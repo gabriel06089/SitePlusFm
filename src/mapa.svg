@@ -26,7 +26,7 @@
       }
 
       .cls-2.scaled {
-        transform: scale(1.05);
+        transform: scale(1.03);
         transition: transform 0.3s ease;
       }
 
@@ -40,7 +40,8 @@
       }
 
       .cls-3.scaled {
-        transform: scale(1.05);
+          fill: #8B008B;
+        transform: scale(1.03);
         transition: transform 0.3s ease;
       }
 
@@ -54,7 +55,8 @@
       }
 
       .cls-4.scaled {
-        transform: scale(1.05);
+          fill: #8B008B;
+        transform: scale(1.03);
         transition: transform 0.3s ease;
       }
 
@@ -68,7 +70,8 @@
       }
 
       .cascavel.scaled {
-        transform: scale(1.05);
+          fill: #8B008B;
+        transform: scale(1.03);
         transition: transform 0.3s ease;
       }
 
@@ -82,7 +85,8 @@
       }
 
       .redencao.scaled {
-        transform: scale(1.05);
+          fill: #8B008B;
+        transform: scale(1.03);
         transition: transform 0.3s ease;
       }
 
@@ -96,9 +100,10 @@
       }
 
       .pacajus.scaled {
-        transform: scale(1.05);
+               fill: #8B008B;
+        transform: scale(1.03);
         transition: transform 0.3s ease;
-        cariri
+      
       }
 
       .fortaleza {
@@ -111,7 +116,8 @@
       }
 
       .fortaleza.scaled {
-        transform: scale(1.05);
+               fill: #8B008B;
+        transform: scale(1.03);
         transition: transform 0.3s ease;
       }
 
@@ -125,7 +131,8 @@
       }
 
       .aracati.scaled {
-        transform: scale(1.05);
+               fill: #8B008B;
+        transform: scale(1.03);
         transition: transform 0.3s ease;
       }
 
@@ -139,7 +146,8 @@
       }
 
       .sobral.scaled {
-        transform: scale(1.05);
+               fill: #8B008B;
+        transform: scale(1.03);
         transition: transform 0.3s ease;
       }
 
@@ -153,7 +161,8 @@
       }
 
       .santaquiteria.scaled {
-        transform: scale(1.05);
+               fill: #8B008B;
+        transform: scale(1.03);
         transition: transform 0.3s ease;
       }
 
@@ -167,7 +176,8 @@
       }
 
       .crateus.scaled {
-        transform: scale(1.05);
+               fill: #8B008B;
+        transform: scale(1.03);
         transition: transform 0.3s ease;
       }
 
@@ -181,7 +191,8 @@
       }
 
       .iguatu.scaled {
-        transform: scale(1.05);
+               fill: #8B008B;
+        transform: scale(1.03);
         transition: transform 0.3s ease;
       }
 
@@ -195,7 +206,8 @@
       }
 
       .cariri.scaled {
-        transform: scale(1.05);
+               fill: #8B008B;
+        transform: scale(1.03);
         transition: transform 0.3s ease;
       }
 
@@ -209,7 +221,9 @@
       }
 
       .catarina.scaled {
-        transform: scale(1.05);
+         fill: #8B008B;
+
+        transform: scale(1.03);
         transition: transform 0.3s ease;
       }
 
@@ -223,7 +237,8 @@
       }
 
       .paraipaba.scaled {
-        transform: scale(1.05);
+               fill: #8B008B;
+        transform: scale(1.03);
         transition: transform 0.3s ease;
       }
     </style>
@@ -232,30 +247,32 @@
   var cls1Elements = document.querySelectorAll('.cls-1');
 
   classes.forEach(function(cls) {
-    var elements = document.querySelectorAll('.' + cls);
-    elements.forEach(function(element) {
-      element.addEventListener('mouseover', function () {
-        elements.forEach(function(el) {
-          el.classList.add('scaled');
-          el.parentNode.appendChild(el);
-        });
-        cls1Elements.forEach(function(el) {
-          el.classList.add('transparent');
-        });
+  var elements = document.querySelectorAll('.' + cls);
+  elements.forEach(function(element) {
+    element.addEventListener('mouseover', function () {
+      elements.forEach(function(el) {
+        el.classList.add('scaled');
+        el.parentNode.appendChild(el);
       });
-      element.addEventListener('mouseout', function () {
-        elements.forEach(function(el) {
-          el.classList.remove('scaled');
-        });
-        cls1Elements.forEach(function(el) {
-          el.classList.remove('transparent');
-        });
-      });
-      element.addEventListener('click', function () {
-        alert('Você clicou na classe: ' + this.className.baseVal);
+      cls1Elements.forEach(function(el) {
+        el.classList.add('transparent');
       });
     });
+    element.addEventListener('mouseout', function () {
+      elements.forEach(function(el) {
+        el.classList.remove('scaled');
+      });
+      cls1Elements.forEach(function(el) {
+        el.classList.remove('transparent');
+      });
+    });
+    element.addEventListener('click', function () {
+  var className = this.className.baseVal.split(' ')[0];
+  var event = new CustomEvent('svgClassClicked', { detail: className });
+  document.dispatchEvent(event);
+});
   });
+});
     </script>
   </defs>
   <g id="Mapa">

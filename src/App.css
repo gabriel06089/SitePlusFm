@@ -1,28 +1,287 @@
 .App {
-  text-align: center;
-  width: 100vw;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  background-image: url('./backgroundpage.jpg');
+  height: 200vh;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* Adicione esta linha */
+  overflow: hidden;
 }
 
 .App-logo {
   height: 40vmin;
- 
   pointer-events: none;
 }
-
-
 
 .App-header {
   text-align: center;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* altura total da viewport */
-  flex-direction: column; /* alinha os itens em uma coluna */
-  width: 100vw;
-  background-color:white;
+  padding-top: 5vw;
+  flex-direction: column;
+
+  margin-inline: 4vw;
 }
+
+.App-header span {
+  color: #FFF;
+  font-family: Quicksand;
+  font-size: calc(1.25vw + 0.2vw);
+  /* Ajuste conforme necessário */
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-inline: 1.5vw;
+
+
+}
+
+.ContainerRow {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: auto;
+}
+
+.InnerContainerRow {
+  display: flex;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: auto;
+}
+
+.App-Player {
+  position: fixed;
+  top: 0;
+
+  background-color: #541084;
+
+
+  width: auto;
+  height: 21px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+
+}
+
+.Container-Music-Title {
+  display: flex;
+  flex-direction: column;
+
+
+  width: auto;
+}
+
+.Container-Music-Title span {
+  text-align: left !important;
+  color: white;
+  font-size: 12px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+
+
+}
+
+.Container-Music-Title span:nth-child(3) {
+  font-size: 11px;
+}
+
+.ContainerRadioList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  width: auto;
+  border-radius: 12px;
+  height: 21px;
+  padding-inline: 8px;
+
+}
+
 
 .App-link {
   color: #61dafb;
+
 }
 
+.ContainerRadioList select {
+
+  color: #541084;
+  font-family: Quicksand;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  border: none;
+  /* Remove a borda */
+  appearance: none;
+  background: none;
+  padding-block: 1rem;
+
+
+}
+
+.ContainerRadioList select:focus {
+  background-color: white;
+  color: #541084;
+  font-family: Quicksand;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  border: none;
+  /* Remove a borda */
+  appearance: none;
+  background: none;
+}
+
+
+.RadioList::-webkit-scrollbar {
+  width: 5px;
+  /* Ajuste a largura da barra de rolagem */
+}
+
+.RadioList::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* Cor de fundo da trilha */
+}
+
+.RadioList::-webkit-scrollbar-thumb {
+  background: #888;
+  /* Cor de fundo do controle deslizante */
+}
+
+.RadioList::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  /* Cor de fundo do controle deslizante ao passar o mouse */
+}
+
+.RadioItem:first-child {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.RadioItem:last-child {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.RadioItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  width: 100%;
+  height: 30px;
+  margin-left: 1vw;
+  overflow-y: auto;
+  max-height: 200px;
+
+}
+
+.VolumeControl {
+  position: relative;
+
+}
+
+.App-Player input[type='range'] {
+  width: 200px;
+  -webkit-appearance: none;
+
+  background: transparent;
+  position: absolute;
+  bottom: -5px;
+  left: 50px;
+  cursor: pointer;
+
+}
+
+.App-Player input[type='range']::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: white;
+  border-radius: 4px;
+}
+
+.App-Player input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+
+  border-radius: 5px;
+
+  background: #9248FF;
+  margin-top: -3px;
+
+  cursor: pointer;
+}
+
+.central-container {
+  display: flex;
+
+  align-items: center;
+
+  /* Ajuste conforme necessário */
+}
+
+.central-container {
+  display: flex;
+  justify-content: space-around;
+  /* ou space-between */
+  align-items: center;
+}
+
+
+.center-image {
+
+  width: 16vw;
+  /* 100% da largura da tela menos 4vw (2vw de cada lado) */
+  height: auto;
+  object-fit: cover;
+  margin-inline: 2vw;
+
+  /* Adicione uma margem ao redor das imagens */
+}
+
+.side-image {
+  width: 26vw;
+  /* 100% da largura da tela menos 4vw (2vw de cada lado) */
+  height: auto;
+  object-fit: cover;
+
+  /* Adicione uma margem ao redor das imagens */
+}
+
+.side-image1 {
+  width: 40vw;
+  /* 100% da largura da tela menos 4vw (2vw de cada lado) */
+  height: auto;
+  object-fit: cover;
+
+  /* Adicione uma margem ao redor das imagens */
+}
+
+.center-image-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /* ou space-between */
+}
