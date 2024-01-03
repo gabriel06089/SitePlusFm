@@ -5,13 +5,27 @@
   align-items: center;
 
   background-image: url('./backgroundpage.jpg');
-  height: 200vh;
+  height: 220vh;
   width: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   /* Adicione esta linha */
   overflow: hidden;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 .App-logo {

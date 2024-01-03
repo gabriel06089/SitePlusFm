@@ -40,9 +40,16 @@
       }
 
       .cls-3.scaled {
-          fill: #8B008B;
+     fill: #8B008B;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+        transition: transform 0.8s ease;
         transform: scale(1.03);
-        transition: transform 0.3s ease;
+        position: relative;
+        /* Adicione esta linha */
+        z-index: 1;
+        /* Adicione esta linha */
       }
 
       .cls-4 {
@@ -55,9 +62,16 @@
       }
 
       .cls-4.scaled {
-          fill: #8B008B;
+     fill: #8B008B;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+        transition: transform 0.8s ease;
         transform: scale(1.03);
-        transition: transform 0.3s ease;
+        position: relative;
+        /* Adicione esta linha */
+        z-index: 1;
+        /* Adicione esta linha */
       }
 
       .cascavel {
@@ -70,9 +84,16 @@
       }
 
       .cascavel.scaled {
-          fill: #8B008B;
+     fill: #8B008B;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+        transition: transform 0.8s ease;
         transform: scale(1.03);
-        transition: transform 0.3s ease;
+        position: relative;
+        /* Adicione esta linha */
+        z-index: 1;
+        /* Adicione esta linha */
       }
 
       .redencao {
@@ -85,9 +106,16 @@
       }
 
       .redencao.scaled {
-          fill: #8B008B;
+     fill: #8B008B;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+        transition: transform 0.8s ease;
         transform: scale(1.03);
-        transition: transform 0.3s ease;
+        position: relative;
+        /* Adicione esta linha */
+        z-index: 1;
+        /* Adicione esta linha */
       }
 
       .pacajus {
@@ -100,10 +128,17 @@
       }
 
       .pacajus.scaled {
-               fill: #8B008B;
+     fill: #8B008B;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+        transition: transform 0.8s ease;
         transform: scale(1.03);
-        transition: transform 0.3s ease;
-      
+        position: relative;
+        /* Adicione esta linha */
+        z-index: 1;
+        /* Adicione esta linha */
+
       }
 
       .fortaleza {
@@ -116,9 +151,16 @@
       }
 
       .fortaleza.scaled {
-               fill: #8B008B;
+     fill: #8B008B;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+        transition: transform 0.8s ease;
         transform: scale(1.03);
-        transition: transform 0.3s ease;
+        position: relative;
+        /* Adicione esta linha */
+        z-index: 1;
+        /* Adicione esta linha */
       }
 
       .aracati {
@@ -131,9 +173,16 @@
       }
 
       .aracati.scaled {
-               fill: #8B008B;
+     fill: #8B008B;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+        transition: transform 0.8s ease;
         transform: scale(1.03);
-        transition: transform 0.3s ease;
+        position: relative;
+        /* Adicione esta linha */
+        z-index: 1;
+        /* Adicione esta linha */
       }
 
       .sobral {
@@ -146,9 +195,16 @@
       }
 
       .sobral.scaled {
-               fill: #8B008B;
+     fill: #8B008B;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+        transition: transform 0.8s ease;
         transform: scale(1.03);
-        transition: transform 0.3s ease;
+        position: relative;
+        /* Adicione esta linha */
+        z-index: 1;
+        /* Adicione esta linha */
       }
 
       .santaquiteria {
@@ -161,9 +217,16 @@
       }
 
       .santaquiteria.scaled {
-               fill: #8B008B;
+     fill: #8B008B;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+        transition: transform 0.8s ease;
         transform: scale(1.03);
-        transition: transform 0.3s ease;
+        position: relative;
+        /* Adicione esta linha */
+        z-index: 1;
+        /* Adicione esta linha */
       }
 
       .crateus {
@@ -176,9 +239,16 @@
       }
 
       .crateus.scaled {
-               fill: #8B008B;
+     fill: #8B008B;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+        transition: transform 0.8s ease;
         transform: scale(1.03);
-        transition: transform 0.3s ease;
+        position: relative;
+        /* Adicione esta linha */
+        z-index: 1;
+        /* Adicione esta linha */
       }
 
       .iguatu {
@@ -191,9 +261,16 @@
       }
 
       .iguatu.scaled {
-               fill: #8B008B;
+     fill: #8B008B;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+        transition: transform 0.8s ease;
         transform: scale(1.03);
-        transition: transform 0.3s ease;
+        position: relative;
+        /* Adicione esta linha */
+        z-index: 1;
+        /* Adicione esta linha */
       }
 
       .cariri {
@@ -206,9 +283,16 @@
       }
 
       .cariri.scaled {
-               fill: #8B008B;
+     fill: #8B008B;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+        transition: transform 0.8s ease;
         transform: scale(1.03);
-        transition: transform 0.3s ease;
+        position: relative;
+        /* Adicione esta linha */
+        z-index: 1;
+        /* Adicione esta linha */
       }
 
       .catarina {
@@ -221,11 +305,15 @@
       }
 
       .catarina.scaled {
-         fill: #8B008B;
+        fill: #8B008B;
 
         transform: scale(1.03);
         transition: transform 0.3s ease;
       }
+
+
+
+
 
       .paraipaba {
         fill: #541084;
@@ -237,42 +325,73 @@
       }
 
       .paraipaba.scaled {
-               fill: #8B008B;
+     fill: #8B008B;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+        transition: transform 0.8s ease;
         transform: scale(1.03);
-        transition: transform 0.3s ease;
+        position: relative;
+        /* Adicione esta linha */
+        z-index: 1;
+        /* Adicione esta linha */
+      }
+
+      .playing {
+        fill: #8B008B;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+        transition: transform 0.8s ease;
+        transform: scale(1.03);
+        position: relative;
+        /* Adicione esta linha */
+        z-index: 1;
+        /* Adicione esta linha */
       }
     </style>
     <script>
-      var classes = ['paraipaba','crateus','catarina','iguatu','cariri', 'sobral', 'santaquiteria', 'cascavel', 'redencao', 'pacajus', 'fortaleza', 'aracati'];
+      var classes = ['paraipaba','crateus','catarina','iguatu','cariri', 'sobral', 'santaquiteria', 'cascavel', 'redencao', 'pacajus', 'fortaleza', 'aracati', 'playing'];
   var cls1Elements = document.querySelectorAll('.cls-1');
+  var playingClass = null;
 
   classes.forEach(function(cls) {
-  var elements = document.querySelectorAll('.' + cls);
-  elements.forEach(function(element) {
-    element.addEventListener('mouseover', function () {
-      elements.forEach(function(el) {
-        el.classList.add('scaled');
-        el.parentNode.appendChild(el);
-      });
-      cls1Elements.forEach(function(el) {
-        el.classList.add('transparent');
+    var elements = document.querySelectorAll('.' + cls);
+    elements.forEach(function(element) {
+      element.addEventListener('click', function () {
+        var className = this.className.baseVal.split(' ')[0];
+        var event = new CustomEvent('svgClassClicked', { detail: className });
+        document.dispatchEvent(event);
+
+        if (playingClass) {
+          var playingElements = document.querySelectorAll('.' + playingClass);
+          playingElements.forEach(function(el) {
+            el.classList.remove('playing');
+            el.classList.remove('scaled');
+          });
+        }
+
+        if (playingClass !== className) {
+          elements.forEach(function(el) {
+            el.classList.add('playing');
+            el.classList.add('scaled');
+            el.parentNode.appendChild(el);
+          });
+          playingClass = className;
+        } else {
+          playingClass = null;
+        }
+
+        cls1Elements.forEach(function(el) {
+          if (el.className.baseVal.split(' ')[0] !== playingClass) {
+            el.classList.add('transparent');
+          } else {
+            el.classList.remove('transparent');
+          }
+        });
       });
     });
-    element.addEventListener('mouseout', function () {
-      elements.forEach(function(el) {
-        el.classList.remove('scaled');
-      });
-      cls1Elements.forEach(function(el) {
-        el.classList.remove('transparent');
-      });
-    });
-    element.addEventListener('click', function () {
-  var className = this.className.baseVal.split(' ')[0];
-  var event = new CustomEvent('svgClassClicked', { detail: className });
-  document.dispatchEvent(event);
-});
   });
-});
     </script>
   </defs>
   <g id="Mapa">

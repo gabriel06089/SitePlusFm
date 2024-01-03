@@ -1,10 +1,25 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect, useRef } from 'react';
 import AudioVisualizer from './Audiovisualizer';
 import './App.css';
 import { BeatLoader } from 'react-spinners';
 import { ReactComponent as Map } from './mapa.svg';
 import myImage from './radios1.png'; // Importe a imagem do local correto
+import styled from 'styled-components';
 import Logo from './plus-1.png';
+import Cariri from './AssetsMap/Cariri.svg';
+import Catarina from './AssetsMap/Catarina.svg';
+import Cascavel from './AssetsMap/Cascavel.svg';
+import Aracati from './AssetsMap/Aracati.svg';
+import Crateus from './AssetsMap/Crateus.svg';
+import Iguatu from './AssetsMap/Iguatu.svg';
+import Pacajus from './AssetsMap/Pacajus.svg';
+import Sobral from './AssetsMap/Sobral.svg';
+import Redencao from './AssetsMap/Redencao.svg';
+import SantaQuiteria from './AssetsMap/SantaQuiteria.svg';
+import Rede from './AssetsMap/Rede.svg';
+import Paraipaba from './AssetsMap/Paraipaba.svg';
 import Boneco from './boneco.png';
 import PlayStore from './playstore.png';
 import AppleStore from './iostore.png';
@@ -44,12 +59,14 @@ function App() {
       isPlaying: false,
       frequency: '98.1',
       width: '70px',
+      svgClass: 'aracati',
     },
     {
       url: 'https://webradio.amsolution.com.br/radio/8020/plus',
       title: 'Plus FM',
       isPlaying: false,
       width: '50px',
+      svgClass: 'fortaleza',
     },
     {
       url: 'https://webradio.amsolution.com.br/radio/8140/cariri',
@@ -57,6 +74,7 @@ function App() {
       isPlaying: false,
       frequency: '97.1',
       width: '60px',
+      svgClass: 'cariri',
     },
     {
       url: 'https://webradio.amsolution.com.br/radio/8110/catarina',
@@ -64,6 +82,7 @@ function App() {
       isPlaying: false,
       frequency: '106.1',
       width: '80px',
+      svgClass: 'catarina',
     },
     {
       url: 'https://webradio.amsolution.com.br/radio/8120/crateus',
@@ -71,6 +90,7 @@ function App() {
       isPlaying: false,
       frequency: '93.3',
       width: '75px',
+      svgClass: 'crateus',
     },
     {
       url: 'https://webradio.amsolution.com.br/radio/8160/cascavel',
@@ -78,12 +98,14 @@ function App() {
       isPlaying: false,
       frequency: '106.1',
       width: '80px',
+      svgClass: 'cascavel',
     },
     {
       url: 'https://webradio.amsolution.com.br/radio/8070/iguatu',
       title: 'Plus Iguatu',
       isPlaying: false,
       width: '70px',
+      svgClass: 'iguatu',
     },
     {
       url: 'https://webradio.amsolution.com.br/radio/8130/pacajus',
@@ -91,6 +113,7 @@ function App() {
       isPlaying: false,
       frequency: '99.5',
       width: '75px',
+      svgClass: 'pacajus',
     },
     {
       url: 'https://webradio.amsolution.com.br/radio/8150/paraipaba',
@@ -98,6 +121,7 @@ function App() {
       isPlaying: false,
       frequency: '88.7',
       width: '90px',
+      svgClass: 'paraipaba',
     },
     {
       url: 'https://webradio.amsolution.com.br/radio/8170/santaquiteria',
@@ -105,6 +129,7 @@ function App() {
       isPlaying: false,
       frequency: '106.5',
       width: '115px',
+      svgClass: 'santaquiteira',
     },
     {
       url: 'https://webradio.amsolution.com.br/radio/8030/sobral',
@@ -112,6 +137,7 @@ function App() {
       isPlaying: false,
       frequency: '105.1',
       width: '70px',
+      svgClass: 'sobral',
     },
     {
       url: 'https://webradio.amsolution.com.br/radio/8090/redencao',
@@ -119,6 +145,7 @@ function App() {
       isPlaying: false,
       frequency: '98.7',
       width: '85px',
+      svgClass: 'redencao',
     },
     {
       url: 'https://webradio.amsolution.com.br/radio/8110/catarina',
@@ -126,6 +153,7 @@ function App() {
       isPlaying: false,
       frequency: '88.7',
       width: '80px',
+      svgClass: 'catarina',
     },
   ];
   const radioMap = {
@@ -154,10 +182,35 @@ function App() {
       if (foundRadio) {
         if (audio.current) {
           audio.current.pause(); // Pausa a rádio atual
+
+          // Remova a classe 'playing' da SVG da música que parou de tocar
+          if (selectedRadio) {
+            const previousSvgElements = document.querySelectorAll(
+              `.${selectedRadio.title}`
+            );
+            previousSvgElements.forEach(function (element) {
+              element.classList.remove('playing');
+              element.style.fill = ''; // Remove o estilo de preenchimento
+            });
+          }
+
           audio.current.src = ''; // Limpa a fonte do áudio atual
           audio.current.load(); // Recarrega o áudio
         }
         setSelectedRadio(foundRadio); // Define a nova rádio
+
+        // Adicione a classe 'playing' à SVG da música que começou a tocar
+        const currentSvgElements = document.querySelectorAll(
+          `.${foundRadio.title}`
+        );
+        console.log(
+          `Found ${currentSvgElements.length} elements with class ${foundRadio.title}`
+        );
+        currentSvgElements.forEach(function (element, index) {
+          console.log(`Element ${index}: ${element}`);
+          element.classList.add('playing');
+          element.style.fill = 'red'; // Adiciona o estilo de preenchimento vermelho
+        });
 
         // Começar a carregar a nova rádio
         setIsLoading(true);
@@ -181,7 +234,7 @@ function App() {
     return () => {
       document.removeEventListener('svgClassClicked', handleSvgClassClicked);
     };
-  }, [radios, radioMap]);
+  }, [radios, radioMap, selectedRadio]);
   useEffect(() => {
     const fetchSong = () => {
       fetch('https://webradio.amsolution.com.br/api/nowplaying/plus', {
@@ -317,7 +370,33 @@ function App() {
       audioRef.current.play();
     }
   }, [selectedRadio]);
+  useEffect(() => {
+    const svgElement = document.querySelector(`.${selectedRadio.svgClass}`);
+    if (svgElement) {
+      svgElement.classList.add('playing');
+    }
 
+    return () => {
+      if (svgElement) {
+        svgElement.classList.remove('playing');
+      }
+    };
+  }, [selectedRadio]);
+  const StyledImg = styled.img`
+    position: absolute;
+    z-index: 1;
+    top: ${(props) => props.top};
+    left: ${(props) => props.left};
+    transform-origin: center bottom;
+    pointer-events: none;
+    height: 10vh;
+    animation: ${(props) =>
+      props.selectedRadio.title === props.title ? 'pulse 2s infinite' : ''};
+
+    @media (max-width: 600px) {
+      height: 5vh;
+    }
+  `;
   return (
     <>
       <div className="App">
@@ -409,7 +488,7 @@ function App() {
               color="white"
               style={{ marginLeft: 32, marginRight: 8 }}
             />
-            <span>Quem somo</span>
+            <span>Quem somos</span>
             <span>Drops</span>
             <span>Progamação</span>
             <span>Top 10</span>
@@ -438,7 +517,91 @@ function App() {
           <Map
             onMouseOver={() => setHover(true)}
             onMouseOut={() => setHover(false)}
-            style={{ width: '80vw', height: '100vh' }}
+            style={{ width: '72vw', overflow: 'visible' }}
+          />
+          <StyledImg
+            src={Cariri}
+            top="87%"
+            left="50%"
+            title="Plus Cariri"
+            selectedRadio={selectedRadio}
+          />
+          <StyledImg
+            src={Aracati}
+            top="35%"
+            left="85%"
+            title="Plus Aracati"
+            selectedRadio={selectedRadio}
+          />
+          <StyledImg
+            src={Catarina}
+            top="62%"
+            left="30%"
+            title="Plus Catarina"
+            selectedRadio={selectedRadio}
+          />
+          <StyledImg
+            src={Rede}
+            top="14%"
+            left="65%"
+            title="Plus FM"
+            selectedRadio={selectedRadio}
+          />
+          <StyledImg
+            src={Crateus}
+            top="44%"
+            left="15%"
+            title="Plus Crateús"
+            selectedRadio={selectedRadio}
+          />
+          <StyledImg
+            src={Iguatu}
+            top="67%"
+            left="45%"
+            title="Plus Iguatu"
+            selectedRadio={selectedRadio}
+          />
+          <StyledImg
+            src={Pacajus}
+            top="24%"
+            left="66%"
+            title="Plus Pacajus"
+            selectedRadio={selectedRadio}
+          />
+          <StyledImg
+            src={Paraipaba}
+            top="9%"
+            left="50%"
+            title="Plus Paraipaba"
+            selectedRadio={selectedRadio}
+          />
+          <StyledImg
+            src={SantaQuiteria}
+            top="27%"
+            left="29%"
+            title="Plus Santa Quitéria"
+            selectedRadio={selectedRadio}
+          />
+          <StyledImg
+            src={Sobral}
+            top="14%"
+            left="22%"
+            title="Plus Sobral"
+            selectedRadio={selectedRadio}
+          />
+          <StyledImg
+            src={Redencao}
+            top="30%"
+            left="62%"
+            title="Plus Redenção"
+            selectedRadio={selectedRadio}
+          />
+          <StyledImg
+            src={Cascavel}
+            top="27%"
+            left="76%"
+            title="Plus Cascavel"
+            selectedRadio={selectedRadio}
           />
         </div>
       </div>
