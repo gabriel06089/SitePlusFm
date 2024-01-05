@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
 
-  height: 100vh;
+  height: auto;
   width: 100%;
   background-image: url('./backgroundpage.jpg');
   background-position: center;
@@ -12,7 +12,7 @@
   background-size: cover;
   background-color: #541084;
 
-
+  padding-bottom: 5vw;
 }
 
 .bodyContainer {
@@ -30,7 +30,7 @@
   left: 0;
 
   width: 100%;
-  height: 40%;
+  height: 20%;
 
   background: linear-gradient(to top, #541084 5%, transparent 100%);
 
@@ -38,21 +38,263 @@
 }
 
 .dropsContainer {
-  position: relative;
+
+
   display: flex;
   flex-direction: row;
-  align-items: center;
-  background-color: #541084;
-  height: 100vh;
-  width: 100%;
+  align-items: flex-start;
+  justify-content: center;
+
+  width: 40vw;
+  margin-top: 1vw;
 }
 
 .dropsContainerNoticias {
-  width: 135px;
-  height: 135px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+
+
+  position: relative;
+
+
+
+
+}
+
+.dropsRowContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  position: relative;
+}
+
+.dropsColumnContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+}
+
+.dropsColumnContainer::after {
+  content: "";
+  position: absolute;
+  bottom: -24%;
+  left: 0;
+  width: 100%;
+  height: 35%;
+  background: white;
+  border-top: 0.5vw solid #ffc007;
+  /* Adiciona uma borda amarela de 2px na parte superior */
+  border-radius: 8px;
+  z-index: 4;
+
+}
+
+.dropsNoArContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 24px;
-  background: red;
-margin: 2rem;
+  width: auto;
+  padding-inline: 1vw;
+  height: auto;
+  background-color: #FFC007;
+  position: absolute;
+
+
+}
+
+.dropsNoArContainer {
+  color: black;
+
+  font-family: 'Rubik', sans-serif;
+  font-size: 1vw;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  z-index: 5;
+
+}
+
+.dropsNoArContainer-0 {
+  bottom: 8%;
+}
+
+.dropsNoArContainer-1 {
+  bottom: 8%;
+}
+
+@media (max-width: 768px) {
+  .dropsNoArContainer-0 {
+    bottom: 9%;
+  }
+
+  .dropsNoArContainer-1 {
+    bottom: 9%;
+  }
+}
+
+
+.MapContainer {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle 300px at center, #A567C4, #541084);
+  height: auto;
+  width: 100%;
+  padding-top: 5vw;
+}
+
+.MapContainer::before {
+  content: "";
+  position: absolute;
+  top: -4%;
+  left: 0;
+  width: 100%;
+  height: 6%;
+  background: linear-gradient(to bottom, #D7D7D7 0%, #541084 100%);
+  pointer-events: none;
+}
+
+.dropsColumnContainer span {
+  color: #541084;
+
+  font-family: 'Rubik', sans-serif;
+  font-size: calc(1vw + 0.2vw);
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  position: absolute;
+
+  text-align: center;
+  position: absolute;
+  bottom: -14%;
+  z-index: 5;
+  margin-inline: 0.5vw;
+}
+
+.dropsRowContainer img {
+  width: 25.7vw;
+  border-radius: 8px;
+  object-fit: cover;
+  overflow: hidden;
+  object-fit: contain;
+
+}
+
+.first-row {
+  margin-bottom: 5.5vw;
+}
+
+.dropsCardContainer {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+
+}
+
+.dropsFrontCardContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  margin-right: 2vw;
+  /* Ajuste conforme necessário */
+
+  /* Ajuste conforme necessário */
+}
+
+
+.dropsFrontcardContainerDivSpan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.dropsFrontCardContainerimg {
+  width: 62.9vw;
+
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  object-fit: cover;
+
+}
+
+.dropsFrontCardContainerDiv {
+
+  position: absolute;
+  bottom: 0%;
+
+  width: 100%;
+  height: 16%;
+  background: white;
+  border-top: 0.5vw solid #ffc007;
+  /* Adiciona uma borda amarela de 2px na parte superior */
+  border-radius: 8px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.dropsFrontCardContainerSpan {
+  font-family: 'Rubik', sans-serif;
+  font-size: calc(1.5vw + 0.2vw);
+  font-weight: 500;
+  /* Medium */
+  color: #541084;
+  text-align: center;
+  z-index: 5;
+}
+
+.dropsFrontCardContainerSpanCartola {
+
+  position: absolute;
+  top: -185%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24px;
+
+  height: auto;
+  background-color: #FFC007;
+  align-self: center;
+  padding-inline: 1rem;
+  z-index: 6;
+  color: #000;
+
+  font-family: 'Rubik', sans-serif;
+  font-size: 2vw;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  position: absolute;
+
+
+
+}
+
+@media (max-width: 768px) {
+  .dropsFrontCardContainerSpanCartola {
+    top: -210%;
+  }
+}
+
+@media (max-width: 388px) {
+  .dropsFrontCardContainerSpanCartola {
+    top: -170%;
+  }
 }
 
 @keyframes pulse {
@@ -85,11 +327,11 @@ margin: 2rem;
 
 .App-header span {
   color: #FFF;
-  font-family: Quicksand;
+  font-family: 'Rubik', sans-serif;
   font-size: calc(1.25vw + 0.2vw);
   /* Ajuste conforme necessário */
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   line-height: normal;
   margin-inline: 1.5vw;
 
@@ -101,6 +343,17 @@ margin: 2rem;
   justify-content: space-around;
   align-items: center;
   width: auto;
+}
+
+.ContainerRow span {
+  color: #FFF;
+  font-family: 'Rubik', sans-serif;
+  font-size: calc(1.25vw + 0.2vw);
+  /* Ajuste conforme necessário */
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-inline: 1.5vw;
 }
 
 .InnerContainerRow {
@@ -119,37 +372,44 @@ margin: 2rem;
   background-color: #541084;
 
   width: auto;
-  height: 21px;
+  height: auto;
 
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 0.8rem;
+  padding-inline: 4vw;
+  padding-block: 0.5vw;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
+
 }
 
 .Container-Music-Title {
   display: flex;
   flex-direction: column;
-
-
   width: auto;
 }
 
-.Container-Music-Title span {
-  text-align: left !important;
+.ContainerMusicSpanPlaying {
   color: white;
-  font-size: 12px;
-  font-family: 'Quicksand', sans-serif;
-  font-weight: 700;
-
+  font-size: 5re;
+  font-family: 'Rubik', sans-serif;
 
 }
 
+.Container-Music-TitleSpan {
+  text-align: left !important;
+  color: white;
+  font-size: 1.4vw;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 400;
+}
+
+
+
 .Container-Music-Title span:nth-child(3) {
-  font-size: 11px;
+  font-size: 1.7vw;
 }
 
 .ContainerRadioList {
@@ -159,7 +419,7 @@ margin: 2rem;
   background-color: #fff;
   width: auto;
   border-radius: 12px;
-  height: 21px;
+  height: 2.7vw;
   padding-inline: 8px;
 
 }
@@ -173,10 +433,10 @@ margin: 2rem;
 .ContainerRadioList select {
 
   color: #541084;
-  font-family: Quicksand;
-  font-size: 12px;
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.5vw;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   line-height: normal;
 
   border: none;
@@ -191,10 +451,10 @@ margin: 2rem;
 .ContainerRadioList select:focus {
   background-color: white;
   color: #541084;
-  font-family: Quicksand;
-  font-size: 12px;
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.5vw;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   line-height: normal;
 
   border: none;
@@ -205,7 +465,7 @@ margin: 2rem;
 
 
 .RadioList::-webkit-scrollbar {
-  width: 5px;
+  width: 5vw;
   /* Ajuste a largura da barra de rolagem */
 }
 
@@ -308,7 +568,7 @@ margin: 2rem;
   /* 100% da largura da tela menos 4vw (2vw de cada lado) */
   height: auto;
   object-fit: cover;
-  margin-inline: 2vw;
+  margin-inline: 4.2vw;
 
   /* Adicione uma margem ao redor das imagens */
 }
@@ -337,4 +597,114 @@ margin: 2rem;
   flex-direction: column;
   justify-content: space-around;
   /* ou space-between */
+}
+
+.dropsImage {
+  margin-top: 2vw;
+  align-self: flex-start;
+  margin-left: 5vw;
+  height: 10vw;
+}
+
+.progContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #D7D7D7;
+  height: auto;
+  width: 100%;
+  padding-bottom: 5vw;
+}
+
+.progContainerRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  position: relative;
+  margin-inline: 1vw;
+
+}
+
+.progContainerColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  margin-inline: 1vw;
+}
+
+.progCardContainerRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  position: relative;
+  margin-inline: 2vw;
+  padding-right: 2vw;
+
+  background-color: white;
+  border-radius: 500px;
+
+}
+
+.progCardContainerColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  margin-inline: 1vw;
+}
+
+.progCardContainerRow span {
+  color: #1E1E1E;
+
+  font-family: 'Rubik', sans-serif;
+  font-size: 0.98vw;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+}
+
+.progBallContainer {
+  background-color: #541084;
+  height: 4.5vw;
+  width: 4.5vw;
+  border-radius: 50%;
+
+}
+
+
+.progContainer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 15%;
+  background: linear-gradient(to bottom, #541084 0%, #D7D7D7 70%);
+  pointer-events: none;
+}
+
+
+
+.progImage {
+  margin-block: 5vw;
+  align-self: flex-start;
+  margin-left: 5vw;
+  height: 9vw;
+  z-index: 5;
+}
+
+.marginDiv {
+  margin-top: 1vw;
+
 }

@@ -24,6 +24,8 @@ import Boneco from './boneco.png';
 import PlayStore from './playstore.png';
 import AppleStore from './iostore.png';
 import TextProg from './TextoProg.png';
+import Drops from './AssetDrops/dropsSemFundo.png';
+import Prog from './AssetDrops/progSemFundo.png';
 import {
   CaretDown,
   PlayCircle,
@@ -40,16 +42,19 @@ import {
   YoutubeLogo,
   WhatsappLogo,
   TelegramLogo,
+  Play,
 } from 'phosphor-react';
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const audio = useRef(null);
-
+  const [image, setImage] = useState(null);
+  const [post, setPost] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const selectRef = useRef(null);
   const [hover, setHover] = useState(false);
   const [currentSong, setCurrentSong] = useState({});
   const [isOpen, setIsOpen] = useState(false);
+  const [news, setNews] = useState([]);
   const [volume, setVolume] = useState(50);
 
   const radios = [
@@ -58,14 +63,14 @@ function App() {
       title: 'Plus Aracati',
       isPlaying: false,
       frequency: '98.1',
-      width: '70px',
+      width: '9vw',
       svgClass: 'aracati',
     },
     {
       url: 'https://webradio.amsolution.com.br/radio/8020/plus',
       title: 'Plus FM',
       isPlaying: false,
-      width: '50px',
+      width: '6vw',
       svgClass: 'fortaleza',
     },
     {
@@ -73,7 +78,7 @@ function App() {
       title: 'Plus Cariri',
       isPlaying: false,
       frequency: '97.1',
-      width: '60px',
+      width: '8vw',
       svgClass: 'cariri',
     },
     {
@@ -81,7 +86,7 @@ function App() {
       title: 'Plus Catarina',
       isPlaying: false,
       frequency: '106.1',
-      width: '80px',
+      width: '10vw',
       svgClass: 'catarina',
     },
     {
@@ -89,7 +94,7 @@ function App() {
       title: 'Plus Crateús',
       isPlaying: false,
       frequency: '93.3',
-      width: '75px',
+      width: '9vw',
       svgClass: 'crateus',
     },
     {
@@ -97,14 +102,14 @@ function App() {
       title: 'Plus Cascavel',
       isPlaying: false,
       frequency: '106.1',
-      width: '80px',
+      width: '10vw',
       svgClass: 'cascavel',
     },
     {
       url: 'https://webradio.amsolution.com.br/radio/8070/iguatu',
       title: 'Plus Iguatu',
       isPlaying: false,
-      width: '70px',
+      width: '8.5vw',
       svgClass: 'iguatu',
     },
     {
@@ -112,7 +117,7 @@ function App() {
       title: 'Plus Pacajus',
       isPlaying: false,
       frequency: '99.5',
-      width: '75px',
+      width: '9vw',
       svgClass: 'pacajus',
     },
     {
@@ -120,7 +125,7 @@ function App() {
       title: 'Plus Paraipaba',
       isPlaying: false,
       frequency: '88.7',
-      width: '90px',
+      width: '11vw',
       svgClass: 'paraipaba',
     },
     {
@@ -128,7 +133,7 @@ function App() {
       title: 'Plus Santa Quitéria',
       isPlaying: false,
       frequency: '106.5',
-      width: '115px',
+      width: '14vw',
       svgClass: 'santaquiteira',
     },
     {
@@ -136,7 +141,7 @@ function App() {
       title: 'Plus Sobral',
       isPlaying: false,
       frequency: '105.1',
-      width: '70px',
+      width: '8.5vw',
       svgClass: 'sobral',
     },
     {
@@ -144,16 +149,8 @@ function App() {
       title: 'Plus Redenção',
       isPlaying: false,
       frequency: '98.7',
-      width: '85px',
+      width: '11vw',
       svgClass: 'redencao',
-    },
-    {
-      url: 'https://webradio.amsolution.com.br/radio/8110/catarina',
-      title: 'Plus Catarina',
-      isPlaying: false,
-      frequency: '88.7',
-      width: '80px',
-      svgClass: 'catarina',
     },
   ];
   const radioMap = {
@@ -294,36 +291,36 @@ function App() {
     if (volume < 1) {
       return (
         <SpeakerSlash
-          style={{ marginInline: 16 }}
+          style={{ marginInline: '2vw' }}
           color="white"
-          size={36}
+          size={'5vw'}
           weight="bold"
         />
       );
     } else if (volume < 20) {
       return (
         <SpeakerNone
-          style={{ marginInline: 16 }}
+          style={{ marginInline: '2vw' }}
           color="white"
-          size={36}
+          size={'5vw'}
           weight="bold"
         />
       );
     } else if (volume < 60) {
       return (
         <SpeakerLow
-          style={{ marginInline: 16 }}
+          style={{ marginInline: '2vw' }}
           color="white"
-          size={36}
+          size={'5vw'}
           weight="bold"
         />
       );
     } else {
       return (
         <SpeakerHigh
-          style={{ marginInline: 16 }}
+          style={{ marginInline: '2vw' }}
           color="white"
-          size={36}
+          size={'5vw'}
           weight="bold"
         />
       );
@@ -397,7 +394,21 @@ function App() {
       height: 5vh;
     }
   `;
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await fetch(
+          'https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=3'
+        );
+        const data = await response.json();
+        setNews(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
+    fetchNews();
+  }, []);
   return (
     <div
       style={{
@@ -418,37 +429,37 @@ function App() {
           onClick={handlePlayPause}
         >
           {isLoading ? (
-            <div style={{ marginRight: 16 }}>
+            <div style={{ marginRight: '2vw' }}>
               <BeatLoader color="#ffffff" loading={isLoading} size={8} />
             </div>
           ) : isPlaying ? (
             <PauseCircle
-              style={{ marginRight: 16 }}
+              style={{ marginRight: '2vw' }}
               color="white"
-              size={36}
+              size={'5vw'}
               weight="bold"
             />
           ) : (
             <PlayCircle
-              style={{ marginRight: 16 }}
+              style={{ marginRight: '2vw' }}
               color="white"
-              size={36}
+              size={'5vw'}
               weight="bold"
             />
           )}
         </div>
         <div className="Container-Music-Title">
-          <span>Tocando agora</span>
+          <span className='Container-Music-TitleSpan'>Tocando agora</span>
           <div
             style={{
               height: '0.1px',
               background: 'white',
-              width: 87,
-              marginBlock: 3,
-              marginLeft: 1.5,
+              width: '10.1vw',
+              marginBlock: '0.5vw',
+              marginLeft: '0.2vw',
             }}
           ></div>
-          <span>{currentSong.title}</span>
+          <span className="ContainerMusicSpanPlaying">{currentSong.title}</span>
         </div>
         <div className="VolumeControl">
           <div
@@ -474,7 +485,7 @@ function App() {
               </option>
             ))}
           </select>
-          <CaretDown />
+          <CaretDown size={'2.5vw'} />
         </div>
 
         {isVolumeVisible && (
@@ -495,7 +506,7 @@ function App() {
               size={'4vw'}
               weight="fill"
               color="white"
-              style={{ marginLeft: 32, marginRight: 8 }}
+              style={{ marginLeft: '3.2vw', marginRight: '2vw' }}
             />
             <span>Quem somos</span>
             <span>Drops</span>
@@ -521,9 +532,311 @@ function App() {
           </div>
           <img src={Boneco} alt="Imagem 4" className="side-image" />
         </div>
+        <img src={Drops} className="dropsImage" />
+        <div className="dropsContainer">
+          <div className="dropsCardContainer">
+            {news.slice(0, 1).map((item, index) => (
+              <div className="dropsFrontCardContainer">
+                <div className="dropsFrontCardContainerDiv">
+                  <div className="dropsFrontcardContainerDivSpan">
+                    {' '}
+                    <span className="dropsFrontCardContainerSpanCartola">
+                      {item.cartola}
+                    </span>
+                    <span className="dropsFrontCardContainerSpan">
+                      {' '}
+                      {item.title.rendered}
+                    </span>
+                  </div>
+                </div>
+                <img
+                  src={item.yoast_head_json?.og_image?.[0]?.url}
+                  alt="News"
+                  key={index}
+                  className="dropsFrontCardContainerimg"
+                />
+              </div>
+            ))}
+          </div>
+          <div className="dropsContainerNoticias">
+            {news.slice(1).map((item, index) => (
+              <div
+                key={index + 2}
+                className={`dropsRowContainer ${
+                  index === 0 ? 'first-row' : ''
+                }`}
+              >
+                {item.yoast_head_json?.og_image?.[0] && (
+                  <img src={item.yoast_head_json.og_image[0].url} alt="News" />
+                )}
+                <div className={`dropsColumnContainer`}>
+                  <div
+                    className={`dropsNoArContainer dropsNoArContainer-${index}`}
+                  >
+                    {item.cartola}
+                  </div>
+                  <span>{item.title.rendered}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
+      <div className="progContainer">
+        <img src={Prog} className="progImage" />
 
-      <div className="dropsContainer">
+        <div className="progContainerRow">
+          <div className="progContainerColumn">
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#8A0A0A" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#1221A8" />
+            </div>
+
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#22D4D8" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#541084" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#000000" />
+            </div>
+            <div className="marginDiv"></div>
+          </div>
+          <div className="progContainerColumn">
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#F4E72D" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#0A8A0F" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#9248FF" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#1E1E1E" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#788A0A" />
+            </div>
+            <div className="marginDiv"></div>
+          </div>
+          <div className="progContainerColumn">
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#84AEFF" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#FF8A00" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#5C3F1C" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#8A0A66" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#FF00C7" />
+            </div>
+            <div className="marginDiv"></div>
+          </div>
+          <div className="progContainerColumn">
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#2D0B3E" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#FF004D" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#FF4D00" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#00FF94" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Progama Tal</span>
+                <span>Segunda - sexta</span>
+                <span>08h às 19h</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#262D6D" />
+            </div>
+            <div className="marginDiv"></div>
+          </div>
+        </div>
+      </div>
+      <div className="MapContainer">
         <div style={{ position: 'relative' }}>
           <Map
             onMouseOver={() => setHover(true)}
@@ -615,10 +928,6 @@ function App() {
             selectedRadio={selectedRadio}
           />
         </div>
-        <div className="dropsContainerNoticias"> oitest</div>
-        <div className="dropsContainerNoticias"> oitest</div>
-        <div className="dropsContainerNoticias"> oitest</div>
-
       </div>
     </div>
   );
