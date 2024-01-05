@@ -397,91 +397,100 @@ function App() {
       height: 5vh;
     }
   `;
+
   return (
-    <>
-      <div className="App">
-        <div className="App-Player">
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+        overflow: 'hidden',
+      }}
+    >
+      <div className="App-Player">
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          onClick={handlePlayPause}
+        >
+          {isLoading ? (
+            <div style={{ marginRight: 16 }}>
+              <BeatLoader color="#ffffff" loading={isLoading} size={8} />
+            </div>
+          ) : isPlaying ? (
+            <PauseCircle
+              style={{ marginRight: 16 }}
+              color="white"
+              size={36}
+              weight="bold"
+            />
+          ) : (
+            <PlayCircle
+              style={{ marginRight: 16 }}
+              color="white"
+              size={36}
+              weight="bold"
+            />
+          )}
+        </div>
+        <div className="Container-Music-Title">
+          <span>Tocando agora</span>
+          <div
+            style={{
+              height: '0.1px',
+              background: 'white',
+              width: 87,
+              marginBlock: 3,
+              marginLeft: 1.5,
+            }}
+          ></div>
+          <span>{currentSong.title}</span>
+        </div>
+        <div className="VolumeControl">
           <div
             style={{
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
             }}
-            onClick={handlePlayPause}
+            onClick={handleSpeakerClick}
           >
-            {isLoading ? (
-              <div style={{ marginRight: 16 }}>
-                <BeatLoader color="#ffffff" loading={isLoading} size={8} />
-              </div>
-            ) : isPlaying ? (
-              <PauseCircle
-                style={{ marginRight: 16 }}
-                color="white"
-                size={36}
-                weight="bold"
-              />
-            ) : (
-              <PlayCircle
-                style={{ marginRight: 16 }}
-                color="white"
-                size={36}
-                weight="bold"
-              />
-            )}
+            {renderSpeakerIcon()}
           </div>
-          <div className="Container-Music-Title">
-            <span>Tocando agora</span>
-            <div
-              style={{
-                height: '0.1px',
-                background: 'white',
-                width: 87,
-                marginBlock: 3,
-                marginLeft: 1.5,
-              }}
-            ></div>
-            <span>{currentSong.title}</span>
-          </div>
-          <div className="VolumeControl">
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-              onClick={handleSpeakerClick}
-            >
-              {renderSpeakerIcon()}
-            </div>
-          </div>
-          <div className="ContainerRadioList">
-            <select
-              value={selectedRadio.title}
-              onChange={(event) => handleRadioClick(event.target.value)}
-              style={{ width: selectedRadio.width }}
-            >
-              {radios.map((radio, index) => (
-                <option key={index} value={radio.title}>
-                  {radio.title}
-                </option>
-              ))}
-            </select>
-            <CaretDown />
-          </div>
-
-          {isVolumeVisible && (
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={volume}
-              onChange={handleVolumeChange}
-            />
-          )}
         </div>
+        <div className="ContainerRadioList">
+          <select
+            value={selectedRadio.title}
+            onChange={(event) => handleRadioClick(event.target.value)}
+            style={{ width: selectedRadio.width }}
+          >
+            {radios.map((radio, index) => (
+              <option key={index} value={radio.title}>
+                {radio.title}
+              </option>
+            ))}
+          </select>
+          <CaretDown />
+        </div>
+
+        {isVolumeVisible && (
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value={volume}
+            onChange={handleVolumeChange}
+          />
+        )}
+      </div>
+      <div className="App">
         <header className="App-header">
           <div className="ContainerRow">
-            <img src={Logo} style={{ width: '20vw', height: 'auto' }} />
+            <img src={Logo} style={{ width: '20vw' }} />
             <House
               size={'4vw'}
               weight="fill"
@@ -512,12 +521,14 @@ function App() {
           </div>
           <img src={Boneco} alt="Imagem 4" className="side-image" />
         </div>
+      </div>
 
+      <div className="dropsContainer">
         <div style={{ position: 'relative' }}>
           <Map
             onMouseOver={() => setHover(true)}
             onMouseOut={() => setHover(false)}
-            style={{ width: '72vw', overflow: 'visible' }}
+            style={{ width: '57vw', overflow: 'visible' }}
           />
           <StyledImg
             src={Cariri}
@@ -604,8 +615,12 @@ function App() {
             selectedRadio={selectedRadio}
           />
         </div>
+        <div className="dropsContainerNoticias"> oitest</div>
+        <div className="dropsContainerNoticias"> oitest</div>
+        <div className="dropsContainerNoticias"> oitest</div>
+
       </div>
-    </>
+    </div>
   );
 }
 

@@ -1,17 +1,58 @@
 .App {
+  position: relative;
   display: flex;
   flex-direction: column;
-
   align-items: center;
 
-  background-image: url('./backgroundpage.jpg');
-  height: 220vh;
+  height: 100vh;
   width: 100%;
+  background-image: url('./backgroundpage.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  /* Adicione esta linha */
+  background-color: #541084;
+
+
+}
+
+.bodyContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   overflow: hidden;
+}
+
+.App::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 40%;
+
+  background: linear-gradient(to top, #541084 5%, transparent 100%);
+
+  pointer-events: none;
+}
+
+.dropsContainer {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #541084;
+  height: 100vh;
+  width: 100%;
+}
+
+.dropsContainerNoticias {
+  width: 135px;
+  height: 135px;
+  border-radius: 24px;
+  background: red;
+margin: 2rem;
 }
 
 @keyframes pulse {
@@ -73,9 +114,9 @@
 .App-Player {
   position: fixed;
   top: 0;
+  z-index: 9999;
 
   background-color: #541084;
-
 
   width: auto;
   height: 21px;
@@ -87,8 +128,6 @@
   padding: 0.8rem;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
-
-
 }
 
 .Container-Music-Title {
