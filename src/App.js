@@ -26,6 +26,8 @@ import AppleStore from './iostore.png';
 import TextProg from './TextoProg.png';
 import Drops from './AssetDrops/dropsSemFundo.png';
 import Prog from './AssetDrops/progSemFundo.png';
+import PromoActor from './AssetDrops/promoActor.png';
+import trueextPromo from './textoPromo.png';
 import {
   CaretDown,
   PlayCircle,
@@ -409,6 +411,24 @@ function App() {
 
     fetchNews();
   }, []);
+  const [promos, setPromos] = useState([]);
+
+  useEffect(() => {
+    const fetchPromotions = async () => {
+      try {
+        const response = await fetch(
+          'https://plusfm.com.br/wp-json/wp/v2/posts?categories=14&per_page=3'
+        );
+        const data = await response.json();
+        setPromos(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchPromotions();
+  }, []);
+
   return (
     <div
       style={{
@@ -449,7 +469,7 @@ function App() {
           )}
         </div>
         <div className="Container-Music-Title">
-          <span className='Container-Music-TitleSpan'>Tocando agora</span>
+          <span className="Container-Music-TitleSpan">Tocando agora</span>
           <div
             style={{
               height: '0.1px',
@@ -927,6 +947,47 @@ function App() {
             title="Plus Cascavel"
             selectedRadio={selectedRadio}
           />
+        </div>
+      </div>
+      <div className="promoContainer">
+        <img src={trueextPromo} className="textProgImg" />
+        <div className="promoActorRow">
+          <div className="promoContainerColumn">
+            <div className="promoCardBig" style={{ flexDirection: 'column' }}>
+              {promos[0] && promos[0].yoast_head_json.og_image[0].url && (
+                <img
+                  src={promos[0].yoast_head_json.og_image[0].url}
+                  alt="Promo"
+                />
+              )}
+              {promos[0] && (
+                <span className="cartolaAbsolute">
+                  {promos[0].cartola === 'Oportunidade' ? 'ATIVA' : 'ENCERRADA'}
+                </span>
+              )}
+            </div>
+            <div className="promoContainerRow">
+              {promos.slice(1).map((promo, index) => (
+                <div
+                  className="promoCardSmall"
+                  style={{ flexDirection: 'column' }}
+                  key={index}
+                >
+                  {promo.yoast_head_json.og_image[0].url && (
+                    <img
+                      src={promo.yoast_head_json.og_image[0].url}
+                      alt="Promo"
+                    />
+                  )}
+                  <span className="cartolaAbsolute">
+                    {promos.cartola === 'Oportunidade' ? 'ATIVA' : 'ENCERRADA'}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <img src={PromoActor} />
         </div>
       </div>
     </div>
