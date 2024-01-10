@@ -2,8 +2,9 @@
     display: flex;
     flex-direction: column;
 
-    width: 100%;
+    width: 66vw;
     padding: 0 20px;
+    padding-left: 8vw;
 }
 
 h1 {
@@ -19,59 +20,80 @@ h1 {
 h2 {
     color: #2B2B2B;
 
-    font-family: Rubik;
+    font-family: 'Rubik', sans-serif;
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
 }
 
-p {
-    font-family: Rubik;
+.descImage {
+    color: #2B2B2B;
+    font-family: 'Rubik', sans-serif;
     font-size: 12px;
     font-style: normal;
+    font-weight: lighter;
+    opacity: 0.8;
 }
 
-.meu-conteudo p {
+img {
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+}
 
-    font-size: 16px;
-    color: #2B2B2B;
-
-    font-family: Rubik;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+.meu-conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .meu-conteudo a {
-    color: #2B2B2B;
-    font-family: Rubik;
+    color: #541084;
+    font-family: 'Rubik', sans-serif;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
     line-height: 107.835%;
-    text-decoration-line: underline;
+    text-decoration-line: none;
 }
 
 .meu-conteudo a:hover {
-    color: #0056b3;
-    text-decoration: underline;
+    color: #541084;
+    text-decoration: none;
+}
+
+.meu-conteudo em {
+    font-style: italic;
+    text-align: right;
+}
+
+.meu-conteudo p {
+    font-size: 16px;
+    color: #2B2B2B;
+    font-family: 'Rubik', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-align: left;
+}
+
+/* Adicione a classe .alinhado-direita ao elemento em que deseja alinhar à direita */
+.meu-conteudo .alinhado-direita {
+    text-align: right;
 }
 
 .meu-conteudo strong {
     color: #541084;
-    font-family: Rubik;
-    font-size: 20px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 18px;
     font-style: normal;
     font-weight: 700;
     line-height: 107.835%;
 }
 
-.meu-conteudo em {
-    font-style: italic;
-}
-
 .meu-conteudo iframe {
     max-width: 100%;
+    border-radius: 10px;
 }

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './NoticiaDetalhe.css';
+
 const NoticiaDetalhe = () => {
   const { id } = useParams();
   const [noticia, setNoticia] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [imagemDescricao, setImagemDescricao] = useState(null);
+
   useEffect(() => {
     const fetchNoticia = async () => {
       try {
@@ -15,13 +17,21 @@ const NoticiaDetalhe = () => {
         );
         const data = await response.json();
         setNoticia(data);
-
-        // Obter os detalhes da imagem
         const imagemResponse = await fetch(
           `https://plusfm.com.br/wp-json/wp/v2/media/${data.featured_media}`
         );
         const imagemData = await imagemResponse.json();
-        setImagemDescricao(imagemData.yoast_head_json.og_description);
+        if (
+          data.title.rendered.startsWith(
+            'AO VIVO: assista aos programas Deu B.O.'
+          )
+        ) {
+          setImagemDescricao(
+            'Wesmenia Lopes e Mateus Vasconcelos. Foto: Plus FM'
+          );
+        } else if (imagemData.yoast_head_json) {
+          setImagemDescricao(imagemData.yoast_head_json.og_description);
+        }
       } catch (error) {
         setError(error.message);
       } finally {
@@ -50,12 +60,19 @@ const NoticiaDetalhe = () => {
             src={noticia.yoast_head_json.og_image[0].url}
             alt="Imagem da notícia"
           />
-          <p>Descrição da imagem: {imagemDescricao}</p>
+          {imagemDescricao && (
+            <p className="descImage">Descrição da imagem: {imagemDescricao}</p>
+          )}
         </>
       )}
       <div
         className="meu-conteudo"
-        dangerouslySetInnerHTML={{ __html: noticia.content.rendered }}
+        dangerouslySetInnerHTML={{
+          __html: noticia.content.rendered.replace(
+            /<em/g,
+            '<em class="alinhado-direita"'
+          ),
+        }}
       />
     </div>
   );
