@@ -27,7 +27,9 @@ import TextProg from './TextoProg.png';
 import Drops from './AssetDrops/dropsSemFundo.png';
 import Prog from './AssetDrops/progSemFundo.png';
 import PromoActor from './AssetDrops/promoActor.png';
-import trueextPromo from './textoPromo.png';
+import textPromo from './textoPromo.png';
+import textTop10 from './AssetDrops/textTop10.png';
+import { Link } from 'react-router-dom';
 import {
   CaretDown,
   PlayCircle,
@@ -479,7 +481,9 @@ function App() {
               marginLeft: '0.2vw',
             }}
           ></div>
-          <span className="ContainerMusicSpanPlaying">{currentSong.title}</span>
+          <span className="ContainerMusicSpanPlaying">
+            {currentSong.artist} - {currentSong.title}
+          </span>
         </div>
         <div className="VolumeControl">
           <div
@@ -556,48 +560,53 @@ function App() {
         <div className="dropsContainer">
           <div className="dropsCardContainer">
             {news.slice(0, 1).map((item, index) => (
-              <div className="dropsFrontCardContainer">
-                <div className="dropsFrontCardContainerDiv">
-                  <div className="dropsFrontcardContainerDivSpan">
-                    {' '}
-                    <span className="dropsFrontCardContainerSpanCartola">
-                      {item.cartola}
-                    </span>
-                    <span className="dropsFrontCardContainerSpan">
+              <Link to={`/noticia/${item.id}`} key={index}>
+                <div className="dropsFrontCardContainer">
+                  <div className="dropsFrontCardContainerDiv">
+                    <div className="dropsFrontcardContainerDivSpan">
                       {' '}
-                      {item.title.rendered}
-                    </span>
+                      <span className="dropsFrontCardContainerSpanCartola">
+                        {item.cartola}
+                      </span>
+                      <span className="dropsFrontCardContainerSpan">
+                        {' '}
+                        {item.title.rendered}
+                      </span>
+                    </div>
                   </div>
+                  <img
+                    src={item.yoast_head_json?.og_image?.[0]?.url}
+                    alt="News"
+                    className="dropsFrontCardContainerimg"
+                  />
                 </div>
-                <img
-                  src={item.yoast_head_json?.og_image?.[0]?.url}
-                  alt="News"
-                  key={index}
-                  className="dropsFrontCardContainerimg"
-                />
-              </div>
+              </Link>
             ))}
           </div>
           <div className="dropsContainerNoticias">
             {news.slice(1).map((item, index) => (
-              <div
-                key={index + 2}
-                className={`dropsRowContainer ${
-                  index === 0 ? 'first-row' : ''
-                }`}
-              >
-                {item.yoast_head_json?.og_image?.[0] && (
-                  <img src={item.yoast_head_json.og_image[0].url} alt="News" />
-                )}
-                <div className={`dropsColumnContainer`}>
-                  <div
-                    className={`dropsNoArContainer dropsNoArContainer-${index}`}
-                  >
-                    {item.cartola}
+              <Link to={`/noticia/${item.id}`} key={index + 2}>
+                <div
+                  className={`dropsRowContainer ${
+                    index === 0 ? 'first-row' : ''
+                  }`}
+                >
+                  {item.yoast_head_json?.og_image?.[0] && (
+                    <img
+                      src={item.yoast_head_json.og_image[0].url}
+                      alt="News"
+                    />
+                  )}
+                  <div className={`dropsColumnContainer`}>
+                    <div
+                      className={`dropsNoArContainer dropsNoArContainer-${index}`}
+                    >
+                      {item.cartola}
+                    </div>
+                    <span>{item.title.rendered}</span>
                   </div>
-                  <span>{item.title.rendered}</span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -950,7 +959,7 @@ function App() {
         </div>
       </div>
       <div className="promoContainer">
-        <img src={trueextPromo} className="textProgImg" />
+        <img src={textPromo} className="textProgImg" />
         <div className="promoActorRow">
           <div className="promoContainerColumn">
             <div className="promoCardBig" style={{ flexDirection: 'column' }}>
@@ -988,6 +997,22 @@ function App() {
           </div>
 
           <img src={PromoActor} />
+        </div>
+      </div>
+      <div className="top10Container">
+        <img src={textTop10} className="imgTop10" />
+        <div className="top10CardsContainer">
+          <div className="mainCard">
+            <div className="smallCard smallCard1">Card pequeno 1</div>
+            <div className="smallCard smallCard2">Card pequeno 2</div>Card
+            principal <div className="smallCard smallCard3">Card pequeno 3</div>
+            <div className="smallCard smallCard4">Card pequeno 4</div>
+            <div className="smallCard smallCard5">Card pequeno 5</div>
+            <div className="smallCard smallCard6">Card pequeno 6</div>
+            <div className="smallCard smallCard7">Card pequeno 7</div>
+            <div className="smallCard smallCard8">Card pequeno 8</div>
+            <div className="smallCard smallCard9">Card pequeno 9</div>
+          </div>
         </div>
       </div>
     </div>
