@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState, useEffect, useRef } from 'react';
-import AudioVisualizer from './Audiovisualizer';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+
 import './App.css';
 import { BeatLoader } from 'react-spinners';
 import { ReactComponent as Map } from './mapa.svg';
@@ -48,133 +48,30 @@ import {
   TelegramLogo,
   Play,
 } from 'phosphor-react';
+import { PlayerContext } from './Context/PlayerContext';
+import CardTop10 from './Card';
 function App() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audio = useRef(null);
   const [image, setImage] = useState(null);
   const [post, setPost] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const selectRef = useRef(null);
-  const [hover, setHover] = useState(false);
-  const [currentSong, setCurrentSong] = useState({});
-  const [isOpen, setIsOpen] = useState(false);
-  const [news, setNews] = useState([]);
-  const [volume, setVolume] = useState(50);
 
-  const radios = [
-    {
-      url: 'https://webradio.amsolution.com.br/radio/8180/aracati',
-      title: 'Plus Aracati',
-      isPlaying: false,
-      frequency: '98.1',
-      width: '9vw',
-      svgClass: 'aracati',
-    },
-    {
-      url: 'https://webradio.amsolution.com.br/radio/8020/plus',
-      title: 'Plus FM',
-      isPlaying: false,
-      width: '6vw',
-      svgClass: 'fortaleza',
-    },
-    {
-      url: 'https://webradio.amsolution.com.br/radio/8140/cariri',
-      title: 'Plus Cariri',
-      isPlaying: false,
-      frequency: '97.1',
-      width: '8vw',
-      svgClass: 'cariri',
-    },
-    {
-      url: 'https://webradio.amsolution.com.br/radio/8110/catarina',
-      title: 'Plus Catarina',
-      isPlaying: false,
-      frequency: '106.1',
-      width: '10vw',
-      svgClass: 'catarina',
-    },
-    {
-      url: 'https://webradio.amsolution.com.br/radio/8120/crateus',
-      title: 'Plus Crateús',
-      isPlaying: false,
-      frequency: '93.3',
-      width: '9vw',
-      svgClass: 'crateus',
-    },
-    {
-      url: 'https://webradio.amsolution.com.br/radio/8160/cascavel',
-      title: 'Plus Cascavel',
-      isPlaying: false,
-      frequency: '106.1',
-      width: '10vw',
-      svgClass: 'cascavel',
-    },
-    {
-      url: 'https://webradio.amsolution.com.br/radio/8070/iguatu',
-      title: 'Plus Iguatu',
-      isPlaying: false,
-      width: '8.5vw',
-      svgClass: 'iguatu',
-    },
-    {
-      url: 'https://webradio.amsolution.com.br/radio/8130/pacajus',
-      title: 'Plus Pacajus',
-      isPlaying: false,
-      frequency: '99.5',
-      width: '9vw',
-      svgClass: 'pacajus',
-    },
-    {
-      url: 'https://webradio.amsolution.com.br/radio/8150/paraipaba',
-      title: 'Plus Paraipaba',
-      isPlaying: false,
-      frequency: '88.7',
-      width: '11vw',
-      svgClass: 'paraipaba',
-    },
-    {
-      url: 'https://webradio.amsolution.com.br/radio/8170/santaquiteria',
-      title: 'Plus Santa Quitéria',
-      isPlaying: false,
-      frequency: '106.5',
-      width: '14vw',
-      svgClass: 'santaquiteira',
-    },
-    {
-      url: 'https://webradio.amsolution.com.br/radio/8030/sobral',
-      title: 'Plus Sobral',
-      isPlaying: false,
-      frequency: '105.1',
-      width: '8.5vw',
-      svgClass: 'sobral',
-    },
-    {
-      url: 'https://webradio.amsolution.com.br/radio/8090/redencao',
-      title: 'Plus Redenção',
-      isPlaying: false,
-      frequency: '98.7',
-      width: '11vw',
-      svgClass: 'redencao',
-    },
-  ];
-  const radioMap = {
-    aracati: 'Plus Aracati',
-    fortaleza: 'Plus FM',
-    cariri: 'Plus Cariri',
-    catarina: 'Plus Catarina',
-    crateus: 'Plus Crateús',
-    iguatu: 'Plus Iguatu',
-    pacajus: 'Plus Pacajus',
-    paraipaba: 'Plus Paraipaba',
-    santaquiteria: 'Plus Santa Quitéria',
-    sobral: 'Plus Sobral',
-    redencao: 'Plus Redenção',
-    cascavel: 'Plus Cascavel',
-    // Adicione todas as outras correspondências de classe para título de rádio aqui
-  };
-  const [selectedRadio, setSelectedRadio] = useState(
-    radios.find((radio) => radio.title === 'Plus FM')
-  );
+  const [hover, setHover] = useState(false);
+
+  const [news, setNews] = useState([]);
+
+  const {
+    isPlaying,
+    setIsPlaying,
+    audio,
+    selectedRadio,
+    setSelectedRadio,
+    radios,
+    radioMap,
+    isLoading,
+    setIsLoading,
+    currentSong,
+    setCurrentSong,
+    handlePlayPause, // Adicione handlePlayPause aqui se você o adicionou ao contexto
+  } = useContext(PlayerContext);
   useEffect(() => {
     function handleSvgClassClicked(event) {
       const foundRadio = radios.find(
@@ -236,141 +133,7 @@ function App() {
       document.removeEventListener('svgClassClicked', handleSvgClassClicked);
     };
   }, [radios, radioMap, selectedRadio]);
-  useEffect(() => {
-    const fetchSong = () => {
-      fetch('https://webradio.amsolution.com.br/api/nowplaying/plus', {
-        headers: {
-          Authorization: 'ec1e12625c87f3fd:3522595694202dccc04b294711eb85cd',
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setCurrentSong(data.now_playing.song);
-        })
-        .catch((error) => {
-          console.error('Erro:', error);
-        });
-    };
 
-    // Chamar a função imediatamente para obter a música atual
-    fetchSong();
-
-    // Configurar um intervalo para chamar a função a cada 10 segundos
-    const intervalId = setInterval(fetchSong, 10000);
-
-    // Limpar o intervalo quando o componente for desmontado
-    return () => clearInterval(intervalId);
-  }, []);
-  useEffect(() => {
-    audio.current = new Audio(selectedRadio.url);
-  }, []);
-
-  const handlePlayPause = () => {
-    if (isPlaying) {
-      console.log('Stopping audio...');
-      audio.current.pause();
-      audio.current.src = '';
-      audio.current.load();
-    } else {
-      console.log('Playing audio...');
-      setIsLoading(true); // Defina isLoading como true quando o áudio começar a carregar
-      audio.current.src = selectedRadio.url;
-      audio.current.load();
-      audio.current.play();
-      audio.current.onloadeddata = () => setIsLoading(false); // Defina isLoading como false quando os dados de mídia suficientes foram carregados
-    }
-    setIsPlaying(!isPlaying);
-  };
-  useEffect(() => {
-    if (audio.current) {
-      audio.current.volume = volume / 100;
-    }
-  }, [volume]);
-
-  const handleVolumeChange = (event) => {
-    setVolume(event.target.value);
-  };
-
-  const renderSpeakerIcon = () => {
-    if (volume < 1) {
-      return (
-        <SpeakerSlash
-          style={{ marginInline: '2vw' }}
-          color="white"
-          size={'5vw'}
-          weight="bold"
-        />
-      );
-    } else if (volume < 20) {
-      return (
-        <SpeakerNone
-          style={{ marginInline: '2vw' }}
-          color="white"
-          size={'5vw'}
-          weight="bold"
-        />
-      );
-    } else if (volume < 60) {
-      return (
-        <SpeakerLow
-          style={{ marginInline: '2vw' }}
-          color="white"
-          size={'5vw'}
-          weight="bold"
-        />
-      );
-    } else {
-      return (
-        <SpeakerHigh
-          style={{ marginInline: '2vw' }}
-          color="white"
-          size={'5vw'}
-          weight="bold"
-        />
-      );
-    }
-  };
-  const [isVolumeVisible, setIsVolumeVisible] = useState(false);
-
-  const handleSpeakerClick = () => {
-    setIsVolumeVisible(!isVolumeVisible);
-  };
-  useEffect(() => {
-    audio.current = new Audio(selectedRadio.url);
-  }, [selectedRadio]);
-
-  const handleRadioClick = (value) => {
-    // Parar a reprodução da rádio atual
-    if (isPlaying) {
-      audio.current.pause();
-      audio.current.src = '';
-      audio.current.load();
-      setIsPlaying(false);
-    }
-
-    // Mudar para a nova rádio
-    const selectedRadio = radios.find((radio) => radio.title === value);
-    setSelectedRadio(selectedRadio);
-
-    // Começar a carregar a nova rádio
-    setIsLoading(true);
-    audio.current.src = selectedRadio.url;
-    audio.current.load();
-
-    // Começar a reprodução da nova rádio quando os dados de mídia suficientes foram carregados
-    audio.current.onloadeddata = () => {
-      audio.current.play();
-      setIsPlaying(true);
-      setIsLoading(false);
-    };
-  };
-  const audioRef = useRef(null);
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.play();
-    }
-  }, [selectedRadio]);
   useEffect(() => {
     const svgElement = document.querySelector(`.${selectedRadio.svgClass}`);
     if (svgElement) {
@@ -441,91 +204,10 @@ function App() {
         overflow: 'hidden',
       }}
     >
-      <div className="App-Player">
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-          onClick={handlePlayPause}
-        >
-          {isLoading ? (
-            <div style={{ marginRight: '2vw' }}>
-              <BeatLoader color="#ffffff" loading={isLoading} size={8} />
-            </div>
-          ) : isPlaying ? (
-            <PauseCircle
-              style={{ marginRight: '2vw' }}
-              color="white"
-              size={'5vw'}
-              weight="bold"
-            />
-          ) : (
-            <PlayCircle
-              style={{ marginRight: '2vw' }}
-              color="white"
-              size={'5vw'}
-              weight="bold"
-            />
-          )}
-        </div>
-        <div className="Container-Music-Title">
-          <span className="Container-Music-TitleSpan">Tocando agora</span>
-          <div
-            style={{
-              height: '0.1px',
-              background: 'white',
-              width: '10.1vw',
-              marginBlock: '0.5vw',
-              marginLeft: '0.2vw',
-            }}
-          ></div>
-          <span className="ContainerMusicSpanPlaying">
-            {currentSong.artist} - {currentSong.title}
-          </span>
-        </div>
-        <div className="VolumeControl">
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-            onClick={handleSpeakerClick}
-          >
-            {renderSpeakerIcon()}
-          </div>
-        </div>
-        <div className="ContainerRadioList">
-          <select
-            value={selectedRadio.title}
-            onChange={(event) => handleRadioClick(event.target.value)}
-            style={{ width: selectedRadio.width }}
-          >
-            {radios.map((radio, index) => (
-              <option key={index} value={radio.title}>
-                {radio.title}
-              </option>
-            ))}
-          </select>
-          <CaretDown size={'2.5vw'} />
-        </div>
-
-        {isVolumeVisible && (
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value={volume}
-            onChange={handleVolumeChange}
-          />
-        )}
-      </div>
       <div className="App">
         <header className="App-header">
-          <div className="ContainerRow">
-            <img src={Logo} style={{ width: '20vw' }} />
+          <div className="ContainerRowN">
+            <img src={Logo} style={{ width: '20vw', paddingRight: '5vw' }} />
             <House
               size={'4vw'}
               weight="fill"
@@ -535,7 +217,6 @@ function App() {
             <span>Quem somos</span>
             <span>Drops</span>
             <span>Progamação</span>
-            <span>Top 10</span>
             <span>Contato</span>
             <div className="InnerContainerRow">
               <FacebookLogo size={'2vw'} weight="fill" color="white" />
@@ -1003,7 +684,7 @@ function App() {
         <img src={textTop10} className="imgTop10" />
         <div className="top10CardsContainer">
           <div className="mainCard">
-            <div className="smallCard smallCard1">Card pequeno 1</div>
+            <div className="smallCard smallCard1"> <CardTop10/></div>
             <div className="smallCard smallCard2">Card pequeno 2</div>Card
             principal <div className="smallCard smallCard3">Card pequeno 3</div>
             <div className="smallCard smallCard4">Card pequeno 4</div>
@@ -1015,6 +696,7 @@ function App() {
           </div>
         </div>
       </div>
+     
     </div>
   );
 }

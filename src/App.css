@@ -50,7 +50,7 @@
 .dropsContainerNoticias {
   display: flex;
   flex-direction: column;
-  border-radius: 8px;
+  border-radius: 24px;
 
 
 }
@@ -63,6 +63,7 @@
   width: auto;
   height: auto;
   position: relative;
+
 }
 
 .dropsColumnContainer {
@@ -174,7 +175,7 @@
   color: #541084;
 
   font-family: 'Rubik', sans-serif;
-  font-size: calc(1vw + 0.2vw);
+  font-size: calc(0.8vw + 0.2vw);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -189,16 +190,16 @@
 
 .dropsRowContainer img {
   height: 15vw;
-  width: 24.4vw;
-  border-radius: 8px;
+  width: 23.2vw;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   object-fit: cover;
   overflow: hidden;
-  object-fit: contain;
 }
 
 .first-row {
   margin-bottom: 5.5vw;
-  width: 24.4vw;
+  width: 23.2vw;
 }
 
 .dropsCardContainer {
@@ -217,7 +218,6 @@
   flex-direction: column;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   margin-right: 2vw;
-
 }
 
 
@@ -225,6 +225,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  height: 7vw;
+
+  justify-content: center;
 
 }
 
@@ -244,7 +247,7 @@
   bottom: 0%;
 
   width: 100%;
-  height: 16%;
+
   background: white;
   border-top: 0.5vw solid #ffc007;
   /* Adiciona uma borda amarela de 2px na parte superior */
@@ -254,53 +257,56 @@
   align-items: center;
   justify-content: center;
 
+
 }
 
 .dropsFrontCardContainerSpan {
   font-family: 'Rubik', sans-serif;
   font-size: calc(1.5vw + 0.2vw);
   font-weight: 500;
-  /* Medium */
   color: #541084;
   text-align: center;
   z-index: 5;
   margin-inline: 2vw;
+  position: relative;
+
+  /* ajuste este valor conforme necessário */
+
 }
 
 .dropsFrontCardContainerSpanCartola {
-
   position: absolute;
-  top: -65%;
-
+  bottom: 87%;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 24px;
-
-  height: auto;
+  height: 2vw;
+  /* ajuste este valor conforme necessário */
   background-color: #FFC007;
   align-self: center;
-  padding-inline: 1rem;
+  padding-inline: 1vw;
   z-index: 6;
   color: #000;
-
   font-family: 'Rubik', sans-serif;
   font-size: 2vw;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   position: absolute;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media (max-width: 768px) {
   .dropsFrontCardContainerSpanCartola {
-    top: -68%;
+    top: -22%;
   }
 }
 
 @media (max-width: 388px) {
   .dropsFrontCardContainerSpanCartola {
-    top: -68%;
+    top: -22%;
   }
 }
 
@@ -371,9 +377,18 @@
   width: auto;
 }
 
+.containerPlayer {
+  display: flex;
+
+
+  justify-content: center;
+  position: relative;
+}
+
+
 .App-Player {
   position: fixed;
-  top: 0;
+  top: -1.2vw;
   z-index: 9999;
 
   background-color: #541084;
@@ -385,11 +400,64 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding-inline: 4vw;
+  padding-inline: 2vw;
   padding-block: 0.5vw;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
 
+
+}
+@media (min-width: 320px) {
+  .App-Player {
+    transform: scale(0.6);
+  }
+}
+@media (min-width: 561px) {
+  .App-Player {
+    transform: scale(0.7);
+  }
+}
+
+@media (min-width: 754px) {
+  .App-Player {
+    transform: scale(0.6);
+  }
+}
+
+@media (min-width: 768px) {
+  .App-Player {
+    transform: scale(0.7);
+  }
+}
+
+@media (min-width: 820px) {
+  .App-Player {
+    transform: scale(0.6);
+  }
+}
+
+@media (min-width: 989px) {
+  .App-Player {
+    transform: scale(0.7);
+  }
+}
+
+@media (min-width: 1024px) {
+  .App-Player {
+    transform: scale(0.6);
+  }
+}
+
+@media (min-width: 1207px) {
+  .App-Player {
+    transform: scale(0.65);
+  }
+}
+
+@media (min-width: 1440px) {
+  .App-Player {
+    transform: scale(0.6);
+  }
 }
 
 .Container-Music-Title {
@@ -400,9 +468,9 @@
 
 .ContainerMusicSpanPlaying {
   color: white;
-  font-size: 5re;
+  font-size: 2vw;
   font-family: 'Rubik', sans-serif;
-
+  font-weight: 200;
 }
 
 .Container-Music-TitleSpan {
@@ -410,7 +478,7 @@
   color: white;
   font-size: 1.4vw;
   font-family: 'Rubik', sans-serif;
-  font-weight: 400;
+  font-weight: 200;
 }
 
 
@@ -571,11 +639,12 @@
 
 .center-image {
 
-  width: 16vw;
+  width: 12vw;
   /* 100% da largura da tela menos 4vw (2vw de cada lado) */
   height: auto;
   object-fit: cover;
   margin-inline: 4.2vw;
+  gap: 2vw;
 
   /* Adicione uma margem ao redor das imagens */
 }
@@ -604,6 +673,7 @@
   flex-direction: column;
   justify-content: space-around;
   /* ou space-between */
+  gap: 1vw;
 }
 
 .dropsImage {
@@ -942,4 +1012,3 @@
   width: 19vw;
   height: 9vw;
 }
-
