@@ -1,12 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import './App.css';
-import { BeatLoader } from 'react-spinners';
+
 import { ReactComponent as Map } from './mapa.svg';
-import myImage from './radios1.png'; // Importe a imagem do local correto
-import styled from 'styled-components';
+
 import Logo from './plus-1.png';
 import Cariri from './AssetsMap/Cariri.svg';
 import Catarina from './AssetsMap/Catarina.svg';
@@ -31,13 +30,6 @@ import textPromo from './textoPromo.png';
 import textTop10 from './AssetDrops/textTop10.png';
 import { Link } from 'react-router-dom';
 import {
-  CaretDown,
-  PlayCircle,
-  PauseCircle,
-  SpeakerNone,
-  SpeakerLow,
-  SpeakerHigh,
-  SpeakerSlash,
   House,
   FacebookLogo,
   TwitterLogo,
@@ -49,7 +41,8 @@ import {
   Play,
 } from 'phosphor-react';
 import { PlayerContext } from './Context/PlayerContext';
-import CardTop10 from './Card';
+
+import { StyledImg } from './styles';
 function App() {
   const [image, setImage] = useState(null);
   const [post, setPost] = useState(null);
@@ -101,11 +94,8 @@ function App() {
         const currentSvgElements = document.querySelectorAll(
           `.${foundRadio.title}`
         );
-        console.log(
-          `Found ${currentSvgElements.length} elements with class ${foundRadio.title}`
-        );
+
         currentSvgElements.forEach(function (element, index) {
-          console.log(`Element ${index}: ${element}`);
           element.classList.add('playing');
           element.style.fill = 'red'; // Adiciona o estilo de preenchimento vermelho
         });
@@ -146,29 +136,24 @@ function App() {
       }
     };
   }, [selectedRadio]);
-  const StyledImg = styled.img`
-    position: absolute;
-    z-index: 1;
-    top: ${(props) => props.top};
-    left: ${(props) => props.left};
-    transform-origin: center bottom;
-    pointer-events: none;
-    height: 10vh;
-    animation: ${(props) =>
-      props.selectedRadio.title === props.title ? 'pulse 2s infinite' : ''};
 
-    @media (max-width: 600px) {
-      height: 5vh;
-    }
-  `;
   useEffect(() => {
     const fetchNews = async () => {
       try {
+        const cachedNews = JSON.parse(localStorage.getItem('news'));
         const response = await fetch(
           'https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=3'
         );
         const data = await response.json();
-        setNews(data);
+        if (
+          !cachedNews ||
+          new Date(data[0].modified) > new Date(cachedNews[0].modified)
+        ) {
+          setNews(data);
+          localStorage.setItem('news', JSON.stringify(data));
+        } else {
+          setNews(cachedNews);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -176,16 +161,26 @@ function App() {
 
     fetchNews();
   }, []);
+
   const [promos, setPromos] = useState([]);
 
   useEffect(() => {
     const fetchPromotions = async () => {
       try {
+        const cachedPromos = JSON.parse(localStorage.getItem('promos'));
         const response = await fetch(
           'https://plusfm.com.br/wp-json/wp/v2/posts?categories=14&per_page=3'
         );
         const data = await response.json();
-        setPromos(data);
+        if (
+          !cachedPromos ||
+          new Date(data[0].modified) > new Date(cachedPromos[0].modified)
+        ) {
+          setPromos(data);
+          localStorage.setItem('promos', JSON.stringify(data));
+        } else {
+          setPromos(cachedPromos);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -193,7 +188,75 @@ function App() {
 
     fetchPromotions();
   }, []);
+  const [songsWithThumbnails, setSongsWithThumbnails] = useState([]);
 
+  const songs = [
+    {
+      song: 'luan santana - mulher segura',
+      url: 'https://www.youtube.com/watch?v=XJQUyfPYQNs&ab_channel=LuanSantana',
+    },
+    {
+      song: 'menos e mais - matadinha',
+      url: 'https://www.youtube.com/watch?v=skGuNpYDzmc&ab_channel=GrupoMenos%C3%A9Mais',
+    },
+    {
+      song: 'manu bahtidao - daqui pra frente',
+      url: 'https://www.youtube.com/watch?v=2FNiAPNK4Ig&ab_channel=ManuBahtid%C3%A3o',
+    },
+    {
+      song: 'guilherme e benuto - milionario',
+      url: 'https://www.youtube.com/watch?v=t5YMh8TWcKQ&ab_channel=GuilhermeeBenuto',
+    },
+    {
+      song: 'gustavo lima - desejo imoral',
+      url: 'https://www.youtube.com/watch?v=-UUe7g8-E0k&ab_channel=GusttavoLimaOficial',
+    },
+    {
+      song: 'marcos e belutti - casal de solteiro',
+      url: 'https://www.youtube.com/watch?v=tgZ3TdqGwuE&ab_channel=MarcoseBelutti',
+    },
+    {
+      song: 'ana castela - solteiro forçado',
+      url: 'https://www.youtube.com/watch?v=f58W_FVXBLg&ab_channel=AnaCastela',
+    },
+    {
+      song: 'dilsinho - diferentao',
+      url: 'https://www.youtube.com/watch?v=YRNLudNXU_c',
+    },
+    {
+      song: 'anita - joga pra lua',
+      url: 'https://www.youtube.com/watch?v=QJgSzPqUYy0&ab_channel=AnittaVEVO',
+    },
+    {
+      song: 'simone mende - dois fugitivos',
+      url: 'https://www.youtube.com/watch?v=9D3c4FlFuy8&ab_channel=SimoneMendes',
+    },
+  ];
+  useEffect(() => {
+    const fetchThumbnails = async () => {
+      const newSongsWithThumbnails = songs.map((song) => {
+        try {
+          const videoId = new URL(song.url).searchParams.get('v');
+          const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/0.jpg`;
+          return { ...song, thumbnailUrl };
+        } catch (error) {
+          console.error(`Error fetching thumbnail for ${song.song}:`, error);
+        }
+
+        return song;
+      });
+
+      // Verifique se os novos dados são diferentes dos dados antigos
+      if (
+        JSON.stringify(newSongsWithThumbnails) !==
+        JSON.stringify(songsWithThumbnails)
+      ) {
+        setSongsWithThumbnails(newSongsWithThumbnails);
+      }
+    };
+
+    fetchThumbnails();
+  }, [songs, songsWithThumbnails]);
   return (
     <div
       style={{
@@ -682,21 +745,28 @@ function App() {
       </div>
       <div className="top10Container">
         <img src={textTop10} className="imgTop10" />
-        <div className="top10CardsContainer">
-          <div className="mainCard">
-            <div className="smallCard smallCard1"> <CardTop10/></div>
-            <div className="smallCard smallCard2">Card pequeno 2</div>Card
-            principal <div className="smallCard smallCard3">Card pequeno 3</div>
-            <div className="smallCard smallCard4">Card pequeno 4</div>
-            <div className="smallCard smallCard5">Card pequeno 5</div>
-            <div className="smallCard smallCard6">Card pequeno 6</div>
-            <div className="smallCard smallCard7">Card pequeno 7</div>
-            <div className="smallCard smallCard8">Card pequeno 8</div>
-            <div className="smallCard smallCard9">Card pequeno 9</div>
-          </div>
+        <div className="mainCard">
+          {songsWithThumbnails[0] && (
+            <a
+              href={songsWithThumbnails[0].url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={songsWithThumbnails[0].thumbnailUrl}
+                alt={songsWithThumbnails[0].song}
+              />
+            </a>
+          )}
+          {songsWithThumbnails.slice(1, 9).map((song, index) => (
+            <div key={index} className={`smallCard smallCard${index + 1}`}>
+              <a href={song.url} target="_blank" rel="noopener noreferrer">
+                <img src={song.thumbnailUrl} alt={song.song} />
+              </a>
+            </div>
+          ))}
         </div>
       </div>
-     
     </div>
   );
 }

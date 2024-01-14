@@ -78,7 +78,7 @@ const NoticiaDetalhe = () => {
   }
 
   return (
-    <div>
+    <div style={{ backgroundColor: '#d7d7d771' }}>
       <div className="MenuContainerHeader">
         <header className="App-headerN">
           <img src={Logo} />

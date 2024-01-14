@@ -113,7 +113,128 @@ const Player = () => {
       setIsLoading(false);
     };
   };
+  const getPrograma = () => {
+    const currentDay = new Date().getDay();
+    const currentHour = new Date().getHours();
+    let progTitle = '';
 
+    if (
+      currentDay >= 0 &&
+      currentDay <= 6 &&
+      currentHour >= 0 &&
+      currentHour < 5
+    ) {
+      progTitle = 'Coruja da Plus';
+    } else if (
+      currentDay >= 1 &&
+      currentDay <= 5 &&
+      currentHour >= 5 &&
+      currentHour < 6
+    ) {
+      progTitle = 'Clube Plus';
+    } else if (
+      currentDay >= 1 &&
+      currentDay <= 5 &&
+      currentHour >= 6 &&
+      currentHour < 7
+    ) {
+      progTitle = 'Deu B.O.';
+    } else if (
+      currentDay >= 1 &&
+      currentDay <= 5 &&
+      currentHour >= 7 &&
+      currentHour < 8
+    ) {
+      progTitle = 'Ceará News';
+    } else if (
+      currentDay >= 1 &&
+      currentDay <= 6 &&
+      currentHour >= 8 &&
+      currentHour < 9
+    ) {
+      progTitle = 'Ao Colo de Jesus e Maria';
+    } else if (
+      currentDay >= 1 &&
+      currentDay <= 6 &&
+      currentHour >= 9 &&
+      currentHour < 11
+    ) {
+      progTitle = 'Manhã da Plus';
+    } else if (
+      currentDay >= 1 &&
+      currentDay <= 5 &&
+      currentHour >= 12 &&
+      currentHour < 14
+    ) {
+      progTitle = 'Redação da Plus';
+    } else if (
+      currentDay >= 1 &&
+      currentDay <= 5 &&
+      currentHour >= 14 &&
+      currentHour < 17
+    ) {
+      progTitle = 'Tarde Plus';
+    } else if (
+      currentDay >= 1 &&
+      currentDay <= 5 &&
+      currentHour >= 17 &&
+      currentHour < 18
+    ) {
+      progTitle = 'Tá Todo Mundo Plus';
+    } else if (
+      currentDay >= 1 &&
+      currentDay <= 5 &&
+      currentHour >= 18 &&
+      currentHour < 19
+    ) {
+      progTitle = 'As Mais Pedidas';
+    } else if (
+      currentDay >= 1 &&
+      currentDay <= 5 &&
+      currentHour >= 20 &&
+      currentHour < 22
+    ) {
+      progTitle = 'Plus Mania';
+    } else if (currentDay === 6 && currentHour >= 12 && currentHour < 14) {
+      progTitle = 'Festa Plus';
+    } else if (currentDay === 6 && currentHour >= 21 && currentHour < 22) {
+      progTitle = 'Time Machine';
+    } else if (currentDay === 6 && currentHour >= 22 && currentHour < 24) {
+      progTitle = 'Upgrade';
+    } else if (
+      currentDay === 0 &&
+      ((currentHour >= 5 && currentHour < 8) ||
+        (currentHour >= 20 && currentHour < 22))
+    ) {
+      progTitle = 'Playlist da Plus';
+    } else if (currentDay === 0 && currentHour >= 8 && currentHour < 9) {
+      progTitle = 'Terço da Misericórdia';
+    } else if (currentDay === 0 && currentHour >= 10 && currentHour < 15) {
+      progTitle = 'Domingão da Plus';
+    } else if (currentDay === 0 && currentHour >= 15 && currentHour < 19) {
+      progTitle = 'Mega Plus';
+    } else if (currentDay === 0 && currentHour >= 19 && currentHour < 20) {
+      progTitle = 'A Grande Hora';
+    } else if (currentDay === 0 && currentHour >= 22 && currentHour < 24) {
+      progTitle = 'Sem Limites Para Amar';
+    } else if (
+      currentDay >= 1 &&
+      currentDay <= 6 &&
+      currentHour >= 11 &&
+      currentHour < 12
+    ) {
+      progTitle = 'As Melhores da Plus';
+    } else if (
+      currentDay >= 1 &&
+      currentDay <= 5 &&
+      currentHour >= 22 &&
+      currentHour < 24
+    ) {
+      progTitle = 'Slow Motion';
+    }
+
+    return progTitle;
+  };
   return (
     <div className="containerPlayer">
       <div className="App-Player">
@@ -157,7 +278,9 @@ const Player = () => {
             }}
           ></div>
           <span className="ContainerMusicSpanPlaying">
-            {currentSong.artist} - {currentSong.title}
+            {currentSong.artist === 'PLUS FM'
+              ? `PLUS FM - ${getPrograma().toUpperCase()}` // Exibe "PLUS FM - " seguido do nome do programa
+              : `${currentSong.artist} - ${currentSong.title}`}
           </span>
         </div>
         <div className="VolumeControl">
