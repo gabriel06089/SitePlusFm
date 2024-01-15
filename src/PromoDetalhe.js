@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   FacebookLogo,
   InstagramLogo,
@@ -82,6 +82,24 @@ const PromoDetalhe = () => {
 
     fetchPromos();
   }, []);
+
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(
+          'https://plusfm.com.br/wp-json/wp/v2/posts?per_page=6'
+        );
+        const data = await response.json();
+        setPosts(data);
+      } catch (error) {
+        console.error('Erro ao buscar os posts:', error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
   if (loading) {
     return <div>Carregando...</div>;
   }
@@ -95,7 +113,7 @@ const PromoDetalhe = () => {
       <div className="MenuContainerHeader">
         <header className="App-headerN">
           <Link to="/">
-            <img src={Logo} />]
+            <img src={Logo} />
           </Link>
           <div className="divMenu">
             <div className="menuDiv">
@@ -112,6 +130,7 @@ const PromoDetalhe = () => {
           </div>
         </header>
       </div>
+
       <div className="noticiasContainer">
         <h1>{noticia.title.rendered}</h1>
         <h2>{noticia.bigode}</h2>
@@ -160,29 +179,82 @@ const PromoDetalhe = () => {
       </div>
       <div className="containerDivisaoP"> Mais promoções </div>
       <div className="maisNoticias">
-        {promos.map((promo) => (
-          <Link
-            to={`/promo/${promo.id}`}
-            key={promo.id}
-            className="noticia"
-            style={{ color: 'inherit', textDecoration: 'none' }}
-          >
-            <img
-              src={promo.yoast_head_json.og_image[0].url}
-              alt="Imagem da promoção"
-            />
-            <div>
-              <h4>
-                {promo.cartola.includes('Oportunidade')
-                  ? promo.cartola.toUpperCase()
-                  : promo.cartola.includes('PROMOÇÃO ENCERRADA')
-                  ? 'ENCERRADA'
-                  : promo.cartola}
-              </h4>
-              <h5>{promo.title.rendered}</h5>
-            </div>
-          </Link>
-        ))}
+        {promos.map((promo) => {
+          let cartola = promo.cartola;
+          if (cartola === 'Oportunidade') {
+            cartola = 'OPORTUNIDADE';
+          } else if (cartola === 'PROMOÇÃO ENCERRADA') {
+            cartola = 'ENCERRADA';
+          }
+
+          return (
+            <Link
+              to={`/promocao/${promo.id}`}
+              key={promo.id}
+              className="noticia"
+              style={{ color: 'inherit', textDecoration: 'none' }}
+            >
+              <img
+                src={promo.yoast_head_json.og_image[0].url}
+                alt="Imagem da notícia"
+              />
+              <div>
+                <h4>{cartola}</h4>
+                <h5>{promo.title.rendered}</h5>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+      <div className="containerDivisao"> Mais notícias </div>
+      <div
+        className="maisNoticiasR"
+        style={{ display: 'flex', flexDirection: 'row', width: '80vw' }}
+      >
+        <div className="containerColuna1">
+          {posts.slice(0, 3).map((post) => (
+            <Link
+              to={`/noticia/${post.id}`} // Use o id do post aqui
+              key={post.id}
+              className="post"
+              style={{
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              <img
+                src={post.yoast_head_json.og_image[0].url}
+                alt="Imagem do post"
+              />
+              <div className="containerSpanFooter">
+                <h4>{post.cartola}</h4>
+                <h5>{post.title.rendered}</h5>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="containerColuna2">
+          {posts.slice(3, 6).map((post) => (
+            <Link
+              to={`/noticia/${post.id}`} // Use o id do post aqui
+              key={post.id}
+              className="post"
+              style={{
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              <img
+                src={post.yoast_head_json.og_image[0].url}
+                alt="Imagem do post"
+              />
+              <div className="containerSpanFooter">
+                <h4>{post.cartola}</h4>
+                <h5>{post.title.rendered}</h5>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

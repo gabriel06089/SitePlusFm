@@ -409,7 +409,13 @@
     transform: scale(0.9);
     top: -.45vw;
   }
+
+  .App-Player.home {
+    transform: scale(1.1);
+    top: -.15vw;
+  }
 }
+
 
 @media (min-width: 601px) and (max-width: 854px) {
   .App-Player {
@@ -1148,4 +1154,110 @@
     font-size: 1.5vw;
     padding-inline: 1.5vw;
   }
+}
+
+.footer {
+  background-color: #541084;
+  /* Cor de fundo roxa */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  height: 15vw;
+  gap: 12vw;
+}
+
+.footerDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.footerImage1 {
+  width: 16vw;
+  height: 50px;
+  margin: 0 10px;
+  object-fit: contain;
+}
+
+.footerImage2 {
+  width: 14vw;
+  height: 50px;
+  margin: 0 10px;
+  object-fit: contain;
+}
+
+.footerImage3 {
+  width: 14vw;
+  height: 50px;
+  margin: 0 10px;
+  object-fit: contain;
+}
+
+.footerText {
+  color: #ffffff;
+  /* Cor do texto branca */
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.5vw;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  z-index: 5;
+  margin-block: 1vw;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contato {
+  background-color: #541084;
+  /* Cor de fundo roxa */
+  color: #ffffff;
+  /* Cor do texto branca */
+  text-align: center;
+  padding: 20px;
+
+  width: 100%;
+}
+
+.contato h2 {
+  color: #9248FF;
+  /* Cor do texto branca */
+  font-family: 'Rubik', sans-serif;
+  font-size: 4vw;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  z-index: 5;
+  margin-block: 1vw;
+}
+
+.contato h4 {
+  color: #ffffff;
+  /* Cor do texto branca */
+  font-family: 'Rubik', sans-serif;
+  font-size: 4vw;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  z-index: 5;
+  margin-block: 1vw;
+}
+
+.contato h2 {
+  font-size: 36px;
+  /* Tamanho do texto */
+  font-weight: bold;
+  /* Texto em negrito */
+  margin-bottom: 20px;
+}
+
+.contatoInfo p {
+  margin: 5px 0;
 }

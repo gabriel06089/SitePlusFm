@@ -6,11 +6,11 @@ export const StyledImg = styled.img`
   left: ${(props) => props.left};
   transform-origin: center bottom;
   pointer-events: none;
-  height: 10vh;
+  height: 12vw;
   animation: ${(props) =>
     props.selectedRadio.title === props.title ? 'pulse 3s infinite' : ''};
 
   @media (max-width: 600px) {
-    height: 5vh;
+    height: 7vh;
   }
 `;

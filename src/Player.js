@@ -11,6 +11,7 @@ import {
   PlayCircle,
   CaretDown,
 } from 'phosphor-react';
+import { useLocation } from 'react-router-dom';
 
 import { PlayerContext } from './Context/PlayerContext'; // Importe o PlayerContext
 
@@ -235,16 +236,22 @@ const Player = () => {
 
     return progTitle;
   };
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
   return (
     <div className="containerPlayer">
-      <div className="App-Player">
+      <div className={`App-Player ${isHomePage ? 'home' : ''}`}>
         <div
           style={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
           }}
-          onClick={handlePlayPause}
+          onClick={() => {
+            if (!isLoading) {
+              handlePlayPause();
+            }
+          }}
         >
           {isLoading ? (
             <div style={{ marginRight: '2vw' }}>

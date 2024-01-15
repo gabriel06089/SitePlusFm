@@ -1,0 +1,119 @@
+.containerPrincipal {
+    /* Estilos para o container principal */
+}
+
+.MenuContainerHeader {
+    /* Estilos para o container do menu e cabeçalho */
+}
+
+.App-headerN {
+    /* Estilos para o cabeçalho */
+}
+
+.linkLogo {
+    /* Estilos para o link do logo */
+}
+
+.imagemLogo {
+    /* Estilos para a imagem do logo */
+}
+
+.divMenu {
+    /* Estilos para o div do menu */
+}
+
+.menuDiv {
+    /* Estilos para o div do menu */
+}
+
+.divMenuSpan {
+    /* Estilos para o span do div do menu */
+}
+
+.socialIcons {
+    /* Estilos para os ícones sociais */
+}
+
+.iconeInstagram,
+.iconeFacebook,
+.iconeYoutube,
+.iconeTwitter {
+    /* Estilos para os ícones das redes sociais */
+}
+
+
+
+
+.containerNoticia {
+
+    border-radius: 10px;
+    width: 90%;
+    padding: 10px;
+}
+
+.imagemNoticia {
+    width: 30vw;
+    height: 16vw;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+h4 {
+    margin: 0;
+    padding: 0;
+
+
+    color: #541084;
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.5vw;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+h5 {
+    margin: 0;
+    padding: 0;
+
+
+    background-color: white;
+
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.5vw;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    opacity: 0.8;
+}
+
+.botaoContainer {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.botaoCarregarMais {
+    margin: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #541084;
+    /* Cor de fundo roxa */
+    border: 2px solid #7d33a6;
+    /* Borda roxa mais clara */
+    color: #ffffff;
+    /* Cor do texto branca */
+    font-size: 16px;
+    /* Tamanho do texto */
+    font-weight: bold;
+    /* Texto em negrito */
+    transition: background-color 0.3s ease;
+    /* Transição suave ao mudar a cor de fundo */
+}
+
+.botaoCarregarMais:hover {
+    background-color: #7d33a6;
+    /* Cor de fundo roxa mais clara ao passar o mouse */
+}

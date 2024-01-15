@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import './NoticiaDetalhe.css';
+
+import Don7 from './Don7.png';
 import Logo from './plus-1.png';
+import PlayStore from './playstore.png';
+import AppleStore from './iostore.png';
 import {
   FacebookLogo,
   InstagramLogo,
@@ -91,6 +95,23 @@ const NoticiaDetalhe = () => {
 
     fetchNoticia();
   }, [id]);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(
+          'https://plusfm.com.br/wp-json/wp/v2/posts?per_page=6'
+        );
+        const data = await response.json();
+        setPosts(data);
+      } catch (error) {
+        console.error('Erro ao buscar os posts:', error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
 
   if (loading) {
     return <div>Carregando...</div>;
@@ -189,6 +210,76 @@ const NoticiaDetalhe = () => {
             </div>
           </Link>
         ))}
+      </div>
+      <div className="containerDivisaoC"> Recomendadas para você </div>
+      <div
+        className="maisNoticiasR"
+        style={{ display: 'flex', flexDirection: 'row', width: '80vw' }}
+      >
+        <div className="containerColuna1">
+          {posts.slice(0, 3).map((post) => (
+            <Link
+              to={`/noticia/${post.id}`} // Use o id do post aqui
+              key={post.id}
+              className="post"
+              style={{
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              <img
+                src={post.yoast_head_json.og_image[0].url}
+                alt="Imagem do post"
+              />
+              <div className="containerSpanFooter">
+                <h4>{post.cartola}</h4>
+                <h5>{post.title.rendered}</h5>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="containerColuna2">
+          {posts.slice(3, 6).map((post) => (
+            <Link
+              to={`/noticia/${post.id}`} // Use o id do post aqui
+              key={post.id}
+              className="post"
+              style={{
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              <img
+                src={post.yoast_head_json.og_image[0].url}
+                alt="Imagem do post"
+              />
+              <div className="containerSpanFooter">
+                <h4>{post.cartola}</h4>
+                <h5>{post.title.rendered}</h5>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+      <div className="footer">
+        <div className="footerDiv">
+          <span className="footerText">
+            Escute a PLUS onde você for, baixe o app
+          </span>
+          <div className="imageContainer">
+            <img src={AppleStore} alt="Imagem 1" className="footerImage1" />
+            <img src={PlayStore} alt="Imagem 2" className="footerImage1" />
+          </div>
+        </div>
+        <div className="footerDiv">
+          <div className="imageContainer">
+            <img src={Logo} alt="Imagem 3" className="footerImage2" />
+            <img src={Don7} alt="Imagem 4" className="footerImage3" />
+          </div>
+          <span className="footerText">
+            Copyright © 2024 Plus FM - Todos os direitos reservados
+          </span>
+        </div>
       </div>
     </div>
   );
