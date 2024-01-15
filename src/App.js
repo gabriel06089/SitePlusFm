@@ -39,6 +39,8 @@ import {
   WhatsappLogo,
   TelegramLogo,
   Play,
+  List,
+  X,
 } from 'phosphor-react';
 import { PlayerContext } from './Context/PlayerContext';
 
@@ -257,6 +259,8 @@ function App() {
 
     fetchThumbnails();
   }, [songs, songsWithThumbnails]);
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
     <div
       style={{
@@ -268,28 +272,59 @@ function App() {
       }}
     >
       <div className="App">
-        <header className="App-header">
-          <div className="ContainerRowN">
-            <img src={Logo} style={{ width: '20vw', paddingRight: '5vw' }} />
-            <House
-              size={'4vw'}
-              weight="fill"
-              color="white"
-              style={{ marginLeft: '3.2vw', marginRight: '2vw' }}
-            />
-            <span>Quem somos</span>
-            <span>Drops</span>
-            <span>Progamação</span>
-            <span>Contato</span>
-            <div className="InnerContainerRow">
-              <FacebookLogo size={'2vw'} weight="fill" color="white" />
-              <TwitterLogo size={'2vw'} weight="fill" color="white" />
-              <InstagramLogo size={'2vw'} weight="fill" color="white" />
-              <TiktokLogo size={'2vw'} weight="fill" color="white" />
-              <YoutubeLogo size={'2vw'} weight="fill" color="white" />
-              <WhatsappLogo size={'2vw'} weight="fill" color="white" />
-              <TelegramLogo size={'2vw'} weight="fill" color="white" />
+        <header className={`App-header ${isSidebarOpen ? 'sidebar-open' : ''}`}>
+          <div
+            className={`ContainerRow ${isSidebarOpen ? 'sidebar-open' : ''}`}
+          >
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}
+            >
+              <img src={Logo} style={{ paddingRight: '15vw' }} />
+              <button
+                className="ButtonMenu"
+                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              >
+                {isSidebarOpen ? (
+                  <X size={'12vw'} color="white" />
+                ) : (
+                  <List size={'12vw'} color="white" />
+                )}
+              </button>
             </div>
+
+            <span>DROPS</span>
+            <span>PROGAMAÇÃO</span>
+            <span>CONTATO</span>
+            <div
+              className={`InnerContainerRow ${
+                isSidebarOpen ? 'sidebar-open' : ''
+              }`}
+            >
+              <FacebookLogo
+                size={isSidebarOpen ? '6vw' : '2vw'}
+                color="white"
+              />
+              <TwitterLogo size={isSidebarOpen ? '6vw' : '2vw'} color="white" />
+              <InstagramLogo
+                size={isSidebarOpen ? '6vw' : '2vw'}
+                color="white"
+              />
+              <TiktokLogo size={isSidebarOpen ? '6vw' : '2vw'} color="white" />
+              <YoutubeLogo size={isSidebarOpen ? '6vw' : '2vw'} color="white" />
+              <WhatsappLogo
+                size={isSidebarOpen ? '6vw' : '2vw'}
+                color="white"
+              />
+              <TelegramLogo
+                size={isSidebarOpen ? '6vw' : '2vw'}
+                color="white"
+              />
+            </div>
+            <div style={{ marginLeft: '6vw' }}></div>
           </div>
         </header>
         <div className="central-container">
@@ -300,7 +335,10 @@ function App() {
           </div>
           <img src={Boneco} alt="Imagem 4" className="side-image" />
         </div>
-        <img src={Drops} className="dropsImage" />
+        <img
+          src={Drops}
+          className={`dropsImage ${isSidebarOpen ? 'sidebar-open' : ''}`}
+        />
         <div className="dropsContainer">
           <div className="dropsCardContainer">
             {news.slice(0, 1).map((item, index) => (
@@ -706,36 +744,43 @@ function App() {
         <img src={textPromo} className="textProgImg" />
         <div className="promoActorRow">
           <div className="promoContainerColumn">
-            <div className="promoCardBig" style={{ flexDirection: 'column' }}>
-              {promos[0] && promos[0].yoast_head_json.og_image[0].url && (
-                <img
-                  src={promos[0].yoast_head_json.og_image[0].url}
-                  alt="Promo"
-                />
-              )}
-              {promos[0] && (
-                <span className="cartolaAbsolute">
-                  {promos[0].cartola === 'Oportunidade' ? 'ATIVA' : 'ENCERRADA'}
-                </span>
-              )}
-            </div>
+            <Link to={`/promocao/${promos[0]?.id}`}>
+              <div className="promoCardBig" style={{ flexDirection: 'column' }}>
+                {promos[0] && promos[0].yoast_head_json.og_image[0].url && (
+                  <img
+                    src={promos[0].yoast_head_json.og_image[0].url}
+                    alt="Promo"
+                  />
+                )}
+                {promos[0] && (
+                  <span className="cartolaAbsolute">
+                    {promos[0].cartola === 'Oportunidade'
+                      ? 'ATIVA'
+                      : 'ENCERRADA'}
+                  </span>
+                )}
+              </div>
+            </Link>
             <div className="promoContainerRow">
               {promos.slice(1).map((promo, index) => (
-                <div
-                  className="promoCardSmall"
-                  style={{ flexDirection: 'column' }}
-                  key={index}
-                >
-                  {promo.yoast_head_json.og_image[0].url && (
-                    <img
-                      src={promo.yoast_head_json.og_image[0].url}
-                      alt="Promo"
-                    />
-                  )}
-                  <span className="cartolaAbsolute">
-                    {promos.cartola === 'Oportunidade' ? 'ATIVA' : 'ENCERRADA'}
-                  </span>
-                </div>
+                <Link to={`/promocao/${promo.id}`} key={index}>
+                  <div
+                    className="promoCardSmall"
+                    style={{ flexDirection: 'column' }}
+                  >
+                    {promo.yoast_head_json.og_image[0].url && (
+                      <img
+                        src={promo.yoast_head_json.og_image[0].url}
+                        alt="Promo"
+                      />
+                    )}
+                    <span className="cartolaAbsolute">
+                      {promos.cartola === 'Oportunidade'
+                        ? 'ATIVA'
+                        : 'ENCERRADA'}
+                    </span>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>

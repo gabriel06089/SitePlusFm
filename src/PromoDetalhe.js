@@ -1,47 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import './NoticiaDetalhe.css';
-import Logo from './plus-1.png';
+import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   FacebookLogo,
   InstagramLogo,
   TwitterLogo,
-  WhatsappLogo,
   YoutubeLogo,
+  WhatsappLogo,
 } from 'phosphor-react';
-
-const NoticiaDetalhe = () => {
+import Logo from './plus-1.png';
+const PromoDetalhe = () => {
   const { id } = useParams();
   const [noticia, setNoticia] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [imagemDescricao, setImagemDescricao] = useState(null);
+  const url = `https://plusfm.com.br/promo/${id}`; // URL da promoção
+  const text = 'Confira esta promoção incrível na Plus FM!'; // Texto para compartilhar
 
-  const [maisNoticias, setMaisNoticias] = useState([]);
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [noticia]);
-  useEffect(() => {
-    const fetchMaisNoticias = async () => {
-      const response = await fetch(
-        'https://plusfm.com.br/wp-json/wp/v2/posts?per_page=3'
-      );
-      const data = await response.json();
-      setMaisNoticias(data);
-    };
-
-    fetchMaisNoticias();
-  }, []);
   useEffect(() => {
     const fetchNoticia = async () => {
       try {
-        // Verifica se a notícia já está em cache
-        const cachedNoticia = localStorage.getItem(`noticia-${id}`);
-        if (cachedNoticia) {
-          setNoticia(JSON.parse(cachedNoticia));
-          return;
-        }
-
         const response = await fetch(
           `https://plusfm.com.br/wp-json/wp/v2/posts/${id}`
         );
@@ -71,10 +50,6 @@ const NoticiaDetalhe = () => {
         data.content.rendered = doc.body.innerHTML;
 
         setNoticia(data);
-
-        // Armazena a notícia em cache
-        localStorage.setItem(`noticia-${id}`, JSON.stringify(data));
-
         const imagemResponse = await fetch(
           `https://plusfm.com.br/wp-json/wp/v2/media/${data.featured_media}`
         );
@@ -91,7 +66,22 @@ const NoticiaDetalhe = () => {
 
     fetchNoticia();
   }, [id]);
+  const [promos, setPromos] = useState([]);
+  useEffect(() => {
+    const fetchPromos = async () => {
+      try {
+        const response = await fetch(
+          'https://plusfm.com.br/wp-json/wp/v2/posts?categories=14&per_page=3'
+        );
+        const data = await response.json();
+        setPromos(data);
+      } catch (error) {
+        console.error('Erro ao buscar as promoções:', error);
+      }
+    };
 
+    fetchPromos();
+  }, []);
   if (loading) {
     return <div>Carregando...</div>;
   }
@@ -99,15 +89,13 @@ const NoticiaDetalhe = () => {
   if (error) {
     return <div>Erro ao carregar a notícia: {error}</div>;
   }
-  const url = window.location.href;
-  const text = `Confira esta notícia: ${noticia.title.rendered}`;
 
   return (
     <div style={{ backgroundColor: '#d7d7d771' }}>
       <div className="MenuContainerHeader">
         <header className="App-headerN">
           <Link to="/">
-            <img src={Logo} />
+            <img src={Logo} />]
           </Link>
           <div className="divMenu">
             <div className="menuDiv">
@@ -170,22 +158,28 @@ const NoticiaDetalhe = () => {
           <WhatsappLogo size={'6vw'} color="#541084" weight="fill" />
         </a>
       </div>
-      <div className="containerDivisao"> Mais notícias </div>
+      <div className="containerDivisaoP"> Mais promoções </div>
       <div className="maisNoticias">
-        {maisNoticias.map((noticia) => (
+        {promos.map((promo) => (
           <Link
-            to={`/noticia/${noticia.id}`}
-            key={noticia.id}
+            to={`/promo/${promo.id}`}
+            key={promo.id}
             className="noticia"
             style={{ color: 'inherit', textDecoration: 'none' }}
           >
             <img
-              src={noticia.yoast_head_json.og_image[0].url}
-              alt="Imagem da notícia"
+              src={promo.yoast_head_json.og_image[0].url}
+              alt="Imagem da promoção"
             />
             <div>
-              <h4>{noticia.cartola}</h4>
-              <h5>{noticia.title.rendered}</h5>
+              <h4>
+                {promo.cartola.includes('Oportunidade')
+                  ? promo.cartola.toUpperCase()
+                  : promo.cartola.includes('PROMOÇÃO ENCERRADA')
+                  ? 'ENCERRADA'
+                  : promo.cartola}
+              </h4>
+              <h5>{promo.title.rendered}</h5>
             </div>
           </Link>
         ))}
@@ -194,4 +188,4 @@ const NoticiaDetalhe = () => {
   );
 };
 
-export default NoticiaDetalhe;
+export default PromoDetalhe;
