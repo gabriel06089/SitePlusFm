@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Camada_1" data-name="Camada 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1297.09 685.74">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: 0em;
+      }
+
+      .cls-2 {
+        font-size: 297.74px;
+      }
+
+      .cls-2, .cls-3 {
+        fill: none;
+        font-family: Rubik-SemiBold, Rubik;
+        font-weight: 600;
+        stroke: #fff;
+        stroke-width: 7px;
+      }
+
+      .cls-4 {
+        letter-spacing: 0em;
+      }
+
+      .cls-5 {
+        fill: #fff;
+        font-family: Rubik-Medium, Rubik;
+        font-size: 103.14px;
+        font-weight: 500;
+      }
+
+      .cls-6 {
+        letter-spacing: 0em;
+      }
+
+      .cls-3 {
+        font-size: 307.32px;
+      }
+
+      .cls-7 {
+        letter-spacing: 0em;
+      }
+    </style>
+  </defs>
+  <text class="cls-5" transform="translate(20.64 87.67)"><tspan x="0" y="0">Ouça nossa p</tspan><tspan class="cls-1" x="658.16" y="0">r</tspan><tspan class="cls-4" x="700.45" y="0">og</tspan><tspan class="cls-7" x="825.04" y="0">r</tspan><tspan x="867.23" y="0">amação</tspan></text>
+  <text class="cls-2" transform="translate(4.29 336.79)"><tspan x="0" y="0">DE ONDE</tspan></text>
+  <text class="cls-3" transform="translate(3.5 594.35)"><tspan x="0" y="0">E</tspan><tspan class="cls-6" x="193.61" y="0">S</tspan><tspan x="391.83" y="0">TIVER</tspan></text>
+</svg>

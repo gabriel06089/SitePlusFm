@@ -67,8 +67,8 @@
     width: 22vw;
     height: 11vw;
     z-index: 22;
-    margin-right: 14vw;
-    margin-left: 5vw;
+    margin-right: 6vw;
+    margin-left: 2vw;
     left: 4vw;
     top: 0vw;
 }
@@ -310,11 +310,7 @@ h3 {
 
 
 
-.dropsImage {
-    width: 40vw;
-    height: auto;
-    border-radius: 10px;
-}
+
 
 .meu-conteudo {
     display: flex;

@@ -3,7 +3,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 
 import './App.css';
-
+import { decode } from 'he';
+import he from 'he';
 import { ReactComponent as Map } from './mapa.svg';
 
 import Cariri from './AssetsMap/Cariri.svg';
@@ -20,13 +21,14 @@ import Rede from './AssetsMap/Rede.svg';
 import Paraipaba from './AssetsMap/Paraipaba.svg';
 import Boneco from './boneco.png';
 
-import TextProg from './TextoProg.png';
-import Drops from './AssetDrops/dropsSemFundo.png';
-import Prog from './AssetDrops/progSemFundo.png';
+import ouca from './ouca.svg';
+import Drops from './textSVGs/drops.svg';
+import Prog from './textSVGs/programa.svg';
 import PromoActor from './AssetDrops/promoActor.png';
-import textPromo from './textoPromo.png';
+import textPromo from './textSVGs/promocoes.svg';
+import mapText from './textSVGs/ondEstou.svg';
 import textTop10 from './AssetDrops/textTop10.png';
-import Don7 from './Don7.png';
+import Don7 from './don7horizontal.svg';
 import Logo from './plus-1.png';
 import PlayStore from './playstore.png';
 import AppleStore from './iostore.png';
@@ -43,6 +45,8 @@ import {
   Play,
   List,
   X,
+  Envelope,
+  Phone,
 } from 'phosphor-react';
 import { PlayerContext } from './Context/PlayerContext';
 
@@ -71,9 +75,14 @@ function App() {
   } = useContext(PlayerContext);
   useEffect(() => {
     function handleSvgClassClicked(event) {
+      if (isLoading) {
+        return;
+      }
+
       const foundRadio = radios.find(
         (radio) => radio.title === radioMap[event.detail]
       );
+
       if (foundRadio) {
         if (audio.current) {
           audio.current.pause(); // Pausa a rádio atual
@@ -126,7 +135,7 @@ function App() {
     return () => {
       document.removeEventListener('svgClassClicked', handleSvgClassClicked);
     };
-  }, [radios, radioMap, selectedRadio]);
+  }, [isLoading, radios, radioMap, selectedRadio]);
 
   useEffect(() => {
     const svgElement = document.querySelector(`.${selectedRadio.svgClass}`);
@@ -423,23 +432,8 @@ function App() {
         <div
           className={`central-container ${isSidebarOpen ? 'sidebar-open' : ''}`}
         >
-          <img
-            src={TextProg}
-            alt="Imagem 1"
-            className={`side-image1 ${isSidebarOpen ? 'sidebar-open' : ''}`}
-          />
-          <div className="center-image-container">
-            <img
-              src={PlayStore}
-              alt="Imagem 2"
-              className={`center-image ${isSidebarOpen ? 'sidebar-open' : ''}`}
-            />
-            <img
-              src={AppleStore}
-              alt="Imagem 3"
-              className={`center-image ${isSidebarOpen ? 'sidebar-open' : ''}`}
-            />
-          </div>
+          
+
           <img
             src={Boneco}
             alt="Imagem 4"
@@ -459,11 +453,11 @@ function App() {
                     <div className="dropsFrontcardContainerDivSpan">
                       {' '}
                       <span className="dropsFrontCardContainerSpanCartola">
-                        {item.cartola}
+                        {he.decode(item.cartola)}
                       </span>
                       <span className="dropsFrontCardContainerSpan">
                         {' '}
-                        {item.title.rendered}
+                        {he.decode(item.title.rendered)}
                       </span>
                     </div>
                   </div>
@@ -494,9 +488,9 @@ function App() {
                     <div
                       className={`dropsNoArContainer dropsNoArContainer-${index}`}
                     >
-                      {item.cartola}
+                      {he.decode(item.cartola)}
                     </div>
-                    <span>{item.title.rendered}</span>
+                    <span>{decode(item.title.rendered)}</span>
                   </div>
                 </div>
               </Link>
@@ -504,269 +498,300 @@ function App() {
           </div>
         </div>
       </div>
+      <section id="programacao"></section>
+      <div className="progContainer">
+        <img src={Prog} className="progImage" />
 
-      <section id="programacao">
-        <div className="progContainer">
-          <img src={Prog} className="progImage" />
+        <div className="progContainerRow">
+          <div className="progContainerColumn">
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
 
-          <div className="progContainerRow">
-            <div className="progContainerColumn">
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
-
-                <div className="progContainerColumn">
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#8A0A0A" />
+              <div className="progContainerColumn">
+                <span>Coruja da Plus</span>
+                <span>Segunda - Sexta</span>
+                <span>00:00 - 04:59</span>
               </div>
-              <div className="marginDiv"></div>
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
-
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#1221A8" />
-              </div>
-
-              <div className="marginDiv"></div>
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
-
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#22D4D8" />
-              </div>
-              <div className="marginDiv"></div>
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
-
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#541084" />
-              </div>
-              <div className="marginDiv"></div>
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
-
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#000000" />
-              </div>
-              <div className="marginDiv"></div>
+              <Play size={'2vw'} weight="fill" color="#8A0A0A" />
             </div>
-            <div className="progContainerColumn">
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
 
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#F4E72D" />
+              <div className="progContainerColumn">
+                {' '}
+                <span>Clube Plus</span>
+                <span>Segunda à Sexta</span>
+                <span>05:00 - 05:59</span>
               </div>
-              <div className="marginDiv"></div>
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
-
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#0A8A0F" />
-              </div>
-              <div className="marginDiv"></div>
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
-
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#9248FF" />
-              </div>
-              <div className="marginDiv"></div>
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
-
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#1E1E1E" />
-              </div>
-              <div className="marginDiv"></div>
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
-
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#788A0A" />
-              </div>
-              <div className="marginDiv"></div>
+              <Play size={'2vw'} weight="fill" color="#1221A8" />
             </div>
-            <div className="progContainerColumn">
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
 
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#84AEFF" />
-              </div>
-              <div className="marginDiv"></div>
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
 
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#FF8A00" />
+              <div className="progContainerColumn">
+                {' '}
+                <span>Deu B.O.</span>
+                <span>Segunda à Sexta</span>
+                <span>06:00 - 06:59</span>
               </div>
-              <div className="marginDiv"></div>
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
-
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#5C3F1C" />
-              </div>
-              <div className="marginDiv"></div>
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
-
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#8A0A66" />
-              </div>
-              <div className="marginDiv"></div>
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
-
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#FF00C7" />
-              </div>
-              <div className="marginDiv"></div>
+              <Play size={'2vw'} weight="fill" color="#22D4D8" />
             </div>
-            <div className="progContainerColumn">
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
 
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#2D0B3E" />
+              <div className="progContainerColumn">
+                {' '}
+                <span>Deu B.O.</span>
+                <span>Segunda à Sexta</span>
+                <span>06:00 - 06:59</span>
               </div>
-              <div className="marginDiv"></div>
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
-
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#FF004D" />
-              </div>
-              <div className="marginDiv"></div>
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
-
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#FF4D00" />
-              </div>
-              <div className="marginDiv"></div>
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
-
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#00FF94" />
-              </div>
-              <div className="marginDiv"></div>
-              <div className="progCardContainerRow">
-                <div className="progBallContainer"></div>
-
-                <div className="progContainerColumn">
-                  {' '}
-                  <span>Progama Tal</span>
-                  <span>Segunda - sexta</span>
-                  <span>08h às 19h</span>
-                </div>
-                <Play size={'2vw'} weight="fill" color="#262D6D" />
-              </div>
-              <div className="marginDiv"></div>
+              <Play size={'2vw'} weight="fill" color="#541084" />
             </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Ceará News</span>
+                <span>Segunda à Sexta</span>
+                <span>07:00 - 07:59</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#000000" />
+            </div>
+            <div className="marginDiv"></div>
+          </div>
+          <div className="progContainerColumn">
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>
+                  Ao Colo de Jesus e<br /> Maria
+                </span>
+                <span>Segunda à Sexta</span>
+                <span>08:00 - 08:59</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#F4E72D" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Manhã da Plus</span>
+                <span>Segunda à Sexta</span>
+                <span>09:00 - 10:59</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#0A8A0F" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Redação da Plus</span>
+                <span>Segunda à Sexta</span>
+                <span>12:00 - 13:59</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#9248FF" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Tarde Plus</span>
+                <span>Segunda à Sexta</span>
+                <span>14:00 - 16:59</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#1E1E1E" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Tá Todo Mundo Plus</span>
+                <span>Segunda à Sexta</span>
+                <span>17:00 - 17:59</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#788A0A" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                <span>As Melhores da Plus</span>
+                <span>Segunda à Sexta</span>
+                <span>11:00 - 11:59</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#1E1E1E" />
+            </div>
+            <div className="marginDiv"></div>
+          </div>
+
+          <div className="progContainerColumn">
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>As Mais Pedidas</span>
+                <span>Segunda à Sexta</span>
+                <span>18:00 - 18:59</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#84AEFF" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Plus Mania</span>
+                <span>Segunda à Sexta</span>
+                <span>20:00 - 21:59</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#FF8A00" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Festa Plus</span>
+                <span>Sábado</span>
+                <span>12:00 - 13:59</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#5C3F1C" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Time Machine</span>
+                <span>Sábado</span>
+                <span>21:00 - 21:59</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#8A0A66" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Upgrade</span>
+                <span>Sábado</span>
+                <span>22:00 - 23:59</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#FF00C7" />
+            </div>
+
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Slow Motion</span>
+                <span>Segunda à Sexta</span>
+                <span>22:00 - 23:59</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#FF00C7" />
+            </div>
+
+            <div className="marginDiv"></div>
+          </div>
+          <div className="progContainerColumn">
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Playlist da Plus</span>
+                <span>Domingo</span>
+                <span>
+                  05:00 - 07:59
+                  <br /> 20:00 - 21:59
+                </span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#2D0B3E" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Terço da Misericórdia</span>
+                <span>Domingo</span>
+                <span>08:00 - 08:59</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#FF004D" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Domingão da Plus</span>
+                <span>Domingo</span>
+                <span>10:00 - 14:59</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#FF4D00" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Mega Plus</span>
+                <span>Domingo</span>
+                <span>15:00 - 18:59</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#00FF94" />
+            </div>
+            <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer"></div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>A Grande Hora</span>
+                <span>Domingo</span>
+                <span>19:00 - 19:59</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#262D6D" />
+            </div>
+            <div className="marginDiv"></div>
           </div>
         </div>
-      </section>
+      </div>
+
       <div className="MapContainer">
+        <img src={mapText} className="mapImage" />
         <div style={{ position: 'relative' }}>
           <Map
             onMouseOver={() => setHover(true)}
             onMouseOut={() => setHover(false)}
-            style={{ width: '57vw', overflow: 'visible' }}
+            style={{ width: '57vw', overflow: 'visible', cursor: 'pointer' }}
           />
           <StyledImg
             src={Cariri}
@@ -868,9 +893,11 @@ function App() {
                 )}
                 {promos[0] && (
                   <span className="cartolaAbsolute">
-                    {promos[0].cartola === 'Oportunidade'
-                      ? 'ATIVA'
-                      : 'ENCERRADA'}
+                    {he.decode(
+                      promos[0].cartola === 'Oportunidade'
+                        ? 'ATIVA'
+                        : 'ENCERRADA'
+                    )}
                   </span>
                 )}
               </div>
@@ -889,9 +916,9 @@ function App() {
                       />
                     )}
                     <span className="cartolaAbsolute">
-                      {promos.cartola === 'Oportunidade'
-                        ? 'ATIVA'
-                        : 'ENCERRADA'}
+                      {he.decode(
+                        promo.cartola === 'Oportunidade' ? 'ATIVA' : 'ENCERRADA'
+                      )}
                     </span>
                   </div>
                 </Link>
@@ -899,107 +926,18 @@ function App() {
             </div>
           </div>
 
-          <img src={PromoActor} />
+          <img src={PromoActor} className="actorImage" />
         </div>
       </div>
-      <div className="top10Container">
-        <img src={textTop10} className="imgTop10" />
-        <div className="mainCard">
-          {songsWithThumbnails[0] && (
-            <a
-              href={songsWithThumbnails[0].url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src={songsWithThumbnails[0].thumbnailUrl}
-                alt={songsWithThumbnails[0].song}
-              />
-            </a>
-          )}
-          {songsWithThumbnails.slice(1, 9).map((song, index) => (
-            <div key={index} className={`smallCard smallCard${index + 1}`}>
-              <a href={song.url} target="_blank" rel="noopener noreferrer">
-                <img src={song.thumbnailUrl} alt={song.song} />
-              </a>
-            </div>
-          ))}
-        </div>
-      </div>
-
+      <section id="contato"></section>
       <div className="contato">
-        <section id="contato">
-          <h2>Contato</h2>
-          <div className="contatoInfo">
-            <h4>E-mail</h4>
-            <p>contato@plusfm.com.br</p>
-            <h4>WhatsApp</h4>
-            <p>(84) 99774-7777</p>
-            <h4>Comercial</h4>
-            <p>(84) 99264-2744</p>
-            <h4>comercial@plusfm.com.br</h4>
-            <p>Siga a Plus nas Redes Sociais</p>
-          </div>
-          <div className="InnerContainerRow">
-            <a
-              href="https://www.facebook.com/plusfmrede"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FacebookLogo size={'4vw'} color="white" />
-            </a>
-            <a
-              href="https://twitter.com/plusfmrede_"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <TwitterLogo size={'4vw'} color="white" />
-            </a>
-            <a
-              href="https://www.instagram.com/plusfmrede/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <InstagramLogo size={'4vw'} color="white" />
-            </a>
-            <a
-              href="https://www.tiktok.com/@plusfmrede"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <TiktokLogo size={'4vw'} color="white" />
-            </a>
-            <a
-              href="https://www.youtube.com/channel/UC0ek2Dls6ikevIsWckZX7ZA"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <YoutubeLogo size={'4vw'} color="white" />
-            </a>
-            <a
-              href="https://chat.whatsapp.com/L1iUEmsrPf7LLkJca22rut"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <WhatsappLogo size={'4vw'} color="white" />
-            </a>
-            <a
-              href="https://t.me/redeplusfm"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <TelegramLogo size={'4vw'} color="white" />
-            </a>
-          </div>
-        </section>
-      </div>
-
-      <div className="footer">
-        <div className="footerDiv">
+        <div className="footerDiv1">
           <span className="footerText">
-            Escute a PLUS onde você for, baixe o app
+            <span className="nossoStyle1">Baixe</span>{' '}
+            <p className="nossoStyle">nosso</p>
+            <p className="appStyle"> App </p>
           </span>
-          <div className="imageContainer">
+          <div className="imageContainer1">
             <a
               href="https://apps.apple.com/br/app/plus-fm/id1542601871"
               target="_blank"
@@ -1016,6 +954,110 @@ function App() {
             </a>
           </div>
         </div>
+        <div>
+          <h2>Contatos</h2>
+          <div className="contatoInfo">
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <Envelope size={'8vw'} weight="fill" color="#9248FF" />
+              <div
+                style={{
+                  marginLeft: '10px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  flexDirection: 'column',
+                  width: '100%',
+                }}
+              >
+                <h4>comercial@plusfm.com.br</h4>
+                <h4>contato@plusfm.com.br</h4>
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <Phone size={'7vw'} weight="fill" color="#9248FF" />
+              <div
+                style={{
+                  marginLeft: '10px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <h4>Comercial</h4>
+                  <h4 style={{ marginLeft: '20px' }}>(85) 99264-2744</h4>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <h4>WhatsApp </h4>
+                  <h4 style={{ marginLeft: '20px' }}>(85) 99774-7777</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        style={{
+          backgroundColor: '#541084',
+          textAlign: 'center',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+        }}
+      >
+        <p className="redesSociaisP">Siga a Plus nas Redes Sociais</p>
+      </div>
+      <div className="InnerContainerRow1">
+        <a
+          href="https://www.facebook.com/plusfmrede"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FacebookLogo size={'4vw'} color="white" />
+        </a>
+        <a
+          href="https://twitter.com/plusfmrede_"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <TwitterLogo size={'4vw'} color="white" />
+        </a>
+        <a
+          href="https://www.instagram.com/plusfmrede/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <InstagramLogo size={'4vw'} color="white" />
+        </a>
+        <a
+          href="https://www.tiktok.com/@plusfmrede"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <TiktokLogo size={'4vw'} color="white" />
+        </a>
+        <a
+          href="https://www.youtube.com/channel/UC0ek2Dls6ikevIsWckZX7ZA"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <YoutubeLogo size={'4vw'} color="white" />
+        </a>
+        <a
+          href="https://chat.whatsapp.com/L1iUEmsrPf7LLkJca22rut"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <WhatsappLogo size={'4vw'} color="white" />
+        </a>
+        <a
+          href="https://t.me/redeplusfm"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <TelegramLogo size={'4vw'} color="white" />
+        </a>
+      </div>
+      <div className="footer">
         <div className="footerDiv">
           <div className="imageContainer">
             <img src={Logo} alt="Imagem 3" className="footerImage2" />

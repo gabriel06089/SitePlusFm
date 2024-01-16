@@ -47,7 +47,7 @@ const Player = () => {
         <SpeakerSlash
           style={{ marginInline: '2vw' }}
           color="white"
-          size={'5vw'}
+          size={'3.4vw'}
           weight="bold"
         />
       );
@@ -56,7 +56,7 @@ const Player = () => {
         <SpeakerNone
           style={{ marginInline: '2vw' }}
           color="white"
-          size={'5vw'}
+          size={'3.4vw'}
           weight="bold"
         />
       );
@@ -65,7 +65,7 @@ const Player = () => {
         <SpeakerLow
           style={{ marginInline: '2vw' }}
           color="white"
-          size={'5vw'}
+          size={'3.4vw'}
           weight="bold"
         />
       );
@@ -74,7 +74,7 @@ const Player = () => {
         <SpeakerHigh
           style={{ marginInline: '2vw' }}
           color="white"
-          size={'5vw'}
+          size={'3.4vw'}
           weight="bold"
         />
       );
@@ -125,7 +125,7 @@ const Player = () => {
       currentHour >= 0 &&
       currentHour < 5
     ) {
-      progTitle = 'Coruja da Plus';
+      progTitle = 'Corujão da Plus';
     } else if (
       currentDay >= 1 &&
       currentDay <= 5 &&
@@ -261,14 +261,14 @@ const Player = () => {
             <PauseCircle
               style={{ marginRight: '2vw' }}
               color="white"
-              size={'5vw'}
+              size={'4vw'}
               weight="bold"
             />
           ) : (
             <PlayCircle
               style={{ marginRight: '2vw' }}
               color="white"
-              size={'5vw'}
+              size={'4vw'}
               weight="bold"
             />
           )}
@@ -314,7 +314,7 @@ const Player = () => {
               </option>
             ))}
           </select>
-          <CaretDown size={'2.5vw'} />
+          <CaretDown size={'2.5vw'} color="#541084" />
         </div>
 
         {isVolumeVisible && (

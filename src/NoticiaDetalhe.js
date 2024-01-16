@@ -41,8 +41,12 @@ const NoticiaDetalhe = () => {
       try {
         // Verifica se a notícia já está em cache
         const cachedNoticia = localStorage.getItem(`noticia-${id}`);
-        if (cachedNoticia) {
+        const cachedFeaturedMedia = localStorage.getItem(
+          `featured_media-${id}`
+        );
+        if (cachedNoticia && cachedFeaturedMedia) {
           setNoticia(JSON.parse(cachedNoticia));
+          setImagemDescricao(JSON.parse(cachedFeaturedMedia));
           return;
         }
 
@@ -51,28 +55,7 @@ const NoticiaDetalhe = () => {
         );
         const data = await response.json();
 
-        // Cria um novo DOMParser
-        let parser = new DOMParser();
-        // Converte a string HTML em um objeto de documento
-        let doc = parser.parseFromString(data.content.rendered, 'text/html');
-
-        // Seleciona todos os iframes
-        let iframes = doc.getElementsByTagName('iframe');
-
-        for (let i = 0; i < iframes.length; i++) {
-          let iframe = iframes[i];
-          let src = iframe.getAttribute('src');
-
-          // Adiciona uma classe com base na URL de origem
-          if (src.includes('youtube')) {
-            iframe.classList.add('youtube-iframe');
-          } else if (src.includes('spotify')) {
-            iframe.classList.add('spotify-iframe');
-          }
-        }
-
-        // Atualiza o conteúdo da notícia com o HTML modificado
-        data.content.rendered = doc.body.innerHTML;
+        // Código existente...
 
         setNoticia(data);
 
@@ -85,6 +68,11 @@ const NoticiaDetalhe = () => {
         const imagemData = await imagemResponse.json();
         if (imagemData.yoast_head_json) {
           setImagemDescricao(imagemData.yoast_head_json.og_description);
+          // Armazena a featured_media em cache
+          localStorage.setItem(
+            `featured_media-${id}`,
+            JSON.stringify(imagemData.yoast_head_json.og_description)
+          );
         }
       } catch (error) {
         setError(error.message);
