@@ -18,6 +18,7 @@
     width: 100%;
     position: relative;
 }
+
 .socialIcons {
     display: flex;
     justify-content: center;
@@ -25,6 +26,7 @@
     position: absolute;
     right: 5vw;
 }
+
 .socialIcons2 {
     display: flex;
     justify-content: center;
@@ -62,16 +64,7 @@
 
 
 
-.App-header img {
 
-    width: 22vw;
-    height: 11vw;
-    z-index: 22;
-    margin-right: 6vw;
-    margin-left: 2vw;
-    left: 4vw;
-    top: 0vw;
-}
 
 
 .ContainerRow.sidebar-open {
@@ -125,7 +118,7 @@
 
     .App-header {
         display: flex;
-
+        padding-top: 12vw;
     }
 
     .App-header img {
@@ -157,7 +150,7 @@
     margin-right: 0vw;
     object-fit: cover;
     padding: 4vw;
-    padding-top: 14vw;
+    padding-top: 17vw;
 }
 
 .xSvg {
@@ -596,4 +589,36 @@ h3 {
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 0.5vw;
+}
+
+
+.App-header img:first-child {
+    width: 22vw;
+    height: 11vw;
+    z-index: 22;
+    margin-right: 6vw;
+    margin-left: 7vw;
+    left: 4vw;
+    top: 0vw;
+}
+
+.twitterLogo {
+    width: 1.5vw !important;
+    height: 1.5vw !important;
+    z-index: 22;
+    margin-right: 0vw !important;
+    margin-left: 0vw !important;
+    margin-bottom: 0.3vw;
+}
+
+@media (max-width: 600px) {
+    .App-header img:first-child {
+        width: 32vw;
+        height: 16vw;
+        z-index: 22;
+        margin-right: 39vw;
+        margin-left: 4vw;
+        left: 4vw;
+        top: 0vw;
+    }
 }

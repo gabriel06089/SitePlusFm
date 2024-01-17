@@ -289,6 +289,7 @@ const Player = () => {
               ? `PLUS FM - ${getPrograma().toUpperCase()}` // Exibe "PLUS FM - " seguido do nome do programa
               : `${currentSong.artist} - ${currentSong.title}`}
           </span>
+          
         </div>
         <div className="VolumeControl">
           <div

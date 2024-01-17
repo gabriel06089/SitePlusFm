@@ -21,13 +21,38 @@ import Rede from './AssetsMap/Rede.svg';
 import Paraipaba from './AssetsMap/Paraipaba.svg';
 import Boneco from './boneco.png';
 
+import agrandehora from './imagemprogamacao/agrandehora.svg';
+import asmaispedidas from './imagemprogamacao/asmaispedidas.svg';
+import asmelhoresdaplus from './imagemprogamacao/asmelhoresdaplus.svg';
+import corujaodaplus from './imagemprogamacao/corujaodaplus.svg';
+import domingao from './imagemprogamacao/domingao.svg';
+import clubeplus from './imagemprogamacao/clubeplus.svg';
+import festaplus from './imagemprogamacao/festaplus.svg';
+import manhadaplus from './imagemprogamacao/manhadaplus.svg';
+import megaplus from './imagemprogamacao/megaplus.svg';
+import nocolodejesusedemaria from './imagemprogamacao/nocolodejesusedemaria.svg';
+import playlistdaplus from './imagemprogamacao/playlistdaplus.svg';
+import redacaoplus from './imagemprogamacao/redacaoplus.svg';
+import semlimitesparaamar from './imagemprogamacao/semlimitesparaamar.svg';
+import tardeplus from './imagemprogamacao/tardeplus.svg';
+import tatodomundoplus from './imagemprogamacao/tatodomundoplus.svg';
+import timemachine from './imagemprogamacao/timemachine.svg';
+import upgrade from './imagemprogamacao/upgrade.svg';
+import PROGRAMAS from './imagemprogamacao/deubo.png';
+import cearanews from './imagemprogamacao/cearanews.svg';
+import plusmania from './imagemprogamacao/plusmania.svg';
+import slowmotion from './imagemprogamacao/slowmotion.svg';
+import tercodamisercordia from './imagemprogamacao/tercodamisericordia.svg';
+
 import ouca from './ouca.svg';
 import Drops from './textSVGs/drops.svg';
+import ProgramasText from './textSVGs/PROGRAMAS.svg';
 import Prog from './textSVGs/programa.svg';
 import PromoActor from './AssetDrops/promoActor.png';
 import textPromo from './textSVGs/promocoes.svg';
-import mapText from './textSVGs/ondEstou.svg';
+import mapText from './textSVGs/OndeEstamos.svg';
 import textTop10 from './AssetDrops/textTop10.png';
+import aoVivo from './oucaqui.svg';
 import Don7 from './don7horizontal.svg';
 import Logo from './plus-1.png';
 import PlayStore from './playstore.png';
@@ -153,20 +178,26 @@ function App() {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const cachedNews = JSON.parse(localStorage.getItem('news'));
         const response = await fetch(
-          'https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=3'
+          'https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=50&tags_exclude=2007'
         );
         const data = await response.json();
-        if (
-          !cachedNews ||
-          new Date(data[0].modified) > new Date(cachedNews[0].modified)
-        ) {
-          setNews(data);
-          localStorage.setItem('news', JSON.stringify(data));
-        } else {
-          setNews(cachedNews);
-        }
+
+        // Filtra as notícias que não contêm "No ar" ou "Política" no cartola
+        const filteredNews = data.filter(
+          (news) =>
+            !news.cartola.toLowerCase().includes('no ar') &&
+            !news.cartola.toLowerCase().includes('política')
+        );
+
+        // Exibe apenas as 3 primeiras notícias após o filtro
+        const limitedNews = filteredNews.slice(0, 3);
+
+        limitedNews.forEach((news) => {
+          console.log('Cartola:', news.cartola);
+        });
+
+        setNews(limitedNews);
       } catch (error) {
         console.error(error);
       }
@@ -202,7 +233,28 @@ function App() {
     fetchPromotions();
   }, []);
   const [songsWithThumbnails, setSongsWithThumbnails] = useState([]);
+  const [programas, setProgramas] = useState([]);
 
+  useEffect(() => {
+    const fetchProgramas = async () => {
+      try {
+        const response = await fetch(
+          'https://plusfm.com.br/wp-json/wp/v2/posts?per_page=3&tags=2007'
+        );
+        const data = await response.json();
+
+        data.forEach((programa) => {
+          console.log('Cartola:', programa.cartola);
+        });
+
+        setProgramas(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchProgramas();
+  }, []);
   const songs = [
     {
       song: 'luan santana - mulher segura',
@@ -333,7 +385,7 @@ function App() {
                   cursor: 'pointer',
                 }}
               >
-                PROGAMAÇÃO
+                PROGRAMAÇÃO
               </a>
             </span>
 
@@ -429,11 +481,15 @@ function App() {
             <div style={{ marginLeft: '6vw' }}></div>
           </div>
         </header>
+
         <div
           className={`central-container ${isSidebarOpen ? 'sidebar-open' : ''}`}
         >
-          
-
+          <img
+            src={aoVivo}
+            alt="Imagem 4"
+            className={`side-image1 ${isSidebarOpen ? 'sidebar-open' : ''}`}
+          />
           <img
             src={Boneco}
             alt="Imagem 4"
@@ -497,6 +553,35 @@ function App() {
             ))}
           </div>
         </div>
+        <img
+          src={ProgramasText}
+          className={`programasImage ${isSidebarOpen ? 'sidebar-open' : ''}`}
+        />
+        <div className="container">
+          {programas.slice(0, 2).map((programa, index) => (
+            <Link
+              to={`/noticia/${programa.id}`}
+              key={index}
+              style={{ textDecoration: 'none' }}
+            >
+              <div className="sub-container">
+                {programa.yoast_head_json?.og_image?.[0] && (
+                  <img
+                    src={programa.yoast_head_json.og_image[0].url}
+                    alt="Imagem do programa"
+                  />
+                )}
+
+                <div className="center-div">
+                  <p>{decode(programa.title.rendered)}</p>
+                  <div className="absolute-div">
+                    <p>{he.decode(programa.cartola)}</p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
       <section id="programacao"></section>
       <div className="progContainer">
@@ -505,10 +590,13 @@ function App() {
         <div className="progContainerRow">
           <div className="progContainerColumn">
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                {' '}
+                <img src={corujaodaplus} alt="Coruja da Plus" />
+              </div>
 
               <div className="progContainerColumn">
-                <span>Coruja da Plus</span>
+                <span>Corujão da Plus</span>
                 <span>Segunda - Sexta</span>
                 <span>00:00 - 04:59</span>
               </div>
@@ -516,11 +604,13 @@ function App() {
             </div>
             <div className="marginDiv"></div>
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                <img src={clubeplus} alt="Clube Plus" />
+              </div>
 
               <div className="progContainerColumn">
                 {' '}
-                <span>Clube Plus</span>
+                <span>Clube da Plus</span>
                 <span>Segunda à Sexta</span>
                 <span>05:00 - 05:59</span>
               </div>
@@ -529,7 +619,10 @@ function App() {
 
             <div className="marginDiv"></div>
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                {' '}
+                <img src={PROGRAMAS} alt="Clube Plus" />
+              </div>
 
               <div className="progContainerColumn">
                 {' '}
@@ -540,23 +633,15 @@ function App() {
               <Play size={'2vw'} weight="fill" color="#22D4D8" />
             </div>
             <div className="marginDiv"></div>
-            <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
 
-              <div className="progContainerColumn">
-                {' '}
-                <span>Deu B.O.</span>
-                <span>Segunda à Sexta</span>
-                <span>06:00 - 06:59</span>
-              </div>
-              <Play size={'2vw'} weight="fill" color="#541084" />
-            </div>
             <div className="marginDiv"></div>
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                {' '}
+                <img src={cearanews} alt="Clube Plus" />
+              </div>
 
               <div className="progContainerColumn">
-                {' '}
                 <span>Ceará News</span>
                 <span>Segunda à Sexta</span>
                 <span>07:00 - 07:59</span>
@@ -564,28 +649,51 @@ function App() {
               <Play size={'2vw'} weight="fill" color="#000000" />
             </div>
             <div className="marginDiv"></div>
+            <div className="progCardContainerRow">
+              <div className="progBallContainer">
+                {' '}
+                <img src={semlimitesparaamar} alt="Clube Plus" />
+              </div>
+
+              <div className="progContainerColumn">
+                {' '}
+                <span>Sem limite para amar</span>
+                <span>Segunda à Sexta</span>
+                <span>12:00 - 12:59</span>
+                <span>Domingo</span>
+                <span>22:00 - 23:59</span>
+              </div>
+              <Play size={'2vw'} weight="fill" color="#000000" />
+            </div>
+            <div className="marginDiv"></div>
           </div>
           <div className="progContainerColumn">
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                {' '}
+                <img src={nocolodejesusedemaria} alt="Clube Plus" />
+              </div>
 
               <div className="progContainerColumn">
                 {' '}
                 <span>
-                  Ao Colo de Jesus e<br /> Maria
+                  No Colo de Jesus e<br />de Maria
                 </span>
                 <span>Segunda à Sexta</span>
-                <span>08:00 - 08:59</span>
+                <span>08:00 - 09:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#F4E72D" />
             </div>
             <div className="marginDiv"></div>
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                {' '}
+                <img src={manhadaplus} alt="Clube Plus" />
+              </div>
 
               <div className="progContainerColumn">
                 {' '}
-                <span>Manhã da Plus</span>
+                <span>Manhã Plus</span>
                 <span>Segunda à Sexta</span>
                 <span>09:00 - 10:59</span>
               </div>
@@ -593,7 +701,10 @@ function App() {
             </div>
             <div className="marginDiv"></div>
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                {' '}
+                <img src={redacaoplus} alt="Clube Plus" />
+              </div>
 
               <div className="progContainerColumn">
                 {' '}
@@ -605,7 +716,10 @@ function App() {
             </div>
             <div className="marginDiv"></div>
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                {' '}
+                <img src={tardeplus} alt="Clube Plus" />
+              </div>
 
               <div className="progContainerColumn">
                 {' '}
@@ -617,7 +731,10 @@ function App() {
             </div>
             <div className="marginDiv"></div>
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                {' '}
+                <img src={tatodomundoplus} alt="Clube Plus" />
+              </div>
 
               <div className="progContainerColumn">
                 {' '}
@@ -629,7 +746,10 @@ function App() {
             </div>
             <div className="marginDiv"></div>
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                {' '}
+                <img src={asmelhoresdaplus} alt="Clube Plus" />
+              </div>
 
               <div className="progContainerColumn">
                 <span>As Melhores da Plus</span>
@@ -643,7 +763,10 @@ function App() {
 
           <div className="progContainerColumn">
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                {' '}
+                <img src={asmaispedidas} alt="Clube Plus" />
+              </div>
 
               <div className="progContainerColumn">
                 {' '}
@@ -655,7 +778,10 @@ function App() {
             </div>
             <div className="marginDiv"></div>
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                {' '}
+                <img src={plusmania} alt="Clube Plus" />
+              </div>
 
               <div className="progContainerColumn">
                 {' '}
@@ -667,7 +793,10 @@ function App() {
             </div>
             <div className="marginDiv"></div>
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                {' '}
+                <img src={festaplus} alt="Clube Plus" />
+              </div>
 
               <div className="progContainerColumn">
                 {' '}
@@ -679,7 +808,10 @@ function App() {
             </div>
             <div className="marginDiv"></div>
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                {' '}
+                <img src={timemachine} alt="Clube Plus" />
+              </div>
 
               <div className="progContainerColumn">
                 {' '}
@@ -691,7 +823,10 @@ function App() {
             </div>
             <div className="marginDiv"></div>
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                {' '}
+                <img src={upgrade} alt="Clube Plus" />
+              </div>
 
               <div className="progContainerColumn">
                 {' '}
@@ -704,7 +839,10 @@ function App() {
 
             <div className="marginDiv"></div>
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                {' '}
+                <img src={slowmotion} alt="Clube Plus" />
+              </div>
 
               <div className="progContainerColumn">
                 {' '}
@@ -719,7 +857,10 @@ function App() {
           </div>
           <div className="progContainerColumn">
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                {' '}
+                <img src={playlistdaplus} alt="Clube Plus" />
+              </div>
 
               <div className="progContainerColumn">
                 {' '}
@@ -733,20 +874,13 @@ function App() {
               <Play size={'2vw'} weight="fill" color="#2D0B3E" />
             </div>
             <div className="marginDiv"></div>
+            
+      
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
-
-              <div className="progContainerColumn">
+              <div className="progBallContainer">
                 {' '}
-                <span>Terço da Misericórdia</span>
-                <span>Domingo</span>
-                <span>08:00 - 08:59</span>
+                <img src={domingao} alt="Clube Plus" />
               </div>
-              <Play size={'2vw'} weight="fill" color="#FF004D" />
-            </div>
-            <div className="marginDiv"></div>
-            <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
 
               <div className="progContainerColumn">
                 {' '}
@@ -758,7 +892,10 @@ function App() {
             </div>
             <div className="marginDiv"></div>
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                {' '}
+                <img src={megaplus} alt="Clube Plus" />
+              </div>
 
               <div className="progContainerColumn">
                 {' '}
@@ -770,7 +907,10 @@ function App() {
             </div>
             <div className="marginDiv"></div>
             <div className="progCardContainerRow">
-              <div className="progBallContainer"></div>
+              <div className="progBallContainer">
+                {' '}
+                <img src={agrandehora} alt="Clube Plus" />
+              </div>
 
               <div className="progContainerColumn">
                 {' '}
