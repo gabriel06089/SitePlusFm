@@ -132,10 +132,7 @@ const NoticiaDetalhe = () => {
           '<iframe class="iframe-wrapper spotify-iframe"'
         )
     )
-    .replace(
-      /<p>(Assista:|Ouça:)<\/p>/g,
-      '<p class="special-strong">$1</p>'
-    );
+    .replace(/<p>(Assista:|Ouça:)<\/p>/g, '<p class="special-strong">$1</p>');
 
   const cleanedHtmlContent = decode(
     htmlWithStyling.replace(/<em/g, '<em class="alinhado-direita"')
@@ -159,7 +156,7 @@ const NoticiaDetalhe = () => {
       <div className="MenuContainerHeader">
         <header className="App-headerN">
           <Link to="/">
-            <img src={Logo} />
+            <img loading="lazy" src={Logo} />
           </Link>
           <div className="divMenu">
             <div className="menuDiv">
@@ -185,6 +182,7 @@ const NoticiaDetalhe = () => {
         {noticia.yoast_head_json && noticia.yoast_head_json.og_image && (
           <>
             <img
+              loading="lazy"
               src={noticia.yoast_head_json.og_image[0].url}
               alt="Imagem da notícia"
             />
@@ -259,6 +257,7 @@ const NoticiaDetalhe = () => {
             style={{ color: 'inherit', textDecoration: 'none' }}
           >
             <img
+              loading="lazy"
               src={noticia.yoast_head_json.og_image[0].url}
               alt="Imagem da notícia"
             />
@@ -286,6 +285,7 @@ const NoticiaDetalhe = () => {
               }}
             >
               <img
+                loading="lazy"
                 src={post.yoast_head_json.og_image[0].url}
                 alt="Imagem do post"
               />
@@ -308,6 +308,7 @@ const NoticiaDetalhe = () => {
               }}
             >
               <img
+                loading="lazy"
                 src={post.yoast_head_json.og_image[0].url}
                 alt="Imagem do post"
               />
@@ -322,8 +323,18 @@ const NoticiaDetalhe = () => {
       <div className="footer">
         <div className="footerDiv">
           <div className="imageContainer">
-            <img src={Logo} alt="Imagem 3" className="footerImage2" />
-            <img src={Don7} alt="Imagem 4" className="footerImage3" />
+            <img
+              loading="lazy"
+              src={Logo}
+              alt="Imagem 3"
+              className="footerImage2"
+            />
+            <img
+              loading="lazy"
+              src={Don7}
+              alt="Imagem 4"
+              className="footerImage3"
+            />
           </div>
           <span className="footerText">
             Copyright © 2024 Plus FM - Todos os direitos reservados

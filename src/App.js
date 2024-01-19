@@ -99,6 +99,25 @@ function App() {
     setCurrentSong,
     handlePlayPause, // Adicione handlePlayPause aqui se você o adicionou ao contexto
   } = useContext(PlayerContext);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [itemsToRender, setItemsToRender] = useState(2);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (windowWidth <= 600) {
+      setItemsToRender(4);
+    } else {
+      setItemsToRender(2);
+    }
+  }, [windowWidth]);
   useEffect(() => {
     function handleSvgClassClicked(event) {
       if (isLoading) {
@@ -695,13 +714,19 @@ function App() {
           className={`dropsImage ${isSidebarOpen ? 'sidebar-open' : ''}`}
         />
         <div className="container">
-          {news.slice(0, 2).map((newsItem, index) => (
+          {news.slice(0, itemsToRender).map((newsItem, index) => (
             <Link
               to={`/noticia/${newsItem.id}`}
               key={index}
               style={{ textDecoration: 'none' }}
             >
-              <div className="sub-container">
+              <div
+                className={
+                  index === 0
+                    ? 'sub-container first-news'
+                    : 'sub-container second-news'
+                }
+              >
                 {newsItem.yoast_head_json?.og_image?.[0] && (
                   <img
                     src={newsItem.yoast_head_json.og_image[0].url}
@@ -709,11 +734,23 @@ function App() {
                   />
                 )}
 
-                <div className="center-div">
+                <div
+                  className={
+                    index === 0
+                      ? 'center-div first-news'
+                      : 'center-div second-news'
+                  }
+                >
                   <p className="center-divP">
                     {decode(newsItem.title.rendered)}
                   </p>
-                  <div className="absolute-div">
+                  <div
+                    className={
+                      index === 0
+                        ? 'absolute-div first-news'
+                        : 'absolute-div second-news'
+                    }
+                  >
                     <p className="center-divPP">
                       {he.decode(newsItem.cartola)}
                     </p>
@@ -728,13 +765,19 @@ function App() {
           className={`programasImage ${isSidebarOpen ? 'sidebar-open' : ''}`}
         />
         <div className="container">
-          {programas.slice(0, 2).map((programa, index) => (
+          {programas.slice(0, itemsToRender).map((programa, index) => (
             <Link
               to={`/noticia/${programa.id}`}
               key={index}
               style={{ textDecoration: 'none' }}
             >
-              <div className="sub-container">
+              <div
+                className={
+                  index === 0
+                    ? 'sub-container first-news'
+                    : 'sub-container second-news'
+                }
+              >
                 {programa.yoast_head_json?.og_image?.[0] && (
                   <img
                     src={programa.yoast_head_json.og_image[0].url}
@@ -742,11 +785,23 @@ function App() {
                   />
                 )}
 
-                <div className="center-div">
+                <div
+                  className={
+                    index === 0
+                      ? 'center-div first-news'
+                      : 'center-div second-news'
+                  }
+                >
                   <p className="center-divP">
                     {decode(programa.title.rendered)}
                   </p>
-                  <div className="absolute-div">
+                  <div
+                    className={
+                      index === 0
+                        ? 'absolute-div first-news'
+                        : 'absolute-div second-news'
+                    }
+                  >
                     <p className="center-divPP">
                       {he.decode(programa.cartola)}
                     </p>

@@ -47,12 +47,12 @@
 .containerNoticia {
 
     border-radius: 10px;
-    width: 90%;
+    width: 100%;
     padding: 10px;
 }
 
 .imagemNoticia {
-    width: 30vw;
+    width: 25vw;
     height: 16vw;
     border-radius: 10px;
     object-fit: cover;
