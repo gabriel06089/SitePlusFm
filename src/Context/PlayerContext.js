@@ -1,5 +1,11 @@
 // PlayerContext.js
-import React, { createContext, useState, useEffect, useRef } from 'react';
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from 'react';
 
 export const PlayerContext = createContext();
 
@@ -110,22 +116,22 @@ export const PlayerProvider = ({ children }) => {
   const [selectedRadio, setSelectedRadio] = useState(
     radios.find((radio) => radio.title === 'Plus FM')
   );
-  useEffect(() => {
-    const fetchSong = () => {
-      fetch('https://webradio.amsolution.com.br/api/nowplaying/plus', {
-        headers: {
-          Authorization: 'ec1e12625c87f3fd:3522595694202dccc04b294711eb85cd',
-        },
+  const fetchSong = useCallback(() => {
+    fetch('https://webradio.amsolution.com.br/api/nowplaying/plus', {
+      headers: {
+        Authorization: 'ec1e12625c87f3fd:3522595694202dccc04b294711eb85cd',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setCurrentSong(data.now_playing.song);
       })
-        .then((response) => response.json())
-        .then((data) => {
-          setCurrentSong(data.now_playing.song);
-        })
-        .catch((error) => {
-          console.error('Erro:', error);
-        });
-    };
+      .catch((error) => {
+        console.error('Erro:', error);
+      });
+  }, []); // A dependência vazia significa que a função não será recriada a menos que o componente seja desmontado e remontado
 
+  useEffect(() => {
     // Chamar a função imediatamente para obter a música atual
     fetchSong();
 
@@ -134,7 +140,7 @@ export const PlayerProvider = ({ children }) => {
 
     // Limpar o intervalo quando o componente for desmontado
     return () => clearInterval(intervalId);
-  }, []);
+  }, [fetchSong]); // Adicione fetchSong como dependência
   useEffect(() => {
     audio.current = new Audio(selectedRadio.url);
   }, []);

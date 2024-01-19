@@ -6,8 +6,8 @@ import {
 } from 'phosphor-react';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-
-import Don7 from './Don7.png';
+import { ReactComponent as TwitterLogoX } from './twitter-x.svg';
+import Don7 from './don7horizontal.svg';
 import Logo from './plus-1.png';
 import PlayStore from './playstore.png';
 import AppleStore from './iostore.png';
@@ -20,7 +20,7 @@ const Drops = ({ match }) => {
   const fetchDrops = async () => {
     try {
       const response = await fetch(
-        `https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=18&page=${page}`
+        `https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=18&page=${page}&categories=2`
       );
       const data = await response.json();
       setDrops(data);
@@ -108,15 +108,6 @@ const Drops = ({ match }) => {
         </Link>
       </div>
       <div className="footer">
-        <div className="footerDiv">
-          <span className="footerText">
-            Escute a PLUS onde você for, baixe o app
-          </span>
-          <div className="imageContainer">
-            <img src={AppleStore} alt="Imagem 1" className="footerImage1" />
-            <img src={PlayStore} alt="Imagem 2" className="footerImage1" />
-          </div>
-        </div>
         <div className="footerDiv">
           <div className="imageContainer">
             <img src={Logo} alt="Imagem 3" className="footerImage2" />

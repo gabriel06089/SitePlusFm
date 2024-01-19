@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 
 import './App.css';
 import { decode } from 'he';
 import he from 'he';
 import { ReactComponent as Map } from './mapa.svg';
-
+import { ReactComponent as TwitterLogoX } from './twitter-x.svg';
 import Cariri from './AssetsMap/Cariri.svg';
 import Catarina from './AssetsMap/Catarina.svg';
 import Cascavel from './AssetsMap/Cascavel.svg';
@@ -20,6 +20,7 @@ import SantaQuiteria from './AssetsMap/SantaQuiteria.svg';
 import Rede from './AssetsMap/Rede.svg';
 import Paraipaba from './AssetsMap/Paraipaba.svg';
 import Boneco from './boneco.png';
+import twitterLogoX from './twitter-x.svg';
 
 import agrandehora from './imagemprogamacao/agrandehora.svg';
 import asmaispedidas from './imagemprogamacao/asmaispedidas.svg';
@@ -55,8 +56,8 @@ import textTop10 from './AssetDrops/textTop10.png';
 import aoVivo from './oucaqui.svg';
 import Don7 from './don7horizontal.svg';
 import Logo from './plus-1.png';
-import PlayStore from './playstore.png';
-import AppleStore from './iostore.png';
+import PlayStore from './playstorebadge.png';
+import AppleStore from './appstorebadge.png';
 import { Link } from 'react-router-dom';
 import {
   House,
@@ -179,7 +180,7 @@ function App() {
     const fetchNews = async () => {
       try {
         const response = await fetch(
-          'https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=50&tags_exclude=2007'
+          'https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=6&tags_exclude=2007'
         );
         const data = await response.json();
 
@@ -239,7 +240,7 @@ function App() {
     const fetchProgramas = async () => {
       try {
         const response = await fetch(
-          'https://plusfm.com.br/wp-json/wp/v2/posts?per_page=3&tags=2007'
+          'https://plusfm.com.br/wp-json/wp/v2/posts?categories=2685&per_page=3'
         );
         const data = await response.json();
 
@@ -324,6 +325,211 @@ function App() {
   }, [songs, songsWithThumbnails]);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // const circleRef = useRef(null);
+  // const programass = [
+  //   {
+  //     title: 'Corujão da Plus',
+  //     days: [0, 1, 2, 3, 4, 5, 6],
+  //     startHour: 0,
+  //     endHour: 5,
+  //     image: corujaodaplus,
+  //   },
+  //   {
+  //     title: 'Clube Plus',
+  //     days: [1, 2, 3, 4, 5],
+  //     startHour: 5,
+  //     endHour: 6,
+  //     image: clubeplus,
+  //   },
+  //   {
+  //     title: 'Deu B.O.',
+  //     days: [1, 2, 3, 4, 5],
+  //     startHour: 6,
+  //     endHour: 7,
+  //     image: PROGRAMAS,
+  //   },
+  //   {
+  //     title: 'Ceará News',
+  //     days: [1, 2, 3, 4, 5],
+  //     startHour: 7,
+  //     endHour: 8,
+  //     image: cearanews,
+  //   },
+  //   {
+  //     title: 'Ao Colo de Jesus e Maria',
+  //     days: [1, 2, 3, 4, 5],
+  //     startHour: 8,
+  //     endHour: 9,
+  //     image: nocolodejesusedemaria,
+  //   },
+  //   {
+  //     title: 'Manhã da Plus',
+  //     days: [1, 2, 3, 4, 5, 6],
+  //     startHour: 9,
+  //     endHour: 11,
+  //     image: manhadaplus,
+  //   },
+  //   {
+  //     title: 'Redação da Plus',
+  //     days: [1, 2, 3, 4, 5],
+  //     startHour: 12,
+  //     endHour: 14,
+  //     image: redacaoplus,
+  //   },
+  //   {
+  //     title: 'Tarde Plus',
+  //     days: [1, 2, 3, 4, 5],
+  //     startHour: 14,
+  //     endHour: 17,
+  //     image: tardeplus,
+  //   },
+  //   {
+  //     title: 'Tá Todo Mundo Plus',
+  //     days: [1, 2, 3, 4, 5],
+  //     startHour: 17,
+  //     endHour: 18,
+  //     image: tatodomundoplus,
+  //   },
+  //   {
+  //     title: 'As Mais Pedidas',
+  //     days: [1, 2, 3, 4, 5],
+  //     startHour: 18,
+  //     endHour: 19,
+  //     image: asmaispedidas,
+  //   },
+  //   {
+  //     title: 'Plus Mania',
+  //     days: [1, 2, 3, 4, 5],
+  //     startHour: 20,
+  //     endHour: 22,
+  //     image: plusmania,
+  //   },
+  //   {
+  //     title: 'Festa Plus',
+  //     days: [6],
+  //     startHour: 12,
+  //     endHour: 14,
+  //     image: festaplus,
+  //   },
+  //   {
+  //     title: 'Time Machine',
+  //     days: [6],
+  //     startHour: 21,
+  //     endHour: 22,
+  //     image: timemachine,
+  //   },
+  //   { title: 'Upgrade', days: [6], startHour: 22, endHour: 24, image: upgrade },
+  //   {
+  //     title: 'Playlist da Plus',
+  //     days: [0],
+  //     startHour: 5,
+  //     endHour: 8,
+  //     image: playlistdaplus,
+  //   },
+  //   {
+  //     title: 'Domingão da Plus',
+  //     days: [0],
+  //     startHour: 10,
+  //     endHour: 15,
+  //     image: domingao,
+  //   },
+  //   {
+  //     title: 'Mega Plus',
+  //     days: [0],
+  //     startHour: 15,
+  //     endHour: 19,
+  //     image: megaplus,
+  //   },
+  //   {
+  //     title: 'A Grande Hora',
+  //     days: [0],
+  //     startHour: 19,
+  //     endHour: 20,
+  //     image: agrandehora,
+  //   },
+  //   {
+  //     title: 'Sem Limites Para Amar',
+  //     days: [0],
+  //     startHour: 22,
+  //     endHour: 24,
+  //     image: semlimitesparaamar,
+  //   },
+  //   {
+  //     title: 'As Melhores da Plus',
+  //     days: [1, 2, 3, 4, 5, 6],
+  //     startHour: 11,
+  //     endHour: 12,
+  //     image: asmelhoresdaplus,
+  //   },
+  //   {
+  //     title: 'Slow Motion',
+  //     days: [1, 2, 3, 4, 5],
+  //     startHour: 22,
+  //     endHour: 24,
+  //     image: slowmotion,
+  //   },
+  // ];
+  // const [currentImage, setCurrentImage] = useState('');
+  // const getPrograma = () => {
+  //   const currentDay = new Date().getDay();
+  //   const currentHour = new Date().getHours();
+
+  //   for (let i = 0; i < programass.length; i++) {
+  //     const programa = programass[i];
+  //     if (
+  //       programa.days.includes(currentDay) &&
+  //       currentHour >= programa.startHour &&
+  //       currentHour < programa.endHour
+  //     ) {
+  //       return programa;
+  //     }
+  //   }
+
+  //   return null;
+  // };
+  // useEffect(() => {
+  //   const circle = circleRef.current;
+  //   const radius = circle.r.baseVal.value;
+  //   const circumference = radius * 2 * Math.PI;
+
+  //   circle.style.strokeDasharray = `${circumference} ${circumference}`;
+  //   circle.style.strokeDashoffset = `${circumference}`;
+
+  //   function setProgress(percent) {
+  //     const offset = circumference - (percent / 100) * circumference;
+  //     circle.style.strokeDashoffset = offset;
+  //   }
+
+  //   const intervalId = setInterval(() => {
+  //     const now = new Date();
+  //     const currentHour = now.getHours();
+  //     const currentMinute = now.getMinutes();
+  //     const currentProgram = getPrograma();
+
+  //     if (currentProgram) {
+  //       const programStartHour = currentProgram.startHour;
+  //       const programDuration = currentProgram.endHour - programStartHour;
+
+  //       // Calcula o progresso com base na hora atual e na duração do programa
+  //       let progress =
+  //         (((currentHour - programStartHour) * 60 + currentMinute) /
+  //           (programDuration * 60)) *
+  //         100;
+
+  //       // Garante que o progresso nunca ultrapasse 100%
+  //       progress = Math.min(progress, 100);
+
+  //       console.log(
+  //         `Progresso do programa "${currentProgram.title}": ${progress}%`
+  //       );
+  //       setProgress(progress);
+  //       setCurrentImage(currentProgram.image);
+  //     }
+  //   }, 1000);
+
+  //   return () => clearInterval(intervalId);
+  // }, []);
   return (
     <div
       style={{
@@ -422,9 +628,11 @@ function App() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <TwitterLogo
-                  size={isSidebarOpen ? '6vw' : '2vw'}
-                  color="white"
+                <TwitterLogoX
+                  className={`svgTwitter ${
+                    isSidebarOpen ? 'sidebar-open' : ''
+                  }`}
+                  alt="Imagem do programa atual"
                 />
               </a>
               <a
@@ -482,76 +690,38 @@ function App() {
           </div>
         </header>
 
-        <div
-          className={`central-container ${isSidebarOpen ? 'sidebar-open' : ''}`}
-        >
-          <img
-            src={aoVivo}
-            alt="Imagem 4"
-            className={`side-image1 ${isSidebarOpen ? 'sidebar-open' : ''}`}
-          />
-          <img
-            src={Boneco}
-            alt="Imagem 4"
-            className={`side-image ${isSidebarOpen ? 'sidebar-open' : ''}`}
-          />
-        </div>
         <img
           src={Drops}
           className={`dropsImage ${isSidebarOpen ? 'sidebar-open' : ''}`}
         />
-        <div className="dropsContainer">
-          <div className="dropsCardContainer">
-            {news.slice(0, 1).map((item, index) => (
-              <Link to={`/noticia/${item.id}`} key={index}>
-                <div className="dropsFrontCardContainer">
-                  <div className="dropsFrontCardContainerDiv">
-                    <div className="dropsFrontcardContainerDivSpan">
-                      {' '}
-                      <span className="dropsFrontCardContainerSpanCartola">
-                        {he.decode(item.cartola)}
-                      </span>
-                      <span className="dropsFrontCardContainerSpan">
-                        {' '}
-                        {he.decode(item.title.rendered)}
-                      </span>
-                    </div>
-                  </div>
+        <div className="container">
+          {news.slice(0, 2).map((newsItem, index) => (
+            <Link
+              to={`/noticia/${newsItem.id}`}
+              key={index}
+              style={{ textDecoration: 'none' }}
+            >
+              <div className="sub-container">
+                {newsItem.yoast_head_json?.og_image?.[0] && (
                   <img
-                    src={item.yoast_head_json?.og_image?.[0]?.url}
-                    alt="News"
-                    className="dropsFrontCardContainerimg"
+                    src={newsItem.yoast_head_json.og_image[0].url}
+                    alt="Imagem da notícia"
                   />
-                </div>
-              </Link>
-            ))}
-          </div>
-          <div className="dropsContainerNoticias">
-            {news.slice(1).map((item, index) => (
-              <Link to={`/noticia/${item.id}`} key={index + 2}>
-                <div
-                  className={`dropsRowContainer ${
-                    index === 0 ? 'first-row' : ''
-                  }`}
-                >
-                  {item.yoast_head_json?.og_image?.[0] && (
-                    <img
-                      src={item.yoast_head_json.og_image[0].url}
-                      alt="News"
-                    />
-                  )}
-                  <div className={`dropsColumnContainer`}>
-                    <div
-                      className={`dropsNoArContainer dropsNoArContainer-${index}`}
-                    >
-                      {he.decode(item.cartola)}
-                    </div>
-                    <span>{decode(item.title.rendered)}</span>
+                )}
+
+                <div className="center-div">
+                  <p className="center-divP">
+                    {decode(newsItem.title.rendered)}
+                  </p>
+                  <div className="absolute-div">
+                    <p className="center-divPP">
+                      {he.decode(newsItem.cartola)}
+                    </p>
                   </div>
                 </div>
-              </Link>
-            ))}
-          </div>
+              </div>
+            </Link>
+          ))}
         </div>
         <img
           src={ProgramasText}
@@ -573,9 +743,13 @@ function App() {
                 )}
 
                 <div className="center-div">
-                  <p>{decode(programa.title.rendered)}</p>
+                  <p className="center-divP">
+                    {decode(programa.title.rendered)}
+                  </p>
                   <div className="absolute-div">
-                    <p>{he.decode(programa.cartola)}</p>
+                    <p className="center-divPP">
+                      {he.decode(programa.cartola)}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -598,7 +772,7 @@ function App() {
               <div className="progContainerColumn">
                 <span>Corujão da Plus</span>
                 <span>Segunda - Sexta</span>
-                <span>00:00 - 04:59</span>
+                <span>00:00 - 05:50</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#8A0A0A" />
             </div>
@@ -612,14 +786,14 @@ function App() {
                 {' '}
                 <span>Clube da Plus</span>
                 <span>Segunda à Sexta</span>
-                <span>05:00 - 05:59</span>
+                <span>05:00 - 06:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#1221A8" />
             </div>
 
             <div className="marginDiv"></div>
             <div className="progCardContainerRow">
-              <div className="progBallContainer">
+              <div className="progBallContainer specialHeightDeuBo">
                 {' '}
                 <img src={PROGRAMAS} alt="Clube Plus" />
               </div>
@@ -628,7 +802,7 @@ function App() {
                 {' '}
                 <span>Deu B.O.</span>
                 <span>Segunda à Sexta</span>
-                <span>06:00 - 06:59</span>
+                <span>06:00 - 07:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#22D4D8" />
             </div>
@@ -644,7 +818,7 @@ function App() {
               <div className="progContainerColumn">
                 <span>Ceará News</span>
                 <span>Segunda à Sexta</span>
-                <span>07:00 - 07:59</span>
+                <span>07:00 - 08:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#000000" />
             </div>
@@ -655,13 +829,13 @@ function App() {
                 <img src={semlimitesparaamar} alt="Clube Plus" />
               </div>
 
-              <div className="progContainerColumn">
+              <div className="progContainerColumn specialHeight">
                 {' '}
-                <span>Sem limite para amar</span>
+                <span>Sem limites para amar</span>
                 <span>Segunda à Sexta</span>
-                <span>12:00 - 12:59</span>
+                <span>12:00 - 13:00</span>
                 <span>Domingo</span>
-                <span>22:00 - 23:59</span>
+                <span>22:00 - 00:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#000000" />
             </div>
@@ -677,7 +851,8 @@ function App() {
               <div className="progContainerColumn">
                 {' '}
                 <span>
-                  No Colo de Jesus e<br />de Maria
+                  No Colo de Jesus e<br />
+                  de Maria
                 </span>
                 <span>Segunda à Sexta</span>
                 <span>08:00 - 09:00</span>
@@ -695,7 +870,7 @@ function App() {
                 {' '}
                 <span>Manhã Plus</span>
                 <span>Segunda à Sexta</span>
-                <span>09:00 - 10:59</span>
+                <span>09:00 - 11:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#0A8A0F" />
             </div>
@@ -710,7 +885,7 @@ function App() {
                 {' '}
                 <span>Redação da Plus</span>
                 <span>Segunda à Sexta</span>
-                <span>12:00 - 13:59</span>
+                <span>12:00 - 14:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#9248FF" />
             </div>
@@ -725,7 +900,7 @@ function App() {
                 {' '}
                 <span>Tarde Plus</span>
                 <span>Segunda à Sexta</span>
-                <span>14:00 - 16:59</span>
+                <span>14:00 - 17:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#1E1E1E" />
             </div>
@@ -740,7 +915,7 @@ function App() {
                 {' '}
                 <span>Tá Todo Mundo Plus</span>
                 <span>Segunda à Sexta</span>
-                <span>17:00 - 17:59</span>
+                <span>17:00 - 18:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#788A0A" />
             </div>
@@ -754,7 +929,7 @@ function App() {
               <div className="progContainerColumn">
                 <span>As Melhores da Plus</span>
                 <span>Segunda à Sexta</span>
-                <span>11:00 - 11:59</span>
+                <span>11:00 - 12:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#1E1E1E" />
             </div>
@@ -772,7 +947,7 @@ function App() {
                 {' '}
                 <span>As Mais Pedidas</span>
                 <span>Segunda à Sexta</span>
-                <span>18:00 - 18:59</span>
+                <span>18:00 - 19:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#84AEFF" />
             </div>
@@ -787,13 +962,13 @@ function App() {
                 {' '}
                 <span>Plus Mania</span>
                 <span>Segunda à Sexta</span>
-                <span>20:00 - 21:59</span>
+                <span>20:00 - 22:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#FF8A00" />
             </div>
             <div className="marginDiv"></div>
             <div className="progCardContainerRow">
-              <div className="progBallContainer">
+              <div className="progBallContainer specialHeightFestaPlus">
                 {' '}
                 <img src={festaplus} alt="Clube Plus" />
               </div>
@@ -802,7 +977,7 @@ function App() {
                 {' '}
                 <span>Festa Plus</span>
                 <span>Sábado</span>
-                <span>12:00 - 13:59</span>
+                <span>12:00 - 14:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#5C3F1C" />
             </div>
@@ -817,7 +992,7 @@ function App() {
                 {' '}
                 <span>Time Machine</span>
                 <span>Sábado</span>
-                <span>21:00 - 21:59</span>
+                <span>21:00 - 22:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#8A0A66" />
             </div>
@@ -832,14 +1007,14 @@ function App() {
                 {' '}
                 <span>Upgrade</span>
                 <span>Sábado</span>
-                <span>22:00 - 23:59</span>
+                <span>22:00 - 00:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#FF00C7" />
             </div>
 
             <div className="marginDiv"></div>
             <div className="progCardContainerRow">
-              <div className="progBallContainer">
+              <div className="progBallContainer specialHeightSlowMo">
                 {' '}
                 <img src={slowmotion} alt="Clube Plus" />
               </div>
@@ -848,7 +1023,7 @@ function App() {
                 {' '}
                 <span>Slow Motion</span>
                 <span>Segunda à Sexta</span>
-                <span>22:00 - 23:59</span>
+                <span>22:00 - 00:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#FF00C7" />
             </div>
@@ -867,15 +1042,14 @@ function App() {
                 <span>Playlist da Plus</span>
                 <span>Domingo</span>
                 <span>
-                  05:00 - 07:59
-                  <br /> 20:00 - 21:59
+                  05:00 - 08:00
+                  <br /> 20:00 - 22:00
                 </span>
               </div>
               <Play size={'2vw'} weight="fill" color="#2D0B3E" />
             </div>
             <div className="marginDiv"></div>
-            
-      
+
             <div className="progCardContainerRow">
               <div className="progBallContainer">
                 {' '}
@@ -886,7 +1060,7 @@ function App() {
                 {' '}
                 <span>Domingão da Plus</span>
                 <span>Domingo</span>
-                <span>10:00 - 14:59</span>
+                <span>10:00 - 15:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#FF4D00" />
             </div>
@@ -901,7 +1075,7 @@ function App() {
                 {' '}
                 <span>Mega Plus</span>
                 <span>Domingo</span>
-                <span>15:00 - 18:59</span>
+                <span>15:00 - 19:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#00FF94" />
             </div>
@@ -916,13 +1090,46 @@ function App() {
                 {' '}
                 <span>A Grande Hora</span>
                 <span>Domingo</span>
-                <span>19:00 - 19:59</span>
+                <span>19:00 - 20:00</span>
               </div>
               <Play size={'2vw'} weight="fill" color="#262D6D" />
             </div>
             <div className="marginDiv"></div>
           </div>
         </div>
+
+        {/* <div className="circleContainerRow">
+          {' '}
+          <div className="circle-container">
+            <div className="inner-container"></div>
+            <svg className="progress-ring" width="100%" height="100%">
+              <circle
+                className="progress-ring__inner-circle"
+                stroke="white"
+                strokeWidth="0.5vw"
+                fill="transparent"
+                r="48%" // metade do tamanho do SVG
+                cx="50%" // metade do tamanho do SVG
+                cy="50%" // metade do tamanho do SVG
+              />
+              <circle
+                ref={circleRef}
+                className="progress-ring__circle"
+                stroke="#541084"
+                strokeWidth="1vw" // reduzido de 21 para 20
+                fill="transparent"
+                r="48%" // reduzido de 50% para 45%
+                cx="50%" // metade do tamanho do SVG
+                cy="50%" // metade do tamanho do SVG
+              />
+            </svg>
+            <img
+              src={currentImage}
+              alt="Imagem dentro do círculo"
+              className="circle-image"
+            />
+          </div>
+        </div> */}
       </div>
 
       <div className="MapContainer">
@@ -1083,7 +1290,7 @@ function App() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src={AppleStore} alt="Imagem 1" className="footerImage1" />
+              <img src={AppleStore} alt="Imagem 1" className="footerImage2" />
             </a>
             <a
               href="https://play.google.com/store/apps/details?id=com.johnallreal.PLUSFM"
@@ -1098,7 +1305,7 @@ function App() {
           <h2>Contatos</h2>
           <div className="contatoInfo">
             <div style={{ display: 'flex', alignItems: 'center' }}>
-              <Envelope size={'8vw'} weight="fill" color="#9248FF" />
+              <Envelope size={'8vw'} weight="thin" color="#ffc007" />
               <div
                 style={{
                   marginLeft: '10px',
@@ -1113,7 +1320,7 @@ function App() {
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
-              <Phone size={'7vw'} weight="fill" color="#9248FF" />
+              <Phone size={'7vw'} weight="thin" color="#ffc007" />
               <div
                 style={{
                   marginLeft: '10px',
@@ -1122,12 +1329,12 @@ function App() {
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                  <h4>Comercial</h4>
-                  <h4 style={{ marginLeft: '20px' }}>(85) 99264-2744</h4>
+                  <h6>Comercial</h6>
+                  <h5 style={{ marginLeft: '20px' }}>(85) 99264-2744</h5>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                  <h4>WhatsApp </h4>
-                  <h4 style={{ marginLeft: '20px' }}>(85) 99774-7777</h4>
+                  <h7>WhatsApp </h7>
+                  <h8 style={{ marginLeft: '20px' }}>(85) 99774-7777</h8>
                 </div>
               </div>
             </div>
@@ -1159,7 +1366,11 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <TwitterLogo size={'4vw'} color="white" />
+          <img
+            className={`programaAtual2 ${isSidebarOpen ? 'sidebar-open' : ''}`}
+            src={twitterLogoX}
+            alt="Imagem do programa atual"
+          />
         </a>
         <a
           href="https://www.instagram.com/plusfmrede/"

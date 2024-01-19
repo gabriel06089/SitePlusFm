@@ -11,7 +11,6 @@ const RoutesComponent = () => {
   return (
     <PlayerProvider>
       <Router>
-        <Player />
         <Routes>
           <Route
             path="/"

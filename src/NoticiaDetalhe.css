@@ -9,6 +9,19 @@
 
 }
 
+.containerImgLogo {
+
+    margin-right: 0vw;
+    margin-left: -1vw;
+    position: absolute;
+    top: 3.5vw;
+    left: 4.7vw;
+    z-index: 100;
+    width: auto;
+    height: 8vw;
+    display: none !important;
+}
+
 .divMenu {
     display: flex;
     justify-content: center;
@@ -17,6 +30,20 @@
     height: 4vw;
     width: 100%;
     position: relative;
+}
+
+.divMenuSpan {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFC007;
+    height: 4vw;
+    width: 100%;
+    position: relative;
+    text-decoration: none;
+    /* Remove a formatação de link */
+    color: inherit;
+    /* Faz o link ter a mesma cor do texto ao redor */
 }
 
 .socialIcons {
@@ -45,10 +72,10 @@
 .App-headerN span {
     color: #541084;
     font-family: 'Rubik', sans-serif;
-    font-size: calc(1.25vw + 0.2vw);
+    font-size: calc(2vw + 0.2vw);
     /* Ajuste conforme necessário */
     font-style: normal;
-    font-weight: 500;
+    font-weight: 700;
     line-height: normal;
     margin-inline: 1.5vw;
 
@@ -65,7 +92,14 @@
 
 
 
-
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #541084;
+}
 
 .ContainerRow.sidebar-open {
     flex-direction: column;
@@ -86,9 +120,19 @@
 
 }
 
+.svgTwitter {
+    width: 1.5vw;
+    height: 1.5vw;
+
+}
+
+.svgTwitter.sidebar-open {
+    width: 4.8vw;
+    height: 4.8vw;
+}
 
 .dropsImage.sidebar-open {
-    margin-top: 35vw;
+    margin-top: 59vw;
 }
 
 .InnerContainerRow {
@@ -126,7 +170,6 @@
         height: 15vw;
         margin-right: 44vw;
         object-fit: cover;
-
     }
 
 
@@ -188,11 +231,11 @@
 
 .App-headerN img {
     position: absolute;
-    width: 22vw;
+    width: 24vw;
     height: 11vw;
-    z-index: 22;
+    z-index: 100;
     margin-right: 2vw;
-    left: 4vw;
+    left: 0vw;
     top: 3vw;
 
 }
@@ -241,13 +284,31 @@
     display: flex;
     flex-direction: column;
 
-    width: 68vw;
+    width: 74vw;
     padding: 0 20px;
-    padding-left: 6vw;
+    padding-left: 15vw;
 }
 
 .noticiasContainer img {
     border-radius: 10px;
+    width: auto;
+    /* Substitua pelo valor desejado */
+    height: 30vw;
+}
+
+@media (max-width: 600px) {
+    .noticiasContainer {
+
+        width: 83vw;
+
+    }
+
+    .noticiasContainer img {
+        border-radius: 10px;
+        width: auto;
+        /* Substitua pelo valor desejado */
+        height: auto;
+    }
 
 }
 
@@ -263,28 +324,30 @@ h1 {
     color: #541084;
 
     font-family: Rubik;
-    font-size: 2vw;
+    font-size: 1, 5vw;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     line-height: normal;
-    padding-top: 5vw;
+    padding-top: 3vw;
 }
 
 h2 {
     color: #2B2B2B;
 
     font-family: 'Rubik', sans-serif;
-    font-size: 1.5vw;
+    font-size: 1.3vw;
+    margin-block: 1.4vw;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 200;
     line-height: normal;
+    opacity: 0.9;
 }
 
 h3 {
     color: #541084;
 
     font-family: 'Rubik', sans-serif;
-    font-size: 4vw;
+    font-size: 3vw;
     font-style: normal;
     font-weight: 500;
     line-height: 1.5px;
@@ -295,26 +358,31 @@ h3 {
 .descImage {
     color: #2B2B2B;
     font-family: 'Rubik', sans-serif;
-    font-size: 2vw;
+    font-size: 1.2vw;
     font-style: normal;
     font-weight: lighter;
-    opacity: 0.8;
+    opacity: 0.7;
+    font-weight: 200;
+    margin-block: 0.2vw;
+    margin-left: 1vw;
 }
-
-
-
-
 
 .meu-conteudo {
     display: flex;
     flex-direction: column;
-    align-items: center;
+
+    margin-bottom: 2vw;
+}
+
+.special-strong {
+    margin-top: 12px;
+    padding-top: 10px;
 }
 
 .meu-conteudo a {
     color: #541084;
     font-family: 'Rubik', sans-serif;
-    font-size: 1.8vw;
+    font-size: 1vw;
     font-style: normal;
     font-weight: 400;
     line-height: 107.835%;
@@ -341,11 +409,12 @@ h3 {
 
     color: #2B2B2B;
     font-family: 'Rubik', sans-serif;
-    font-size: 1.6vw;
+    font-size: 2.2vw;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 200;
     line-height: normal;
     text-align: left;
+    margin-top: 1vw;
 }
 
 /* Adicione a classe .alinhado-direita ao elemento em que deseja alinhar à direita */
@@ -356,47 +425,79 @@ h3 {
 .meu-conteudo strong {
     color: #541084;
     font-family: 'Rubik', sans-serif;
-    font-size: 1.5vw;
+    font-size: 2.1vw;
 
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 107.835%;
 }
 
 
+.social-share-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1vw;
+    position: absolute;
+    top: 13.8vw;
+    left: 8vw;
+}
 
-.youtube-iframe {
-    height: 40vw;
-    width: 100%;
-    border-radius: 10px;
+.social-share-container.fixed {
+    position: fixed;
+    top: 8vw;
+    left: 8vw;
+}
+
+.final-position {
+    position: absolute;
+    top: 80vw;
+    /* ajuste para a posição final desejada */
 }
 
 .spotify-iframe {
-    overflow: hidden;
-    width: 100%;
-    border-radius: 10px;
+    height: 12vw;
+    border-radius: 8px;
+    margin-block: 2vw;
 }
 
-.containerDivisao {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 5vw;
-    width: 24vw;
-    margin-top: 5vw;
-    background-color: #541084;
-    border-radius: 24px;
-    padding-inline: 1vw;
-    margin-left: 5vw;
+.youtube-iframe {
+    height: 30vw;
+    border-radius: 8px;
+    margin-block: 3vw;
+}
 
-    color: #FFF;
+@media (max-width: 600px) {
+    .youtube-iframe {
+        height: 40vw;
+    }
 
-    font-family: 'Rubik', sans-serif;
-    font-size: 3.4vw;
+    .spotify-iframe {
+        height: 20vw;
+    }
 
-    font-style: normal;
-    font-weight: 700;
-    margin-bottom: 7vw;
+    h1 {
+        color: #541084;
+
+        font-family: Rubik;
+        font-size: 3.2vw;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        padding-top: 3vw;
+    }
+
+    .descImage {
+        color: #2B2B2B;
+        font-family: 'Rubik', sans-serif;
+        font-size: 1.6vw;
+        font-style: normal;
+        font-weight: lighter;
+        opacity: 0.7;
+        font-weight: 200;
+        margin-block: 0.2vw;
+        margin-left: 1vw;
+    }
 }
 
 .containerDivisaoP {
@@ -421,6 +522,97 @@ h3 {
     margin-bottom: 7vw;
 }
 
+.containerDivisao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vw;
+    width: 24vw;
+    margin-top: 5vw;
+    background-color: #541084;
+    border-radius: 8px;
+    padding-inline: 1vw;
+    margin-left: 4.1vw;
+
+    color: #FFF;
+
+    font-family: 'Rubik', sans-serif;
+    font-size: 3.4vw;
+
+    font-style: normal;
+    font-weight: 200;
+    margin-bottom: 2vw;
+}
+
+.containerDivisaoC {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vw;
+    width: 44vw;
+    margin-top: 2vw;
+    background-color: #541084;
+    border-radius: 8px;
+    padding-inline: 1vw;
+    margin-left: 4vw;
+
+    color: #FFF;
+
+    font-family: 'Rubik', sans-serif;
+    font-size: 3.4vw;
+
+    font-style: normal;
+    font-weight: 200;
+    margin-bottom: 3vw;
+}
+
+@media (max-width: 600px) {
+    .containerDivisao {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 5vw;
+        width: 24vw;
+        margin-top: 5vw;
+        background-color: #541084;
+        border-radius: 2px;
+        padding-inline: 1vw;
+        margin-left: 6.1vw;
+
+        color: #FFF;
+
+        font-family: 'Rubik', sans-serif;
+        font-size: 3.4vw;
+
+        font-style: normal;
+        font-weight: 200;
+        margin-bottom: 2vw;
+    }
+
+    .containerDivisaoC {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 5vw;
+        width: 44vw;
+        margin-top: 2vw;
+        background-color: #541084;
+        border-radius: 2px;
+        padding-inline: 1vw;
+        margin-left: 6vw;
+
+        color: #FFF;
+
+        font-family: 'Rubik', sans-serif;
+        font-size: 3.4vw;
+
+        font-style: normal;
+        font-weight: 200;
+        margin-bottom: 3vw;
+    }
+}
+
+
 .containerDivisaoR {
     display: flex;
     justify-content: center;
@@ -442,27 +634,6 @@ h3 {
     font-weight: 700;
 }
 
-.containerDivisaoC {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 5vw;
-    width: 44vw;
-    margin-top: 5vw;
-    background-color: #541084;
-    border-radius: 24px;
-    padding-inline: 1vw;
-    margin-left: 5vw;
-
-    color: #FFF;
-
-    font-family: 'Rubik', sans-serif;
-    font-size: 3.4vw;
-
-    font-style: normal;
-    font-weight: 700;
-    margin-bottom: 7vw;
-}
 
 .maisNoticias {
     display: flex;
@@ -480,7 +651,7 @@ h3 {
 .maisNoticiasR {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+
     margin-top: 20px;
 }
 
@@ -517,17 +688,18 @@ h3 {
     font-size: 2.7vw;
     color: #541084;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
 }
 
 .noticia h5 {
     padding-left: 1vw;
     margin: 1vw 0;
-    font-family: 'Rubik', sans-serif;
+
+    font-weight: 200;
     font-size: 2vw;
 
     font-style: normal;
-    font-weight: 400;
+
 }
 
 .noticia a {
@@ -540,7 +712,13 @@ h3 {
     flex-direction: column;
     justify-content: center;
     width: 85%;
-    margin-left: 5vw;
+    margin-left: 4vw;
+}
+
+@media (max-width: 600px) {
+    .containerColuna1 {
+        margin-left: 5.78vw;
+    }
 }
 
 .containerColuna2 {
@@ -563,7 +741,7 @@ h3 {
     font-size: 2vw;
     color: #541084;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     width: 85%;
 }
 
@@ -574,7 +752,7 @@ h3 {
     font-size: 1.3vw;
 
     font-style: normal;
-    font-weight: 400;
+    font-weight: 200;
     width: 85%;
     height: 4vw;
     opacity: 0.8;
@@ -591,16 +769,225 @@ h3 {
     margin-bottom: 0.5vw;
 }
 
+.App-headerImg3 {
+    margin-right: 0vw;
+    margin-left: -1vw;
+    position: fixed;
+    top: 3.5vw;
+    left: 4.7vw;
+    z-index: 115;
+    width: auto;
+    height: 8vw;
+
+}
+
+@media (max-width: 1439px) {
+    .App-headerImg3 {
+        display: none;
+    }
+}
 
 .App-header img:first-child {
     width: 22vw;
     height: 11vw;
-    z-index: 22;
-    margin-right: 6vw;
+
+    margin-right: 5vw;
     margin-left: 7vw;
     left: 4vw;
     top: 0vw;
+
 }
+
+@media (min-width: 1440px) {
+    .App-header img:first-child {
+        margin-right: 0vw;
+        margin-left: -1vw;
+        position: absolute;
+        top: 3.5vw;
+        left: 4.7vw;
+        z-index: 100;
+        width: auto;
+        height: 8vw;
+    }
+
+    .App-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 3vw;
+    }
+
+    .ContainerRow {
+        margin-left: 4vw;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 95%;
+        background-color: white;
+        margin-bottom: 1vw;
+        padding-bottom: 0.4vw;
+
+        border-bottom-left-radius: 24px;
+    }
+
+    .ContainerRow span {
+        margin-top: 0.8vw;
+
+        color: #541084;
+        font-family: 'Rubik', sans-serif;
+        font-size: calc(1.25vw + 0.2vw);
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
+    }
+
+    .InnerContainerRow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        padding-inline: 2vw;
+        margin-left: 2vw;
+        gap: 1vw;
+        margin-top: 2vw;
+        background-color: #541084;
+        height: 4vw;
+        position: absolute;
+        right: 12vw;
+        top: 4.22vw;
+        border-bottom-left-radius: 24px;
+        border-bottom-right-radius: 24px;
+        /* border: 2px solid white; */
+        /* Adiciona uma borda branca fina */
+        border-top: none;
+
+    }
+
+    .App-Player {
+        transform: scale(1.1);
+        top: 0vw;
+        margin-inline: 2vw;
+        width: 91%;
+        height: 6vw;
+        /* border: 2px solid white; */
+        /* Adiciona uma borda branca fina */
+        border-top: none;
+        /* Remove a borda do topo */
+    }
+
+
+
+    @media (min-width: 1440px) {
+        .App-headerImg3 {
+            margin-right: 0vw;
+            margin-left: -1vw;
+            position: fixed;
+            top: 3.5vw;
+            left: 4.7vw;
+            z-index: 115;
+            width: auto;
+            height: 8vw;
+        }
+    }
+
+    .ContainerMusicSpanPlaying {
+
+        width: 55vw;
+
+    }
+
+    .dropsFrontCardContainerSpanCartola {
+        position: absolute;
+        bottom: 87%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        height: 2.4vw;
+        background-color: #541084;
+        align-self: center;
+        padding-inline: 1vw;
+        z-index: 6;
+        color: white;
+        font-family: 'Rubik', sans-serif;
+        font-size: 1.2vw;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        position: absolute;
+        overflow: hidden;
+
+        /* Adiciona uma borda branca fina */
+    }
+
+    .dropsColumnContainer::after {
+        content: "";
+        position: absolute;
+        bottom: -24%;
+        left: 0;
+        width: 100%;
+        height: 35%;
+        background: white;
+        border-top: 0.5vw solid #541084;
+        /* Adiciona uma borda amarela de 2px na parte superior */
+        border-radius: 8px;
+        z-index: 4;
+
+    }
+
+    .dropsNoArContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        width: auto;
+        padding-inline: 1vw;
+        height: auto;
+        background-color: white;
+        position: absolute;
+
+
+    }
+
+    .dropsNoArContainer {
+        color: #541084;
+        font-family: 'Rubik', sans-serif;
+        font-size: 1vw;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        z-index: 5;
+
+    }
+
+    .dropsFrontCardContainerDiv {
+        position: absolute;
+        bottom: -20%;
+        width: 100%;
+        background: #541084;
+        border-top: 0.5vw solid white;
+        /* Adiciona uma borda amarela de 2px na parte superior */
+        border-radius: 8px;
+        z-index: 4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dropsFrontCardContainerSpan {
+        font-family: 'Rubik', sans-serif;
+        font-size: calc(1.5vw + 0.2vw);
+        font-weight: 500;
+        color: white;
+        text-align: center;
+        z-index: 5;
+        margin-inline: 2vw;
+        position: relative;
+    }
+}
+
+
 
 .twitterLogo {
     width: 1.5vw !important;
@@ -616,7 +1003,7 @@ h3 {
         width: 32vw;
         height: 16vw;
         z-index: 22;
-        margin-right: 39vw;
+        margin-right: 46vw;
         margin-left: 4vw;
         left: 4vw;
         top: 0vw;

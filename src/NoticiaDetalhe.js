@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import './NoticiaDetalhe.css';
+import { Puff } from 'react-loader-spinner';
 
-import Don7 from './Don7.png';
+import { decode } from 'he';
+import Don7 from './don7horizontal.svg';
 import Logo from './plus-1.png';
 import PlayStore from './playstore.png';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import AppleStore from './iostore.png';
 import {
+  Camera,
   FacebookLogo,
   InstagramLogo,
+  Timer,
   TwitterLogo,
   WhatsappLogo,
   YoutubeLogo,
@@ -102,15 +108,52 @@ const NoticiaDetalhe = () => {
   }, []);
 
   if (loading) {
-    return <div>Carregando...</div>;
+    return (
+      <div className="loader-container">
+        <Puff color="white" size={400} />
+        <p>Carregando...</p>
+      </div>
+    );
   }
-
   if (error) {
     return <div>Erro ao carregar a notícia: {error}</div>;
   }
   const url = window.location.href;
   const text = `Confira esta notícia: ${noticia.title.rendered}`;
+  const htmlWithStyling = noticia.content.rendered
+    .replace(/(<iframe[^>]*src="https:\/\/www\.youtube\.com[^>]*>)/g, (match) =>
+      match.replace('<iframe', '<iframe class="iframe-wrapper youtube-iframe"')
+    )
+    .replace(
+      /(<iframe[^>]*src="https:\/\/open\.spotify\.com[^>]*>)/g,
+      (match) =>
+        match.replace(
+          '<iframe',
+          '<iframe class="iframe-wrapper spotify-iframe"'
+        )
+    )
+    .replace(
+      /<p>(Assista:|Ouça:)<\/p>/g,
+      '<p class="special-strong">$1</p>'
+    );
 
+  const cleanedHtmlContent = decode(
+    htmlWithStyling.replace(/<em/g, '<em class="alinhado-direita"')
+  );
+  // window.addEventListener('scroll', function () {
+  //   const element = document.querySelector('.social-share-container');
+  //   const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+  //   if (scrollPosition > 200 && scrollPosition < 3250) {
+  //     element.classList.add('fixed');
+  //     element.classList.remove('final-position');
+  //   } else if (scrollPosition >= 3250) {
+  //     element.classList.remove('fixed');
+  //     element.classList.add('final-position');
+  //   } else {
+  //     element.classList.remove('fixed');
+  //     element.classList.remove('final-position');
+  //   }
+  // });
   return (
     <div style={{ backgroundColor: '#d7d7d771' }}>
       <div className="MenuContainerHeader">
@@ -120,9 +163,11 @@ const NoticiaDetalhe = () => {
           </Link>
           <div className="divMenu">
             <div className="menuDiv">
-              <span className="divMenuSpan">Drops</span>
+              <Link to="/drops" className="divMenuSpan">
+                <span>Drops</span>
+              </Link>
               <span className="divMenuSpan">Contato</span>
-              <span className="divMenuSpan">Progamação</span>
+              <span className="divMenuSpan">Programação</span>
             </div>
             <div className="socialIcons">
               <InstagramLogo size={'2vw'} color="#541084" />
@@ -134,49 +179,74 @@ const NoticiaDetalhe = () => {
         </header>
       </div>
       <div className="noticiasContainer">
-        <h1>{noticia.title.rendered}</h1>
-        <h2>{noticia.bigode}</h2>
+        <h1>{decode(noticia.title.rendered)}</h1>
+        <h2>{decode(noticia.bigode)}</h2>
+
         {noticia.yoast_head_json && noticia.yoast_head_json.og_image && (
           <>
             <img
               src={noticia.yoast_head_json.og_image[0].url}
               alt="Imagem da notícia"
             />
-            {imagemDescricao && <p className="descImage">{imagemDescricao}</p>}
+
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginTop: '1vw',
+              }}
+            >
+              <Camera size={'1.5vw'} />
+              {imagemDescricao && (
+                <p className="descImage">{decode(imagemDescricao)}</p>
+              )}
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: '1vw',
+                marginTop: '1vw',
+              }}
+            >
+              <Timer size={'1.5vw'} />
+              {noticia.date && (
+                <p className="descImage">
+                  Publicado em:{' '}
+                  {format(new Date(noticia.date), 'dd/MM/yyyy HH:mm', {
+                    locale: ptBR,
+                  })}
+                </p>
+              )}
+            </div>
           </>
         )}
         <div
           className="meu-conteudo"
-          dangerouslySetInnerHTML={{
-            __html: noticia.content.rendered.replace(
-              /<em/g,
-              '<em class="alinhado-direita"'
-            ),
-          }}
+          dangerouslySetInnerHTML={{ __html: cleanedHtmlContent }}
         />
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1vw' }}>
-        <h3>COMPARTILHE</h3>
+      <div className="social-share-container">
         <a
           href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FacebookLogo size={'6vw'} color="#541084" weight="fill" />
+          <FacebookLogo size={'5vw'} color="#541084" weight="fill" />
         </a>
         <a
           href={`https://twitter.com/intent/tweet?text=${text}&url=${url}`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <TwitterLogo size={'6vw'} color="#541084" weight="fill" />
+          <TwitterLogo size={'5vw'} color="#541084" weight="fill" />
         </a>
         <a
           href={`https://api.whatsapp.com/send?text=${text} ${url}`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <WhatsappLogo size={'6vw'} color="#541084" weight="fill" />
+          <WhatsappLogo size={'5vw'} color="#541084" weight="fill" />
         </a>
       </div>
       <div className="containerDivisao"> Mais notícias </div>
@@ -193,8 +263,8 @@ const NoticiaDetalhe = () => {
               alt="Imagem da notícia"
             />
             <div>
-              <h4>{noticia.cartola}</h4>
-              <h5>{noticia.title.rendered}</h5>
+              <h4>{decode(noticia.cartola)}</h4>
+              <h5>{decode(noticia.title.rendered)}</h5>
             </div>
           </Link>
         ))}
@@ -202,7 +272,7 @@ const NoticiaDetalhe = () => {
       <div className="containerDivisaoC"> Recomendadas para você </div>
       <div
         className="maisNoticiasR"
-        style={{ display: 'flex', flexDirection: 'row', width: '80vw' }}
+        style={{ display: 'flex', flexDirection: 'row', width: '74vw' }}
       >
         <div className="containerColuna1">
           {posts.slice(0, 3).map((post) => (
@@ -220,8 +290,8 @@ const NoticiaDetalhe = () => {
                 alt="Imagem do post"
               />
               <div className="containerSpanFooter">
-                <h4>{post.cartola}</h4>
-                <h5>{post.title.rendered}</h5>
+                <h4>{decode(post.cartola)}</h4>
+                <h5>{decode(post.title.rendered)}</h5>
               </div>
             </Link>
           ))}
@@ -242,23 +312,14 @@ const NoticiaDetalhe = () => {
                 alt="Imagem do post"
               />
               <div className="containerSpanFooter">
-                <h4>{post.cartola}</h4>
-                <h5>{post.title.rendered}</h5>
+                <h4>{decode(post.cartola)}</h4>
+                <h5>{decode(post.title.rendered)}</h5>
               </div>
             </Link>
           ))}
         </div>
       </div>
       <div className="footer">
-        <div className="footerDiv">
-          <span className="footerText">
-            Escute a PLUS onde você for, baixe o app
-          </span>
-          <div className="imageContainer">
-            <img src={AppleStore} alt="Imagem 1" className="footerImage1" />
-            <img src={PlayStore} alt="Imagem 2" className="footerImage1" />
-          </div>
-        </div>
         <div className="footerDiv">
           <div className="imageContainer">
             <img src={Logo} alt="Imagem 3" className="footerImage2" />

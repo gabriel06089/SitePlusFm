@@ -1,7 +1,9 @@
 // Player.js
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { BeatLoader } from 'react-spinners';
+import { css } from '@emotion/react';
 import './App.css';
+import './NoticiaDetalhe.css';
 import {
   SpeakerHigh,
   SpeakerLow,
@@ -12,7 +14,7 @@ import {
   CaretDown,
 } from 'phosphor-react';
 import { useLocation } from 'react-router-dom';
-
+import Logo from './plus-1.png';
 import { PlayerContext } from './Context/PlayerContext'; // Importe o PlayerContext
 
 const Player = () => {
@@ -236,10 +238,26 @@ const Player = () => {
 
     return progTitle;
   };
+  const text =
+    currentSong.artist === 'PLUS FM'
+      ? `PLUS FM - ${getPrograma().toUpperCase()}`
+      : currentSong.artist === 'Artista Específico'
+      ? 'Seu texto personalizado aqui'
+      : `${currentSong.artist} - ${currentSong.title}`;
+
+  console.log('Comprimento do texto: ', text.length);
+
+  const isLongText = text.length > 46;
   const location = useLocation();
   const isHomePage = location.pathname === '/';
+  const naTelaNoticias =
+    location.pathname.startsWith('/noticia/') ||
+    location.pathname.startsWith('/drops'); // Ajuste para o caminho correto
   return (
     <div className="containerPlayer">
+      {!naTelaNoticias && (
+        <img src={Logo} alt="Logo da Plus FM" className="App-headerImg3" />
+      )}
       <div className={`App-Player ${isHomePage ? 'home' : ''}`}>
         <div
           style={{
@@ -254,55 +272,61 @@ const Player = () => {
           }}
         >
           {isLoading ? (
-            <div style={{ marginRight: '2vw' }}>
-              <BeatLoader color="#ffffff" loading={isLoading} size={8} />
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <BeatLoader
+                loading={isLoading}
+                size="2vw" // Ajuste o tamanho aqui
+                color={'white'} // Ajuste a cor aqui
+                css={css`
+                  margin-right: 2vw; // Ajuste a margem aqui
+                `}
+              />
             </div>
           ) : isPlaying ? (
-            <PauseCircle
-              style={{ marginRight: '2vw' }}
-              color="white"
-              size={'4vw'}
-              weight="bold"
-            />
+            <PauseCircle className="pause-circle" />
           ) : (
-            <PlayCircle
-              style={{ marginRight: '2vw' }}
-              color="white"
-              size={'4vw'}
-              weight="bold"
-            />
+            <PlayCircle className="play-circle" />
           )}
         </div>
         <div className="Container-Music-Title">
           <span className="Container-Music-TitleSpan">Tocando agora</span>
           <div
             style={{
-              height: '0.1px',
+              height: '0.1vw',
               background: 'white',
               width: '10.1vw',
               marginBlock: '0.5vw',
               marginLeft: '0.2vw',
             }}
           ></div>
-          <span className="ContainerMusicSpanPlaying">
-            {currentSong.artist === 'PLUS FM'
-              ? `PLUS FM - ${getPrograma().toUpperCase()}` // Exibe "PLUS FM - " seguido do nome do programa
-              : `${currentSong.artist} - ${currentSong.title}`}
-          </span>
-          
-        </div>
-        <div className="VolumeControl">
           <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-            onClick={handleSpeakerClick}
+            className={`ContainerMusicSpanPlaying ${
+              isLongText ? '' : 'static'
+            }`}
           >
-            {renderSpeakerIcon()}
+            <span>{text}</span>
           </div>
         </div>
+        {/*         
+<div className="VolumeControl">
+  <div
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}
+    onClick={handleSpeakerClick}
+  >
+    {renderSpeakerIcon()}
+  </div>
+</div> */}
+
         <div className="ContainerRadioList">
           <select
             value={selectedRadio.title}
