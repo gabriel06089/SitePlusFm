@@ -1713,10 +1713,7 @@
     -ms-border-radius: 6px;
     -o-border-radius: 6px;
     border-top: 6px solid transparent;
-    -webkit-transform: ;
-    -moz-transform: ;
-    -ms-transform: ;
-    -o-transform: ;
+
     z-index: -1;
   }
 

@@ -7,7 +7,12 @@ import {
   TwitterLogo,
   YoutubeLogo,
   WhatsappLogo,
+  Camera,
+  Timer,
 } from 'phosphor-react';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
+import { decode } from 'he';
 import Logo from './plus-1.png';
 const PromoDetalhe = () => {
   const { id } = useParams();
@@ -137,10 +142,41 @@ const PromoDetalhe = () => {
         {noticia.yoast_head_json && noticia.yoast_head_json.og_image && (
           <>
             <img
+              loading="lazy"
               src={noticia.yoast_head_json.og_image[0].url}
               alt="Imagem da notícia"
             />
-            {imagemDescricao && <p className="descImage">{imagemDescricao}</p>}
+
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginTop: '1vw',
+              }}
+            >
+              <Camera size={'1.5vw'} />
+              {imagemDescricao && (
+                <p className="descImage">{decode(imagemDescricao)}</p>
+              )}
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: '1vw',
+                marginTop: '1vw',
+              }}
+            >
+              <Timer size={'1.5vw'} />
+              {noticia.date && (
+                <p className="descImage">
+                  Publicado em:{' '}
+                  {format(new Date(noticia.date), 'dd/MM/yyyy HH:mm', {
+                    locale: ptBR,
+                  })}
+                </p>
+              )}
+            </div>
           </>
         )}
         <div
