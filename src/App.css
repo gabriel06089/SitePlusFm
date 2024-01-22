@@ -595,6 +595,17 @@
   z-index: 1 !important;
 }
 
+.App-header.sidebar-open img:first-child {
+  height: auto;
+  
+  left: 4vw;
+  margin-left: 7vw;
+  margin-right: 44vw;
+  top: 0vw;
+  width: 42vw;
+  z-index: 22;
+}
+
 .programaAtual2 {
   height: auto !important;
   left: 4.7vw !important;
@@ -1764,7 +1775,7 @@
     -ms-border-radius: 6px;
     -o-border-radius: 6px;
     border-top: 6px solid transparent;
- 
+
     z-index: -1;
   }
 
