@@ -569,6 +569,7 @@ function App() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
+                paddingTop: '9vw',
               }}
             >
               <img src={Logo} />
@@ -1193,7 +1194,7 @@ function App() {
           <Map
             onMouseOver={() => setHover(true)}
             onMouseOut={() => setHover(false)}
-            style={{ width: '57vw', overflow: 'visible', cursor: 'pointer' }}
+            className="mapComponent"
           />
           <StyledImg
             src={Cariri}
@@ -1398,7 +1399,9 @@ function App() {
       </div>
       <div
         style={{
-          backgroundColor: '#541084',
+          backgroundColor: getComputedStyle(document.documentElement)
+            .getPropertyValue('--cor-primaria')
+            .trim(),
           textAlign: 'center',
           display: 'flex',
           justifyContent: 'center',

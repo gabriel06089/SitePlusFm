@@ -12,5 +12,7 @@ export const StyledImg = styled.img`
 
   @media (max-width: 600px) {
     height: 5.5vh;
+    margin-block: 0vw;
+    margin-left: -2vw;
   }
 `;

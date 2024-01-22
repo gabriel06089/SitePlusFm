@@ -1,10 +1,24 @@
+:root {
+    --cor-primaria: #DC143C;
+    --cor-primaria-clara: #E26A6E;
+
+    /* --cor-primaria: #541084; */
+    /* --cor-primaria-clara: #8D1B94; */
+    --cor-secundaria: #FFC007;
+    --cor-terciaria: white;
+    --cor-text: black;
+    --cor-backgroundClaro: #FFC300;
+    --cor-backgroundEscuro: #FF5733;
+}
+
+
 .MenuContainerHeader {}
 
 .App-headerN {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #541084;
+    background-color: var(--cor-primaria);
     padding-top: 7vw;
 
 }
@@ -26,7 +40,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #FFC007;
+    background-color: var(--cor-terciaria);
     height: 4vw;
     width: 100%;
     position: relative;
@@ -36,7 +50,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #FFC007;
+    background-color: var(--cor-terciaria);
     height: 4vw;
     width: 100%;
     position: relative;
@@ -70,7 +84,7 @@
 }
 
 .App-headerN span {
-    color: #541084;
+    color: var(--cor-text);
     font-family: 'Rubik', sans-serif;
     font-size: calc(2vw + 0.2vw);
     /* Ajuste conforme necessário */
@@ -98,19 +112,19 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #541084;
+    background-color: var(--cor-primaria);
 }
 
 .ContainerRow.sidebar-open {
     flex-direction: column;
-    background: linear-gradient(to bottom, #541084, #8D1B94 70%, transparent 100%);
+    background: linear-gradient(to bottom, var(--cor-primaria) 21%, var(--cor-primaria-clara) 70%, transparent 100%);
     width: 100%;
     position: absolute;
     top: -5vw;
     width: 100%;
-    height: 78vw;
+    height: 98vw;
     z-index: 20;
-    padding-bottom: vw;
+    padding-bottom: 0vw;
 }
 
 .ContainerRow.sidebar-open span {
@@ -132,7 +146,7 @@
 }
 
 .dropsImage.sidebar-open {
-    margin-top: 59vw;
+    margin-top: 76vw;
 }
 
 .InnerContainerRow {
@@ -187,6 +201,8 @@
     padding: 0;
 }
 
+
+
 .App-header.sidebar-open img {
     width: 30vw;
     height: 15vw;
@@ -198,8 +214,8 @@
 
 .xSvg {
     position: absolute;
-    top: 18vw;
-    right: 5vw;
+    top: 28vw;
+    right: 12vw;
 }
 
 .App-header.sidebar-open .InnerContainerRow {
@@ -321,7 +337,7 @@
 }
 
 h1 {
-    color: #541084;
+    color: var(--cor-text);
 
     font-family: Rubik;
     font-size: 1, 5vw;
@@ -344,7 +360,7 @@ h2 {
 }
 
 h3 {
-    color: #541084;
+    color: var(--cor-text);
 
     font-family: 'Rubik', sans-serif;
     font-size: 3vw;
@@ -380,9 +396,13 @@ h3 {
 }
 
 .meu-conteudo a {
-    color: #541084;
+    color: var(--cor-text);
     font-family: 'Rubik', sans-serif;
+<<<<<<< Updated upstream
     font-size: 1vw;
+=======
+
+>>>>>>> Stashed changes
     font-style: normal;
     font-weight: 400;
     line-height: 107.835%;
@@ -396,7 +416,7 @@ h3 {
 }
 
 .meu-conteudo a:hover {
-    color: #541084;
+    color: var(--cor-primaria);
     text-decoration: none;
 }
 
@@ -423,7 +443,7 @@ h3 {
 }
 
 .meu-conteudo strong {
-    color: #541084;
+    color: var(--cor-primaria);
     font-family: 'Rubik', sans-serif;
     font-size: 2.1vw;
 
@@ -477,7 +497,7 @@ h3 {
     }
 
     h1 {
-        color: #541084;
+        color: var(--cor-text);
 
         font-family: Rubik;
         font-size: 3.2vw;
@@ -505,10 +525,17 @@ h3 {
     justify-content: center;
     align-items: center;
     height: 5vw;
+<<<<<<< Updated upstream
     width: 28vw;
     margin-top: 5vw;
     background-color: #541084;
     border-radius: 24px;
+=======
+    width: 29vw;
+    margin-top: 2vw;
+    background-color: var(--cor-primaria);
+    border-radius: 5px;
+>>>>>>> Stashed changes
     padding-inline: 1vw;
     margin-left: 5vw;
 
@@ -529,7 +556,7 @@ h3 {
     height: 5vw;
     width: 24vw;
     margin-top: 5vw;
-    background-color: #541084;
+    background-color: var(--cor-primaria);
     border-radius: 8px;
     padding-inline: 1vw;
     margin-left: 4.1vw;
@@ -551,7 +578,7 @@ h3 {
     height: 5vw;
     width: 44vw;
     margin-top: 2vw;
-    background-color: #541084;
+    background-color: var(--cor-primaria);
     border-radius: 8px;
     padding-inline: 1vw;
     margin-left: 4vw;
@@ -574,7 +601,7 @@ h3 {
         height: 5vw;
         width: 24vw;
         margin-top: 5vw;
-        background-color: #541084;
+        background-color: var(--cor-primaria);
         border-radius: 2px;
         padding-inline: 1vw;
         margin-left: 6.1vw;
@@ -596,7 +623,7 @@ h3 {
         height: 5vw;
         width: 44vw;
         margin-top: 2vw;
-        background-color: #541084;
+        background-color: var(--cor-primaria);
         border-radius: 2px;
         padding-inline: 1vw;
         margin-left: 6vw;
@@ -620,7 +647,7 @@ h3 {
     height: 5vw;
     width: 44vw;
     margin-top: 5vw;
-    background-color: #541084;
+    background-color: var(--cor-primaria);
     border-radius: 24px;
     padding-inline: 1vw;
     margin-left: 5vw;
@@ -686,7 +713,7 @@ h3 {
     margin: 1vw 0;
     font-family: 'Rubik', sans-serif;
     font-size: 2.7vw;
-    color: #541084;
+    color: var(--cor-primaria);
     font-style: normal;
     font-weight: 400;
 }
@@ -739,7 +766,7 @@ h3 {
     margin: 0 0;
     font-family: 'Rubik', sans-serif;
     font-size: 2vw;
-    color: #541084;
+    color: var(--cor-primaria);
     font-style: normal;
     font-weight: 400;
     width: 85%;
@@ -826,14 +853,14 @@ h3 {
         background-color: white;
         margin-bottom: 1vw;
         padding-bottom: 0.4vw;
-
+        height: 3vw;
         border-bottom-left-radius: 24px;
     }
 
     .ContainerRow span {
         margin-top: 0.8vw;
 
-        color: #541084;
+        color: var(--cor-primaria);
         font-family: 'Rubik', sans-serif;
         font-size: calc(1.25vw + 0.2vw);
         font-style: normal;
@@ -851,7 +878,7 @@ h3 {
         margin-left: 2vw;
         gap: 1vw;
         margin-top: 2vw;
-        background-color: #541084;
+        background-color: var(--cor-primaria);
         height: 4vw;
         position: absolute;
         right: 12vw;
@@ -905,7 +932,7 @@ h3 {
         justify-content: center;
         border-radius: 8px;
         height: 2.4vw;
-        background-color: #541084;
+        background-color: var(--cor-primaria);
         align-self: center;
         padding-inline: 1vw;
         z-index: 6;
@@ -929,7 +956,7 @@ h3 {
         width: 100%;
         height: 35%;
         background: white;
-        border-top: 0.5vw solid #541084;
+        border-top: 0.5vw solid var(--cor-primaria);
         /* Adiciona uma borda amarela de 2px na parte superior */
         border-radius: 8px;
         z-index: 4;
@@ -951,7 +978,7 @@ h3 {
     }
 
     .dropsNoArContainer {
-        color: #541084;
+        color: var(--cor-primaria);
         font-family: 'Rubik', sans-serif;
         font-size: 1vw;
         font-style: normal;
@@ -965,7 +992,7 @@ h3 {
         position: absolute;
         bottom: -20%;
         width: 100%;
-        background: #541084;
+        background: var(--cor-primaria);
         border-top: 0.5vw solid white;
         /* Adiciona uma borda amarela de 2px na parte superior */
         border-radius: 8px;
@@ -1007,5 +1034,16 @@ h3 {
         margin-left: 4vw;
         left: 4vw;
         top: 0vw;
+    }
+
+    .sidebar-open.App-header img:first-child {
+        width: auto;
+        height: 35vw;
+        z-index: 22;
+        margin-right: 46vw;
+        margin-left: 4vw;
+        left: 4vw;
+        top: 0vw;
+
     }
 }

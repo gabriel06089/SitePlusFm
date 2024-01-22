@@ -32,6 +32,37 @@
   }
 }
 
+:root {
+  --cor-primaria: #DC143C;
+  --cor-primaria-clara: #E26A6E;
+
+  /* --cor-primaria: #541084; */
+  /* --cor-primaria-clara: #8D1B94; */
+  --cor-secundaria: #FFC007;
+  --cor-terciaria: white;
+  --cor-text: black;
+  --cor-backgroundClaro: #FFC300;
+  --cor-backgroundEscuro: #FF5733;
+}
+
+.mapComponent {
+  width: 57vw;
+  overflow: visible;
+  cursor: pointer;
+
+}
+
+@media (max-width: 600px) {
+  .mapComponent {
+    width: 88vw;
+    margin-right: 2vw;
+    margin-top: 2vw;
+    /* ou qualquer outro valor que você deseja */
+  }
+}
+
+
+
 .App {
   align-items: center;
   display: flex;
@@ -42,7 +73,8 @@
 }
 
 .App::before {
-  background-image: url('./bg.svg');
+  /* background-image: url('./bg.svg'); */
+  background: linear-gradient(to bottom, var(--cor-backgroundEscuro) 0%, var(--cor-backgroundClaro) 100%);
   background-position: center 4vw;
   background-repeat: repeat;
   background-size: cover;
@@ -178,7 +210,7 @@
 
 .MapContainer {
   align-items: center;
-  background: radial-gradient(circle 34vw at center, #A567C4, #541084);
+  background: radial-gradient(circle 50vw at center, var(--cor-backgroundEscuro), var(--cor-backgroundClaro));
   display: flex;
   flex-direction: column;
   height: auto;
@@ -191,7 +223,7 @@
 
 .dropsColumnContainer span {
   bottom: -14%;
-  color: #541084;
+  color: var(--cor-primaria);
   font-family: 'Rubik', sans-serif;
   font-size: calc(0.8vw + 0.2vw);
   font-style: normal;
@@ -290,7 +322,7 @@
 }
 
 .dropsFrontCardContainerSpan {
-  color: #541084;
+  color: var(--cor-primaria);
   font-family: 'Rubik', sans-serif;
   font-size: calc(1.5vw + 0.2vw);
   font-weight: 500;
@@ -395,7 +427,7 @@
 
 .InnerContainerRow1 {
   align-items: center;
-  background-color: #541084;
+  background-color: var(--cor-primaria);
   display: flex;
   gap: 4vw;
   justify-content: center;
@@ -412,7 +444,7 @@
 
 .App-Player {
   align-items: center;
-  background-color: #541084;
+  background-color: var(--cor-primaria);
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
   display: flex;
@@ -659,7 +691,7 @@
   appearance: none;
   background: none;
   border: none;
-  color: #541084;
+  color: var(--cor-primaria);
   font-family: 'Rubik', sans-serif;
   font-size: 1.5vw;
   font-style: normal;
@@ -673,7 +705,7 @@
   background: none;
   background-color: white;
   border: none;
-  color: #541084;
+  color: var(--cor-primaria);
   font-family: 'Rubik', sans-serif;
   font-size: 1.5vw;
   font-style: normal;
@@ -796,7 +828,8 @@
 .progContainer {
   align-items: center;
   background-color: #F2F2F2;
-  background-image: url('./AssetDrops/fundoProg.jpg');
+  /* background-image: url('./AssetDrops/fundoProg.jpg'); */
+  background: linear-gradient(to bottom, var(--cor-backgroundClaro) 0%, var(--cor-backgroundEscuro) 50%, var(--cor-backgroundClaro) 100%);
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -968,6 +1001,23 @@
     z-index: 5;
   }
 
+  .mapImage {
+    align-self: flex-start;
+    height: 12vw;
+    margin-block: 2vw;
+    margin-bottom: 6vw;
+    margin-left: 10.5vw;
+    z-index: 5;
+  }
+
+  .progImage {
+    align-self: flex-start;
+    height: 12vw;
+    margin-block: 5vw;
+    margin-left: 4.5vw;
+    margin-top: 2vw;
+    z-index: 5;
+  }
 }
 
 .textProgImg {
@@ -983,9 +1033,10 @@
 
 .promoContainer {
   align-items: center;
-  background-image: url('./AssetDrops/fundoPromo.png');
+  /* background-image: url('./AssetDrops/fundoPromo.png');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
+  background: radial-gradient(circle 50vw at center, var(--cor-backgroundEscuro), var(--cor-backgroundClaro));
   display: flex;
   flex-direction: column;
   height: auto;
@@ -996,7 +1047,7 @@
 }
 
 .promoContainer span {
-  color: #541084;
+  color: var(--cor-primaria);
   font-family: 'Rubik', sans-serif;
   font-size: 0.9vw;
   font-style: normal;
@@ -1119,7 +1170,7 @@
 .cartolaAbsolute {
   background-color: yellow;
   border-radius: 24px;
-  color: #541084;
+  color: var(--cor-primaria);
   font-family: 'Rubik', sans-serif;
   font-size: 3vw;
   left: 0;
@@ -1331,7 +1382,7 @@
 
   .spanContainerNoticias {
     bottom: -20%;
-    color: #541084;
+    color: var(--cor-primaria);
     font-family: 'Rubik', sans-serif;
     font-size: calc(2vw + 0.2vw);
     margin-inline: 1vw;
@@ -1359,7 +1410,7 @@
 
 .footer {
   align-items: center;
-  background-color: #541084;
+  background-color: var(--cor-primaria);
   display: flex;
   gap: 15vw;
   height: 26vw;
@@ -1466,7 +1517,7 @@
 
 .contato {
   align-items: center;
-  background-color: #541084;
+  background-color: var(--cor-primaria);
   color: #ffffff;
   display: flex;
   flex-direction: row;
@@ -1480,7 +1531,7 @@
 @media (max-width: 600px) {
   .contato {
     align-items: center;
-    background-color: #541084;
+    background-color: var(--cor-primaria);
     color: #ffffff;
     display: flex;
     flex-direction: row;
@@ -1630,7 +1681,7 @@
 .absolute-div {
   align-items: center;
   align-self: center;
-  background-color: #541084;
+  background-color: var(--cor-primaria);
   border-radius: 8px;
   display: flex;
   height: 100%;
@@ -1645,7 +1696,7 @@
   align-items: center;
   background-color: white;
   border-radius: 8px;
-  border-top: 6px solid #541084;
+  border-top: 6px solid var(--cor-primaria);
   bottom: -25%;
   display: flex;
   height: 7vw;
@@ -1661,7 +1712,7 @@
   .absolute-div {
     align-items: center;
     align-self: center;
-    background-color: #541084;
+    background-color: var(--cor-primaria);
     border-radius: 8px;
     display: flex;
     height: 100%;
@@ -1685,7 +1736,7 @@
 
 
 .center-divP {
-  color: #541084;
+  color: var(--cor-primaria);
   font-family: 'Rubik', sans-serif;
   font-size: 1.5vw;
   margin-inline: 2vw;
@@ -1697,7 +1748,7 @@
     align-items: center;
     background-color: white;
     border-radius: 8px;
-    border-top: 6px solid #541084;
+    border-top: 6px solid var(--cor-primaria);
     display: flex;
     height: 24.5vw;
     justify-content: center;
@@ -1713,10 +1764,7 @@
     -ms-border-radius: 6px;
     -o-border-radius: 6px;
     border-top: 6px solid transparent;
-    -webkit-transform: ;
-    -moz-transform: ;
-    -ms-transform: ;
-    -o-transform: ;
+ 
     z-index: -1;
   }
 
@@ -1739,7 +1787,7 @@
   .first-news .absolute-div {
     align-items: center;
     align-self: center;
-    background-color: red;
+    background-color: var(--cor-primaria);
     border-radius: 8px;
     display: flex;
 
@@ -1788,7 +1836,7 @@
 
   .second-news .absolute-div {
     align-items: center;
-    background-color: red;
+    background-color: var(--cor-primaria);
     border-radius: 8px;
     display: flex;
     height: 100%;
@@ -1855,7 +1903,7 @@
     -moz-border-radius: 8px;
     -ms-border-radius: 8px;
     -o-border-radius: 8px;
-    border-top: 6px solid red;
+    border-top: 6px solid var(--cor-primaria);
   }
 
 

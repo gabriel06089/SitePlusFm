@@ -167,10 +167,30 @@ const NoticiaDetalhe = () => {
               <span className="divMenuSpan">Programação</span>
             </div>
             <div className="socialIcons">
-              <InstagramLogo size={'2vw'} color="#541084" />
-              <FacebookLogo size={'2vw'} color="#541084" />
-              <YoutubeLogo size={'2vw'} color="#541084" />
-              <TwitterLogo size={'2vw'} color="#541084" />
+              <InstagramLogo
+                size={'2vw'}
+                color={getComputedStyle(
+                  document.documentElement
+                ).getPropertyValue('--cor-primaria')}
+              />
+              <FacebookLogo
+                size={'2vw'}
+                color={getComputedStyle(
+                  document.documentElement
+                ).getPropertyValue('--cor-primaria')}
+              />
+              <YoutubeLogo
+                size={'2vw'}
+                color={getComputedStyle(
+                  document.documentElement
+                ).getPropertyValue('--cor-primaria')}
+              />
+              <TwitterLogo
+                size={'2vw'}
+                color={getComputedStyle(
+                  document.documentElement
+                ).getPropertyValue('--cor-primaria')}
+              />
             </div>
           </div>
         </header>
@@ -230,21 +250,39 @@ const NoticiaDetalhe = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FacebookLogo size={'5vw'} color="#541084" weight="fill" />
+          <FacebookLogo
+            size={'5vw'}
+            color={getComputedStyle(document.documentElement).getPropertyValue(
+              '--cor-primaria'
+            )}
+            weight="fill"
+          />
         </a>
         <a
           href={`https://twitter.com/intent/tweet?text=${text}&url=${url}`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <TwitterLogo size={'5vw'} color="#541084" weight="fill" />
+          <TwitterLogo
+            size={'5vw'}
+            color={getComputedStyle(document.documentElement).getPropertyValue(
+              '--cor-primaria'
+            )}
+            weight="fill"
+          />
         </a>
         <a
           href={`https://api.whatsapp.com/send?text=${text} ${url}`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <WhatsappLogo size={'5vw'} color="#541084" weight="fill" />
+          <WhatsappLogo
+            size={'5vw'}
+            color={getComputedStyle(document.documentElement).getPropertyValue(
+              '--cor-primaria'
+            )}
+            weight="fill"
+          />
         </a>
       </div>
       <div className="containerDivisao"> Mais notícias </div>
