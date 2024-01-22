@@ -198,7 +198,10 @@
 .ButtonMenu {
     background: none;
     border: none;
-    padding: 0;
+    padding: 3vw;
+    position: relative;
+    left: -37vw;
+    top: -1vw;
 }
 
 .App-header.sidebar-open img {
@@ -1024,9 +1027,12 @@ h3 {
         width: 32vw;
         height: 16vw;
         z-index: 22;
-        margin-right: 42vw;
-        margin-left: 4vw;
-        left: 4vw;
-        top: 0vw;
+        margin-right: 0vw;
+        margin-left: 0vw;
+        left: auto;
+        right: 30vw;
+        align-self: center;
+        top: 19vw;
+        position: absolute;
     }
 }

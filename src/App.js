@@ -21,6 +21,8 @@ import Rede from './AssetsMap/Rede.svg';
 import Paraipaba from './AssetsMap/Paraipaba.svg';
 import Boneco from './boneco.png';
 import twitterLogoX from './twitter-x.svg';
+import moment from 'moment';
+import 'moment/locale/pt-br';
 
 import agrandehora from './imagemprogamacao/agrandehora.svg';
 import asmaispedidas from './imagemprogamacao/asmaispedidas.svg';
@@ -569,7 +571,7 @@ function App() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                paddingTop: '9vw',
+                paddingTop: 'vw',
               }}
             >
               <img src={Logo} />
@@ -761,9 +763,12 @@ function App() {
                       : 'center-div second-news'
                   }
                 >
-                  <p className="center-divP">
-                    {decode(newsItem.title.rendered)}
-                  </p>
+                  <div className="title-bigode-container">
+                    <p className="center-divP">
+                      {decode(newsItem.title.rendered)}
+                    </p>
+                    <p className="bigode">{newsItem.bigode}</p>
+                  </div>
                   <div
                     className={
                       index === 0
@@ -771,8 +776,13 @@ function App() {
                         : 'absolute-div second-news'
                     }
                   >
+                    {index !== 0 && (
+                      <p className="date">
+                       {moment(newsItem.date).fromNow()}
+                      </p>
+                    )}
                     <p className="center-divPP">
-                      {he.decode(newsItem.cartola)}
+                    — {he.decode(newsItem.cartola)}
                     </p>
                   </div>
                 </div>
