@@ -110,7 +110,13 @@ function App() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   useEffect(() => {
     if (windowWidth <= 600) {
       setItemsToRender(4);
@@ -569,7 +575,6 @@ function App() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                paddingTop: '9vw',
               }}
             >
               <img src={Logo} />
@@ -581,18 +586,26 @@ function App() {
                   <X
                     size={'8vw'}
                     color={getComputedStyle(document.documentElement)
-                      .getPropertyValue('--cor-primaria')
+                      .getPropertyValue('--cor-terciaria')
                       .trim()}
                     weight="bold"
                     className="xSvg"
                   />
                 ) : (
-                  <List
-                    size={'12vw'}
-                    color={getComputedStyle(document.documentElement)
-                      .getPropertyValue('--cor-primaria')
-                      .trim()}
-                  />
+                  <div className="line-container">
+                    <div
+                      className="line"
+                      style={{ width: '72%', marginBottom: '3px' }}
+                    ></div>
+                    <div
+                      className="line"
+                      style={{ width: '72%', marginBottom: '3px' }}
+                    ></div>
+                    <div
+                      className="line"
+                      style={{ width: '72%', marginBottom: '0px' }}
+                    ></div>
+                  </div>
                 )}
               </button>
             </div>
@@ -648,7 +661,7 @@ function App() {
                 <FacebookLogo
                   size={isSidebarOpen ? '6vw' : '2vw'}
                   color={getComputedStyle(document.documentElement)
-                    .getPropertyValue('--cor-primaria')
+                    .getPropertyValue('--cor-terciaria')
                     .trim()}
                 />
               </a>
@@ -672,7 +685,7 @@ function App() {
                 <InstagramLogo
                   size={isSidebarOpen ? '6vw' : '2vw'}
                   color={getComputedStyle(document.documentElement)
-                    .getPropertyValue('--cor-primaria')
+                    .getPropertyValue('--cor-terciaria')
                     .trim()}
                 />
               </a>
@@ -684,7 +697,7 @@ function App() {
                 <TiktokLogo
                   size={isSidebarOpen ? '6vw' : '2vw'}
                   color={getComputedStyle(document.documentElement)
-                    .getPropertyValue('--cor-primaria')
+                    .getPropertyValue('--cor-terciaria')
                     .trim()}
                 />
               </a>
@@ -696,7 +709,7 @@ function App() {
                 <YoutubeLogo
                   size={isSidebarOpen ? '6vw' : '2vw'}
                   color={getComputedStyle(document.documentElement)
-                    .getPropertyValue('--cor-primaria')
+                    .getPropertyValue('--cor-terciaria')
                     .trim()}
                 />
               </a>
@@ -708,7 +721,7 @@ function App() {
                 <WhatsappLogo
                   size={isSidebarOpen ? '6vw' : '2vw'}
                   color={getComputedStyle(document.documentElement)
-                    .getPropertyValue('--cor-primaria')
+                    .getPropertyValue('--cor-terciaria')
                     .trim()}
                 />
               </a>
@@ -720,7 +733,7 @@ function App() {
                 <TelegramLogo
                   size={isSidebarOpen ? '6vw' : '2vw'}
                   color={getComputedStyle(document.documentElement)
-                    .getPropertyValue('--cor-primaria')
+                    .getPropertyValue('--cor-terciaria')
                     .trim()}
                 />
               </a>
@@ -785,51 +798,54 @@ function App() {
           className={`programasImage ${isSidebarOpen ? 'sidebar-open' : ''}`}
         />
         <div className="container">
-          {programas.slice(0, itemsToRender).map((programa, index) => (
-            <Link
-              to={`/noticia/${programa.id}`}
-              key={index}
-              style={{ textDecoration: 'none' }}
-            >
-              <div
-                className={
-                  index === 0
-                    ? 'sub-container first-news'
-                    : 'sub-container second-news'
-                }
+          {programas
+            .slice(0, windowWidth > 600 ? 2 : 3)
+            .map((programa, index) => (
+              <Link
+                to={`/noticia/${programa.id}`}
+                key={index}
+                style={{ textDecoration: 'none' }}
               >
-                {programa.yoast_head_json?.og_image?.[0] && (
-                  <img
-                    src={programa.yoast_head_json.og_image[0].url}
-                    alt="Imagem do programa"
-                  />
-                )}
-
                 <div
                   className={
                     index === 0
-                      ? 'center-div first-news'
-                      : 'center-div second-news'
+                      ? 'sub-container first-news'
+                      : 'sub-container second-news'
                   }
                 >
-                  <p className="center-divP">
-                    {decode(programa.title.rendered)}
-                  </p>
+                  {programa.yoast_head_json?.og_image?.[0] && (
+                    <img
+                      src={programa.yoast_head_json.og_image[0].url}
+                      alt="Imagem do programa"
+                      className={index === 2 ? 'hide-on-large' : ''}
+                    />
+                  )}
+
                   <div
                     className={
                       index === 0
-                        ? 'absolute-div first-news'
-                        : 'absolute-div second-news'
+                        ? 'center-div first-news'
+                        : 'center-div second-news'
                     }
                   >
-                    <p className="center-divPP">
-                      {he.decode(programa.cartola)}
+                    <p className="center-divP">
+                      {decode(programa.title.rendered)}
                     </p>
+                    <div
+                      className={
+                        index === 0
+                          ? 'absolute-div first-news'
+                          : 'absolute-div second-news'
+                      }
+                    >
+                      <p className="center-divPP">
+                        {he.decode(programa.cartola)}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
         </div>
       </div>
       <section id="programacao"></section>

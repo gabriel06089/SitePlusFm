@@ -29,12 +29,18 @@ const NoticiaDetalhe = () => {
 
   const [maisNoticias, setMaisNoticias] = useState([]);
   useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://platform.twitter.com/widgets.js';
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, [noticia]);
   useEffect(() => {
     const fetchMaisNoticias = async () => {
       const response = await fetch(
-        'https://plusfm.com.br/wp-json/wp/v2/posts?per_page=3'
+        'https://plusfm.com.br/wp-json/wp/v2/posts?per_page=2'
       );
       const data = await response.json();
       setMaisNoticias(data);
@@ -132,8 +138,12 @@ const NoticiaDetalhe = () => {
           '<iframe class="iframe-wrapper spotify-iframe"'
         )
     )
-    .replace(/<p>(Assista:|Ouça:)<\/p>/g, '<p class="special-strong">$1</p>');
-
+    .replace(/<p>(Assista:|Ouça:)<\/p>/g, '<p class="special-strong">$1</p>')
+    .replace(
+      /<div class="twitter-tweet twitter-tweet-rendered"[^>]*>[\s\S]*?<\/div>/g,
+      ''
+    );
+  console.log(htmlWithStyling); // Exibe o htmlContent no console
   const cleanedHtmlContent = decode(
     htmlWithStyling.replace(/<em/g, '<em class="alinhado-direita"')
   );
@@ -152,7 +162,7 @@ const NoticiaDetalhe = () => {
   //   }
   // });
   return (
-    <div style={{ backgroundColor: '#d7d7d771' }}>
+    <div className="noticiaDetalheDiv">
       <div className="MenuContainerHeader">
         <header className="App-headerN">
           <Link to="/">
@@ -223,7 +233,7 @@ const NoticiaDetalhe = () => {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                marginBottom: '1vw',
+                marginBottom: '3vw',
                 marginTop: '1vw',
               }}
             >
@@ -251,6 +261,7 @@ const NoticiaDetalhe = () => {
           rel="noopener noreferrer"
         >
           <FacebookLogo
+            className="social-link"
             size={'5vw'}
             color={getComputedStyle(document.documentElement).getPropertyValue(
               '--cor-primaria'
@@ -264,6 +275,7 @@ const NoticiaDetalhe = () => {
           rel="noopener noreferrer"
         >
           <TwitterLogo
+            className="social-link"
             size={'5vw'}
             color={getComputedStyle(document.documentElement).getPropertyValue(
               '--cor-primaria'
@@ -277,6 +289,7 @@ const NoticiaDetalhe = () => {
           rel="noopener noreferrer"
         >
           <WhatsappLogo
+            className="social-link"
             size={'5vw'}
             color={getComputedStyle(document.documentElement).getPropertyValue(
               '--cor-primaria'

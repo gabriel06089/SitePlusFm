@@ -33,11 +33,11 @@
 }
 
 :root {
-  --cor-primaria: #DC143C;
-  --cor-primaria-clara: #E26A6E;
+  /* --cor-primaria: #DC143C;
+  --cor-primaria-clara: #E26A6E; */
 
-  /* --cor-primaria: #541084; */
-  /* --cor-primaria-clara: #8D1B94; */
+  --cor-primaria: #541084;
+  --cor-primaria-clara: #8D1B94;
   --cor-secundaria: #FFC007;
   --cor-terciaria: white;
   --cor-text: black;
@@ -75,7 +75,7 @@
 .App::before {
   /* background-image: url('./bg.svg'); */
   /* background: linear-gradient(to bottom, var(--cor-backgroundEscuro) 0%, var(--cor-backgroundClaro) 100%); */
-  background-color: whitesmoke;
+  background-color: #FFD300;
   background-position: center 4vw;
   background-repeat: repeat;
   background-size: cover;
@@ -209,11 +209,23 @@
   }
 }
 
+.social-link {
+  width: 4vw;
+  height: 4vw;
+}
+
+@media (max-width: 600px) {
+  .social-link {
+    width: 5vw;
+  height: 5vw;
+  }
+}
+
 .MapContainer {
   align-items: center;
   /* background: radial-gradient(circle 50vw at center, var(--cor-backgroundEscuro), var(--cor-backgroundClaro)); 
   */
-  background-color: whitesmoke;
+  background-color: #FFD300;
   display: flex;
   flex-direction: column;
   height: auto;
@@ -466,9 +478,9 @@
 @media (max-width: 600px) {
   .App-header img:first-child {
     height: 14vw;
-    left: 6vw;
-    margin-left: 7vw;
-    margin-right: 4vw;
+    left: vw;
+    margin-left: 0vw;
+    margin-right: 0vw;
     top: 0vw;
     width: 22vw;
     z-index: 22;
@@ -602,9 +614,9 @@
   height: auto;
 
   left: 4vw;
-  margin-left: 7vw;
-  margin-right: 44vw;
-  top: 0vw;
+  margin-left: 0vw;
+  margin-right: 45vw;
+  top: 5vw;
   width: 42vw;
   z-index: 22;
 }
@@ -845,7 +857,7 @@
   /* background-image: url('./AssetDrops/fundoProg.jpg'); */
   /* background: linear-gradient(to bottom, var(--cor-backgroundClaro) 0%, var(--cor-backgroundEscuro) 50%, var(--cor-backgroundClaro) 100%);
    */
-  background-color: whitesmoke;
+  background-color: #FFD300;
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -1350,9 +1362,9 @@
   }
 
   .cartolaAbsolute {
-  
+
     margin: 0.3rem;
- 
+
   }
 
   .dropsContainerNoticias {
@@ -1792,6 +1804,8 @@
   text-align: center;
 }
 
+
+
 @media (max-width: 600px) {
   .second-news .center-div {
     align-items: center;
@@ -1828,7 +1842,7 @@
     color: black;
     font-family: 'Rubik', sans-serif;
     font-size: 3.3vw;
-    font-weight: 400;
+    font-weight: 200;
     margin-inline: 2vw;
     text-align: center;
   }
@@ -1945,9 +1959,9 @@
   }
 
   .first-news .center-div {
-    height: 12vw;
+    height: 16vw;
     border-radius: 8px;
-    bottom: -12%;
+    bottom: -16%;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     -ms-border-radius: 8px;
@@ -1956,6 +1970,30 @@
   }
 
 
+}
+
+@media (max-width: 500px) {
+  .first-news .absolute-div {
+    align-items: center;
+    align-self: center;
+    background-color: var(--cor-primaria);
+    border-radius: 8px;
+    display: flex;
+
+    height: 4vw;
+    justify-content: center;
+    position: absolute;
+    top: -24%;
+    z-index: 5;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    font-weight: 200;
+    width: auto;
+    padding: 2.5vw;
+
+  }
 }
 
 @media (max-width: 466px) {
