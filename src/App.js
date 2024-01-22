@@ -580,12 +580,19 @@ function App() {
                 {isSidebarOpen ? (
                   <X
                     size={'8vw'}
-                    color="white"
+                    color={getComputedStyle(document.documentElement)
+                      .getPropertyValue('--cor-primaria')
+                      .trim()}
                     weight="bold"
                     className="xSvg"
                   />
                 ) : (
-                  <List size={'12vw'} color="white" />
+                  <List
+                    size={'12vw'}
+                    color={getComputedStyle(document.documentElement)
+                      .getPropertyValue('--cor-primaria')
+                      .trim()}
+                  />
                 )}
               </button>
             </div>
@@ -640,7 +647,9 @@ function App() {
               >
                 <FacebookLogo
                   size={isSidebarOpen ? '6vw' : '2vw'}
-                  color="white"
+                  color={getComputedStyle(document.documentElement)
+                    .getPropertyValue('--cor-primaria')
+                    .trim()}
                 />
               </a>
               <a
@@ -662,7 +671,9 @@ function App() {
               >
                 <InstagramLogo
                   size={isSidebarOpen ? '6vw' : '2vw'}
-                  color="white"
+                  color={getComputedStyle(document.documentElement)
+                    .getPropertyValue('--cor-primaria')
+                    .trim()}
                 />
               </a>
               <a
@@ -672,7 +683,9 @@ function App() {
               >
                 <TiktokLogo
                   size={isSidebarOpen ? '6vw' : '2vw'}
-                  color="white"
+                  color={getComputedStyle(document.documentElement)
+                    .getPropertyValue('--cor-primaria')
+                    .trim()}
                 />
               </a>
               <a
@@ -682,7 +695,9 @@ function App() {
               >
                 <YoutubeLogo
                   size={isSidebarOpen ? '6vw' : '2vw'}
-                  color="white"
+                  color={getComputedStyle(document.documentElement)
+                    .getPropertyValue('--cor-primaria')
+                    .trim()}
                 />
               </a>
               <a
@@ -692,7 +707,9 @@ function App() {
               >
                 <WhatsappLogo
                   size={isSidebarOpen ? '6vw' : '2vw'}
-                  color="white"
+                  color={getComputedStyle(document.documentElement)
+                    .getPropertyValue('--cor-primaria')
+                    .trim()}
                 />
               </a>
               <a
@@ -702,7 +719,9 @@ function App() {
               >
                 <TelegramLogo
                   size={isSidebarOpen ? '6vw' : '2vw'}
-                  color="white"
+                  color={getComputedStyle(document.documentElement)
+                    .getPropertyValue('--cor-primaria')
+                    .trim()}
                 />
               </a>
             </div>

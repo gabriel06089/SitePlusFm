@@ -124,7 +124,7 @@
     height: 78vw;
     z-index: 20;
     padding-bottom: vw;
-   
+
 }
 
 .ContainerRow.sidebar-open span {
@@ -239,7 +239,7 @@
 .App-header.sidebar-open span {
     display: block;
 
-    color: #FFF;
+    color: var(--cor-primaria);
     font-family: 'Rubik', sans-serif;
     font-size: calc(2.25vw + 0.2vw);
     /* Ajuste conforme necessário */
@@ -356,12 +356,12 @@ h2 {
     color: #2B2B2B;
 
     font-family: 'Rubik', sans-serif;
-    font-size: 1.3vw;
+    font-size: 2.1vw;
     margin-block: 1.4vw;
     font-style: normal;
     font-weight: 200;
     line-height: normal;
-    opacity: 0.9;
+    opacity: 0.99;
 }
 
 h3 {
@@ -1024,7 +1024,7 @@ h3 {
         width: 32vw;
         height: 16vw;
         z-index: 22;
-        margin-right: 46vw;
+        margin-right: 42vw;
         margin-left: 4vw;
         left: 4vw;
         top: 0vw;

@@ -339,7 +339,12 @@ const Player = () => {
               </option>
             ))}
           </select>
-          <CaretDown size={'2.5vw'} color="#541084" />
+          <CaretDown
+            size={'2.5vw'}
+            color={getComputedStyle(document.documentElement)
+              .getPropertyValue('--cor-primaria')
+              .trim()}
+          />
         </div>
 
         {isVolumeVisible && (

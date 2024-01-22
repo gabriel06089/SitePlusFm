@@ -74,7 +74,8 @@
 
 .App::before {
   /* background-image: url('./bg.svg'); */
-  background: linear-gradient(to bottom, var(--cor-backgroundEscuro) 0%, var(--cor-backgroundClaro) 100%);
+  /* background: linear-gradient(to bottom, var(--cor-backgroundEscuro) 0%, var(--cor-backgroundClaro) 100%); */
+  background-color: whitesmoke;
   background-position: center 4vw;
   background-repeat: repeat;
   background-size: cover;
@@ -210,7 +211,9 @@
 
 .MapContainer {
   align-items: center;
-  background: radial-gradient(circle 50vw at center, var(--cor-backgroundEscuro), var(--cor-backgroundClaro));
+  /* background: radial-gradient(circle 50vw at center, var(--cor-backgroundEscuro), var(--cor-backgroundClaro)); 
+  */
+  background-color: whitesmoke;
   display: flex;
   flex-direction: column;
   height: auto;
@@ -410,7 +413,7 @@
 }
 
 .ContainerRow span {
-  color: #FFF;
+  color: var(--cor-primaria);
   font-family: 'Rubik', sans-serif;
   font-size: calc(1.25vw + 0.2vw);
   font-style: normal;
@@ -463,9 +466,9 @@
 @media (max-width: 600px) {
   .App-header img:first-child {
     height: 14vw;
-    left: 4vw;
+    left: 6vw;
     margin-left: 7vw;
-    margin-right: 44vw;
+    margin-right: 4vw;
     top: 0vw;
     width: 22vw;
     z-index: 22;
@@ -597,7 +600,7 @@
 
 .App-header.sidebar-open img:first-child {
   height: auto;
-  
+
   left: 4vw;
   margin-left: 7vw;
   margin-right: 44vw;
@@ -840,7 +843,9 @@
   align-items: center;
   background-color: #F2F2F2;
   /* background-image: url('./AssetDrops/fundoProg.jpg'); */
-  background: linear-gradient(to bottom, var(--cor-backgroundClaro) 0%, var(--cor-backgroundEscuro) 50%, var(--cor-backgroundClaro) 100%);
+  /* background: linear-gradient(to bottom, var(--cor-backgroundClaro) 0%, var(--cor-backgroundEscuro) 50%, var(--cor-backgroundClaro) 100%);
+   */
+  background-color: whitesmoke;
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -1017,7 +1022,7 @@
     height: 12vw;
     margin-block: 2vw;
     margin-bottom: 6vw;
-    margin-left: 10.5vw;
+    margin-left: 4.5vw;
     z-index: 5;
   }
 
@@ -1025,10 +1030,13 @@
     align-self: flex-start;
     height: 12vw;
     margin-block: 5vw;
-    margin-left: 4.5vw;
+    margin-left: 0.5vw;
     margin-top: 2vw;
     z-index: 5;
   }
+
+
+
 }
 
 .textProgImg {
@@ -1047,7 +1055,7 @@
   /* background-image: url('./AssetDrops/fundoPromo.png');
   background-repeat: no-repeat;
   background-size: cover; */
-  background: radial-gradient(circle 50vw at center, var(--cor-backgroundEscuro), var(--cor-backgroundClaro));
+  /* background: radial-gradient(circle 50vw at center, var(--cor-backgroundEscuro), var(--cor-backgroundClaro)); */
   display: flex;
   flex-direction: column;
   height: auto;
@@ -1092,19 +1100,43 @@
     display: none;
   }
 
-  .promoContainer {
+  .promoContainer span {
+    color: var(--cor-primaria);
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.1vw;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 
+    padding: 0.2vw;
+    padding-inline: 1vw;
+    z-index: 5;
+  }
+
+  .promoContainer {
+    align-items: center;
+    /* background-image: url('./AssetDrops/fundoPromo.png');
+    background-repeat: no-repeat;
+    background-size: cover; */
+    /* background: radial-gradient(circle 50vw at center, var(--cor-backgroundEscuro), var(--cor-backgroundClaro)); */
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: center;
+    margin-inline: 1vw;
+    padding-top: 2vw;
+    width: 100%;
     height: 110vw;
     position: relative;
   }
 
   .textProgImg {
     align-self: flex-start;
-    height: 7vw;
+    height: 12vw;
     margin-left: 7.5vw;
     z-index: 5;
     position: absolute;
-    top: 5vw;
+    top: 2vw;
 
   }
 
@@ -1179,7 +1211,7 @@
 }
 
 .cartolaAbsolute {
-  background-color: yellow;
+  background-color: var(--cor-terciaria);
   border-radius: 24px;
   color: var(--cor-primaria);
   font-family: 'Rubik', sans-serif;
@@ -1315,6 +1347,12 @@
     height: 14vw;
     margin-left: 5.8vw;
     margin-bottom: 6vw;
+  }
+
+  .cartolaAbsolute {
+  
+    margin: 0.3rem;
+ 
   }
 
   .dropsContainerNoticias {
