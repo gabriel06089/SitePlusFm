@@ -5,6 +5,10 @@ import PromoDetalhe from '../PromoDetalhe';
 import App from '../App';
 import Player from '../Player';
 import Drops from '../Drops';
+import Sobre from '../Sobre';
+import PrincipiosEditoriais from '../PrincipiosEditoriais';
+import Contato from '../Contato';
+
 import { PlayerProvider } from '../Context/PlayerContext';
 
 const RoutesComponent = () => {
@@ -45,6 +49,36 @@ const RoutesComponent = () => {
               <>
                 <Player />
                 <NoticiaDetalhe />
+              </>
+            }
+          />
+          <Route
+            path="/sobre"
+            element={
+              <>
+                {' '}
+                <Player />
+                <Sobre />{' '}
+              </>
+            }
+          />
+          <Route
+            path="/principios-editoriais"
+            element={
+              <>
+                {' '}
+                <Player />
+                <PrincipiosEditoriais />{' '}
+              </>
+            }
+          />
+          <Route
+            path="/contato"
+            element={
+              <>
+                {' '}
+                <Player />
+                <Contato />{' '}
               </>
             }
           />

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import './NoticiaDetalhe.css';
 import { Puff } from 'react-loader-spinner';
+import { TwitterTweetEmbed } from 'react-twitter-embed';
+import { Tweet } from 'react-tweet';
 
 import { decode } from 'he';
 import Don7 from './don7horizontal.svg';
@@ -26,17 +28,31 @@ const NoticiaDetalhe = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [imagemDescricao, setImagemDescricao] = useState(null);
-
   const [maisNoticias, setMaisNoticias] = useState([]);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  const checkScroll = () => {
+    // Verifique se a página foi rolada mais de 100 pixels
+    if (window.scrollY > 20) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
+  };
+
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://platform.twitter.com/widgets.js';
-    script.async = true;
-    document.body.appendChild(script);
+    window.addEventListener('scroll', checkScroll);
+
+    // Limpe o evento ao desmontar o componente
+    return () => {
+      window.removeEventListener('scroll', checkScroll);
+    };
   }, []);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [noticia]);
+
   useEffect(() => {
     const fetchMaisNoticias = async () => {
       const response = await fetch(
@@ -48,10 +64,10 @@ const NoticiaDetalhe = () => {
 
     fetchMaisNoticias();
   }, []);
+
   useEffect(() => {
     const fetchNoticia = async () => {
       try {
-        // Verifica se a notícia já está em cache
         const cachedNoticia = localStorage.getItem(`noticia-${id}`);
         const cachedFeaturedMedia = localStorage.getItem(
           `featured_media-${id}`
@@ -67,11 +83,7 @@ const NoticiaDetalhe = () => {
         );
         const data = await response.json();
 
-        // Código existente...
-
         setNoticia(data);
-
-        // Armazena a notícia em cache
         localStorage.setItem(`noticia-${id}`, JSON.stringify(data));
 
         const imagemResponse = await fetch(
@@ -80,7 +92,6 @@ const NoticiaDetalhe = () => {
         const imagemData = await imagemResponse.json();
         if (imagemData.yoast_head_json) {
           setImagemDescricao(imagemData.yoast_head_json.og_description);
-          // Armazena a featured_media em cache
           localStorage.setItem(
             `featured_media-${id}`,
             JSON.stringify(imagemData.yoast_head_json.og_description)
@@ -95,13 +106,14 @@ const NoticiaDetalhe = () => {
 
     fetchNoticia();
   }, [id]);
+
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const response = await fetch(
-          'https://plusfm.com.br/wp-json/wp/v2/posts?per_page=6'
+          'https://plusfm.com.br/wp-json/wp/v2/posts?per_page=9'
         );
         const data = await response.json();
         setPosts(data);
@@ -138,15 +150,38 @@ const NoticiaDetalhe = () => {
           '<iframe class="iframe-wrapper spotify-iframe"'
         )
     )
-    .replace(/<p>(Assista:|Ouça:)<\/p>/g, '<p class="special-strong">$1</p>')
-    .replace(
-      /<div class="twitter-tweet twitter-tweet-rendered"[^>]*>[\s\S]*?<\/div>/g,
-      ''
-    );
-  console.log(htmlWithStyling); // Exibe o htmlContent no console
+    .replace(/<p>(Assista:|Ouça:)<\/p>/g, '<p class="special-strong">$1</p>');
+
   const cleanedHtmlContent = decode(
     htmlWithStyling.replace(/<em/g, '<em class="alinhado-direita"')
   );
+
+  const tweetBlockquoteRegex =
+    /<blockquote class="twitter-tweet"[^>]*>.*?<\/blockquote>/s;
+  const cleanedHtmlContentWithoutTweet = cleanedHtmlContent.replace(
+    tweetBlockquoteRegex,
+    ''
+  );
+  const tweet = document.querySelector('.twitter-tweet');
+
+  // Altere a largura máxima e a altura
+  if (tweet) {
+    tweet.style.display = 'none';
+  }
+  const tweetBlockquote = document.querySelector('.twitter-tweet');
+
+  // Altere a largura máxima e a altura
+  if (tweetBlockquote) {
+    tweetBlockquote.dataset.width = '500px';
+    tweetBlockquote.dataset.height = '300px';
+  }
+
+  const tweetUrlRegex = /https:\/\/twitter.com\/\w+\/status\/(\d+)/;
+  const match = cleanedHtmlContent.match(tweetUrlRegex);
+  const tweetId = match ? match[1] : null;
+  // Exiba o htmlContent atualizado
+  console.log(cleanedHtmlContent);
+
   // window.addEventListener('scroll', function () {
   //   const element = document.querySelector('.social-share-container');
   //   const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
@@ -165,9 +200,7 @@ const NoticiaDetalhe = () => {
     <div className="noticiaDetalheDiv">
       <div className="MenuContainerHeader">
         <header className="App-headerN">
-          <Link to="/">
-            <img loading="lazy" src={Logo} />
-          </Link>
+          <Link to="/">{!isScrolled && <img loading="lazy" src={Logo} />}</Link>
           <div className="divMenu">
             <div className="menuDiv">
               <Link to="/drops" className="divMenuSpan">
@@ -221,10 +254,10 @@ const NoticiaDetalhe = () => {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                marginTop: '1vw',
+                marginTop: '6px',
               }}
             >
-              <Camera size={'1.5vw'} />
+              <Camera size={'1.5vw'} className="iconDesc" />
               {imagemDescricao && (
                 <p className="descImage">{decode(imagemDescricao)}</p>
               )}
@@ -233,11 +266,10 @@ const NoticiaDetalhe = () => {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                marginBottom: '3vw',
-                marginTop: '1vw',
+                marginBottom: '2vw',
               }}
             >
-              <Timer size={'1.5vw'} />
+              <Timer size={'1.5vw'} className="iconDesc" />
               {noticia.date && (
                 <p className="descImage">
                   Publicado em:{' '}
@@ -253,6 +285,10 @@ const NoticiaDetalhe = () => {
           className="meu-conteudo"
           dangerouslySetInnerHTML={{ __html: cleanedHtmlContent }}
         />
+        <div className="tweet-container">
+          <div className="light">{tweetId && <Tweet id={tweetId} />}</div>
+        </div>
+        <div id="container"></div>
       </div>
       <div className="social-share-container">
         <a
@@ -262,7 +298,7 @@ const NoticiaDetalhe = () => {
         >
           <FacebookLogo
             className="social-link"
-            size={'5vw'}
+            size={'4vw'}
             color={getComputedStyle(document.documentElement).getPropertyValue(
               '--cor-primaria'
             )}
@@ -276,7 +312,7 @@ const NoticiaDetalhe = () => {
         >
           <TwitterLogo
             className="social-link"
-            size={'5vw'}
+            size={'4vw'}
             color={getComputedStyle(document.documentElement).getPropertyValue(
               '--cor-primaria'
             )}
@@ -290,7 +326,7 @@ const NoticiaDetalhe = () => {
         >
           <WhatsappLogo
             className="social-link"
-            size={'5vw'}
+            size={'4vw'}
             color={getComputedStyle(document.documentElement).getPropertyValue(
               '--cor-primaria'
             )}
@@ -322,7 +358,7 @@ const NoticiaDetalhe = () => {
       <div className="containerDivisaoC"> Recomendadas para você </div>
       <div
         className="maisNoticiasR"
-        style={{ display: 'flex', flexDirection: 'row', width: '74vw' }}
+        style={{ display: 'flex', flexDirection: 'row', width: 'auto' }}
       >
         <div className="containerColuna1">
           {posts.slice(0, 3).map((post) => (
@@ -349,6 +385,29 @@ const NoticiaDetalhe = () => {
         </div>
         <div className="containerColuna2">
           {posts.slice(3, 6).map((post) => (
+            <Link
+              to={`/noticia/${post.id}`} // Use o id do post aqui
+              key={post.id}
+              className="post"
+              style={{
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              <img
+                loading="lazy"
+                src={post.yoast_head_json.og_image[0].url}
+                alt="Imagem do post"
+              />
+              <div className="containerSpanFooter">
+                <h4>{decode(post.cartola)}</h4>
+                <h5>{decode(post.title.rendered)}</h5>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="containerColuna3">
+          {posts.slice(6, 9).map((post) => (
             <Link
               to={`/noticia/${post.id}`} // Use o id do post aqui
               key={post.id}

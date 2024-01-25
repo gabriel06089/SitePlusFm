@@ -2,6 +2,8 @@
     /* Estilos para o container principal */
 }
 
+
+
 .MenuContainerHeader {
     /* Estilos para o container do menu e cabeçalho */
 }
@@ -61,11 +63,10 @@
 h4 {
     margin: 0;
     padding: 0;
-
-
+    font-size: 1.8rem;
     color: #541084;
     font-family: 'Rubik', sans-serif;
-    font-size: 1.5vw;
+
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -75,11 +76,8 @@ h5 {
     margin: 0;
     padding: 0;
 
-
-
-
     font-family: 'Rubik', sans-serif;
-    font-size: 1.5vw;
+    font-size: 1.5rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;

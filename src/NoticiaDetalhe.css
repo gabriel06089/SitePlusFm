@@ -3,7 +3,7 @@
 :root {
     /* --cor-primaria: #DC143C;
     --cor-primaria-clara: #E26A6E; */
-
+    --tamanho-base-fonte: 16px;
     --cor-primaria: #541084;
     --cor-primaria-clara: #8D1B94;
     --cor-secundaria: #FFC007;
@@ -13,12 +13,60 @@
     --cor-backgroundEscuro: #FF5733;
 }
 
+
+html {
+    font-size: var(--tamanho-base-fonte);
+}
+
+body {
+    font-size: 1rem;
+    /* Corpo do texto */
+}
+
+h1 {
+    font-size: 2rem;
+    /* Títulos principais */
+}
+
+h2 {
+    font-size: 1.5rem;
+    /* Subtítulos */
+}
+
+h3 {
+    font-size: 1.2rem;
+    /* Títulos de seção */
+}
+
+p {
+    font-size: 1rem;
+    /* Parágrafos */
+}
+
+a {
+    font-size: 1rem;
+    /* Links */
+}
+
+@media (max-width: 600px) {
+
+    body,
+    h1,
+    h2,
+    h3,
+    p,
+    a {
+        font-size: 10px;
+        /* Exemplo de estilo */
+    }
+}
+
 .App-headerN {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--cor-primaria);
-    padding-top: 7vw;
+    padding-top: 5vw;
 
 }
 
@@ -40,9 +88,40 @@
     justify-content: center;
     align-items: center;
     background-color: var(--cor-terciaria);
-    height: 4vw;
+    height: 3vw;
     width: 100%;
     position: relative;
+}
+
+@media (max-width: 600px) {
+    .divMenu {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--cor-terciaria);
+        height: 4vw;
+        width: 100%;
+        position: relative;
+        margin-top: 1vw;
+
+    }
+
+    .divMenuSpan {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--cor-terciaria);
+
+        width: 100%;
+        position: relative;
+        text-decoration: none;
+        font-size: 9px;
+        /* Remove a formatação de link */
+        color: inherit;
+        padding-block: 1vw;
+        /* Faz o link ter a mesma cor do texto ao redor */
+    }
+
 }
 
 .divMenuSpan {
@@ -50,7 +129,7 @@
     justify-content: center;
     align-items: center;
     background-color: var(--cor-terciaria);
-    height: 4vw;
+    height: 2vw;
     width: 100%;
     position: relative;
     text-decoration: none;
@@ -85,10 +164,10 @@
 .App-headerN span {
     color: var(--cor-text);
     font-family: 'Rubik', sans-serif;
-    font-size: calc(2vw + 0.2vw);
+
     /* Ajuste conforme necessário */
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     line-height: normal;
     margin-inline: 1.5vw;
 
@@ -130,7 +209,7 @@
 .ContainerRow.sidebar-open span {
     color: #FFF;
     width: 100%;
-    font-size: 5vw;
+
 
 }
 
@@ -265,7 +344,7 @@
 
     color: var(--cor-primaria);
     font-family: 'Rubik', sans-serif;
-    font-size: calc(2.25vw + 0.2vw);
+
     /* Ajuste conforme necessário */
     font-style: normal;
     font-weight: 400;
@@ -281,14 +360,18 @@
     z-index: 100;
     margin-right: 2vw;
     left: 0vw;
-    top: 3vw;
+    top: 0.7vw;
 
 }
 
 
 @media (min-width: 320px) {
     .App-headerN img {
-        transform: scale(0.8);
+        transform: scale(0.7);
+        -webkit-transform: scale(0.7);
+        -moz-transform: scale(0.7);
+        -ms-transform: scale(0.7);
+        -o-transform: scale(0.7);
     }
 }
 
@@ -309,7 +392,6 @@
 .ContainerRowN span {
     color: #FFF;
     font-family: 'Rubik', sans-serif;
-    font-size: calc(1.25vw + 0.2vw);
     /* Ajuste conforme necessário */
     font-style: normal;
     font-weight: 400;
@@ -330,17 +412,18 @@
     display: flex;
     flex-direction: column;
 
-    width: 74vw;
+    width: 61vw;
     padding: 0 20px;
     padding-left: 15vw;
 }
 
 .noticiasContainer img {
     border-radius: 10px;
-    width: auto;
+
     /* Substitua pelo valor desejado */
     height: 25vw;
-    width: 52vw;
+
+    width: 45vw;
 }
 
 @media (max-width: 600px) {
@@ -368,10 +451,10 @@
 }
 
 h1 {
-    color: var(--cor-text);
+    color: var(--cor-primaria);
 
     font-family: Rubik;
-    font-size: 1, 5vw;
+
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -379,10 +462,10 @@ h1 {
 }
 
 h2 {
-    color: #2B2B2B;
 
+    font-size: 22px;
     font-family: 'Rubik', sans-serif;
-    font-size: 2.1vw;
+
     margin-block: 1.4vw;
     font-style: normal;
     font-weight: 200;
@@ -390,21 +473,19 @@ h2 {
     opacity: 0.99;
 }
 
-@media (min-width: 601px) {
+@media (max-width: 600px) {
     h2 {
-        font-size: 1.5vw;
+        font-size: 9px;
     }
 
-    h1 {
-        font-size: 1.7vw;
-    }
+    h1 {}
 }
 
 h3 {
     color: var(--cor-text);
 
     font-family: 'Rubik', sans-serif;
-    font-size: 3vw;
+
     font-style: normal;
     font-weight: 500;
     line-height: 1.5px;
@@ -415,13 +496,13 @@ h3 {
 .descImage {
     color: #2B2B2B;
     font-family: 'Rubik', sans-serif;
-    font-size: 1.2vw;
+    font-size: 13px;
     font-style: normal;
     font-weight: lighter;
     opacity: 0.7;
     font-weight: 200;
     margin-block: 0.2vw;
-    margin-left: 1vw;
+    margin-left: 0.5vw;
 }
 
 .meu-conteudo {
@@ -467,12 +548,13 @@ h3 {
 
     color: #2B2B2B;
     font-family: 'Rubik', sans-serif;
-    font-size: 2.2vw;
+
     font-style: normal;
     font-weight: 200;
     line-height: normal;
+    padding: 0.5vw;
 
-    margin-top: 1vw;
+
 }
 
 /* Adicione a classe .alinhado-direita ao elemento em que deseja alinhar à direita */
@@ -483,7 +565,7 @@ h3 {
 .meu-conteudo strong {
     color: var(--cor-text);
     font-family: 'Rubik', sans-serif;
-    font-size: 2.1vw;
+
 
     font-style: normal;
     font-weight: 400;
@@ -493,6 +575,7 @@ h3 {
 
 .has-text-align-center {
     text-align: center;
+    margin-block: 0.5vw;
 }
 
 .social-share-container {
@@ -501,7 +584,7 @@ h3 {
     align-items: center;
     gap: 1vw;
     position: absolute;
-    top: 13.8vw;
+    top: 11.8vw;
     left: 8vw;
 }
 
@@ -523,10 +606,35 @@ h3 {
     margin-block: 2vw;
 }
 
+.twitter-iframe {
+    height: 30vw;
+    border-radius: 8px;
+    margin-block: 3vw;
+}
+
 .youtube-iframe {
     height: 30vw;
     border-radius: 8px;
     margin-block: 3vw;
+}
+
+.twitter-tweet {
+    max-width: 100% !important;
+    height: 300px !important;
+}
+
+.iconDesc {
+    weight: 6vw;
+
+    color: var(--cor-primaria);
+}
+
+@media (max-width: 600px) {
+    .iconDesc {
+        weight: 6vw;
+
+        color: var(--cor-primaria);
+    }
 }
 
 @media (max-width: 600px) {
@@ -539,10 +647,10 @@ h3 {
     }
 
     h1 {
-        color: var(--cor-text);
-
+        color: var(--cor-primaria);
+        font-size: 14px;
         font-family: Rubik;
-        font-size: 3.2vw;
+
         font-style: normal;
         font-weight: 400;
         line-height: normal;
@@ -552,12 +660,12 @@ h3 {
     .descImage {
         color: #2B2B2B;
         font-family: 'Rubik', sans-serif;
-        font-size: 1.6vw;
+        font-size: 8px;
         font-style: normal;
         font-weight: lighter;
         opacity: 0.7;
         font-weight: 200;
-        margin-block: 0.2vw;
+        margin-block: 0.1vw;
         margin-left: 1vw;
     }
 }
@@ -577,19 +685,21 @@ h3 {
     color: #FFF;
 
     font-family: 'Rubik', sans-serif;
-    font-size: 3.4vw;
+
 
     font-style: normal;
     font-weight: 700;
     margin-bottom: 7vw;
 }
 
+
+
 .containerDivisao {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 5vw;
-    width: 24vw;
+    height: 3vw;
+    width: 12vw;
     margin-top: 5vw;
     background-color: var(--cor-primaria);
     border-radius: 8px;
@@ -599,7 +709,7 @@ h3 {
     color: #FFF;
 
     font-family: 'Rubik', sans-serif;
-    font-size: 3.4vw;
+
 
     font-style: normal;
     font-weight: 200;
@@ -610,8 +720,8 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 5vw;
-    width: 44vw;
+    height: 3.5vw;
+    width: 24vw;
     margin-top: 2vw;
     background-color: var(--cor-primaria);
     border-radius: 8px;
@@ -621,12 +731,14 @@ h3 {
     color: #FFF;
 
     font-family: 'Rubik', sans-serif;
-    font-size: 3.4vw;
+
 
     font-style: normal;
     font-weight: 200;
     margin-bottom: 3vw;
 }
+
+
 
 @media (max-width: 600px) {
     .containerDivisao {
@@ -634,21 +746,21 @@ h3 {
         justify-content: center;
         align-items: center;
         height: 5vw;
-        width: 24vw;
+        width: 17vw;
         margin-top: 5vw;
         background-color: var(--cor-primaria);
-        border-radius: 2px;
+        border-radius: 8px;
         padding-inline: 1vw;
         margin-left: 6.1vw;
-
         color: #FFF;
-
         font-family: 'Rubik', sans-serif;
-        font-size: 3.4vw;
-
         font-style: normal;
         font-weight: 200;
         margin-bottom: 2vw;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        -ms-border-radius: 8px;
+        -o-border-radius: 8px;
     }
 
     .containerDivisaoC {
@@ -656,17 +768,17 @@ h3 {
         justify-content: center;
         align-items: center;
         height: 5vw;
-        width: 44vw;
+        width: 32vw;
         margin-top: 2vw;
         background-color: var(--cor-primaria);
-        border-radius: 2px;
+        border-radius: 8px;
         padding-inline: 1vw;
         margin-left: 6vw;
 
         color: #FFF;
 
         font-family: 'Rubik', sans-serif;
-        font-size: 3.4vw;
+
 
         font-style: normal;
         font-weight: 200;
@@ -690,7 +802,6 @@ h3 {
     color: #FFF;
 
     font-family: 'Rubik', sans-serif;
-    font-size: 3.4vw;
 
     font-style: normal;
     font-weight: 700;
@@ -729,8 +840,8 @@ h3 {
 }
 
 .noticia img {
-    width: 32vw;
-    height: 22vw;
+    width: 16vw;
+    height: 12vw;
     object-fit: cover;
     margin-right: 10px;
 }
@@ -747,7 +858,7 @@ h3 {
     padding-left: 1vw;
     margin: 1vw 0;
     font-family: 'Rubik', sans-serif;
-    font-size: 2.7vw;
+
     color: var(--cor-primaria);
     font-style: normal;
     font-weight: 400;
@@ -758,10 +869,34 @@ h3 {
     margin: 1vw 0;
 
     font-weight: 200;
-    font-size: 2vw;
+
 
     font-style: normal;
 
+}
+
+@media (max-width: 600px) {
+    .noticia {
+        display: flex;
+        width: 80vw;
+
+        padding: 10px;
+        box-sizing: border-box;
+        margin-left: 3.5vw;
+    }
+
+    .noticia h4 {
+        /* Insira seus estilos aqui */
+        font-size: 13px;
+        /* Exemplo de estilo */
+    }
+
+    .noticia h5 {
+        /* Insira seus estilos aqui */
+        margin: 0.1vw 0;
+        font-size: 11px;
+        /* Exemplo de estilo */
+    }
 }
 
 .noticia a {
@@ -781,9 +916,23 @@ h3 {
     .containerColuna1 {
         margin-left: 5.78vw;
     }
+
+    .noticia img {
+        width: 36vw;
+        height: 24vw;
+        object-fit: cover;
+        margin-right: 10px;
+    }
 }
 
 .containerColuna2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 85%;
+}
+
+.containerColuna3 {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -800,8 +949,8 @@ h3 {
 
     margin: 0 0;
     font-family: 'Rubik', sans-serif;
-    font-size: 2vw;
-    color: var(--cor-text);
+
+    color: var(--cor-primaria);
     font-style: normal;
     font-weight: 400;
     width: 85%;
@@ -811,7 +960,7 @@ h3 {
 
     margin: 0 0;
     font-family: 'Rubik', sans-serif;
-    font-size: 1.3vw;
+
 
     font-style: normal;
     font-weight: 200;
@@ -819,13 +968,21 @@ h3 {
     height: 4vw;
     opacity: 0.8;
     margin-top: 0.5vw;
-
+    margin-bottom: 4vw;
 }
 
 .containerColuna1 img,
 .containerColuna2 img {
-    width: 31vw;
-    height: 20vw;
+    width: 18vw;
+    height: 12vw;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 0.5vw;
+}
+
+.containerColuna3 img {
+    width: 18vw;
+    height: 12vw;
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 0.5vw;
@@ -869,25 +1026,38 @@ h3 {
     border-left: 5px solid #ccc;
     padding-left: 20px;
     color: #666;
+    display: none;
 }
 
-@media (min-width: 1440px) {
+.tweet-container {
+    width: 100%;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+
+
+}
+
+
+
+@media (min-width: 601px) {
     .App-header img:first-child {
         margin-right: 0vw;
         margin-left: -1vw;
         position: absolute;
-        top: 3.5vw;
-        left: 4.7vw;
-        z-index: 100;
+        top: -4.7vw;
+        left: -24vw;
+        z-index: 999;
         width: auto;
-        height: 8vw;
+        height: 9vw;
+        align-self: center
     }
 
     .App-header {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-top: 3vw;
+        padding-top: 1vw;
     }
 
 
@@ -895,26 +1065,71 @@ h3 {
     .ContainerRow {
         margin-left: 4vw;
         display: flex;
-        justify-content: space-around;
+        justify-content: flex-start;
+        /* Alinha os itens ao início do contêiner */
         align-items: center;
-        width: 95%;
+        width: 25vw;
+        padding-left: 0.5vw;
+        /* Reduz o padding para aproximar os itens */
         background-color: white;
         margin-bottom: 1vw;
         padding-bottom: 0.4vw;
-
-        border-bottom-left-radius: 24px;
+        border-bottom-left-radius: 12px;
+        position: fixed;
+        top: 4.7vw;
+        left: 24.7vw;
+        z-index: 99;
+        height: 2.0vw;
     }
 
     .ContainerRow span {
-        margin-top: 0.8vw;
+        margin-top: 0.5vw;
 
         color: var(--cor-primaria);
         font-family: 'Rubik', sans-serif;
-        font-size: calc(1.25vw + 0.2vw);
+
         font-style: normal;
         font-weight: 400;
         line-height: normal;
 
+
+    }
+
+    .ContainerRowSpan {
+        margin-top: 0.5vw;
+        width: 2vw;
+        color: var(--cor-primaria);
+        font-family: 'Rubik', sans-serif;
+        font-size: 2px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        position: relative;
+    }
+
+    .ContainerRowSpan1 {
+        margin-top: 0.5vw;
+        width: 2vw;
+        color: var(--cor-primaria);
+        font-family: 'Rubik', sans-serif;
+        font-size: 2px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        position: relative;
+        left: -3vw;
+    }
+
+    .ContainerRowSpanNone {
+        margin-top: 0.5vw;
+
+        color: var(--cor-primaria);
+        font-family: 'Rubik', sans-serif;
+        font-size: 2px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        display: none;
     }
 
     .InnerContainerRow {
@@ -922,35 +1137,41 @@ h3 {
         justify-content: center;
         align-items: center;
         width: auto;
-        padding-inline: 2vw;
+        padding-inline: 0.5vw;
         margin-left: 2vw;
         gap: 1vw;
-        margin-top: 2vw;
+        margin-top: 1.5vw;
         background-color: var(--cor-primaria);
-        height: 4vw;
-        position: absolute;
-        right: 12vw;
-        top: 4.22vw;
-        border-bottom-left-radius: 24px;
-        border-bottom-right-radius: 24px;
-        /* border: 2px solid white; */
-        /* Adiciona uma borda branca fina */
+        height: 2.6vw;
+        position: fixed;
+        right: 29.5vw;
+        top: 3.18vw;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        border: 2px solid white;
+        
         border-top: none;
 
+        z-index: 12;
     }
 
     .App-Player {
-        transform: scale(1.1);
-        top: 0vw;
+        transform: scale(0.9);
+        top: -0.5vw;
         margin-inline: 2vw;
-        width: 91%;
-        height: 6vw;
-        /* border: 2px solid white; */
-        /* Adiciona uma borda branca fina */
+        width: 152vw;
+        height: 5.5vw;
+        /*border: 2px solid white;
+        */
+        /*Adicionaumabordabrancafina*/
         border-top: none;
-        /* Remove a borda do topo */
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
     }
 
+    .App-Player.scrolled {
+        width: auto;
+    }
 
 
     @media (min-width: 1440px) {
@@ -960,9 +1181,10 @@ h3 {
             position: fixed;
             top: 3.5vw;
             left: 4.7vw;
-            z-index: 115;
+            z-index: 51;
             width: auto;
             height: 8vw;
+            display: none;
         }
     }
 
@@ -986,7 +1208,7 @@ h3 {
         z-index: 6;
         color: white;
         font-family: 'Rubik', sans-serif;
-        font-size: 1.2vw;
+
         font-style: normal;
         font-weight: 400;
         line-height: normal;
@@ -1028,7 +1250,7 @@ h3 {
     .dropsNoArContainer {
         color: var(--cor-primaria);
         font-family: 'Rubik', sans-serif;
-        font-size: 1vw;
+
         font-style: normal;
         font-weight: 400;
         line-height: normal;
@@ -1052,7 +1274,7 @@ h3 {
 
     .dropsFrontCardContainerSpan {
         font-family: 'Rubik', sans-serif;
-        font-size: calc(1.5vw + 0.2vw);
+
         font-weight: 500;
         color: white;
         text-align: center;
@@ -1083,5 +1305,69 @@ h3 {
         left: 1vw;
         top: -2vw;
         position: relative;
+    }
+
+    .containerColuna1 img,
+    .containerColuna2 img,
+    .containerColuna3 img {
+        width: 26vw;
+        height: 18vw;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 0.5vw;
+    }
+
+    .containerSpanFooter h4 {
+
+        margin: 0 0;
+        font-family: 'Rubik', sans-serif;
+        font-size: 12px;
+        color: var(--cor-primaria);
+        font-style: normal;
+        font-weight: 400;
+        width: 85%;
+    }
+
+    .containerSpanFooter h5 {
+
+        margin: 0 0;
+        font-family: 'Rubik', sans-serif;
+
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 200;
+        width: 85%;
+        height: 4vw;
+        opacity: 0.8;
+        margin-top: 0.5vw;
+        margin-bottom: 12vw;
+    }
+}
+
+@media (max-width: 600px) {
+    .containerSpanFooter h4 {
+
+        margin: 0 0;
+        font-family: 'Rubik', sans-serif;
+        font-size: 8px;
+        color: var(--cor-primaria);
+        font-style: normal;
+        font-weight: 400;
+        width: 85%;
+    }
+
+    .containerSpanFooter h5 {
+
+        margin: 0 0;
+        font-family: 'Rubik', sans-serif;
+
+        font-size: 9.8px;
+        font-style: normal;
+        font-weight: 200;
+        width: 85%;
+        height: 4vw;
+        opacity: 0.8;
+        margin-top: 0.5vw;
+        margin-bottom: 12vw;
     }
 }

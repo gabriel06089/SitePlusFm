@@ -250,6 +250,7 @@ const Player = () => {
   const isLongText = text.length > 46;
   const location = useLocation();
   const isHomePage = location.pathname === '/';
+  const isContatoPage = location.pathname === '/contato';
   const naTelaNoticias =
     location.pathname.startsWith('/noticia/') ||
     location.pathname.startsWith('/drops'); // Ajuste para o caminho correto
@@ -258,7 +259,11 @@ const Player = () => {
       {!naTelaNoticias && (
         <img src={Logo} alt="Logo da Plus FM" className="App-headerImg3" />
       )}
-      <div className={`App-Player ${isHomePage ? 'home' : ''}`}>
+      <div
+        className={`App-Player ${isHomePage ? 'home' : ''} ${
+          isContatoPage ? 'contato-page' : ''
+        }`}
+      >
         <div
           style={{
             display: 'flex',
