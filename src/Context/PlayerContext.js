@@ -19,19 +19,19 @@ export const PlayerProvider = ({ children }) => {
 
   const radios = [
     {
-      url: 'https://webradio.amsolution.com.br/radio/8180/aracati',
-      title: 'Plus Aracati',
-      isPlaying: false,
-      frequency: '98.1',
-      width: '9vw',
-      svgClass: 'aracati',
-    },
-    {
       url: 'https://webradio.amsolution.com.br/radio/8020/plus',
       title: 'Plus FM',
       isPlaying: false,
       width: '6vw',
       svgClass: 'fortaleza',
+    },
+    {
+      url: 'https://webradio.amsolution.com.br/radio/8030/sobral',
+      title: 'Plus Sobral',
+      isPlaying: false,
+      frequency: '105.1',
+      width: '8.5vw',
+      svgClass: 'sobral',
     },
     {
       url: 'https://webradio.amsolution.com.br/radio/8140/cariri',
@@ -41,13 +41,23 @@ export const PlayerProvider = ({ children }) => {
       width: '8vw',
       svgClass: 'cariri',
     },
+
     {
-      url: 'https://webradio.amsolution.com.br/radio/8110/catarina',
-      title: 'Plus Catarina',
+      url: 'https://webradio.amsolution.com.br/radio/8180/aracati',
+      title: 'Plus Aracati',
+      isPlaying: false,
+      frequency: '98.1',
+      width: '9vw',
+      svgClass: 'aracati',
+    },
+
+    {
+      url: 'https://webradio.amsolution.com.br/radio/8160/cascavel',
+      title: 'Plus Cascavel',
       isPlaying: false,
       frequency: '106.1',
       width: '10vw',
-      svgClass: 'catarina',
+      svgClass: 'cascavel',
     },
     {
       url: 'https://webradio.amsolution.com.br/radio/8120/crateus',
@@ -57,14 +67,7 @@ export const PlayerProvider = ({ children }) => {
       width: '9vw',
       svgClass: 'crateus',
     },
-    {
-      url: 'https://webradio.amsolution.com.br/radio/8160/cascavel',
-      title: 'Plus Cascavel',
-      isPlaying: false,
-      frequency: '106.1',
-      width: '10vw',
-      svgClass: 'cascavel',
-    },
+
     {
       url: 'https://webradio.amsolution.com.br/radio/8070/iguatu',
       title: 'Plus Iguatu',
@@ -96,14 +99,7 @@ export const PlayerProvider = ({ children }) => {
       width: '14vw',
       svgClass: 'santaquiteira',
     },
-    {
-      url: 'https://webradio.amsolution.com.br/radio/8030/sobral',
-      title: 'Plus Sobral',
-      isPlaying: false,
-      frequency: '105.1',
-      width: '8.5vw',
-      svgClass: 'sobral',
-    },
+
     {
       url: 'https://webradio.amsolution.com.br/radio/8090/redencao',
       title: 'Plus Redenção',
@@ -111,6 +107,14 @@ export const PlayerProvider = ({ children }) => {
       frequency: '98.7',
       width: '11vw',
       svgClass: 'redencao',
+    },
+    {
+      url: 'https://webradio.amsolution.com.br/radio/8110/catarina',
+      title: 'Plus Catarina',
+      isPlaying: false,
+      frequency: '106.1',
+      width: '10vw',
+      svgClass: 'catarina',
     },
   ];
   const [selectedRadio, setSelectedRadio] = useState(

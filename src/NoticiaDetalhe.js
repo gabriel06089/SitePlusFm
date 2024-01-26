@@ -272,7 +272,6 @@ const NoticiaDetalhe = () => {
               <Timer size={'1.5vw'} className="iconDesc" />
               {noticia.date && (
                 <p className="descImage">
-                  Publicado em:{' '}
                   {format(new Date(noticia.date), 'dd/MM/yyyy HH:mm', {
                     locale: ptBR,
                   })}

@@ -170,7 +170,7 @@ a {
     font-weight: 400;
     line-height: normal;
     margin-inline: 1.5vw;
-
+    font-size: 2.3rem;
 }
 
 .App-header {
@@ -265,6 +265,17 @@ a {
         object-fit: cover;
     }
 
+    .App-headerN span {
+        color: var(--cor-text);
+        font-family: 'Rubik', sans-serif;
+
+        /* Ajuste conforme necessário */
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-inline: 1.5vw;
+        font-size: 0.7rem;
+    }
 
 }
 
@@ -421,7 +432,7 @@ a {
     border-radius: 10px;
 
     /* Substitua pelo valor desejado */
-    height: 25vw;
+    height: auto;
 
     width: 45vw;
 }
@@ -459,14 +470,17 @@ h1 {
     font-weight: 400;
     line-height: normal;
     padding-top: 3vw;
+    font-size: 56px;
+    letter-spacing: -3.08px;
 }
 
 h2 {
 
-    font-size: 22px;
+    font-size: 20px;
     font-family: 'Rubik', sans-serif;
 
-    margin-block: 1.4vw;
+    letter-spacing: -0.6px;
+    margin-block: 0.7vw;
     font-style: normal;
     font-weight: 200;
     line-height: normal;
@@ -496,7 +510,7 @@ h3 {
 .descImage {
     color: #2B2B2B;
     font-family: 'Rubik', sans-serif;
-    font-size: 13px;
+    font-size: 1.17rem;
     font-style: normal;
     font-weight: lighter;
     opacity: 0.7;
@@ -548,19 +562,34 @@ h3 {
 
     color: #2B2B2B;
     font-family: 'Rubik', sans-serif;
-
+    letter-spacing: -0.6px;
     font-style: normal;
     font-weight: 200;
     line-height: normal;
     padding: 0.5vw;
+    font-size: 20px;
+    line-height: 2.3rem;
+}
 
+.meu-conteudo .alinhado-direita {
+    text-align: right;
 
+    font-size: 1.5rem;
+}
+
+@media (max-width: 600px) {
+    .meu-conteudo p {
+        font-size: 1rem;
+    }
+
+    .meu-conteudo .alinhado-direita {
+        text-align: right;
+        font-size: 0.8rem;
+    }
 }
 
 /* Adicione a classe .alinhado-direita ao elemento em que deseja alinhar à direita */
-.meu-conteudo .alinhado-direita {
-    text-align: right;
-}
+
 
 .meu-conteudo strong {
     color: var(--cor-text);
@@ -586,6 +615,7 @@ h3 {
     position: absolute;
     top: 11.8vw;
     left: 8vw;
+
 }
 
 .social-share-container.fixed {
@@ -650,7 +680,7 @@ h3 {
         color: var(--cor-primaria);
         font-size: 14px;
         font-family: Rubik;
-
+        letter-spacing: -.58px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
@@ -699,13 +729,13 @@ h3 {
     justify-content: center;
     align-items: center;
     height: 3vw;
-    width: 12vw;
+    width: 16vw;
     margin-top: 5vw;
     background-color: var(--cor-primaria);
     border-radius: 8px;
     padding-inline: 1vw;
     margin-left: 4.1vw;
-
+    font-size: 2.2rem;
     color: #FFF;
 
     font-family: 'Rubik', sans-serif;
@@ -721,13 +751,13 @@ h3 {
     justify-content: center;
     align-items: center;
     height: 3.5vw;
-    width: 24vw;
+    width: 37vw;
     margin-top: 2vw;
     background-color: var(--cor-primaria);
     border-radius: 8px;
     padding-inline: 1vw;
     margin-left: 4vw;
-
+    font-size: 3rem;
     color: #FFF;
 
     font-family: 'Rubik', sans-serif;
@@ -746,7 +776,7 @@ h3 {
         justify-content: center;
         align-items: center;
         height: 5vw;
-        width: 17vw;
+        width: 27vw;
         margin-top: 5vw;
         background-color: var(--cor-primaria);
         border-radius: 8px;
@@ -761,6 +791,7 @@ h3 {
         -moz-border-radius: 8px;
         -ms-border-radius: 8px;
         -o-border-radius: 8px;
+        font-size: 0.9rem;
     }
 
     .containerDivisaoC {
@@ -768,7 +799,7 @@ h3 {
         justify-content: center;
         align-items: center;
         height: 5vw;
-        width: 32vw;
+        width: 48vw;
         margin-top: 2vw;
         background-color: var(--cor-primaria);
         border-radius: 8px;
@@ -783,6 +814,7 @@ h3 {
         font-style: normal;
         font-weight: 200;
         margin-bottom: 3vw;
+        font-size: 0.9rem;
     }
 }
 
@@ -858,7 +890,7 @@ h3 {
     padding-left: 1vw;
     margin: 1vw 0;
     font-family: 'Rubik', sans-serif;
-
+    font-size: 3rem;
     color: var(--cor-primaria);
     font-style: normal;
     font-weight: 400;
@@ -867,7 +899,7 @@ h3 {
 .noticia h5 {
     padding-left: 1vw;
     margin: 1vw 0;
-
+    font-size: 2.2rem;
     font-weight: 200;
 
 
@@ -949,7 +981,7 @@ h3 {
 
     margin: 0 0;
     font-family: 'Rubik', sans-serif;
-
+    font-size: 3.2rem;
     color: var(--cor-primaria);
     font-style: normal;
     font-weight: 400;
@@ -960,7 +992,7 @@ h3 {
 
     margin: 0 0;
     font-family: 'Rubik', sans-serif;
-
+    font-size: 2.4rem;
 
     font-style: normal;
     font-weight: 200;
@@ -973,7 +1005,7 @@ h3 {
 
 .containerColuna1 img,
 .containerColuna2 img {
-    width: 18vw;
+    width: 23vw;
     height: 12vw;
     object-fit: cover;
     border-radius: 10px;
@@ -981,7 +1013,7 @@ h3 {
 }
 
 .containerColuna3 img {
-    width: 18vw;
+    width: 23vw;
     height: 12vw;
     object-fit: cover;
     border-radius: 10px;
@@ -1149,7 +1181,7 @@ h3 {
         border-bottom-left-radius: 12px;
         border-bottom-right-radius: 12px;
         border: 2px solid white;
-        
+
         border-top: none;
 
         z-index: 12;

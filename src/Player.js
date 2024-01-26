@@ -251,6 +251,9 @@ const Player = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   const isContatoPage = location.pathname === '/contato';
+  const isPrincipiosEditoriaisPage =
+    location.pathname === '/principios-editoriais';
+  const isSobrePage = location.pathname === '/sobre';
   const naTelaNoticias =
     location.pathname.startsWith('/noticia/') ||
     location.pathname.startsWith('/drops'); // Ajuste para o caminho correto
@@ -262,6 +265,8 @@ const Player = () => {
       <div
         className={`App-Player ${isHomePage ? 'home' : ''} ${
           isContatoPage ? 'contato-page' : ''
+        } ${isPrincipiosEditoriaisPage ? 'principios-editoriais-page' : ''} ${
+          isSobrePage ? 'sobre-page' : ''
         }`}
       >
         <div

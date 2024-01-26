@@ -1,0 +1,23 @@
+.manutencao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.manutencaoLogo {
+    width: 170vw;
+    height: auto;
+    object-fit: fill;
+}
+
+@media (max-width: 600px) {
+    .manutencaoLogo {
+        padding-top: 40vw;
+        width: auto;
+        height: 50rem;
+        object-fit: fill;
+    }
+}

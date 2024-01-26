@@ -228,7 +228,7 @@ function App() {
     const fetchNews = async () => {
       try {
         const response = await fetch(
-          'https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=13&tags_exclude=2007'
+          'https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=3&tags_exclude=2007'
         );
         const data = await response.json();
 

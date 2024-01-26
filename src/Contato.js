@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Contato.css'; // Importe o arquivo CSS
 import InputMask from 'react-input-mask';
+import { CaretCircleLeft } from 'phosphor-react';
+import { Navigate, useNavigate } from 'react-router-dom';
 const Contato = () => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
@@ -47,6 +49,7 @@ const Contato = () => {
     const mailtoLink = `mailto:gabrieleemailpessoal02@gmail.com?subject=Contato do site&body=Nome: ${nome}%0DEmail: ${email}%0DTelefone: ${telefone}%0DMensagem: ${mensagem}`;
     window.location.href = mailtoLink;
   };
+  const navigate = useNavigate();
   return (
     <div className="contatoContainer">
       <img
@@ -54,57 +57,80 @@ const Contato = () => {
         alt="Imagem genérica"
         className="contatoImagem"
       />
-      <h1 className="contatoH1">
-        Para falar com a equipe da Plus FM, basta preencher o formulário abaixo.
-        Responderemos, em breve, via e-mail.
-      </h1>
-      <form className="contatoForm" onSubmit={handleSubmit}>
-        <label className="contatoLabel">
-          Nome:
-          <input
-            type="text"
-            name="nome"
-            placeholder="Seu Nome Completo"
-            className="contatoInput"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
+      <div className="containerRowColumn">
+        {' '}
+        <div className="divColumn">
+          <h1 className="contatoH1">
+            Para falar com a equipe da Plus FM, basta preencher o formulário
+            abaixo. Responderemos, em breve, via e-mail.
+          </h1>
+          <form className="contatoForm" onSubmit={handleSubmit}>
+            <label className="contatoLabel">
+              Nome:
+              <input
+                type="text"
+                name="nome"
+                placeholder="Seu nome completo."
+                className="contatoInput"
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+              />
+            </label>
+            <label className="contatoLabel">
+              Email:
+              <input
+                type="email"
+                name="email"
+                placeholder="Ex: exemplo@email.com"
+                className="contatoInput"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </label>
+            <label className="contatoLabel">
+              Telefone:
+              <InputMask
+                mask="(99) 99999-9999"
+                type="tel"
+                name="telefone"
+                placeholder="Ex: (00) 00000-0000"
+                className="contatoInput"
+                value={telefone}
+                onChange={(e) => setTelefone(e.target.value)}
+              />
+            </label>
+            <label className="contatoLabel">
+              Mensagem:
+              <textarea
+                name="mensagem"
+                placeholder="Digite sua mensagem aqui"
+                className="contatoTextarea"
+                value={mensagem}
+                onChange={(e) => setMensagem(e.target.value)}
+              />
+            </label>
+            <input type="submit" value="Enviar" className="contatoSubmit" />
+          </form>
+        </div>{' '}
+        <div className="contatoInfoContainer">
+          <div className="contatoInfo1">
+            <h1>Comercial</h1> <h2>E-mail</h2>
+            <span>comercial@plusfm.com.br</span>
+          </div>
+          <div className="contatoInfo1">
+            <h1>Redação</h1> <h2>E-mail</h2>
+            <span>redacao@plusfm.com.br </span>
+          </div>
+        </div>
+      </div>
+      <div className="contatoBackButton">
+        <div className="posicaoAbsolutaDireita">
+          <CaretCircleLeft
+            className="caretCircleLeftStyle"
+            onClick={() => navigate(-1)}
           />
-        </label>
-        <label className="contatoLabel">
-          Email:
-          <input
-            type="email"
-            name="email"
-            placeholder="Ex: exemplo@email.com"
-            className="contatoInput"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label className="contatoLabel">
-          Telefone:
-          <InputMask
-            mask="(99) 99999-9999"
-            type="tel"
-            name="telefone"
-            placeholder="Ex: (00) 00000-0000"
-            className="contatoInput"
-            value={telefone}
-            onChange={(e) => setTelefone(e.target.value)}
-          />
-        </label>
-        <label className="contatoLabel">
-          Mensagem:
-          <textarea
-            name="mensagem"
-            placeholder="Digite sua mensagem aqui"
-            className="contatoTextarea"
-            value={mensagem}
-            onChange={(e) => setMensagem(e.target.value)}
-          />
-        </label>
-        <input type="submit" value="Enviar" className="contatoSubmit" />
-      </form>
+        </div>
+      </div>
     </div>
   );
 };

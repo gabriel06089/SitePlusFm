@@ -512,7 +512,40 @@ a {
   z-index: 50;
 }
 
+.App-Player.principios-editoriais-page {
+  /* Adicione suas estilizações aqui */
+  top: 1.8vw;
+  transform: scale(1.7);
+  height: 8vw;
+  padding-top: 1vw;
+  /* Exemplo */
+}
+
+.App-Player.sobre-page {
+  /*Adicionesuasestilizaçõesaqui*/top: 0.8vw;
+  transform: scale(1.4);
+  height: 6vw;
+  padding-top: 0.3vw;
+  -webkit-transform: scale(1.4);
+  -moz-transform: scale(1.4);
+  -ms-transform: scale(1.4);
+  -o-transform: scale(1.4);
+}
+
+
 @media (max-width: 600px) {
+  .App-Player.sobre-page {
+    /*Adicionesuasestilizaçõesaqui*/
+    top: 1.8vw;
+    transform: scale(1.7);
+    height: 8vw;
+    padding-top: 1vw;
+    -webkit-transform: scale(1.7);
+    -moz-transform: scale(1.7);
+    -ms-transform: scale(1.7);
+    -o-transform: scale(1.7);
+  }
+
   .App-header img:first-child {
     height: 14vw;
     left: vw;
@@ -541,6 +574,8 @@ a {
     padding-top: 1vw;
     /* Exemplo */
   }
+
+
 
   .App-Player.home {
     top: 1.8vw;
@@ -2050,7 +2085,7 @@ a {
   .center-divP-bigode {
     color: var(--cor-primaria);
     font-family: 'Rubik', sans-serif;
-    font-size: 1vw;
+    font-size: 0.8vw;
     margin-inline: 1vw;
     text-align: left;
     font-weight: 200;
@@ -2097,7 +2132,7 @@ a {
     font-size: 1.2vw;
     margin-inline: 2vw;
     text-align: center;
-    margin: 0w;
+    margin: 0vw;
     margin-top: 3vw;
     padding-top: 2vw;
     padding-bottom: 8px;
@@ -2113,7 +2148,7 @@ a {
     height: 98%;
     justify-content: center;
     left: 105%;
-    padding-block: 1vw;
+    padding-block: 1.5vw;
     position: absolute;
     transform: translate(-0%, -25%);
     width: 120%;
@@ -2215,7 +2250,7 @@ a {
 .center-divP {
   color: var(--cor-primaria);
   font-family: 'Rubik', sans-serif;
-  font-size: 16px;
+  font-size: 1.6rem;
   margin-inline: 1vw;
   text-align: left;
   font-weight: 400;
@@ -2700,7 +2735,7 @@ a {
 
 .textoBotao {
   color: var(--cor-primaria);
-  font-size: 1.2rem;
+  font-size: 2.2rem;
   font-weight: 400;
   font-family: 'Rubik', sans-serif;
 }

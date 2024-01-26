@@ -8,7 +8,7 @@ import Drops from '../Drops';
 import Sobre from '../Sobre';
 import PrincipiosEditoriais from '../PrincipiosEditoriais';
 import Contato from '../Contato';
-
+import Manutencao from '../Manutencao';
 import { PlayerProvider } from '../Context/PlayerContext';
 
 const RoutesComponent = () => {
@@ -16,6 +16,15 @@ const RoutesComponent = () => {
     <PlayerProvider>
       <Router>
         <Routes>
+          <Route
+            path="/manutencao"
+            element={
+              <>
+                <Player />
+                <Manutencao />
+              </>
+            }
+          />
           <Route
             path="/"
             element={
