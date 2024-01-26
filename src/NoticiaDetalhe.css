@@ -66,7 +66,7 @@ a {
     justify-content: center;
     align-items: center;
     background-color: var(--cor-primaria);
-    padding-top: 5vw;
+    padding-top: -0vw;
 
 }
 
@@ -99,10 +99,10 @@ a {
         justify-content: center;
         align-items: center;
         background-color: var(--cor-terciaria);
-        height: 4vw;
+        height: 9vw;
         width: 100%;
         position: relative;
-        margin-top: 1vw;
+        margin-top: 21vw;
 
     }
 
@@ -274,7 +274,7 @@ a {
         font-weight: 400;
         line-height: normal;
         margin-inline: 1.5vw;
-        font-size: 0.7rem;
+        font-size: 1rem;
     }
 
 }
@@ -440,13 +440,13 @@ a {
 @media (max-width: 600px) {
     .noticiasContainer {
 
-        width: 83vw;
-
+        width: 100%;
+        padding-inline: 2vw;
     }
 
     .noticiasContainer img {
         border-radius: 10px;
-        width: auto;
+        width: 100%;
         /* Substitua pelo valor desejado */
         height: auto;
     }
@@ -456,7 +456,7 @@ a {
 @media (max-width: 329px) {
     .noticiasContainer {
 
-        width: 70vw;
+        width: 100%;
 
     }
 }
@@ -485,11 +485,17 @@ h2 {
     font-weight: 200;
     line-height: normal;
     opacity: 0.99;
+
 }
 
 @media (max-width: 600px) {
     h2 {
         font-size: 9px;
+        font-size: 20px;
+        line-height: 30px;
+        letter-spacing: -0.6px;
+        padding-inline: 1vw;
+        padding-block: 1.5vw;
     }
 
     h1 {}
@@ -577,6 +583,17 @@ h3 {
     font-size: 1.5rem;
 }
 
+.social-share-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1vw;
+    position: absolute;
+    top: 11.8vw;
+    left: 8vw;
+
+}
+
 @media (max-width: 600px) {
     .meu-conteudo p {
         font-size: 1rem;
@@ -585,6 +602,23 @@ h3 {
     .meu-conteudo .alinhado-direita {
         text-align: right;
         font-size: 0.8rem;
+    }
+
+    .meu-conteudo p {
+        font-size: 20px;
+        color: #2B2B2B;
+        font-family: 'Rubik', sans-serif;
+        letter-spacing: -0.6px;
+        font-style: normal;
+        font-weight: 200;
+        line-height: normal;
+        padding: 0.5vw;
+        line-height: 30px;
+        letter-spacing: -0.6px;
+    }
+
+    .social-share-container {
+        display: none;
     }
 }
 
@@ -607,16 +641,7 @@ h3 {
     margin-block: 0.5vw;
 }
 
-.social-share-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1vw;
-    position: absolute;
-    top: 11.8vw;
-    left: 8vw;
 
-}
 
 .social-share-container.fixed {
     position: fixed;
@@ -661,9 +686,19 @@ h3 {
 
 @media (max-width: 600px) {
     .iconDesc {
-        weight: 6vw;
-
+        font-size: 0.8rem;
         color: var(--cor-primaria);
+    }
+
+    .meu-conteudo a {
+        color: var(--cor-primaria);
+        font-family: 'Rubik', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 107.835%;
+        text-decoration-line: none;
+        text-align: center;
+        font-size: 18px;
     }
 }
 
@@ -678,25 +713,43 @@ h3 {
 
     h1 {
         color: var(--cor-primaria);
-        font-size: 14px;
+        font-size: 40px;
         font-family: Rubik;
-        letter-spacing: -.58px;
+        letter-spacing: -3.08px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
         padding-top: 3vw;
+        line-height: 45.6px;
+        width: 100%;
+        padding-inline: 0.2rem;
     }
 
     .descImage {
         color: #2B2B2B;
         font-family: 'Rubik', sans-serif;
-        font-size: 8px;
+        font-size: 0.8rem;
         font-style: normal;
         font-weight: lighter;
         opacity: 0.7;
         font-weight: 200;
         margin-block: 0.1vw;
         margin-left: 1vw;
+    }
+}
+
+@media (max-width: 466px) {
+    h1 {
+        color: var(--cor-primaria);
+        font-size: 26px;
+        font-family: Rubik;
+        letter-spacing: -2.08px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        padding-top: 3vw;
+        line-height: 31.6px;
+        width: 100%;
     }
 }
 

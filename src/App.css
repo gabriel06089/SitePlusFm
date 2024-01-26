@@ -95,9 +95,6 @@ a {
     /* ou qualquer outro valor que você deseja */
   }
 }
-
-
-
 .App {
   align-items: center;
   display: flex;
@@ -522,7 +519,20 @@ a {
 }
 
 .App-Player.sobre-page {
-  /*Adicionesuasestilizaçõesaqui*/top: 0.8vw;
+  /*Adicionesuasestilizaçõesaqui*/
+  top: 0.8vw;
+  transform: scale(1.4);
+  height: 6vw;
+  padding-top: 0.3vw;
+  -webkit-transform: scale(1.4);
+  -moz-transform: scale(1.4);
+  -ms-transform: scale(1.4);
+  -o-transform: scale(1.4);
+}
+
+.App-Player.noticias-page {
+  /*Adicionesuasestilizaçõesaqui*/
+  top: 0.8vw;
   transform: scale(1.4);
   height: 6vw;
   padding-top: 0.3vw;
@@ -545,6 +555,17 @@ a {
     -ms-transform: scale(1.7);
     -o-transform: scale(1.7);
   }
+
+  .App-Player.noticias-page {
+    top: 4vw;
+    transform: scale(2);
+    height: 8vw;
+    padding-top: 1vw;
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+}
 
   .App-header img:first-child {
     height: 14vw;
@@ -645,7 +666,7 @@ a {
   display: flex;
   flex-direction: column;
   width: auto;
-  max-width: 32vw;
+  max-width: 22vw;
 }
 
 @media (min-width: 1024px) {

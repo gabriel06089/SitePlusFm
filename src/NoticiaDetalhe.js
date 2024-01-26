@@ -257,19 +257,20 @@ const NoticiaDetalhe = () => {
                 marginTop: '6px',
               }}
             >
-              <Camera size={'1.5vw'} className="iconDesc" />
+              <Camera className="iconDesc" />
               {imagemDescricao && (
                 <p className="descImage">{decode(imagemDescricao)}</p>
               )}
             </div>
+
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                marginBottom: '2vw',
+                marginBottom: '1rem',
               }}
             >
-              <Timer size={'1.5vw'} className="iconDesc" />
+              <Timer className="iconDesc" />
               {noticia.date && (
                 <p className="descImage">
                   {format(new Date(noticia.date), 'dd/MM/yyyy HH:mm', {
@@ -280,6 +281,16 @@ const NoticiaDetalhe = () => {
             </div>
           </>
         )}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            height: '1px',
+            backgroundColor: 'black',
+            marginBottom: '2rem',
+            opacity: '0.4',
+          }}
+        />
         <div
           className="meu-conteudo"
           dangerouslySetInnerHTML={{ __html: cleanedHtmlContent }}

@@ -267,7 +267,7 @@ const Player = () => {
           isContatoPage ? 'contato-page' : ''
         } ${isPrincipiosEditoriaisPage ? 'principios-editoriais-page' : ''} ${
           isSobrePage ? 'sobre-page' : ''
-        }`}
+        } ${naTelaNoticias ? 'noticias-page' : ''}`}
       >
         <div
           style={{
