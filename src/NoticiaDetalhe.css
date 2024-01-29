@@ -68,6 +68,7 @@ a {
     background-color: var(--cor-primaria);
     padding-top: -0vw;
 
+
 }
 
 .containerImgLogo {
@@ -102,7 +103,7 @@ a {
         height: 9vw;
         width: 100%;
         position: relative;
-        margin-top: 21vw;
+        margin-top: 15vw;
 
     }
 
@@ -121,6 +122,7 @@ a {
         padding-block: 1vw;
         /* Faz o link ter a mesma cor do texto ao redor */
     }
+
 
 }
 
@@ -366,23 +368,29 @@ a {
 
 .App-headerN img {
     position: absolute;
-    width: 24vw;
-    height: 11vw;
+    width: 18vw;
+    height: auto;
     z-index: 100;
     margin-right: 2vw;
-    left: 0vw;
-    top: 0.7vw;
+    left: 3vw;
+    top: 21.5vw;
+    display: none;
 
 }
 
 
-@media (min-width: 320px) {
-    .App-headerN img {
-        transform: scale(0.7);
-        -webkit-transform: scale(0.7);
-        -moz-transform: scale(0.7);
-        -ms-transform: scale(0.7);
-        -o-transform: scale(0.7);
+
+
+
+@media (max-width: 500px) {
+    .App-headerN span {
+        color: var(--cor-text);
+        font-family: 'Rubik', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-inline: 1.5vw;
+        font-size: 0.7rem;
     }
 }
 
@@ -469,7 +477,7 @@ h1 {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    padding-top: 3vw;
+    padding-top: 6vw;
     font-size: 56px;
     letter-spacing: -3.08px;
 }
@@ -540,7 +548,7 @@ h3 {
 .meu-conteudo a {
     color: var(--cor-primaria);
     font-family: 'Rubik', sans-serif;
-
+    font-size: 1.17rem;
     font-style: normal;
     font-weight: 400;
     line-height: 107.835%;
@@ -589,7 +597,7 @@ h3 {
     align-items: center;
     gap: 1vw;
     position: absolute;
-    top: 11.8vw;
+    top: 9.4vw;
     left: 8vw;
 
 }
@@ -713,14 +721,14 @@ h3 {
 
     h1 {
         color: var(--cor-primaria);
-        font-size: 40px;
+        font-size: 35px;
         font-family: Rubik;
-        letter-spacing: -3.08px;
+        letter-spacing: -1.08px;
         font-style: normal;
         font-weight: 400;
-        line-height: normal;
+
         padding-top: 3vw;
-        line-height: 45.6px;
+        line-height: 32.6px;
         width: 100%;
         padding-inline: 0.2rem;
     }
@@ -741,15 +749,17 @@ h3 {
 @media (max-width: 466px) {
     h1 {
         color: var(--cor-primaria);
-        font-size: 26px;
+        font-size: 32px;
         font-family: Rubik;
-        letter-spacing: -2.08px;
+        letter-spacing: -0.08px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
         padding-top: 3vw;
         line-height: 31.6px;
         width: 100%;
+        padding-inline: 0rem;
+
     }
 }
 
@@ -943,7 +953,7 @@ h3 {
     padding-left: 1vw;
     margin: 1vw 0;
     font-family: 'Rubik', sans-serif;
-    font-size: 3rem;
+    font-size: 2rem;
     color: var(--cor-primaria);
     font-style: normal;
     font-weight: 400;
@@ -952,7 +962,7 @@ h3 {
 .noticia h5 {
     padding-left: 1vw;
     margin: 1vw 0;
-    font-size: 2.2rem;
+    font-size: 1.6rem;
     font-weight: 200;
 
 
@@ -1034,7 +1044,7 @@ h3 {
 
     margin: 0 0;
     font-family: 'Rubik', sans-serif;
-    font-size: 3.2rem;
+    font-size: 2rem;
     color: var(--cor-primaria);
     font-style: normal;
     font-weight: 400;
@@ -1045,7 +1055,7 @@ h3 {
 
     margin: 0 0;
     font-family: 'Rubik', sans-serif;
-    font-size: 2.4rem;
+    font-size: 1.6rem;
 
     font-style: normal;
     font-weight: 200;

@@ -621,6 +621,7 @@ function App() {
     }
   });
   const [mostrar, setMostrar] = useState(false);
+  const naTelaNoticias = window.location.pathname.startsWith('/noticias');
   return (
     <div
       style={{

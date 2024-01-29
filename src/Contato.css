@@ -234,16 +234,19 @@
     .contatoInfo1 h1 {
         color: white;
         font-size: 1.5rem;
+        padding-inline: 0rem;
     }
 
     .contatoInfo1 h2 {
         font-size: 1rem;
         font-weight: 400;
+        padding-inline: 0rem;
     }
 
     .contatoInfo1 span {
         color: white;
         font-size: 1.1rem;
+        margin-bottom: 1rem;
     }
 
     .contatoBackButton {
@@ -254,6 +257,7 @@
         width: auto;
         padding: 1rem;
         font-size: 1.2rem;
+        padding-inline: 1rem !important;
     }
 
     .contatoForm {
@@ -292,8 +296,9 @@
         margin-left: 1rem;
         gap: 3vw;
         margin-bottom: 5rem;
-      
+
     }
+
     .caretCircleLeftStyle {
         color: white;
         width: auto;
@@ -304,6 +309,7 @@
         margin-right: 0vw;
 
     }
+
     .contatoContainer img {
         position: relative;
         width: 100%;
@@ -312,5 +318,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin-bottom: 1rem;
     }
 }

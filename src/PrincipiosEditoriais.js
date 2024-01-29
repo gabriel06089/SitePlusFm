@@ -44,8 +44,7 @@ const PrincipiosEditoriais = () => {
       <div style={{ position: 'relative', width: '100%' }}>
         <div style={{ position: 'absolute', right: 0 }}>
           <CaretCircleLeft
-            color="white"
-            size="50"
+            className="caretCircleLeftStyle"
             onClick={() => navigate(-1)}
           />
         </div>

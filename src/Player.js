@@ -2,6 +2,9 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { BeatLoader } from 'react-spinners';
 import { css } from '@emotion/react';
+import Select from 'react-select';
+import { useMediaQuery } from 'react-responsive';
+
 import './App.css';
 import './NoticiaDetalhe.css';
 import {
@@ -246,7 +249,45 @@ const Player = () => {
       : `${currentSong.artist} - ${currentSong.title}`;
 
   console.log('Comprimento do texto: ', text.length);
+  const options = radios.map((radio) => ({
+    value: radio.title,
+    label: radio.title,
+  }));
+  const isLargeScreen = useMediaQuery({ query: '(min-width: 601px)' });
+  const customStyles = {
+    control: (base) => ({
+      ...base,
+      minHeight: isLargeScreen ? 40 : 12,
 
+      border: 'none',
+      borderRadius: '12px',
+      paddingInline: isLargeScreen ? '16px' : '2px',
+      fontSize: isLargeScreen ? '20px' : '7px',
+    }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      padding: 2,
+    }),
+    clearIndicator: (base) => ({
+      ...base,
+      padding: 2,
+    }),
+
+    valueContainer: (base) => ({
+      ...base,
+      padding: '0px 0.5px',
+    }),
+    input: (base) => ({
+      ...base,
+      margin: 0,
+      padding: 0,
+    }),
+    menu: (base) => ({
+      ...base,
+      width: '100px',
+      right: '0px', // Adicione esta linha
+    }),
+  };
   const isLongText = text.length > 46;
   const location = useLocation();
   const isHomePage = location.pathname === '/';
@@ -257,6 +298,7 @@ const Player = () => {
   const naTelaNoticias =
     location.pathname.startsWith('/noticia/') ||
     location.pathname.startsWith('/drops'); // Ajuste para o caminho correto
+
   return (
     <div className="containerPlayer">
       {!naTelaNoticias && (
@@ -299,9 +341,15 @@ const Player = () => {
               />
             </div>
           ) : isPlaying ? (
-            <PauseCircle className="pause-circle" />
+            <PauseCircle
+              className={`pause-circle ${
+                naTelaNoticias ? 'noticias-page' : ''
+              }`}
+            />
           ) : (
-            <PlayCircle className="play-circle" />
+            <PlayCircle
+              className={`play-circle ${naTelaNoticias ? 'noticias-page' : ''}`}
+            />
           )}
         </div>
         <div className="Container-Music-Title">
@@ -338,22 +386,26 @@ const Player = () => {
 </div> */}
 
         <div className="ContainerRadioList">
-          <select
-            value={selectedRadio.title}
-            onChange={(event) => handleRadioClick(event.target.value)}
-            style={{ width: selectedRadio.width }}
-          >
-            {radios.map((radio, index) => (
-              <option key={index} value={radio.title}>
-                {radio.title}
-              </option>
-            ))}
-          </select>
-          <CaretDown
-            size={'2.5vw'}
-            color={getComputedStyle(document.documentElement)
-              .getPropertyValue('--cor-primaria')
-              .trim()}
+          <Select
+            classNamePrefix="react-select"
+            value={options.find(
+              (option) => option.value === selectedRadio.title
+            )}
+            onChange={(option) => handleRadioClick(option.value)}
+            options={options}
+            isSearchable={false}
+            styles={customStyles}
+            components={{
+              DropdownIndicator: () => (
+                <CaretDown
+                  size={isLargeScreen ? '1.6rem' : '2.5vw'}
+                  color={getComputedStyle(document.documentElement)
+                    .getPropertyValue('--cor-primaria')
+                    .trim()}
+                />
+              ),
+              IndicatorSeparator: () => null,
+            }}
           />
         </div>
 

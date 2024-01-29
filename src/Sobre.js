@@ -13,7 +13,7 @@ const Sobre = () => {
         alt="Imagem genérica"
         className="contatoImagem"
       />
-      <h2> Sobre nós</h2>
+      <h2 className='sobreNos'> Sobre nós</h2>
       <div className="lineSobre" />
       <h1>
         {' '}

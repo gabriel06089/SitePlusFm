@@ -95,6 +95,7 @@ a {
     /* ou qualquer outro valor que você deseja */
   }
 }
+
 .App {
   align-items: center;
   display: flex;
@@ -560,12 +561,12 @@ a {
     top: 4vw;
     transform: scale(2);
     height: 8vw;
-    padding-top: 1vw;
+    padding-top: 0.5vw;
     -webkit-transform: scale(2);
     -moz-transform: scale(2);
     -ms-transform: scale(2);
     -o-transform: scale(2);
-}
+  }
 
   .App-header img:first-child {
     height: 14vw;
@@ -666,7 +667,7 @@ a {
   display: flex;
   flex-direction: column;
   width: auto;
-  max-width: 22vw;
+  max-width: 26vw;
 }
 
 @media (min-width: 1024px) {
@@ -753,10 +754,10 @@ a {
   color: white;
   display: flex;
   font-family: 'Rubik', sans-serif;
-  font-size: 1vw;
+  font-size: 2rem;
   font-weight: 400;
   margin-left: 0vw;
-  padding-right: 90%;
+  padding-right: 85%;
   max-width: 0vw;
   overflow: hidden;
 }
@@ -790,6 +791,19 @@ a {
     padding-right: 90%;
 
   }
+
+  .ContainerMusicSpanPlaying span {
+    align-items: center;
+    color: white;
+    display: flex;
+    font-family: 'Rubik', sans-serif;
+    font-size: 0.35rem;
+    font-weight: 400;
+    margin-left: 0vw;
+    padding-right: 85%;
+    max-width: 0vw;
+    overflow: hidden;
+  }
 }
 
 @keyframes marquee {
@@ -817,14 +831,9 @@ a {
 }
 
 .ContainerRadioList {
-  align-items: center;
-  background-color: #fff;
-  border-radius: 12px;
-  display: flex;
-  height: 2.7vw;
-  justify-content: center;
-  padding-inline: 8px;
+
   width: auto;
+
 }
 
 .App-link {
@@ -1608,7 +1617,7 @@ a {
     background-color: var(--cor-primaria);
     display: flex;
     gap: 15vw;
-    height: 35vw;
+    height: 25vw;
     justify-content: center;
     padding: 20px;
     width: 100%;
@@ -1651,8 +1660,8 @@ a {
   height: auto;
   margin: 0 10px;
   object-fit: cover;
-  width: 30vw;
-  margin-bottom: 5vw;
+  width: 14vw;
+  margin-bottom: 1vw;
 }
 
 .footerImage3 {
@@ -1669,6 +1678,14 @@ a {
     margin: 0 10px;
     object-fit: contain;
     width: 14vw;
+  }
+
+  .footerImage4 {
+    height: auto;
+    margin: 0 10px;
+    object-fit: cover;
+    width: 30vw;
+    margin-bottom: 5vw;
   }
 
 }
@@ -2271,7 +2288,7 @@ a {
 .center-divP {
   color: var(--cor-primaria);
   font-family: 'Rubik', sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.1rem;
   margin-inline: 1vw;
   text-align: left;
   font-weight: 400;
@@ -2500,6 +2517,17 @@ a {
 
   .home .home .ContainerMusicSpanPlaying {
     width: 0vw;
+  }
+
+  loader,
+  .pause-circle.noticias-page,
+  .play-circle.noticias-page {
+    color: white;
+    height: 8vw;
+    font-size: 12vw !important;
+    margin-right: 0vw;
+    width: auto;
+
   }
 }
 

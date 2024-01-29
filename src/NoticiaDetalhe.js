@@ -199,7 +199,13 @@ const NoticiaDetalhe = () => {
   return (
     <div className="noticiaDetalheDiv">
       <div className="MenuContainerHeader">
-        <header className="App-headerN">
+        <header
+          className={`App-headerN ${
+            window.location.pathname.startsWith('/noticia')
+              ? 'noticias-page'
+              : ''
+          }`}
+        >
           <Link to="/">{!isScrolled && <img loading="lazy" src={Logo} />}</Link>
           <div className="divMenu">
             <div className="menuDiv">
@@ -443,22 +449,25 @@ const NoticiaDetalhe = () => {
       <div className="footer">
         <div className="footerDiv">
           <div className="imageContainer">
-            <img
-              loading="lazy"
-              src={Logo}
-              alt="Imagem 3"
-              className="footerImage2"
-            />
-            <img
-              loading="lazy"
-              src={Don7}
-              alt="Imagem 4"
-              className="footerImage3"
-            />
+            <img src={Logo} alt="Imagem 3" className="footerImage4" />
+            <div className="footerDivRow">
+              <Link to="/sobre">
+                <span className="footerDivRowSpan"> Sobre </span>
+              </Link>
+              <div className="verticalLine"></div>
+              <Link to="/principios-editoriais">
+                <span className="footerDivRowSpan">
+                  {' '}
+                  Princípios Editoriais{' '}
+                </span>
+              </Link>
+              <div className="verticalLine"></div>
+              <Link to="/contato">
+                <span className="footerDivRowSpan"> Contato </span>
+              </Link>
+            </div>
           </div>
-          <span className="footerText">
-            Copyright © 2024 Plus FM - Todos os direitos reservados
-          </span>
+          <span className="footerText">Copyright © 2024 Plus FM.</span>
         </div>
       </div>
     </div>
