@@ -15,6 +15,17 @@
     letter-spacing: -0.58px;
     font-weight: 200;
     line-height: 27px;
+
+}
+
+.h1Sobre {
+    color: var(--cor-terciaria);
+    font-size: 2rem;
+    padding-block: 2rem;
+    letter-spacing: -0.58px;
+    font-weight: 200;
+    line-height: 27px;
+    padding-inline: 2rem;
 }
 
 .contatoContainer h2 {
@@ -25,6 +36,7 @@
     font-weight: 200;
     align-self: flex-start;
 }
+
 .sobreNos {
     color: var(--cor-terciaria);
     font-size: 2rem;
@@ -33,6 +45,7 @@
     font-weight: 200;
     align-self: flex-start;
 }
+
 .lineSobre {
     height: 2px;
     width: 55%;
@@ -45,7 +58,7 @@
 .caretCircleLeftStyle1 {
     color: white;
     width: 150px;
-    height: 150px;
+    height: 100px;
     margin-right: 2rem;
 }
 

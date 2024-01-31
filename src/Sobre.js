@@ -15,7 +15,7 @@ const Sobre = () => {
       />
       <h2 className='sobreNos'> Sobre nós</h2>
       <div className="lineSobre" />
-      <h1>
+      <h1 className='h1Sobre'>
         {' '}
         O Ceará está ligado através da Plus FM, a maior rede de rádios do
         estado. Com 11 emissoras espalhadas do norte ao sul do Ceará, a Plus FM

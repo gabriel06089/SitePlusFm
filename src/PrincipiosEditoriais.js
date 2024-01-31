@@ -42,7 +42,14 @@ const PrincipiosEditoriais = () => {
         sociedade cujo maior interesse é o bem estar coletivo.
       </h2>
       <div style={{ position: 'relative', width: '100%' }}>
-        <div style={{ position: 'absolute', right: 0 }}>
+        <div
+          style={{
+            position: 'absolute',
+            right: 0,
+            paddingTop: '60px',
+
+          }}
+        >
           <CaretCircleLeft
             className="caretCircleLeftStyle"
             onClick={() => navigate(-1)}

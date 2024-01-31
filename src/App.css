@@ -163,6 +163,7 @@ a {
   height: auto;
   justify-content: center;
   margin-top: 1vw;
+
   width: auto;
 }
 
@@ -511,24 +512,27 @@ a {
 }
 
 .App-Player.principios-editoriais-page {
-  /* Adicione suas estilizações aqui */
+  /*Adicionesuasestilizaçõesaqui*/
   top: 1.8vw;
-  transform: scale(1.7);
-  height: 8vw;
+  transform: scale(1);
+  height: 2vw;
   padding-top: 1vw;
-  /* Exemplo */
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
 }
 
 .App-Player.sobre-page {
   /*Adicionesuasestilizaçõesaqui*/
-  top: 0.8vw;
-  transform: scale(1.4);
+  top: 0.2vw;
+  transform: scale(1.1);
   height: 6vw;
   padding-top: 0.3vw;
-  -webkit-transform: scale(1.4);
-  -moz-transform: scale(1.4);
-  -ms-transform: scale(1.4);
-  -o-transform: scale(1.4);
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
 }
 
 .App-Player.noticias-page {
@@ -555,6 +559,15 @@ a {
     -moz-transform: scale(1.7);
     -ms-transform: scale(1.7);
     -o-transform: scale(1.7);
+  }
+
+  .App-Player.principios-editoriais-page {
+    /* Adicione suas estilizações aqui */
+    top: 1.8vw;
+    transform: scale(1.7);
+    height: 8vw;
+    padding-top: 1vw;
+    /* Exemplo */
   }
 
   .App-Player.noticias-page {
@@ -589,23 +602,120 @@ a {
   }
 
   .App-Player.contato-page {
-    /* Adicione suas estilizações aqui */
-    top: 1.8vw;
-    transform: scale(1.7);
-    height: 8vw;
-    padding-top: 1vw;
-    /* Exemplo */
+    bottom: 0rem !important;
+    top: auto;
+    width: 100%;
+    transform: scale(1);
+    height: 15vw;
+    padding-top: 0vw;
+    margin-left: 0vw;
+    padding-inline: 0vw;
+    background-color: var(--cor-primaria);
+    border-radius: 8px;
+    right: -84%;
+    padding: 0vw;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    padding-top: 2px;
+    /*Adicionapaddingaotopo*/
+    padding-right: 10px;
+    /*Adicionapaddingàdireita*/
+    padding-bottom: 0px;
+    /*Adicionapaddingaofundo*/
+    padding-left: 10px;
+    display: flex;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    transition: all 0.5s ease;
   }
 
 
 
   .App-Player.home {
-    top: 1.8vw;
-    transform: scale(1.7);
-    height: 10vw;
-    padding-top: 2vw;
-
+    position: relative;
+    bottom: auto;
+    top: -14vw !important;
+    width: 100%;
+    transform: scale(1);
+    height: 15vw;
+    padding-top: 0vw;
+    margin-left: 0vw;
+    padding-inline: 0vw;
+    background-color: white;
+    border-radius: 0px;
+    right: 0%;
+    padding: 0vw;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
+    padding-top: 2px;
+    /*Adicionapaddingaotopo*/
+    padding-right: 10px;
+    /*Adicionapaddingàdireita*/
+    padding-bottom: 0px;
+    /*Adicionapaddingaofundo*/
+    padding-left: 10px;
+    display: flex;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    transition: top 0.5s ease, border-radius 0.5s ease;
+    position: fixed;
   }
+
+  .App-Player.playing {
+    stroke: none;
+    bottom: auto;
+    top: -0vw !important;
+    width: 100%;
+    transform: scale(1);
+    height: auto;
+    padding-top: 0vw;
+    margin-left: 0vw;
+    padding-inline: 0vw;
+    background-color: white;
+    border-radius: 8px;
+    right: 0;
+    padding: 0vw;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    padding-top: 2px;
+    /*Adicionapaddingaotopo*/
+    padding-right: 10px;
+    /*Adicionapaddingàdireita*/
+    padding-bottom: 0px;
+    /*Adicionapaddingaofundo*/
+    padding-left: 10px;
+    display: flex;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    position: fixed;
+    transition: top 0.5s ease, border-radius 0.5s ease;
+    z-index: 999;
+  }
+
 
   .App-header {
     display: flex;
@@ -667,7 +777,8 @@ a {
   display: flex;
   flex-direction: column;
   width: auto;
-  max-width: 26vw;
+  max-width: 56vw;
+
 }
 
 @media (min-width: 1024px) {
@@ -686,7 +797,8 @@ a {
   position: relative;
   text-overflow: clip;
   white-space: nowrap;
-  width: 30vw;
+  width: 53vw;
+  font-size: 13px;
   -webkit-animation: marquee 10s linear infinite;
 }
 
@@ -794,10 +906,10 @@ a {
 
   .ContainerMusicSpanPlaying span {
     align-items: center;
-    color: white;
+    color: #541084;
     display: flex;
     font-family: 'Rubik', sans-serif;
-    font-size: 0.35rem;
+    font-size: 0.6rem;
     font-weight: 400;
     margin-left: 0vw;
     padding-right: 85%;
@@ -819,9 +931,9 @@ a {
 }
 
 .Container-Music-TitleSpan {
-  color: white;
+  color: var(--cor-primaria);
   font-family: 'Rubik', sans-serif;
-  font-size: 1.4vw;
+  font-size: 1rem;
   font-weight: 200;
   text-align: left !important;
 }
@@ -833,7 +945,7 @@ a {
 .ContainerRadioList {
 
   width: auto;
-
+  margin: auto;
 }
 
 .App-link {
@@ -1094,11 +1206,11 @@ a {
 }
 
 .progBallContainer.specialHeightSlowMo img {
-  height: 8vw;
-  left: -4vw;
+  height: 5vw;
+
   position: relative;
   top: 0vw;
-  width: 8vw;
+  width: 5vw;
 }
 
 .progBallContainer.specialHeightFestaPlus img {
@@ -1299,10 +1411,13 @@ a {
 }
 
 .promoCardBig {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  height: 22vw;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  justify-content: center;
+  margin-inline: 0.5vw;
+
   width: auto;
 }
 
@@ -1327,24 +1442,25 @@ a {
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.2);
-  height: 9.6vw;
+  height: 22vw;
   margin: 0 0.5vw;
-  overflow: hidden;
+
   width: auto;
 }
 
 .promoCardSmall img {
   border-radius: 10px;
-  height: 9.6vw;
+  height: 22vw;
   width: auto;
 }
 
 .promoContainerColumn {
   align-items: center;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   margin-inline: 1vw;
+  padding-top: 1vw;
   width: auto;
 }
 
@@ -1487,9 +1603,9 @@ a {
 
 @media (max-width: 600px) {
   .dropsImage {
-    height: 14vw;
+    height: 0vw;
     margin-left: 5.8vw;
-    margin-bottom: 6vw;
+    margin-bottom: 0vw;
   }
 
   .cartolaAbsolute {
@@ -2508,11 +2624,43 @@ a {
   width: 6vw;
 }
 
+.home .DotsPlayer {
+  padding-right: 0vw;
+  margin-left: 0vw;
+  color: white;
+  margin-right: 0vw;
+  transform: scale(2);
+  -webkit-transform: scale(2);
+  -moz-transform: scale(2);
+  -ms-transform: scale(2);
+  -o-transform: scale(2);
+  display: none;
+}
+
 @media (max-width: 600px) {
 
-  .home .play-circle {
+  .loader,
+  .pause-circle,
+  .play-circle {
     padding-right: 0vw;
     margin-left: 0vw;
+    color: var(--cor-primaria);
+    height: 13vw;
+    margin-right: 1vw;
+    width: 13vw;
+
+  }
+
+
+
+  .home .DotsPlayer {
+    padding-right: 0vw;
+    margin-left: 0vw;
+    color: white;
+    margin-right: 0vw;
+    height: 7vw;
+    width: 7vw;
+    display: block;
   }
 
   .home .home .ContainerMusicSpanPlaying {
@@ -2538,6 +2686,7 @@ a {
   .play-circle {
     height: 5vw;
     width: 5vw;
+    stroke: none;
   }
 
 }
@@ -2694,6 +2843,8 @@ a {
   .programasImage {
     display: none;
   }
+
+
 }
 
 @media (min-width: 601px) {
@@ -2791,22 +2942,48 @@ a {
 
 @media (max-width: 600px) {
   .meuBotao {
-    background-color: var(--cor-primaria);
+    background-color: white;
     border: none;
     border-radius: 12px;
-    color: white;
-    padding: 10px 16px;
+    color: var(--cor-primaria);
+    padding: 4px 8px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 12px;
     margin: 2px 1px;
     cursor: pointer;
+    align-self: start;
+    margin-left: 12vw;
+  }
+
+  .inner-container {
+    /* background: radial-gradient(circle at center, darkgray, lightgray, white); */
+    background-color: whitesmoke;
+    border-radius: 50%;
+    height: 41vw;
+    width: 41vw;
+    /* aumentado de 36vw para 42vw */
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    /* aumentado de 36vw para 46vw */
+  }
+
+  .program-time {
+    margin-top: 0vw;
+    font-family: 'Rubik', sans-serif;
+    font-size: 3vw;
+    color: var(--cor-primaria);
+    font-weight: 400;
+    margin-bottom: 4vw;
   }
 
   .textoBotao {
-    color: white;
-    font-size: 14px;
+    color: var(--cor-primaria);
+    font-size: 10px;
   }
 }
 
@@ -2851,4 +3028,205 @@ a {
 
     margin-inline: 1vw;
   }
+}
+
+.live-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1vw;
+}
+
+.live-container span {
+  color: white;
+
+}
+
+.live-dot {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background-color: red;
+  margin-right: 5px;
+  animation: blink 1s steps(5, start) infinite;
+
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .live-container {
+    /* Seu estilo para telas menores que 600px aqui */
+  }
+
+  .live-container span {
+    color: white;
+    font-size: 8px;
+  }
+
+
+  .live-dot {
+    width: 0.3rem;
+    height: 0.3rem;
+    border-radius: 50%;
+    background-color: red;
+    margin-right: 5px;
+    animation: blink 1s steps(5, start) infinite;
+  }
+}
+
+.promoContainerNew {
+  width: 100%;
+  max-width: 1200px;
+  /* Limita a largura máxima do contêiner */
+
+  max-height: 35vw;
+  border-radius: 12px;
+  padding: 45px;
+  margin: 0 auto;
+  /* Centraliza o contêiner */
+}
+
+.promoActorRowNew {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.promoCardNew {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+}
+
+.promoCardNew img {
+  width: 100%;
+  object-fit: fill;
+  height: 32vw;
+
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+}
+
+.cartolaAbsoluteNew {
+  border-radius: 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  margin: 10px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.slick-prev {
+  left: -118px !important;
+  /* Move a seta para a esquerda */
+}
+
+.slick-next {
+  right: -40px !important;
+  /* Move a seta para a direita */
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 100px !important;
+
+}
+
+@media (max-width: 600px) {
+  .slick-prev {
+    left: -40px !important;
+    /* Move a seta para a esquerda */
+  }
+
+  .slick-next {
+    right: -30px !important;
+    /* Move a seta para a direita */
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 30px !important;
+    color: white !important;
+  }
+
+  .promoContainerNew {
+    padding: 50px;
+    max-height: 62vw;
+  }
+
+  .promoCardNew {
+    max-height: 300px;
+
+  }
+
+  .promoCardNew img {
+    object-fit: fill;
+    height: 50vw;
+  }
+}
+
+.pushLine {
+  width: 100%;
+  height: 1.5vw;
+  background-color: white;
+  z-index: 49;
+  right: 0;
+  position: fixed;
+  top: 98%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s, visibility 0.2s;
+  -webkit-transition: opacity 0.5s, visibility 0.2s;
+  -moz-transition: opacity 0.5s, visibility 0.2s;
+  -ms-transition: opacity 0.5s, visibility 0.2s;
+  -o-transition: opacity 0.5s, visibility 0.2s;
+}
+
+.pushLineOpenner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  padding-inline: 0.5rem;
+  padding-block: 1vw;
+  background-color: white;
+  position: fixed;
+  bottom: -5vw;
+  border-radius: 0px 0px 12px 12px;
+  -webkit-border-radius: 0px 0px 12px 12px;
+  -moz-border-radius: 0px 0px 12px 12px;
+  -ms-border-radius: 0px 0px 12px 12px;
+  -o-border-radius: 0px 0px 12px 12px;
+
+}
+
+.playing .pushLine {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.pushLineOpenner span {
+  font-size: 0.6rem;
+  color: #541084;
+  font-weight: 400;
+  font-family: 'Rubik', sans-serif;
+}
+
+.pushLineOpenner svg {
+  margin-left: 1vw;
+  font-size: 0.6rem;
+  color: #541084;
 }

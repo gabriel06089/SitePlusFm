@@ -21,7 +21,9 @@ import Rede from './AssetsMap/Rede.svg';
 import Paraipaba from './AssetsMap/Paraipaba.svg';
 import Boneco from './boneco.png';
 import twitterLogoX from './twitter-x.svg';
-
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import agrandehora from './imagemprogamacao/agrandehora.svg';
 import asmaispedidas from './imagemprogamacao/asmaispedidas.svg';
 import asmelhoresdaplus from './imagemprogamacao/asmelhoresdaplus.svg';
@@ -622,6 +624,16 @@ function App() {
   });
   const [mostrar, setMostrar] = useState(false);
   const naTelaNoticias = window.location.pathname.startsWith('/noticias');
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1, // Mostra apenas um slide de cada vez
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 20000,
+  };
+
   return (
     <div
       style={{
@@ -633,7 +645,11 @@ function App() {
       }}
     >
       <div className="App">
-        <header className={`App-header ${isSidebarOpen ? 'sidebar-open' : ''}`}>
+        <header
+          className={`App-header ${isSidebarOpen ? 'sidebar-open' : ''} ${
+            isPlaying ? 'playing' : ''
+          }`}
+        >
           <div
             className={`ContainerRow ${isSidebarOpen ? 'sidebar-open' : ''}`}
           >
@@ -984,11 +1000,11 @@ function App() {
       <section id="programacao"></section>
       <div className="progContainer">
         <img src={Prog} className="progImage" />
-        <h1 className="dropsText1">PROGRAMAÇÃO</h1>
+        <h1 className="dropsText1">NO AR</h1>
         <div className="whiteLine1"></div>
         <button className="meuBotao" onClick={() => setMostrar(!mostrar)}>
           {' '}
-          <span className="textoBotao">Veja nossa programação</span>
+          <span className="textoBotao">CONFIRA NOSSA PROGRAMAÇÃO</span>
         </button>
         {mostrar && (
           <div>
@@ -1340,7 +1356,7 @@ function App() {
               <circle
                 className="progress-ring__inner-circle"
                 stroke="white"
-                strokeWidth="0.5vw"
+                strokeWidth="0.2vw"
                 fill="transparent"
                 r="48%" // metade do tamanho do SVG
                 cx="50%" // metade do tamanho do SVG
@@ -1364,9 +1380,22 @@ function App() {
             />
           </div>
           <div className="program-info">
-            <div className="now-playing">Tocando agora</div>
-            <hr className="separator" />
+            {/* <div className="now-playing">Tocando agora</div> */}
+            {/* <hr className="separator" /> */}
+            <div className="live-container">
+              <div className="live-dot"></div>
+              <span>AO VIVO</span>
+            </div>
+
             <h1 className="program-title">{currentProgramTitle}</h1>
+
+            <style jsx>{`
+              @keyframes blink {
+                to {
+                  visibility: hidden;
+                }
+              }
+            `}</style>
             <p className="program-time">
               {formatHour(currentProgramStartHour)} -{' '}
               {formatHour(currentProgramEndHour)}
@@ -1482,54 +1511,27 @@ function App() {
           />
         </div>
       </div>
-      <div className="promoContainer">
-        <img src={textPromo} className="textProgImg" />
-        <div className="promoActorRow">
-          <div className="promoContainerColumn">
-            <Link to={`/promocao/${promos[0]?.id}`}>
-              <div className="promoCardBig" style={{ flexDirection: 'column' }}>
-                {promos[0] && promos[0].yoast_head_json.og_image[0].url && (
-                  <img
-                    src={promos[0].yoast_head_json.og_image[0].url}
-                    alt="Promo"
-                  />
-                )}
-                {promos[0] && (
-                  <span className="cartolaAbsolute">
+      <div className="promoContainerNew">
+        <div className="promoActorRowNew">
+          <Slider {...settings}>
+            {promos.map((promo, index) => (
+              <Link to={`/promocao/${promo.id}`} key={index}>
+                <div className="promoCardNew">
+                  {promo.yoast_head_json.og_image[0].url && (
+                    <img
+                      src={promo.yoast_head_json.og_image[0].url}
+                      alt="Promo"
+                    />
+                  )}
+                  <span className="cartolaAbsoluteNew">
                     {he.decode(
-                      promos[0].cartola === 'Oportunidade'
-                        ? 'ATIVA'
-                        : 'ENCERRADA'
+                      promo.cartola === 'Oportunidade' ? 'ATIVA' : 'ENCERRADA'
                     )}
                   </span>
-                )}
-              </div>
-            </Link>
-            <div className="promoContainerRow">
-              {promos.slice(1).map((promo, index) => (
-                <Link to={`/promocao/${promo.id}`} key={index}>
-                  <div
-                    className="promoCardSmall"
-                    style={{ flexDirection: 'column' }}
-                  >
-                    {promo.yoast_head_json.og_image[0].url && (
-                      <img
-                        src={promo.yoast_head_json.og_image[0].url}
-                        alt="Promo"
-                      />
-                    )}
-                    <span className="cartolaAbsolute">
-                      {he.decode(
-                        promo.cartola === 'Oportunidade' ? 'ATIVA' : 'ENCERRADA'
-                      )}
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <img src={PromoActor} className="actorImage" />
+                </div>
+              </Link>
+            ))}
+          </Slider>
         </div>
       </div>
       <section id="contato"></section>

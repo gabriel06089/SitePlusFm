@@ -6,7 +6,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
+
 
 .containerRowColumn {
     position: relative;
@@ -54,9 +56,10 @@
 }
 
 .contatoH1 {
-    color: white;
+    color: #541084 !important;
     font-size: 25px;
     width: 40vw;
+
 }
 
 .contatoForm {
@@ -70,9 +73,9 @@
 .contatoLabel {
     display: flex;
     flex-direction: column;
-    width: 32vw;
+    width: 100%;
     align-self: flex-start;
-    color: white;
+    color: #541084;
     font-size: 1.5rem;
     font-weight: bold;
     margin-top: 0.5rem;
@@ -81,7 +84,7 @@
 .contatoInput {
     display: flex;
     flex-direction: column;
-    width: 35vw;
+    width: 100%;
     align-self: start;
     font-size: 0.9rem;
     height: 3rem;
@@ -92,17 +95,18 @@
     -moz-border-radius: 8px;
     -ms-border-radius: 8px;
     -o-border-radius: 8px;
-    padding-left: 7px;
+    margin-inline: 13em;
 }
 
 .contatoTextarea {
+    font-family: Rubik;
     display: flex;
     flex-direction: column;
-    width: 35vw;
+    width: 88%;
     align-self: start;
     font-size: 1rem;
     height: 12rem;
-    font-weight: bold;
+    font-weight: 200;
     margin-top: 0.5rem;
     border-radius: 8px;
     -webkit-border-radius: 8px;
@@ -113,9 +117,11 @@
 }
 
 .contatoSubmit {
-    background-color: white;
-    color: var(--cor-primaria);
-    padding: 5px 15px;
+    background: #9248FF;
+    color: #FFF;
+
+    font-family: Rubik;
+    padding: 5px 5px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -123,6 +129,7 @@
     margin: 4px 2px;
     cursor: pointer;
     border: none;
+    border-radius: 0.5rem;
     align-self: flex-end;
     margin-top: 1vw;
 
@@ -159,8 +166,9 @@
 .caretCircleLeftStyle {
     color: white;
     width: 150px;
-    height: 150px;
+    height: 100px;
     margin-right: 2rem;
+
 }
 
 @media (max-width: 1140px) {
@@ -170,11 +178,7 @@
 
     }
 
-    .contatoTextarea,
-    .contatoInput,
-    .contatoH1 {
-        width: 50vw;
-    }
+
 
     .contatoSubmit {
         margin-right: 0;
@@ -216,7 +220,7 @@
 
 @media (max-width: 600px) {
     .contatoContainer {
-        /* Seus estilos aqui */
+        background-color: #FFFFFF;
     }
 
     .containerRowColumn {
@@ -257,30 +261,42 @@
         width: auto;
         padding: 1rem;
         font-size: 1.2rem;
-        padding-inline: 1rem !important;
+        padding: 0 !important;
+        padding-inline: 3rem !important;
     }
 
     .contatoForm {
-        width: auto;
+        width: 100%;
         padding: 1rem;
     }
 
     .contatoLabel {
-        font-size: 1.1rem;
+        font-size: 1rem;
+        width: 100%;
+        margin-inline: 1.5rem;
+        font-family: Rubik;
+        font-weight: 400;
     }
 
     .contatoInput {
-        width: 92vw;
+        font-family: Rubik;
+        font-weight: 100;
         padding: 1rem;
+        margin: 0rem;
+        margin-top: 0.5rem;
+        width: 87%;
+        border: none;
+        background-color: #F8F7FD;
     }
 
     .contatoTextarea {
-        width: 92vw;
+        border: none;
+        background-color: #F8F7FD;
         padding: 1rem;
     }
 
     .contatoSubmit {
-        padding: 10px 15px;
+        padding: 5px 15px;
         margin: 16px 0px;
         align-self: center;
     }
@@ -320,4 +336,118 @@
         justify-content: center;
         margin-bottom: 1rem;
     }
+}
+
+.logoRowContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 3rem 3rem;
+    background-color: #F8F7FD;
+    border-radius: 0px 0px 35px 35px;
+    -webkit-border-radius: 0px 0px 35px 35px;
+    -moz-border-radius: 0px 0px 35px 35px;
+    -ms-border-radius: 0px 0px 35px 35px;
+    -o-border-radius: 0px 0px 35px 35px;
+}
+
+.logoRowContainer img {
+    width: auto;
+    height: 3rem;
+    margin: 0;
+}
+
+.logoRowContainer svg {
+    font-size: 3rem;
+}
+
+.containerPropaganda {
+    width: 84%;
+    height: 4rem;
+    margin: 2rem;
+    background-color: #D9D9D9;
+}
+
+.box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.box .rectangle {
+    background-color: #d9d9d9;
+    height: 200px;
+
+    width: 200px;
+}
+
+.footerContainer {
+    width: 100%;
+    background-color: #f8f7fd;
+    border-radius: 35px 35px 0px 0px;
+    height: 15rem;
+    margin-top: 4rem;
+    -webkit-border-radius: 35px 35px 0px 0px;
+    -moz-border-radius: 35px 35px 0px 0px;
+    -ms-border-radius: 35px 35px 0px 0px;
+    -o-border-radius: 35px 35px 0px 0px;
+}
+
+.footerDivContato {
+    background-color: #f8f7fd;
+    border-radius: 35px 35px 0px 0px;
+    -webkit-border-radius: 35px 35px 0px 0px;
+    -moz-border-radius: 35px 35px 0px 0px;
+    -ms-border-radius: 35px 35px 0px 0px;
+    -o-border-radius: 35px 35px 0px 0px;
+}
+
+.footerDivRowContato {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+.footerDivColumnContato {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #541084;
+
+}
+
+.footerDivColumnContato svg {
+    font-size: 1.1rem;
+
+}
+
+.text-wrapper {
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.span {
+    font-family: "Rubik-Medium", Helvetica;
+    font-weight: 400;
+    font-size: 0.8rem;
+}
+
+.footerSocialmediaContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+.footerSocialmediaContainer img {
+    width: auto;
+    height: 1.2rem;
+    margin: 0;
+    padding: 0;
 }

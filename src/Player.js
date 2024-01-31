@@ -15,6 +15,7 @@ import {
   PauseCircle,
   PlayCircle,
   CaretDown,
+  DotsSixVertical,
 } from 'phosphor-react';
 import { useLocation } from 'react-router-dom';
 import Logo from './plus-1.png';
@@ -260,9 +261,12 @@ const Player = () => {
       minHeight: isLargeScreen ? 40 : 12,
 
       border: 'none',
-      borderRadius: '12px',
-      paddingInline: isLargeScreen ? '16px' : '2px',
-      fontSize: isLargeScreen ? '20px' : '7px',
+      borderRadius: '8px',
+      paddingInline: isLargeScreen ? '16px' : '8px',
+
+      fontSize: isLargeScreen ? '20px' : '12px',
+      fontFamily: 'Rubik',
+      backgroundColor: '#541084', // Adiciona a cor do fun
     }),
     dropdownIndicator: (base) => ({
       ...base,
@@ -272,12 +276,16 @@ const Player = () => {
       ...base,
       padding: 2,
     }),
-
+    singleValue: (base) => ({
+      ...base,
+      color: 'white', // Adiciona a cor do texto
+    }),
     valueContainer: (base) => ({
       ...base,
       padding: '0px 0.5px',
     }),
     input: (base) => ({
+      color: 'white',
       ...base,
       margin: 0,
       padding: 0,
@@ -285,7 +293,7 @@ const Player = () => {
     menu: (base) => ({
       ...base,
       width: '100px',
-      right: '0px', // Adicione esta linha
+      right: '0px',
     }),
   };
   const isLongText = text.length > 46;
@@ -305,11 +313,11 @@ const Player = () => {
         <img src={Logo} alt="Logo da Plus FM" className="App-headerImg3" />
       )}
       <div
-        className={`App-Player ${isHomePage ? 'home' : ''} ${
-          isContatoPage ? 'contato-page' : ''
-        } ${isPrincipiosEditoriaisPage ? 'principios-editoriais-page' : ''} ${
-          isSobrePage ? 'sobre-page' : ''
-        } ${naTelaNoticias ? 'noticias-page' : ''}`}
+        className={`
+        App-Player 
+        ${'home'} 
+        ${isPlaying ? 'playing' : ''}
+        `}
       >
         <div
           style={{
@@ -333,7 +341,7 @@ const Player = () => {
             >
               <BeatLoader
                 loading={isLoading}
-                size="2vw" // Ajuste o tamanho aqui
+                // Ajuste o tamanho aqui
                 color={'white'} // Ajuste a cor aqui
                 css={css`
                   margin-right: 2vw; // Ajuste a margem aqui
@@ -357,7 +365,7 @@ const Player = () => {
           <div
             style={{
               height: '0.1vw',
-              background: 'white',
+              background: '#541084',
               width: '10.1vw',
               marginBlock: '0.5vw',
               marginLeft: '0.2vw',
@@ -398,15 +406,22 @@ const Player = () => {
             components={{
               DropdownIndicator: () => (
                 <CaretDown
-                  size={isLargeScreen ? '1.6rem' : '2.5vw'}
+                  size={isLargeScreen ? '1.6rem' : '4vw'}
+                  weight="bold"
                   color={getComputedStyle(document.documentElement)
-                    .getPropertyValue('--cor-primaria')
+                    .getPropertyValue('--cor-terciaria')
                     .trim()}
                 />
               ),
               IndicatorSeparator: () => null,
             }}
           />
+        </div>
+        <div className="pushLine">
+          {' '}
+          <div className="pushLineOpenner" onClick={handlePlayPause}>
+            <span>OUÇA AQUI</span> <CaretDown weight="bold" />
+          </div>
         </div>
 
         {isVolumeVisible && (

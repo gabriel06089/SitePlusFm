@@ -1,8 +1,21 @@
 import React, { useState } from 'react';
 import './Contato.css'; // Importe o arquivo CSS
 import InputMask from 'react-input-mask';
-import { CaretCircleLeft } from 'phosphor-react';
+import {
+  CaretCircleLeft,
+  Envelope,
+  EnvelopeSimple,
+  FacebookLogo,
+  InstagramLogo,
+  List,
+  TelegramLogo,
+  TiktokLogo,
+  WhatsappLogo,
+  YoutubeLogo,
+} from 'phosphor-react';
 import { Navigate, useNavigate } from 'react-router-dom';
+import Logo from './plus-1.png';
+import Xlogo from './TwitterRoxo.png';
 const Contato = () => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
@@ -52,11 +65,12 @@ const Contato = () => {
   const navigate = useNavigate();
   return (
     <div className="contatoContainer">
-      <img
-        src="https://via.placeholder.com/150"
-        alt="Imagem genérica"
-        className="contatoImagem"
-      />
+      <div className="logoRowContainer">
+        {' '}
+        <img src={Logo} />
+        <List />
+      </div>
+      <div className="containerPropaganda"> </div>
       <div className="containerRowColumn">
         {' '}
         <div className="divColumn">
@@ -112,23 +126,39 @@ const Contato = () => {
             <input type="submit" value="Enviar" className="contatoSubmit" />
           </form>
         </div>{' '}
-        <div className="contatoInfoContainer">
-          <div className="contatoInfo1">
-            <h1>Comercial</h1> <h2>E-mail</h2>
-            <span>comercial@plusfm.com.br</span>
-          </div>
-          <div className="contatoInfo1">
-            <h1>Redação</h1> <h2>E-mail</h2>
-            <span>redacao@plusfm.com.br </span>
-          </div>
+        <div className="box">
+          <div className="rectangle" />
         </div>
-      </div>
-      <div className="contatoBackButton">
-        <div className="posicaoAbsolutaDireita">
-          <CaretCircleLeft
-            className="caretCircleLeftStyle"
-            onClick={() => navigate(-1)}
-          />
+        <div className="footerContainer">
+          <div className="footerDivRowContato">
+            <div className="footerDivColumnContato">
+              {' '}
+              <EnvelopeSimple weight="regular" />
+              <span className="text-wrapper">
+                Comercial
+                <br />
+              </span>
+              <span className="span">comercial@plusfm.com.br</span>
+            </div>
+            <div className="footerDivColumnContato">
+              <EnvelopeSimple weight="regular" />{' '}
+              <span className="text-wrapper">
+                Redação
+                <br />
+              </span>
+              <span className="span">redacao@plusfm.com.br</span>
+            </div>
+          </div>
+          <div className="footerSocialmediaContainer">
+            {' '}
+            <FacebookLogo weight="regular" size={25} color="#9248FF" />{' '}
+            <img src={Xlogo} />
+            <InstagramLogo weight="regular" size={25} color="#9248FF" />{' '}
+            <TiktokLogo weight="regular" size={25} color="#9248FF" />{' '}
+            <YoutubeLogo weight="regular" size={25} color="#9248FF" />{' '}
+            <WhatsappLogo weight="regular" size={25} color="#9248FF" />{' '}
+            <TelegramLogo weight="regular" size={25} color="#9248FF" />
+          </div>
         </div>
       </div>
     </div>
