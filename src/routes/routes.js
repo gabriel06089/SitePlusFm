@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import NoticiaDetalhe from '../NoticiaDetalhe';
 import PromoDetalhe from '../PromoDetalhe';
+import Programas from '../Programas';
 import App from '../App';
 import Player from '../Player';
 import Drops from '../Drops';
@@ -9,6 +10,7 @@ import Sobre from '../Sobre';
 import PrincipiosEditoriais from '../PrincipiosEditoriais';
 import Contato from '../Contato';
 import Manutencao from '../Manutencao';
+import Programacao from '../Programacao';
 import { PlayerProvider } from '../Context/PlayerContext';
 
 const RoutesComponent = () => {
@@ -16,6 +18,15 @@ const RoutesComponent = () => {
     <PlayerProvider>
       <Router>
         <Routes>
+          <Route
+            path="/programacao"
+            element={
+              <>
+                <Player />
+                <Programacao />
+              </>
+            }
+          />
           <Route
             path="/manutencao"
             element={
@@ -35,7 +46,7 @@ const RoutesComponent = () => {
             }
           />
           <Route
-            path="/drops"
+            path="/drops/:page?"
             element={
               <>
                 <Player />
@@ -49,6 +60,24 @@ const RoutesComponent = () => {
               <>
                 <Player />
                 <Drops />
+              </>
+            }
+          />
+          <Route
+            path="/programas/:page?"
+            element={
+              <>
+                <Player />
+                <Programas />
+              </>
+            }
+          />
+          <Route
+            path="/programas/page/:page"
+            element={
+              <>
+                <Player />
+                <Programas />
               </>
             }
           />

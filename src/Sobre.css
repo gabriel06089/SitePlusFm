@@ -46,6 +46,15 @@
     align-self: flex-start;
 }
 
+.sobreNos1 {
+    color: var(--cor-primaria);
+    font-size: 2rem;
+    padding-inline: 2rem;
+    padding-top: 2rem;
+    font-weight: 200;
+    align-self: flex-start;
+}
+
 .lineSobre {
     height: 2px;
     width: 55%;
@@ -71,7 +80,14 @@
     margin-bottom: 5vw;
 }
 
+.contatoContainer.primary {
+    background-color: var(--cor-primaria);
+    /* substitua #corPrimaria pela cor primária do seu tema */
+}
+
 @media (max-width: 600px) {
+    .contatoContainer {}
+
     .contatoContainer h1 {
         color: var(--cor-terciaria);
         font-size: 1rem;

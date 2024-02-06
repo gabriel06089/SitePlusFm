@@ -1,21 +1,26 @@
 // Sobre.js
 import { CaretCircleLeft } from 'phosphor-react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, useLocation } from 'react-router-dom';
 import React from 'react';
 import './Sobre.css';
 const Sobre = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   return (
-    <div className="contatoContainer">
+    <div
+      className={`contatoContainer ${
+        location.pathname === '/sobre' ? 'primary' : ''
+      }`}
+    >
       {' '}
       <img
         src="https://via.placeholder.com/150"
         alt="Imagem genérica"
         className="contatoImagem"
       />
-      <h2 className='sobreNos'> Sobre nós</h2>
+      <h2 className="sobreNos"> Sobre nós</h2>
       <div className="lineSobre" />
-      <h1 className='h1Sobre'>
+      <h1 className="h1Sobre">
         {' '}
         O Ceará está ligado através da Plus FM, a maior rede de rádios do
         estado. Com 11 emissoras espalhadas do norte ao sul do Ceará, a Plus FM

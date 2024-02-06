@@ -198,6 +198,13 @@ const Player = () => {
     } else if (
       currentDay >= 1 &&
       currentDay <= 5 &&
+      currentHour >= 19 &&
+      currentHour < 20
+    ) {
+      progTitle = 'A Voz do Brasil';
+    } else if (
+      currentDay >= 1 &&
+      currentDay <= 5 &&
       currentHour >= 20 &&
       currentHour < 22
     ) {
@@ -296,7 +303,7 @@ const Player = () => {
       right: '0px',
     }),
   };
-  const isLongText = text.length > 46;
+  const isLongText = text.length > 31;
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   const isContatoPage = location.pathname === '/contato';

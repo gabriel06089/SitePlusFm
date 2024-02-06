@@ -16,10 +16,10 @@ import './Drops.css';
 import { decode } from 'he';
 import { Link } from 'react-router-dom';
 
-const Drops = ({ match }) => {
+const Programas = ({ match }) => {
   const navigate = useNavigate();
 
-  const [news, setNews] = useState([]);
+  const [programas, setprogramas] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [startPage, setStartPage] = useState(1);
@@ -38,45 +38,38 @@ const Drops = ({ match }) => {
   }
 
   useEffect(() => {
-    const fetchNews = async () => {
+    const fetchProgramas = async () => {
       setLoading(true);
       try {
         const response = await fetch(
-          `https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=5&page=${page}&tags_exclude=2007`
+          `https://plusfm.com.br/wp-json/wp/v2/posts?categories=2685&per_page=3&page=${page}`
         );
         const data = await response.json();
 
-        const filteredNews = data.filter(
-          (news) =>
-            !news.cartola.toLowerCase().includes('no ar') &&
-            !news.cartola.toLowerCase().includes('política')
-        );
-
-        filteredNews.forEach((news) => {
-          console.log('Cartola:', news.cartola);
+        data.forEach((programa) => {
+          console.log('Cartola:', programa.cartola);
         });
 
-        setNews(filteredNews);
+        setprogramas(data); // Corrigido para corresponder ao nome do estado
       } catch (error) {
         console.error(error);
       }
       setLoading(false);
     };
 
-    fetchNews();
+    fetchProgramas();
   }, [page]);
   const handlePageChange = (newPage) => {
-    navigate(`/drops/${newPage}`);
+    navigate(`/programas/${newPage}`); // Atualizado para apontar para a página de Programas
   };
-
   return (
     <div>
-      <div className="contentBackgroundDrops">
+      <div className="contentBackgroundDrops1">
         <div className="topBackContainer">
-          <button onClick={handleHome} className="backButton">
-            <CaretLeft weight='bold'/>
+          <button onClick={handleHome} className="backButton3">
+            <CaretLeft weight="bold" />
           </button>
-          <h1 className="contentTitle">Drops</h1>
+          <h1 className="contentTitle">Programas</h1>
         </div>
         <div className="whiteLine" />
         <div className="contentContainer">
@@ -95,28 +88,37 @@ const Drops = ({ match }) => {
                     <p className="contentText">Carregando...</p>
                   </div>
                 ))
-            : news.map((newsItem, index) => (
-                <Link
-                  to={`/noticia/${newsItem.id}`}
-                  style={{ textDecoration: 'none' }}
-                  key={newsItem.id}
-                >
-                  <div
-                    className={`contentItem ${index === 2 ? 'thirdItem' : ''}`}
+            : programas.map(
+                (
+                  programa,
+                  index // Atualizado para usar a variável programas
+                ) => (
+                  <Link
+                    to={`/programa/${programa.id}`}
+                    style={{ textDecoration: 'none' }}
+                    key={programa.id}
                   >
-                    <img
-                      src={newsItem.yoast_head_json?.og_image?.[0]?.url}
-                      alt="Imagem da notícia"
-                    />
-                    <p className="contentText">
-                      {decode(newsItem.title.rendered)}
-                    </p>
-                  </div>
-                  {index === news.length - 1 && <div className="dividerLine" />}
-                </Link>
-              ))}
+                    <div
+                      className={`contentItem ${
+                        index === 2 ? 'thirdItem' : ''
+                      }`}
+                    >
+                      <img
+                        src={programa.yoast_head_json?.og_image?.[0]?.url}
+                        alt="Imagem do programa"
+                      />
+                      <p className="contentText">
+                        {decode(programa.title.rendered)}
+                      </p>
+                    </div>
+                    {index === programas.length - 1 && (
+                      <div className="dividerLine" />
+                    )}
+                  </Link>
+                )
+              )}
         </div>
-        <div className="pagination">
+        <div className="pagination1">
           {startPage > 1 && (
             <button onClick={handlePreviousPages} className="previousPages">
               &lt;
@@ -165,4 +167,4 @@ const Drops = ({ match }) => {
   );
 };
 
-export default Drops;
+export default Programas;

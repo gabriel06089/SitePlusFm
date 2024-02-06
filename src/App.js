@@ -46,7 +46,9 @@ import cearanews from './imagemprogamacao/cearanews.svg';
 import plusmania from './imagemprogamacao/plusmania.svg';
 import slowmotion from './imagemprogamacao/slowmotion.svg';
 import tercodamisercordia from './imagemprogamacao/tercodamisericordia.svg';
-
+import Xlogo from './twitter-x.svg';
+import FoneDeOuvido from './FoneDeOuvido.png';
+import PingGoogle from './PingGoogle.png';
 import ouca from './ouca.svg';
 import Drops from './textSVGs/drops.svg';
 import ProgramasText from './textSVGs/PROGRAMAS.svg';
@@ -104,6 +106,8 @@ function App() {
     setCurrentSong,
     handlePlayPause, // Adicione handlePlayPause aqui se você o adicionou ao contexto
   } = useContext(PlayerContext);
+  const [carregando, setCarregando] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [itemsToRender, setItemsToRender] = useState(2);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -228,20 +232,19 @@ function App() {
 
   useEffect(() => {
     const fetchNews = async () => {
+      setCarregando(true);
       try {
         const response = await fetch(
           'https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=3&tags_exclude=2007'
         );
         const data = await response.json();
 
-        // Filtra as notícias que não contêm "No ar" ou "Política" no cartola
         const filteredNews = data.filter(
           (news) =>
             !news.cartola.toLowerCase().includes('no ar') &&
             !news.cartola.toLowerCase().includes('política')
         );
 
-        // Exibe apenas as 3 primeiras notícias após o filtro
         const limitedNews = filteredNews.slice(0, 3);
 
         limitedNews.forEach((news) => {
@@ -251,6 +254,8 @@ function App() {
         setNews(limitedNews);
       } catch (error) {
         console.error(error);
+      } finally {
+        setCarregando(false);
       }
     };
 
@@ -449,6 +454,12 @@ function App() {
       image: asmaispedidas,
     },
     {
+      title: 'A Voz do Brasil',
+      days: [1, 2, 3, 4, 5],
+      startHour: 19,
+      endHour: 20,
+    },
+    {
       title: 'Plus Mania',
       days: [1, 2, 3, 4, 5],
       startHour: 20,
@@ -633,6 +644,13 @@ function App() {
     autoplay: true,
     autoplaySpeed: 20000,
   };
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add('noScroll');
+    } else {
+      document.body.classList.remove('noScroll');
+    }
+  }, [isMenuOpen]);
 
   return (
     <div
@@ -645,367 +663,143 @@ function App() {
       }}
     >
       <div className="App">
-        <header
-          className={`App-header ${isSidebarOpen ? 'sidebar-open' : ''} ${
-            isPlaying ? 'playing' : ''
-          }`}
-        >
+        <div className="promoContainerNew1">
           <div
-            className={`ContainerRow ${isSidebarOpen ? 'sidebar-open' : ''}`}
+            className={`logoMenuDivRow ${isMenuOpen ? 'fixed' : ''} ${
+              isPlaying ? 'playing' : ''
+            } ${isPlaying && isMenuOpen ? 'playingAndMenuOpen' : ''}`}
           >
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}
-            >
-              {!isScrolled && <img loading="lazy" src={Logo} />}
-              <button
-                className="ButtonMenu"
-                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              >
-                {isSidebarOpen ? (
-                  <X
-                    size={'8vw'}
-                    color={getComputedStyle(document.documentElement)
-                      .getPropertyValue('--cor-terciaria')
-                      .trim()}
-                    weight="bold"
-                    className="xSvg"
-                  />
-                ) : (
-                  <div className="line-container">
-                    <div
-                      className="line"
-                      style={{ width: '72%', marginBottom: '3px' }}
-                    ></div>
-                    <div
-                      className="line"
-                      style={{ width: '72%', marginBottom: '3px' }}
-                    ></div>
-                    <div
-                      className="line"
-                      style={{ width: '72%', marginBottom: '0px' }}
-                    ></div>
-                  </div>
-                )}
-              </button>
-            </div>
-            <span>
-              <Link
-                to="/drops"
-                style={{
-                  color: 'inherit',
-                  textDecoration: 'none',
-                  cursor: 'pointer',
-                }}
-              >
-                <span className="ContainerRowSpan">DROPS</span>
-              </Link>
-            </span>
-            <span>
-              {' '}
-              <a
-                href="#programacao"
-                style={{
-                  color: 'inherit',
-                  textDecoration: 'none',
-                  cursor: 'pointer',
-                }}
-              >
-                <span className="ContainerRowSpan1">PROGRAMAÇÃO</span>
-              </a>
-            </span>
-
-            <span>
-              {' '}
-              <a
-                href="#contato"
-                style={{
-                  color: 'inherit',
-                  textDecoration: 'none',
-                  cursor: 'pointer',
-                }}
-              >
-                <span className="ContainerRowSpanNone">CONTATO</span>
-              </a>
-            </span>
-            <div
-              className={`InnerContainerRow ${
-                isSidebarOpen ? 'sidebar-open' : ''
-              }`}
-            >
-              <a
-                href="https://www.facebook.com/plusfmrede"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FacebookLogo
-                  size={isSidebarOpen ? '6vw' : '2vw'}
-                  color={getComputedStyle(document.documentElement)
-                    .getPropertyValue('--cor-terciaria')
-                    .trim()}
-                />
-              </a>
-              <a
-                href="https://twitter.com/plusfmrede_"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <TwitterLogoX
-                  className={`svgTwitter ${
-                    isSidebarOpen ? 'sidebar-open' : ''
-                  }`}
-                  alt="Imagem do programa atual"
-                />
-              </a>
-              <a
-                href="https://www.instagram.com/plusfmrede/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <InstagramLogo
-                  size={isSidebarOpen ? '6vw' : '2vw'}
-                  color={getComputedStyle(document.documentElement)
-                    .getPropertyValue('--cor-terciaria')
-                    .trim()}
-                />
-              </a>
-              <a
-                href="https://www.tiktok.com/@plusfmrede"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <TiktokLogo
-                  size={isSidebarOpen ? '6vw' : '2vw'}
-                  color={getComputedStyle(document.documentElement)
-                    .getPropertyValue('--cor-terciaria')
-                    .trim()}
-                />
-              </a>
-              <a
-                href="https://www.youtube.com/channel/UC0ek2Dls6ikevIsWckZX7ZA"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <YoutubeLogo
-                  size={isSidebarOpen ? '6vw' : '2vw'}
-                  color={getComputedStyle(document.documentElement)
-                    .getPropertyValue('--cor-terciaria')
-                    .trim()}
-                />
-              </a>
-              <a
-                href="https://chat.whatsapp.com/L1iUEmsrPf7LLkJca22rut"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <WhatsappLogo
-                  size={isSidebarOpen ? '6vw' : '2vw'}
-                  color={getComputedStyle(document.documentElement)
-                    .getPropertyValue('--cor-terciaria')
-                    .trim()}
-                />
-              </a>
-              <a
-                href="https://t.me/redeplusfm"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <TelegramLogo
-                  size={isSidebarOpen ? '6vw' : '2vw'}
-                  color={getComputedStyle(document.documentElement)
-                    .getPropertyValue('--cor-terciaria')
-                    .trim()}
-                />
-              </a>
-            </div>
-            <div style={{ marginLeft: '6vw' }}></div>
+            <img src={Logo} />
+            {isMenuOpen ? (
+              <X weight="bold" onClick={() => setIsMenuOpen(false)} />
+            ) : (
+              <List weight="bold" onClick={() => setIsMenuOpen(true)} />
+            )}
           </div>
-        </header>
-
-        <div className="backgroundDivContainerNews">
-          <img
-            src={Drops}
-            className={`dropsImage ${isSidebarOpen ? 'sidebar-open' : ''}`}
-          />
-          <h1 className="dropsText">DROPS DA PLUS</h1>
-          <div className="whiteLine"></div>
-          <div className="container">
-            {news.slice(0, 1).map((newsItem, index) => (
-              <Link
-                to={`/noticia/${newsItem.id}`}
-                key={index}
-                style={{ textDecoration: 'none' }}
-              >
-                <div className="sub-container first-news">
-                  <img
-                    src={newsItem.yoast_head_json?.og_image?.[0]?.url}
-                    alt="Imagem da notícia"
-                  />
-                  <div className="center-div first-news">
-                    <div className="title-bigode-container">
-                      <p className="center-divP">
-                        {decode(newsItem.title.rendered)}
-                      </p>
-                    </div>
-                    <div className="absolute-div first-news">
-                      <p className="center-divPP">{decode(newsItem.cartola)}</p>
-                    </div>
-                  </div>
-                </div>
+          <div className={`fullScreenMenu ${isMenuOpen ? 'open' : ''}`}>
+            <div className="menuOpenContainerColumn">
+              <Link to="/">
+                <h1>Home</h1>
               </Link>
-            ))}
-
-            <div className="second-news-container">
-              {news.slice(1, 3).map((newsItem, index) => (
-                <Link
-                  to={`/noticia/${newsItem.id}`}
-                  key={index}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <div className="sub-container second-news">
-                    <img
-                      src={newsItem.yoast_head_json?.og_image?.[0]?.url}
-                      alt="Imagem da notícia"
-                    />
-                    <div className="center-div second-news">
-                      <div className="title-bigode-container">
-                        <p className="center-divP">
-                          {decode(newsItem.title.rendered)}
-                        </p>
-                        <p className="center-divP-bigode">
-                          {decode(newsItem.bigode)}
-                        </p>
-                        <p className="center-divP-date">
-                          <span
-                            style={{ display: 'flex', alignItems: 'center' }}
-                          >
-                            <CalendarPlus
-                              size={18}
-                              weight="fill"
-                              style={{ marginRight: '8px' }}
-                            />
-                            {new Date(newsItem.date).toLocaleDateString(
-                              'pt-BR',
-                              {
-                                day: 'numeric',
-                                month: 'long',
-                                year: 'numeric',
-                              }
-                            )}
-                          </span>
-                        </p>
-                      </div>
-                      <div className="absolute-div second-news">
-                        <p className="center-divPP">
-                          {decode(newsItem.cartola)}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              ))}
+              <Link to="/sobre">
+                <h1>Quem Somos</h1>
+              </Link>
+              <Link to="/drops">
+                <h1>Drops</h1>
+              </Link>
+              <Link to="/programas">
+                <h1>Programas</h1>
+              </Link>
+              <Link to="/programacao">
+                <h1>Programação</h1>
+              </Link>
+              <Link to="/onde-estamos">
+                <h1>Onde Estamos</h1>
+              </Link>
+              <Link to="/promocoes">
+                <h1>Promoções</h1>
+              </Link>
+              <Link to="/contato">
+                <h1>Contato</h1>
+              </Link>
+              <div className="footerSocialMediaContainer">
+                {' '}
+                <FacebookLogo weight="regular" size={30} /> <img src={Xlogo} />
+                <InstagramLogo weight="regular" size={30} />{' '}
+                <TiktokLogo weight="regular" size={30} />{' '}
+                <YoutubeLogo weight="regular" size={30} />{' '}
+                <WhatsappLogo weight="regular" size={30} />{' '}
+                <TelegramLogo weight="regular" size={30} />
+              </div>
             </div>
+          </div>
+          <div className="promoActorRowNew">
+            <Slider {...settings}>
+              {promos.map((promo, index) => (
+                <div
+                  className={`promoCardNew1 ${isPlaying ? 'playing' : ''}`}
+                  key={index}
+                >
+                  {promo.yoast_head_json.og_image[0].url && (
+                    <div className="imageContainer1">
+                      <img
+                        src={promo.yoast_head_json.og_image[0].url}
+                        alt="Promo"
+                      />
+                      <div className="clickInterceptor"></div>
+                    </div>
+                  )}
+                  <Link
+                    to={`/promocao/${promo.id}`}
+                    className="linkArea"
+                  ></Link>
+                </div>
+              ))}
+            </Slider>
           </div>
         </div>
-        <div className="backgroundDivContainerNews">
-          <img
-            src={ProgramasText}
-            className={`programasImage ${isSidebarOpen ? 'sidebar-open' : ''}`}
-          />
-          <h1 className="dropsText2">PROGRAMAS</h1>
-          <div className="whiteLine2"></div>
 
-          <div className="container">
-            {programas.slice(0, 1).map((programa, index) => (
+        <div className="backgroundDivContainerNews fade-in">
+          <h1 className="h1StyleDrops">Drops </h1>
+          <div className="whiteLine" />
+
+          {news.slice(0, 3).map((newsItem, index) => (
+            <Link
+              to={`/noticia/${newsItem.id}`}
+              key={index}
+              style={{ textDecoration: 'none' }}
+            >
+              <div className="newsContainer">
+                <img
+                  src={newsItem.yoast_head_json?.og_image?.[0]?.url}
+                  alt="Imagem da notícia"
+                  className="newsImage"
+                />
+                <div className="newsTitleContainer">
+                  <h2 className="newsTitle">
+                    {decode(newsItem.title.rendered)}
+                  </h2>
+                </div>
+              </div>
+            </Link>
+          ))}
+          <Link to="/drops" className="btnStyle">
+            Ver mais
+          </Link>
+          <div className="placeholderPropraganda" />
+        </div>
+        <div className="contentBackground fade-in">
+          <h1 className="contentTitle">Programas</h1>
+          <div className="whiteLine" />
+
+          <div className="contentContainer">
+            {programas.slice(0, 2).map((programa, index) => (
               <Link
                 to={`/noticia/${programa.id}`}
                 key={index}
                 style={{ textDecoration: 'none' }}
               >
-                <div className="sub-container first-news">
+                <div className="contentItem">
                   <img
                     src={programa.yoast_head_json?.og_image?.[0]?.url}
                     alt="Imagem da notícia"
                   />
-                  <div className="center-div first-news">
-                    <div className="title-bigode-container">
-                      <p className="center-divP">
-                        {decode(programa.title.rendered)}
-                      </p>
-                    </div>
-                    <div className="absolute-div first-news">
-                      <p className="center-divPP">{decode(programa.cartola)}</p>
-                    </div>
-                  </div>
+                  <p className="contentText">
+                    {decode(programa.title.rendered)}
+                  </p>
                 </div>
               </Link>
             ))}
-
-            <div className="second-news-container">
-              {programas.slice(1, 3).map((programa, index) => (
-                <Link
-                  to={`/noticia/${programa.id}`}
-                  key={index}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <div className="sub-container second-news">
-                    <img
-                      src={programa.yoast_head_json?.og_image?.[0]?.url}
-                      alt="Imagem da notícia"
-                    />
-                    <div className="center-div second-news">
-                      <div className="title-bigode-container">
-                        <p className="center-divP">
-                          {decode(programa.title.rendered)}
-                        </p>
-                        <p className="center-divP-bigode">
-                          {decode(programa.bigode)}
-                        </p>
-                        <p className="center-divP-date">
-                          <span
-                            style={{ display: 'flex', alignItems: 'center' }}
-                          >
-                            <CalendarPlus
-                              size={18}
-                              weight="fill"
-                              style={{ marginRight: '8px' }}
-                            />
-                            {new Date(programa.date).toLocaleDateString(
-                              'pt-BR',
-                              {
-                                day: 'numeric',
-                                month: 'long',
-                                year: 'numeric',
-                              }
-                            )}
-                          </span>
-                        </p>
-                      </div>
-                      <div className="absolute-div second-news">
-                        <p className="center-divPP">
-                          {decode(programa.cartola)}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
           </div>
         </div>
       </div>
       <section id="programacao"></section>
       <div className="progContainer">
-        <img src={Prog} className="progImage" />
-        <h1 className="dropsText1">NO AR</h1>
-        <div className="whiteLine1"></div>
-        <button className="meuBotao" onClick={() => setMostrar(!mostrar)}>
-          {' '}
-          <span className="textoBotao">CONFIRA NOSSA PROGRAMAÇÃO</span>
-        </button>
+        {/* <img src={Prog} className="progImage" /> */}
+        {/* <h1 className="dropsText1">NO AR</h1>
+        <div className="whiteLine1"></div> */}
+        <h1 className="h1StyleDrops">Programação </h1>
+        <div className="whiteLine" />
         {mostrar && (
           <div>
             {' '}
@@ -1347,7 +1141,6 @@ function App() {
             </div>
           </div>
         )}
-
         <div className="circleContainerRow">
           {' '}
           <div className="circle-container">
@@ -1414,11 +1207,47 @@ function App() {
               </button>
             </div>
           </div>
+        </div>{' '}
+        <button className="meuBotao" onClick={() => setMostrar(!mostrar)}>
+          {' '}
+          <span className="textoBotao">CONFIRA NOSSA PROGRAMAÇÃO</span>
+        </button>
+      </div>
+      <div className="promoContainerNew">
+        <img src={FoneDeOuvido} className="foneImg" />
+
+        <div className="flexCenter">
+          {' '}
+          <h1 className="contentTitle1">Promoções</h1>
+          <div className="whiteLine1" />
+        </div>
+        <div className="promoActorRowNew fade-in">
+          <Slider {...settings}>
+            {promos.map((promo, index) => (
+              <Link to={`/promocao/${promo.id}`} key={index}>
+                <div className="promoCardNew">
+                  {promo.yoast_head_json.og_image[0].url && (
+                    <img
+                      src={promo.yoast_head_json.og_image[0].url}
+                      alt="Promo"
+                    />
+                  )}
+                  <span className="cartolaAbsoluteNew">
+                    {he.decode(
+                      promo.cartola === 'Oportunidade' ? 'ATIVA' : 'ENCERRADA'
+                    )}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </Slider>
         </div>
       </div>
-
       <div className="MapContainer">
-        <img src={mapText} className="mapImage" />
+        <img src={PingGoogle} className="mapImg" />
+        {/* <img src={mapText} className="mapImage" /> */}
+        <h1 className="h1StyleDrops">Onde Estamos</h1>
+        <div className="whiteLine" />
         <div style={{ position: 'relative' }}>
           <Map
             onMouseOver={() => setHover(true)}
@@ -1510,30 +1339,9 @@ function App() {
             selectedRadio={selectedRadio}
           />
         </div>
+        <div className="boxMapPropaganda" />
       </div>
-      <div className="promoContainerNew">
-        <div className="promoActorRowNew">
-          <Slider {...settings}>
-            {promos.map((promo, index) => (
-              <Link to={`/promocao/${promo.id}`} key={index}>
-                <div className="promoCardNew">
-                  {promo.yoast_head_json.og_image[0].url && (
-                    <img
-                      src={promo.yoast_head_json.og_image[0].url}
-                      alt="Promo"
-                    />
-                  )}
-                  <span className="cartolaAbsoluteNew">
-                    {he.decode(
-                      promo.cartola === 'Oportunidade' ? 'ATIVA' : 'ENCERRADA'
-                    )}
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </Slider>
-        </div>
-      </div>
+
       <section id="contato"></section>
       <div className="contato">
         <div className="footerDiv1">

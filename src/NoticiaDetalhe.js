@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import './NoticiaDetalhe.css';
 import { Puff } from 'react-loader-spinner';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 import { Tweet } from 'react-tweet';
-
+import Xlogo from './twitter-x.svg';
 import { decode } from 'he';
 import Don7 from './don7horizontal.svg';
 import Logo from './plus-1.png';
@@ -12,17 +12,24 @@ import PlayStore from './playstore.png';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import AppleStore from './iostore.png';
+import { PlayerContext } from './Context/PlayerContext';
 import {
   Camera,
   FacebookLogo,
   InstagramLogo,
+  List,
+  TelegramLogo,
+  TiktokLogo,
   Timer,
   TwitterLogo,
   WhatsappLogo,
+  X,
   YoutubeLogo,
 } from 'phosphor-react';
 
 const NoticiaDetalhe = () => {
+  const location = useLocation();
+  const isNewsPage = location.pathname.includes('/noticia');
   const { id } = useParams();
   const [noticia, setNoticia] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -30,7 +37,11 @@ const NoticiaDetalhe = () => {
   const [imagemDescricao, setImagemDescricao] = useState(null);
   const [maisNoticias, setMaisNoticias] = useState([]);
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const {
+    isPlaying,
+    // Adicione handlePlayPause aqui se você o adicionou ao contexto
+  } = useContext(PlayerContext);
   const checkScroll = () => {
     // Verifique se a página foi rolada mais de 100 pixels
     if (window.scrollY > 20) {
@@ -124,7 +135,13 @@ const NoticiaDetalhe = () => {
 
     fetchPosts();
   }, []);
-
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add('noScroll');
+    } else {
+      document.body.classList.remove('noScroll');
+    }
+  }, [isMenuOpen]);
   if (loading) {
     return (
       <div className="loader-container">
@@ -196,55 +213,71 @@ const NoticiaDetalhe = () => {
   //     element.classList.remove('final-position');
   //   }
   // });
+
   return (
     <div className="noticiaDetalheDiv">
       <div className="MenuContainerHeader">
-        <header
-          className={`App-headerN ${
-            window.location.pathname.startsWith('/noticia')
-              ? 'noticias-page'
-              : ''
+        <div
+          className={`logoMenuDivRow ${isMenuOpen ? 'fixed' : ''} ${
+            isPlaying ? 'playing' : ''
+          } ${isPlaying && isMenuOpen ? 'playingAndMenuOpen' : ''} ${
+            isNewsPage ? 'newsPage' : ''
           }`}
         >
-          <Link to="/">{!isScrolled && <img loading="lazy" src={Logo} />}</Link>
-          <div className="divMenu">
-            <div className="menuDiv">
-              <Link to="/drops" className="divMenuSpan">
-                <span>Drops</span>
-              </Link>
-              <span className="divMenuSpan">Contato</span>
-              <span className="divMenuSpan">Programação</span>
-            </div>
-            <div className="socialIcons">
-              <InstagramLogo
-                size={'2vw'}
-                color={getComputedStyle(
-                  document.documentElement
-                ).getPropertyValue('--cor-primaria')}
-              />
-              <FacebookLogo
-                size={'2vw'}
-                color={getComputedStyle(
-                  document.documentElement
-                ).getPropertyValue('--cor-primaria')}
-              />
-              <YoutubeLogo
-                size={'2vw'}
-                color={getComputedStyle(
-                  document.documentElement
-                ).getPropertyValue('--cor-primaria')}
-              />
-              <TwitterLogo
-                size={'2vw'}
-                color={getComputedStyle(
-                  document.documentElement
-                ).getPropertyValue('--cor-primaria')}
-              />
+          <img src={Logo} />
+          {isMenuOpen ? (
+            <X
+              className={isNewsPage ? 'newsPageIcon' : ''}
+              weight="bold"
+              onClick={() => setIsMenuOpen(false)}
+            />
+          ) : (
+            <List
+              className={isNewsPage ? 'newsPageIcon' : ''}
+              weight="bold"
+              onClick={() => setIsMenuOpen(true)}
+            />
+          )}
+        </div>
+        <div className={`fullScreenMenu ${isMenuOpen ? 'open' : ''}`}>
+          <div className="menuOpenContainerColumn">
+            <Link to="/">
+              <h1>Home</h1>
+            </Link>
+            <Link to="/sobre">
+              <h1>Quem Somos</h1>
+            </Link>
+            <Link to="/drops">
+              <h1>Drops</h1>
+            </Link>
+            <Link to="/programas">
+              <h1>Programas</h1>
+            </Link>
+            <Link to="/programacao">
+              <h1>Programação</h1>
+            </Link>
+            <Link to="/onde-estamos">
+              <h1>Onde Estamos</h1>
+            </Link>
+            <Link to="/promocoes">
+              <h1>Promoções</h1>
+            </Link>
+            <Link to="/contato">
+              <h1>Contato</h1>
+            </Link>
+            <div className="footerSocialMediaContainer">
+              {' '}
+              <FacebookLogo weight="regular" size={30} /> <img src={Xlogo} />
+              <InstagramLogo weight="regular" size={30} />{' '}
+              <TiktokLogo weight="regular" size={30} />{' '}
+              <YoutubeLogo weight="regular" size={30} />{' '}
+              <WhatsappLogo weight="regular" size={30} />{' '}
+              <TelegramLogo weight="regular" size={30} />
             </div>
           </div>
-        </header>
+        </div>
       </div>
-      <div className="noticiasContainer">
+      <div className={`noticiasContainer ${isPlaying ? 'playing' : ''}`}>
         <h1>{decode(noticia.title.rendered)}</h1>
         <h2>{decode(noticia.bigode)}</h2>
 
