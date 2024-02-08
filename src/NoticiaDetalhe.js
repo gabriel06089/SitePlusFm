@@ -379,27 +379,7 @@ const NoticiaDetalhe = () => {
           />
         </a>
       </div>
-      <div className="containerDivisao"> Mais notícias </div>
-      <div className="maisNoticias">
-        {maisNoticias.map((noticia) => (
-          <Link
-            to={`/noticia/${noticia.id}`}
-            key={noticia.id}
-            className="noticia"
-            style={{ color: 'inherit', textDecoration: 'none' }}
-          >
-            <img
-              loading="lazy"
-              src={noticia.yoast_head_json.og_image[0].url}
-              alt="Imagem da notícia"
-            />
-            <div>
-              <h4>{decode(noticia.cartola)}</h4>
-              <h5>{decode(noticia.title.rendered)}</h5>
-            </div>
-          </Link>
-        ))}
-      </div>
+
       <div className="containerDivisaoC"> Recomendadas para você </div>
       <div
         className="maisNoticiasR"
@@ -408,7 +388,7 @@ const NoticiaDetalhe = () => {
         <div className="containerColuna1">
           {posts.slice(0, 3).map((post) => (
             <Link
-              to={`/noticia/${post.id}`} // Use o id do post aqui
+              to={`/noticia/${post.id}`}
               key={post.id}
               className="post"
               style={{
@@ -431,30 +411,7 @@ const NoticiaDetalhe = () => {
         <div className="containerColuna2">
           {posts.slice(3, 6).map((post) => (
             <Link
-              to={`/noticia/${post.id}`} // Use o id do post aqui
-              key={post.id}
-              className="post"
-              style={{
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              <img
-                loading="lazy"
-                src={post.yoast_head_json.og_image[0].url}
-                alt="Imagem do post"
-              />
-              <div className="containerSpanFooter">
-                <h4>{decode(post.cartola)}</h4>
-                <h5>{decode(post.title.rendered)}</h5>
-              </div>
-            </Link>
-          ))}
-        </div>
-        <div className="containerColuna3">
-          {posts.slice(6, 9).map((post) => (
-            <Link
-              to={`/noticia/${post.id}`} // Use o id do post aqui
+              to={`/noticia/${post.id}`}
               key={post.id}
               className="post"
               style={{
