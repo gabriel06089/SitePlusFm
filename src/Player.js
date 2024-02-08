@@ -256,7 +256,7 @@ const Player = () => {
       ? 'Seu texto personalizado aqui'
       : `${currentSong.artist} - ${currentSong.title}`;
 
-  console.log('Comprimento do texto: ', text.length);
+  
   const options = radios.map((radio) => ({
     value: radio.title,
     label: radio.title,

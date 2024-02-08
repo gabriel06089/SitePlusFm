@@ -350,8 +350,23 @@
         /* Adicione esta linha */
       }
     </style>
-    <script>
-      var classes = ['paraipaba','crateus','catarina','iguatu','cariri', 'sobral', 'santaquiteria', 'cascavel', 'redencao', 'pacajus', 'fortaleza', 'aracati', 'playing'];
+   <script>
+  var svgElement = document.querySelector('svg');
+
+  // Estado inicial
+  var state = {
+    isPlaying: svgElement.getAttribute('data-is-playing') === 'true',
+    currentSong: svgElement.getAttribute('data-current-song'),
+  };
+
+  // Atualize o estado com base no evento personalizado
+  svgElement.addEventListener('stateChanged', function (event) {
+    state.isPlaying = event.detail.isPlaying;
+    state.currentSong = event.detail.currentSong;
+    console.log('state:', state);
+  });
+
+  var classes = ['paraipaba','crateus','catarina','iguatu','cariri', 'sobral', 'santaquiteria', 'cascavel', 'redencao', 'pacajus', 'fortaleza', 'aracati', 'playing'];
   var cls1Elements = document.querySelectorAll('.cls-1');
   var playingClass = null;
 
@@ -370,6 +385,11 @@
             el.classList.remove('scaled');
           });
         }
+
+        var allElements = document.querySelectorAll('.scaled');
+        allElements.forEach(function(el) {
+          el.classList.remove('scaled');
+        });
 
         if (playingClass !== className) {
           elements.forEach(function(el) {
@@ -392,7 +412,7 @@
       });
     });
   });
-    </script>
+</script>
   </defs>
   <g id="Mapa">
     <polygon class="cls-1"

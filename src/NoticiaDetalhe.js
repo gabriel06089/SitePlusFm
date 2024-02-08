@@ -226,11 +226,7 @@ const NoticiaDetalhe = () => {
         >
           <img src={Logo} />
           {isMenuOpen ? (
-            <X
-              className={isNewsPage ? 'newsPageIcon' : ''}
-              weight="bold"
-              onClick={() => setIsMenuOpen(false)}
-            />
+            <X weight="bold" onClick={() => setIsMenuOpen(false)} />
           ) : (
             <List
               className={isNewsPage ? 'newsPageIcon' : ''}

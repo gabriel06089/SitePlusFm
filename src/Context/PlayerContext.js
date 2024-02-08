@@ -140,7 +140,7 @@ export const PlayerProvider = ({ children }) => {
     fetchSong();
 
     // Configurar um intervalo para chamar a função a cada 10 segundos
-    const intervalId = setInterval(fetchSong, 10000);
+    const intervalId = setInterval(fetchSong, 2000);
 
     // Limpar o intervalo quando o componente for desmontado
     return () => clearInterval(intervalId);

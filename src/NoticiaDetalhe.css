@@ -474,7 +474,7 @@ a {
     .noticiasContainer {
 
         width: 100%;
-        padding-inline: 2vw;
+        padding-inline: 8vw;
     }
 
     .noticiasContainer img {
@@ -761,7 +761,7 @@ h3 {
     .descImage {
         color: #2B2B2B;
         font-family: 'Rubik', sans-serif;
-        font-size: 0.8rem;
+        font-size: 0.62rem;
         font-style: normal;
         font-weight: lighter;
         opacity: 0.7;
@@ -774,9 +774,9 @@ h3 {
 @media (max-width: 466px) {
     h1 {
         color: var(--cor-primaria);
-        font-size: 32px;
+        font-size: 30px;
         font-family: Rubik;
-        letter-spacing: -0.08px;
+        letter-spacing: -0.1px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
@@ -1160,249 +1160,7 @@ h3 {
 
 
 
-@media (min-width: 601px) {
-    .App-header img:first-child {
-        margin-right: 0vw;
-        margin-left: -1vw;
-        position: absolute;
-        top: -4.7vw;
-        left: -24vw;
-        z-index: 999;
-        width: auto;
-        height: 9vw;
-        align-self: center
-    }
 
-    .App-header {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-top: 1vw;
-    }
-
-
-
-    .ContainerRow {
-        margin-left: 4vw;
-        display: flex;
-        justify-content: flex-start;
-        /* Alinha os itens ao início do contêiner */
-        align-items: center;
-        width: 25vw;
-        padding-left: 0.5vw;
-        /* Reduz o padding para aproximar os itens */
-        background-color: white;
-        margin-bottom: 1vw;
-        padding-bottom: 0.4vw;
-        border-bottom-left-radius: 12px;
-        position: fixed;
-        top: 4.7vw;
-        left: 24.7vw;
-        z-index: 99;
-        height: 2.0vw;
-    }
-
-    .ContainerRow span {
-        margin-top: 0.5vw;
-
-        color: var(--cor-primaria);
-        font-family: 'Rubik', sans-serif;
-
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-
-
-    }
-
-    .ContainerRowSpan {
-        margin-top: 0.5vw;
-        width: 2vw;
-        color: var(--cor-primaria);
-        font-family: 'Rubik', sans-serif;
-        font-size: 2px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        position: relative;
-    }
-
-    .ContainerRowSpan1 {
-        margin-top: 0.5vw;
-        width: 2vw;
-        color: var(--cor-primaria);
-        font-family: 'Rubik', sans-serif;
-        font-size: 2px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        position: relative;
-        left: -3vw;
-    }
-
-    .ContainerRowSpanNone {
-        margin-top: 0.5vw;
-
-        color: var(--cor-primaria);
-        font-family: 'Rubik', sans-serif;
-        font-size: 2px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        display: none;
-    }
-
-    .InnerContainerRow {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: auto;
-        padding-inline: 0.5vw;
-        margin-left: 2vw;
-        gap: 1vw;
-        margin-top: 1.5vw;
-        background-color: var(--cor-primaria);
-        height: 2.6vw;
-        position: fixed;
-        right: 29.5vw;
-        top: 3.18vw;
-        border-bottom-left-radius: 12px;
-        border-bottom-right-radius: 12px;
-        border: 2px solid white;
-
-        border-top: none;
-
-        z-index: 12;
-    }
-
-    .App-Player {
-        transform: scale(0.9);
-        top: -0.5vw;
-        margin-inline: 2vw;
-        width: 152vw;
-        height: 5.5vw;
-        /*border: 2px solid white;
-        */
-        /*Adicionaumabordabrancafina*/
-        border-top: none;
-        border-bottom-left-radius: 12px;
-        border-bottom-right-radius: 12px;
-    }
-
-    .App-Player.scrolled {
-        width: auto;
-    }
-
-
-    @media (min-width: 1440px) {
-        .App-headerImg3 {
-            margin-right: 0vw;
-            margin-left: -1vw;
-            position: fixed;
-            top: 3.5vw;
-            left: 4.7vw;
-            z-index: 51;
-            width: auto;
-            height: 8vw;
-            display: none;
-        }
-    }
-
-    .ContainerMusicSpanPlaying {
-
-        width: 55vw;
-
-    }
-
-    .dropsFrontCardContainerSpanCartola {
-        position: absolute;
-        bottom: 87%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 8px;
-        height: 2.4vw;
-        background-color: var(--cor-primaria);
-        align-self: center;
-        padding-inline: 1vw;
-        z-index: 6;
-        color: white;
-        font-family: 'Rubik', sans-serif;
-
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        position: absolute;
-
-
-        /* Adiciona uma borda branca fina */
-    }
-
-    .dropsColumnContainer::after {
-        content: "";
-        position: absolute;
-        bottom: -24%;
-        left: 0;
-        width: 100%;
-        height: 35%;
-        background: white;
-        border-top: 0.5vw solid var(--cor-primaria);
-        /* Adiciona uma borda amarela de 2px na parte superior */
-        border-radius: 8px;
-        z-index: 4;
-
-    }
-
-    .dropsNoArContainer {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 8px;
-        width: auto;
-        padding-inline: 1vw;
-        height: auto;
-        background-color: white;
-        position: absolute;
-
-
-    }
-
-    .dropsNoArContainer {
-        color: var(--cor-primaria);
-        font-family: 'Rubik', sans-serif;
-
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        z-index: 5;
-
-    }
-
-    .dropsFrontCardContainerDiv {
-        position: absolute;
-        bottom: -20%;
-        width: 100%;
-        background: var(--cor-primaria);
-        border-top: 0.5vw solid white;
-        /* Adiciona uma borda amarela de 2px na parte superior */
-        border-radius: 8px;
-        z-index: 4;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .dropsFrontCardContainerSpan {
-        font-family: 'Rubik', sans-serif;
-
-        font-weight: 500;
-        color: white;
-        text-align: center;
-        z-index: 5;
-        margin-inline: 2vw;
-        position: relative;
-    }
-}
 
 
 

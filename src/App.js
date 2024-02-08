@@ -83,7 +83,7 @@ import {
 } from 'phosphor-react';
 import { PlayerContext } from './Context/PlayerContext';
 
-import { StyledImg } from './styles';
+import { StyledImg, StyledRipple } from './styles';
 function App() {
   const [image, setImage] = useState(null);
   const [post, setPost] = useState(null);
@@ -108,6 +108,9 @@ function App() {
   } = useContext(PlayerContext);
   const [carregando, setCarregando] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const animationDelays = [...Array(50)].map(() => ({
+    animationDelay: `${Math.random() * 1000}ms`,
+  }));
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [itemsToRender, setItemsToRender] = useState(2);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -247,9 +250,7 @@ function App() {
 
         const limitedNews = filteredNews.slice(0, 3);
 
-        limitedNews.forEach((news) => {
-          console.log('Cartola:', news.cartola);
-        });
+        limitedNews.forEach((news) => {});
 
         setNews(limitedNews);
       } catch (error) {
@@ -299,9 +300,7 @@ function App() {
         );
         const data = await response.json();
 
-        data.forEach((programa) => {
-          console.log('Cartola:', programa.cartola);
-        });
+        data.forEach((programa) => {});
 
         setProgramas(data);
       } catch (error) {
@@ -381,7 +380,6 @@ function App() {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const circleRef = useRef(null);
   const programass = [
     {
       title: 'Corujão da Plus',
@@ -573,8 +571,12 @@ function App() {
 
     return () => clearInterval(intervalId);
   }, []);
+  const circleRef = useRef(null);
   useEffect(() => {
     const circle = circleRef.current;
+
+    if (!circle) return;
+
     const radius = circle.r.baseVal.value;
     const circumference = radius * 2 * Math.PI;
 
@@ -605,16 +607,13 @@ function App() {
         // Garante que o progresso nunca ultrapasse 100%
         progress = Math.min(progress, 100);
 
-        console.log(
-          `Progresso do programa "${currentProgram.title}": ${progress}%`
-        );
         setProgress(progress);
         setCurrentImage(currentProgram.image);
       }
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [circleRef.current]);
   function formatHour(hour) {
     let formattedHour = hour < 10 ? `0${hour}:00` : `${hour}:00`;
 
@@ -651,7 +650,27 @@ function App() {
       document.body.classList.remove('noScroll');
     }
   }, [isMenuOpen]);
+  useEffect(() => {
+    // Simula o carregamento de dados que leva 3 segundos
+    setTimeout(() => {
+      setCarregando(false);
+    }, 2200);
+  }, []);
 
+  if (carregando) {
+    return (
+      <div className="loader-container1">
+        <img className="loader-logo" src={Logo} alt="Logo" />
+        {[...Array(50)].map((_, i) => (
+          <div
+            key={i}
+            className="loader-bar"
+            style={{ '--delay': `${Math.sin(i + Math.random()) * 0.2}s` }}
+          />
+        ))}
+      </div>
+    );
+  }
   return (
     <div
       style={{
@@ -696,7 +715,7 @@ function App() {
               <Link to="/onde-estamos">
                 <h1>Onde Estamos</h1>
               </Link>
-              <Link to="/promocoes">
+              <Link to="/promocao">
                 <h1>Promoções</h1>
               </Link>
               <Link to="/contato">
@@ -800,7 +819,7 @@ function App() {
         <div className="whiteLine1"></div> */}
         <h1 className="h1StyleDrops">Programação </h1>
         <div className="whiteLine" />
-        {mostrar && (
+        {/* {mostrar && (
           <div>
             {' '}
             <div className="progContainerRow">
@@ -1140,7 +1159,7 @@ function App() {
               </div>
             </div>
           </div>
-        )}
+        )} */}
         <div className="circleContainerRow">
           {' '}
           <div className="circle-container">
@@ -1208,10 +1227,9 @@ function App() {
             </div>
           </div>
         </div>{' '}
-        <button className="meuBotao" onClick={() => setMostrar(!mostrar)}>
-          {' '}
+        <Link to="/programacao" className="meuBotao">
           <span className="textoBotao">CONFIRA NOSSA PROGRAMAÇÃO</span>
-        </button>
+        </Link>
       </div>
       <div className="promoContainerNew">
         <img src={FoneDeOuvido} className="foneImg" />
@@ -1254,89 +1272,163 @@ function App() {
             onMouseOut={() => setHover(false)}
             className="mapComponent"
           />
+          <StyledRipple
+            top="86%"
+            left="60%"
+            className={selectedRadio.title === 'Cariri' ? 'ripple' : ''}
+          />
           <StyledImg
             src={Cariri}
-            top="87%"
+            top="83%"
             left="50%"
-            title="Plus Cariri"
+            title="Cariri"
             selectedRadio={selectedRadio}
+            className={selectedRadio.title === 'Cariri' ? 'pulsing' : ''}
+          />
+          <StyledRipple
+            top="37%"
+            left="86%"
+            className={selectedRadio.title === 'Aracati' ? 'ripple' : ''}
           />
           <StyledImg
             src={Aracati}
-            top="35%"
-            left="85%"
-            title="Plus Aracati"
+            top="33%"
+            left="81%"
+            title="Aracati"
             selectedRadio={selectedRadio}
+            className={selectedRadio.title === 'Aracati' ? 'pulsing' : ''}
+          />
+          <StyledRipple
+            top="65%"
+            left="27%"
+            className={selectedRadio.title === 'Catarina' ? 'ripple' : ''}
           />
           <StyledImg
             src={Catarina}
             top="62%"
-            left="30%"
-            title="Plus Catarina"
+            left="22%"
+            title="Catarina"
             selectedRadio={selectedRadio}
+            className={selectedRadio.title === 'Catarina' ? 'pulsing' : ''}
+          />
+          <StyledRipple
+            top="18%"
+            left="69%"
+            className={selectedRadio.title === 'Fortaleza' ? 'ripple' : ''}
           />
           <StyledImg
             src={Rede}
             top="14%"
-            left="65%"
-            title="Plus FM"
+            left="61%"
+            title="Fortaleza"
             selectedRadio={selectedRadio}
+            className={selectedRadio.title === 'Fortaleza' ? 'pulsing' : ''}
+          />
+          <StyledRipple
+            top="48%"
+            left="15%"
+            className={selectedRadio.title === 'Crateús' ? 'ripple' : ''}
           />
           <StyledImg
             src={Crateus}
             top="44%"
-            left="15%"
-            title="Plus Crateús"
+            left="10%"
+            title="Crateús"
             selectedRadio={selectedRadio}
+            className={selectedRadio.title === 'Crateús' ? 'pulsing' : ''}
+          />
+          <StyledRipple
+            top="70%"
+            left="51%"
+            className={selectedRadio.title === 'Iguatu' ? 'ripple' : ''}
           />
           <StyledImg
             src={Iguatu}
             top="67%"
-            left="45%"
-            title="Plus Iguatu"
+            left="39%"
+            title="Iguatu"
             selectedRadio={selectedRadio}
+            className={selectedRadio.title === 'Iguatu' ? 'pulsing' : ''}
+          />
+          <StyledRipple
+            top="25%"
+            left="64%"
+            className={selectedRadio.title === 'Pacajus' ? 'ripple' : ''}
           />
           <StyledImg
             src={Pacajus}
-            top="24%"
-            left="58%"
-            title="Plus Pacajus"
+            top="22%"
+            left="56%"
+            title="Pacajus"
             selectedRadio={selectedRadio}
+            className={selectedRadio.title === 'Pacajus' ? 'pulsing' : ''}
+          />
+          <StyledRipple
+            top="13%"
+            left="54%"
+            className={selectedRadio.title === 'Paraipaba' ? 'ripple' : ''}
           />
           <StyledImg
             src={Paraipaba}
             top="9%"
             left="50%"
-            title="Plus Paraipaba"
+            title="Paraipaba"
             selectedRadio={selectedRadio}
+            className={selectedRadio.title === 'Paraipaba' ? 'pulsing' : ''}
+          />
+          <StyledRipple
+            top="31%"
+            left="32%"
+            className={selectedRadio.title === 'Santa Quitéria' ? 'ripple' : ''}
           />
           <StyledImg
             src={SantaQuiteria}
             top="27%"
             left="29%"
-            title="Plus Santa Quitéria"
+            title="Santa Quitéria"
             selectedRadio={selectedRadio}
+            className={
+              selectedRadio.title === 'Santa Quitéria' ? 'pulsing' : ''
+            }
+          />
+          <StyledRipple
+            top="18%"
+            left="26%"
+            className={selectedRadio.title === 'Sobral' ? 'ripple' : ''}
           />
           <StyledImg
             src={Sobral}
             top="14%"
             left="22%"
-            title="Plus Sobral"
+            title="Sobral"
             selectedRadio={selectedRadio}
+            className={selectedRadio.title === 'Sobral' ? 'pulsing' : ''}
+          />
+          <StyledRipple
+            top="32%"
+            left="63%"
+            className={selectedRadio.title === 'Redenção' ? 'ripple' : ''}
           />
           <StyledImg
             src={Redencao}
-            top="30%"
-            left="62%"
-            title="Plus Redenção"
+            top="28%"
+            left="55%"
+            title="Redenção"
             selectedRadio={selectedRadio}
+            className={selectedRadio.title === 'Redenção' ? 'pulsing' : ''}
+          />
+          <StyledRipple
+            top="30%"
+            left="78%"
+            className={selectedRadio.title === 'Cascavel' ? 'ripple' : ''}
           />
           <StyledImg
             src={Cascavel}
             top="27%"
-            left="76%"
-            title="Plus Cascavel"
+            left="71%"
+            title="Cascavel"
             selectedRadio={selectedRadio}
+            className={selectedRadio.title === 'Cascavel' ? 'pulsing' : ''}
           />
         </div>
         <div className="boxMapPropaganda" />

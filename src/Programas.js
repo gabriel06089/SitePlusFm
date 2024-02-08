@@ -42,7 +42,7 @@ const Programas = ({ match }) => {
       setLoading(true);
       try {
         const response = await fetch(
-          `https://plusfm.com.br/wp-json/wp/v2/posts?categories=2685&per_page=3&page=${page}`
+          `https://plusfm.com.br/wp-json/wp/v2/posts?categories=2685&per_page=5&page=${page}`
         );
         const data = await response.json();
 

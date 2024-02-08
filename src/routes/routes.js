@@ -3,10 +3,12 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import NoticiaDetalhe from '../NoticiaDetalhe';
 import PromoDetalhe from '../PromoDetalhe';
 import Programas from '../Programas';
+import Promocao from '../Promocao';
 import App from '../App';
 import Player from '../Player';
 import Drops from '../Drops';
 import Sobre from '../Sobre';
+import OndeEstamos from '../OndeEstamos';
 import PrincipiosEditoriais from '../PrincipiosEditoriais';
 import Contato from '../Contato';
 import Manutencao from '../Manutencao';
@@ -33,6 +35,15 @@ const RoutesComponent = () => {
               <>
                 <Player />
                 <Manutencao />
+              </>
+            }
+          />
+          <Route
+            path="/onde-estamos"
+            element={
+              <>
+                <Player />
+                <OndeEstamos />
               </>
             }
           />
@@ -81,6 +92,25 @@ const RoutesComponent = () => {
               </>
             }
           />
+          <Route
+            path="/promocao/:page?"
+            element={
+              <>
+                <Player />
+                <Promocao />
+              </>
+            }
+          />
+          <Route
+            path="/promocao/page/:page"
+            element={
+              <>
+                <Player />
+                <Promocao />
+              </>
+            }
+          />
+
           <Route
             path="/noticia/:id"
             element={

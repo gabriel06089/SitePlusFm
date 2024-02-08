@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import './Contato.css'; // Importe o arquivo CSS
+import { Link, useParams, useLocation } from 'react-router-dom';
 import InputMask from 'react-input-mask';
 import {
   CaretCircleLeft,
@@ -11,17 +12,27 @@ import {
   TelegramLogo,
   TiktokLogo,
   WhatsappLogo,
+  X,
   YoutubeLogo,
 } from 'phosphor-react';
+import { PlayerContext } from './Context/PlayerContext';
 import { Navigate, useNavigate } from 'react-router-dom';
 import Logo from './plus-1.png';
-import Xlogo from './TwitterRoxo.png';
+import XRoxo from './TwitterRoxo.png';
+import Xlogo from './twitter-x.svg';
+
 const Contato = () => {
+  const location = useLocation();
+  const isNewsPage = location.pathname.includes('/contato');
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
   const [mensagem, setMensagem] = useState('');
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const {
+    isPlaying,
+    // Adicione handlePlayPause aqui se você o adicionou ao contexto
+  } = useContext(PlayerContext);
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -63,14 +74,115 @@ const Contato = () => {
     window.location.href = mailtoLink;
   };
   const navigate = useNavigate();
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add('noScroll');
+    } else {
+      document.body.classList.remove('noScroll');
+    }
+  }, [isMenuOpen]);
   return (
     <div className="contatoContainer">
-      <div className="logoRowContainer">
-        {' '}
+      <div
+        className={`logoMenuDivRow ${isMenuOpen ? 'fixed' : ''} ${
+          isPlaying ? 'playing' : ''
+        } ${isPlaying && isMenuOpen ? 'playingAndMenuOpen' : ''}`}
+      >
         <img src={Logo} />
-        <List />
+        {isMenuOpen ? (
+          <X weight="bold" onClick={() => setIsMenuOpen(false)} />
+        ) : (
+          <List
+            className={isNewsPage ? 'newsPageIcon' : ''}
+            weight="bold"
+            onClick={() => setIsMenuOpen(true)}
+          />
+        )}
       </div>
-      <div className="containerPropaganda"> </div>
+      <div className={`fullScreenMenu ${isMenuOpen ? 'open' : ''}`}>
+        <div className="menuOpenContainerColumn">
+          <Link to="/">
+            <h1>Home</h1>
+          </Link>
+          <Link to="/sobre">
+            <h1>Quem Somos</h1>
+          </Link>
+          <Link to="/drops">
+            <h1>Drops</h1>
+          </Link>
+          <Link to="/programas">
+            <h1>Programas</h1>
+          </Link>
+          <Link to="/programacao">
+            <h1>Programação</h1>
+          </Link>
+          <Link to="/onde-estamos">
+            <h1>Onde Estamos</h1>
+          </Link>
+          <Link to="/promocao">
+            <h1>Promoções</h1>
+          </Link>
+          <Link to="/contato">
+            <h1>Contato</h1>
+          </Link>
+          <div className="footerSocialMediaContainer">
+            {' '}
+            <a
+              href="https://www.facebook.com/plusfmrede/?locale=pt_BR"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FacebookLogo weight="regular" size={30} />
+            </a>
+            <a
+              href="https://twitter.com/plusfmrede_"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={Xlogo} />
+            </a>
+            <a
+              href="https://www.instagram.com/plusfmrede/?igsh=dGhjczFwNDBwdW81"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <InstagramLogo weight="regular" size={30} />
+            </a>
+            <a
+              href="https://www.tiktok.com/@plusfmrede"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <TiktokLogo weight="regular" size={30} />
+            </a>
+            <a
+              href="https://www.youtube.com/channel/UC0ek2Dls6ikevIsWckZX7ZA"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <YoutubeLogo weight="regular" size={30} />
+            </a>
+            <a
+              href="https://www.whatsapp.com/channel/0029VaDSwXYA89MeJrPw1p1A"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <WhatsappLogo weight="regular" size={30} />
+            </a>
+            <a
+              href="https://t.me/redeplusfm"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <TelegramLogo weight="regular" size={30} />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className={`containerPropaganda ${isPlaying ? 'playing' : ''}`}>
+        {' '}
+      </div>
       <div className="containerRowColumn">
         {' '}
         <div className="divColumn">
@@ -151,13 +263,55 @@ const Contato = () => {
           </div>
           <div className="footerSocialmediaContainer">
             {' '}
-            <FacebookLogo weight="regular" size={25} color="#9248FF" />{' '}
-            <img src={Xlogo} />
-            <InstagramLogo weight="regular" size={25} color="#9248FF" />{' '}
-            <TiktokLogo weight="regular" size={25} color="#9248FF" />{' '}
-            <YoutubeLogo weight="regular" size={25} color="#9248FF" />{' '}
-            <WhatsappLogo weight="regular" size={25} color="#9248FF" />{' '}
-            <TelegramLogo weight="regular" size={25} color="#9248FF" />
+            <a
+              href="https://www.facebook.com/plusfmrede/?locale=pt_BR"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FacebookLogo weight="regular" size={25} color="#9248FF" />
+            </a>
+            <a
+              href="https://twitter.com/plusfmrede_"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={XRoxo} />
+            </a>
+            <a
+              href="https://www.instagram.com/plusfmrede/?igsh=dGhjczFwNDBwdW81"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <InstagramLogo weight="regular" size={25} color="#9248FF" />
+            </a>
+            <a
+              href="https://www.tiktok.com/@plusfmrede"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <TiktokLogo weight="regular" size={25} color="#9248FF" />
+            </a>
+            <a
+              href="https://www.youtube.com/channel/UC0ek2Dls6ikevIsWckZX7ZA"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <YoutubeLogo weight="regular" size={25} color="#9248FF" />
+            </a>
+            <a
+              href="https://www.whatsapp.com/channel/0029VaDSwXYA89MeJrPw1p1A"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <WhatsappLogo weight="regular" size={25} color="#9248FF" />
+            </a>
+            <a
+              href="https://t.me/redeplusfm"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <TelegramLogo weight="regular" size={25} color="#9248FF" />
+            </a>
           </div>
         </div>
       </div>

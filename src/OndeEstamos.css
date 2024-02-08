@@ -1,0 +1,182 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #541084 0%, #9248FF 100%);
+    overflow: hidden;
+}
+
+
+
+
+
+.MapContainerOndeEstamos {
+    align-items: center;
+
+
+    /* background-color: #FFC007; */
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: center;
+    padding-bottom: 12vw;
+    padding-top: vw;
+    position: relative;
+    width: 100%;
+}
+
+.backButton4 {
+    position: absolute;
+    left: 9%;
+    top: 3rem;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.backButton4.playing {
+    left: -18%;
+    top: 1rem;
+    outline: none;
+    border: none;
+    stroke: transparent;
+    stroke-miterlimit: 10;
+    stroke-width: 1.2px;
+}
+
+.spacerDiv {
+    height: 1rem;
+
+}
+
+.spacerDiv.playing {
+    height: 4rem;
+}
+
+.contentContainer {
+    /* seu CSS aqui */
+}
+
+.pageTitle {
+    /* seu CSS aqui */
+}
+
+.pageContent {
+    /* seu CSS aqui */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+.pulsing {
+    position: relative;
+    animation: pulse 2s infinite;
+    z-index: 2;
+}
+
+.pulsing::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* Alterado de 'background' para 'background-color' */
+    animation: ripple 2s infinite;
+    z-index: 1;
+}
+
+.ripple {
+    position: absolute;
+    top: 83%;
+    left: 50%;
+    width: 13%;
+    height: 10%;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    animation: ripple 2s infinite;
+    z-index: 1;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+.container-cidades-coluna {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    width: 100%;
+    align-items: center;
+}
+
+.container-cidades-coluna h1 {
+    color: #FFF;
+
+    text-align: center;
+    font-family: Rubik;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    width: auto;
+    margin-bottom: 1rem;
+}
+
+.container-cidades-row {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+
+
+}
+
+.container-cidades-row h1 {
+    border: 1px solid white;
+    border-radius: 12px;
+    padding-block: 0.1rem;
+    padding-inline: 0.6rem;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+}
