@@ -29,7 +29,7 @@
 .backButton4 {
     position: absolute;
     left: 9%;
-    top: 3rem;
+    top: 7%;
     border: none;
     background-color: transparent;
     color: white;
@@ -38,7 +38,7 @@
 
 .backButton4.playing {
     left: -18%;
-    top: 1rem;
+    top: 1.4rem;
     outline: none;
     border: none;
     stroke: transparent;
@@ -149,6 +149,42 @@
     align-items: center;
 }
 
+@media (min-width: 600px) {
+    .container-cidades-coluna {
+        display: flex;
+        flex-direction: column;
+        margin-top: 4rem;
+        width: 100%;
+        align-items: center;
+        transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        -o-transform: scale(1.2);
+
+
+    }
+
+    .backButton1 {
+        position: absolute !important;
+        left: 6%;
+        top: auto;
+        border: none;
+        background-color: transparent;
+        color: white;
+        font-size: 4.5rem !important;
+        padding-top: 4vw !important;
+
+        stroke: transparent !important;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+    }
+
+
+
+
+}
+
 .container-cidades-coluna h1 {
     color: #FFF;
 
@@ -165,7 +201,7 @@
 .container-cidades-row {
     display: flex;
     flex-direction: row;
-    gap: 1rem;
+    gap: 0.5rem;
 
 
 }
@@ -179,4 +215,18 @@
     -moz-border-radius: 12px;
     -ms-border-radius: 12px;
     -o-border-radius: 12px;
+}
+
+.container-cidades-grid {
+    display: block;
+}
+
+@media (min-width: 600px) {
+    .container-cidades-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 5rem;
+        align-items: center;
+        justify-content: center;
+    }
 }

@@ -13,11 +13,6 @@ const Sobre = () => {
       }`}
     >
       {' '}
-      <img
-        src="https://via.placeholder.com/150"
-        alt="Imagem genérica"
-        className="contatoImagem"
-      />
       <h2 className="sobreNos"> Sobre nós</h2>
       <div className="lineSobre" />
       <h1 className="h1Sobre">
@@ -30,6 +25,7 @@ const Sobre = () => {
         diariamente, muita informação e entretenimento. São mais de 10 anos
         tornando o dia a dia dos cearenses legal demais!{' '}
       </h1>
+      <div className="boxMapPropaganda4" />
       <div className="contatoBackButton">
         <div className="posicaoAbsolutaDireita1">
           <CaretCircleLeft

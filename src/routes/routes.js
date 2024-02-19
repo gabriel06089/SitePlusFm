@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import NoticiaDetalhe from '../NoticiaDetalhe';
 import PromoDetalhe from '../PromoDetalhe';
+
 import Programas from '../Programas';
 import Promocao from '../Promocao';
 import App from '../App';
@@ -151,7 +152,7 @@ const RoutesComponent = () => {
             }
           />
           <Route
-            path="/promocao/:id"
+            path="/promocao-detalhes/:id"
             element={
               <>
                 <Player />

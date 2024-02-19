@@ -1,12 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, {
+  useLayoutEffect,
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+} from 'react';
 
 import './App.css';
 import { decode } from 'he';
 import he from 'he';
 import { ReactComponent as Map } from './mapa.svg';
 import { ReactComponent as TwitterLogoX } from './twitter-x.svg';
+import discoMusical from './discoMusical.png';
 import Cariri from './AssetsMap/Cariri.svg';
 import Catarina from './AssetsMap/Catarina.svg';
 import Cascavel from './AssetsMap/Cascavel.svg';
@@ -24,6 +31,8 @@ import twitterLogoX from './twitter-x.svg';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useLocation } from 'react-router-dom';
+
 import agrandehora from './imagemprogamacao/agrandehora.svg';
 import asmaispedidas from './imagemprogamacao/asmaispedidas.svg';
 import asmelhoresdaplus from './imagemprogamacao/asmelhoresdaplus.svg';
@@ -47,6 +56,7 @@ import plusmania from './imagemprogamacao/plusmania.svg';
 import slowmotion from './imagemprogamacao/slowmotion.svg';
 import tercodamisercordia from './imagemprogamacao/tercodamisericordia.svg';
 import Xlogo from './twitter-x.svg';
+import pRoxo from './pBackgroundDrops.png';
 import FoneDeOuvido from './FoneDeOuvido.png';
 import PingGoogle from './PingGoogle.png';
 import ouca from './ouca.svg';
@@ -59,6 +69,8 @@ import mapText from './textSVGs/OndeEstamos.svg';
 import textTop10 from './AssetDrops/textTop10.png';
 import aoVivo from './oucaqui.svg';
 import Don7 from './don7horizontal.svg';
+import vozdobrasil from './imagemprogamacao/vozdobrasil.png';
+import LogoBranca from './LogoBranca.svg';
 import Logo from './plus-1.png';
 import PlayStore from './playstorebadge.png';
 import AppleStore from './appstorebadge.png';
@@ -80,6 +92,9 @@ import {
   PlayCircle,
   PauseCircle,
   CalendarPlus,
+  HandPointing,
+  Cursor,
+  CaretDown,
 } from 'phosphor-react';
 import { PlayerContext } from './Context/PlayerContext';
 
@@ -91,7 +106,200 @@ function App() {
   const [hover, setHover] = useState(false);
 
   const [news, setNews] = useState([]);
-
+  const programs = [
+    {
+      title: 'Corujão da Plus',
+      days: [0, 1, 2, 3, 4, 5, 6],
+      startHour: 0,
+      endHour: 5,
+      textDesc:
+        'Curta as madrugadas com o Corujão da Plus, onde a música nunca para!',
+      image: corujaodaplus,
+    },
+    {
+      title: 'Clube Plus',
+      days: [1, 2, 3, 4, 5],
+      startHour: 5,
+      endHour: 6,
+      textDesc: 'Comece o dia com o pé direito no Clube Plus da Plus!',
+      image: clubeplus,
+    },
+    {
+      title: 'Deu B.O.',
+      days: [1, 2, 3, 4, 5],
+      startHour: 6,
+      endHour: 7,
+      textDesc:
+        'O Deu B.O. é o seu aliado para ficar por dentro dos crimes e da justiça!',
+      image: PROGRAMAS,
+    },
+    {
+      title: 'Ceará News',
+      days: [1, 2, 3, 4, 5],
+      startHour: 7,
+      endHour: 8,
+      textDesc:
+        'O Ceará News traz as últimas notícias do estado para você todas as manhãs!',
+      image: cearanews,
+    },
+    {
+      title: 'No Colo de Jesus e Maria',
+      days: [1, 2, 3, 4, 5],
+      startHour: 8,
+      endHour: 9,
+      textDesc: 'Acompanhe mensagens de fé e esperança todas as manhãs.',
+      image: nocolodejesusedemaria,
+    },
+    {
+      title: 'Manhã da Plus',
+      days: [1, 2, 3, 4, 5, 6],
+      startHour: 9,
+      endHour: 11,
+      textDesc: 'Comece o dia com a energia contagiante da Manhã da Plus!',
+      image: manhadaplus,
+    },
+    {
+      title: 'Redação da Plus',
+      days: [1, 2, 3, 4, 5],
+      startHour: 12,
+      endHour: 14,
+      textDesc:
+        'Redação da Plus, informação e análise dos principais fatos do dia!',
+      image: redacaoplus,
+    },
+    {
+      title: 'Tarde Plus',
+      days: [1, 2, 3, 4, 5],
+      startHour: 14,
+      endHour: 17,
+      textDesc: 'Acompanhe a Tarde Plus e tenha uma tarde cheia de energia!',
+      image: tardeplus,
+    },
+    {
+      title: 'Tá Todo Mundo Plus',
+      days: [1, 2, 3, 4, 5],
+      startHour: 17,
+      endHour: 18,
+      textDesc:
+        'Tá Todo Mundo Plus, a diversão está garantida para animar o seu final de tarde!',
+      image: tatodomundoplus,
+    },
+    {
+      title: 'As Mais Pedidas',
+      days: [1, 2, 3, 4, 5],
+      startHour: 18,
+      endHour: 19,
+      textDesc: 'Curta os sucessos mais pedidos em uma programação especial.',
+      image: asmaispedidas,
+    },
+    {
+      title: 'A Voz do Brasil',
+      days: [1, 2, 3, 4, 5],
+      startHour: 19,
+      endHour: 20,
+      textDesc:
+        'A Voz do Brasil, a sua conexão com os acontecimentos do Brasil.',
+      image: vozdobrasil,
+    },
+    {
+      title: 'Plus Mania',
+      days: [1, 2, 3, 4, 5],
+      startHour: 20,
+      endHour: 22,
+      textDesc: 'O melhor da música para agitar a noite está na Plus Mania!',
+      image: plusmania,
+    },
+    {
+      title: 'Festa Plus',
+      days: [6],
+      startHour: 12,
+      endHour: 14,
+      textDesc:
+        'Festa Plus, a trilha sonora perfeita para animar o seu sábado!',
+      image: festaplus,
+    },
+    {
+      title: 'Time Machine',
+      days: [6],
+      startHour: 21,
+      endHour: 22,
+      textDesc:
+        'Time Machine, uma viagem no tempo com as melhores músicas do passado!',
+      image: timemachine,
+    },
+    {
+      title: 'Upgrade',
+      days: [6],
+      startHour: 22,
+      endHour: 24,
+      textDesc:
+        'O programa que leva a sua noite a outro nível: Upgrade na Plus!',
+      image: upgrade,
+    },
+    {
+      title: 'Playlist da Plus',
+      days: [0],
+      startHour: 5,
+      endHour: 8,
+      textDesc:
+        'Playlist da Plus, a trilha sonora perfeita para começar a semana!',
+      image: playlistdaplus,
+    },
+    {
+      title: 'Domingão da Plus',
+      days: [0],
+      startHour: 10,
+      endHour: 15,
+      textDesc:
+        'Comece o domingo com as melhores músicas para animar o seu dia.',
+      image: domingao,
+    },
+    {
+      title: 'Mega Plus',
+      days: [0],
+      startHour: 15,
+      endHour: 19,
+      textDesc:
+        'Mega Plus, a sua dose de energia para aproveitar o final de domingo',
+      image: megaplus,
+    },
+    {
+      title: 'A Grande Hora',
+      days: [0],
+      startHour: 19,
+      endHour: 20,
+      textDesc:
+        '"O programa que transforma o seu domingo em um momento inesquecível: A Grande Hora!',
+      image: agrandehora,
+    },
+    {
+      title: 'Sem Limites Para Amar',
+      days: [0],
+      startHour: 22,
+      endHour: 24,
+      textDesc:
+        'Transforme o seu domingo em uma celebração do amor com músicas apaixonadas.',
+      image: semlimitesparaamar,
+    },
+    {
+      title: 'As Melhores da Plus',
+      days: [1, 2, 3, 4, 5, 6],
+      startHour: 11,
+      endHour: 12,
+      textDesc:
+        'Curta As Melhores da Plus e ouça os maiores sucessos em um só lugar!',
+      image: asmelhoresdaplus,
+    },
+    {
+      title: 'Slow Motion',
+      days: [1, 2, 3, 4, 5],
+      startHour: 22,
+      endHour: 24,
+      textDesc:
+        'Acompanhe o Slow Motion e tenha uma noite relaxante e cheia de boas vibrações!',
+      image: slowmotion,
+    },
+  ];
   const {
     isPlaying,
     setIsPlaying,
@@ -108,15 +316,22 @@ function App() {
   } = useContext(PlayerContext);
   const [carregando, setCarregando] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentProgramIndex, setCurrentProgramIndex] = useState(0);
   const animationDelays = [...Array(50)].map(() => ({
     animationDelay: `${Math.random() * 1000}ms`,
   }));
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [itemsToRender, setItemsToRender] = useState(2);
+  const [isHome, setIsHome] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentProgram, setCurrentProgram] = useState(null);
   const [currentProgramStartHour, setCurrentProgramStartHour] = useState(null);
   const [currentProgramEndHour, setCurrentProgramEndHour] = useState(null);
+  const [selectedDay, setSelectedDay] = useState(null);
+  const [expandedProgram, setExpandedProgram] = useState(null);
+  const [displayPrograms, setDisplayPrograms] = useState([]);
+  const currentProgramRef = useRef(null);
+  const [clickedProgram, setClickedProgram] = useState(null);
   const checkScroll = () => {
     // Verifique se a página foi rolada mais de 100 pixels
     if (window.scrollY > 10) {
@@ -125,6 +340,48 @@ function App() {
       setIsScrolled(false);
     }
   };
+
+  useLayoutEffect(() => {
+    const now = new Date();
+    const currentDay = now.getDay();
+    const currentHour = now.getHours();
+
+    const sortedPrograms = [...programs].sort((a, b) => {
+      const dayDiff = a.days[0] - b.days[0];
+      if (dayDiff !== 0) {
+        return dayDiff;
+      } else {
+        return a.startHour - b.startHour;
+      }
+    });
+
+    const currentProgramIndex = sortedPrograms.findIndex((program) => {
+      return (
+        program.days.includes(currentDay) &&
+        program.startHour <= currentHour &&
+        program.endHour > currentHour
+      );
+    });
+
+    setCurrentProgramIndex(currentProgramIndex);
+
+    setCurrentProgram(currentProgram);
+    setExpandedProgram(currentProgram);
+
+    // Exibe apenas os programas do dia selecionado
+    const selectedPrograms = sortedPrograms.filter((program) =>
+      selectedDay ? program.days.some((day) => selectedDay.includes(day)) : true
+    );
+    setDisplayPrograms(selectedPrograms);
+
+    // Atrasa a rolagem até que os programas sejam renderizados
+    setTimeout(() => {
+      currentProgramRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    }, 0);
+  }, [selectedDay]);
 
   useEffect(() => {
     window.addEventListener('scroll', checkScroll);
@@ -237,6 +494,7 @@ function App() {
     const fetchNews = async () => {
       setCarregando(true);
       try {
+        const cachedNews = JSON.parse(localStorage.getItem('news'));
         const response = await fetch(
           'https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=3&tags_exclude=2007'
         );
@@ -250,9 +508,15 @@ function App() {
 
         const limitedNews = filteredNews.slice(0, 3);
 
-        limitedNews.forEach((news) => {});
-
-        setNews(limitedNews);
+        if (
+          !cachedNews ||
+          new Date(data[0].modified) > new Date(cachedNews[0].modified)
+        ) {
+          setNews(limitedNews);
+          localStorage.setItem('news', JSON.stringify(limitedNews));
+        } else {
+          setNews(cachedNews);
+        }
       } catch (error) {
         console.error(error);
       } finally {
@@ -262,6 +526,14 @@ function App() {
 
     fetchNews();
   }, []);
+  useEffect(() => {
+    setExpandedProgram(displayPrograms[currentProgramIndex]);
+  }, [currentProgramIndex, displayPrograms]);
+
+  // Modifique a função handleExpand para definir o programa expandido
+  const handleExpand = (program) => {
+    setExpandedProgram(program);
+  };
 
   const [promos, setPromos] = useState([]);
 
@@ -269,10 +541,12 @@ function App() {
     const fetchPromotions = async () => {
       try {
         const cachedPromos = JSON.parse(localStorage.getItem('promos'));
+
         const response = await fetch(
           'https://plusfm.com.br/wp-json/wp/v2/posts?categories=14&per_page=3'
         );
         const data = await response.json();
+
         if (
           !cachedPromos ||
           new Date(data[0].modified) > new Date(cachedPromos[0].modified)
@@ -295,14 +569,21 @@ function App() {
   useEffect(() => {
     const fetchProgramas = async () => {
       try {
+        const cachedProgramas = JSON.parse(localStorage.getItem('programas'));
         const response = await fetch(
           'https://plusfm.com.br/wp-json/wp/v2/posts?categories=2685&per_page=3'
         );
         const data = await response.json();
 
-        data.forEach((programa) => {});
-
-        setProgramas(data);
+        if (
+          !cachedProgramas ||
+          new Date(data[0].modified) > new Date(cachedProgramas[0].modified)
+        ) {
+          setProgramas(data);
+          localStorage.setItem('programas', JSON.stringify(data));
+        } else {
+          setProgramas(cachedProgramas);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -352,31 +633,6 @@ function App() {
       url: 'https://www.youtube.com/watch?v=9D3c4FlFuy8&ab_channel=SimoneMendes',
     },
   ];
-  useEffect(() => {
-    const fetchThumbnails = async () => {
-      const newSongsWithThumbnails = songs.map((song) => {
-        try {
-          const videoId = new URL(song.url).searchParams.get('v');
-          const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/0.jpg`;
-          return { ...song, thumbnailUrl };
-        } catch (error) {
-          console.error(`Error fetching thumbnail for ${song.song}:`, error);
-        }
-
-        return song;
-      });
-
-      // Verifique se os novos dados são diferentes dos dados antigos
-      if (
-        JSON.stringify(newSongsWithThumbnails) !==
-        JSON.stringify(songsWithThumbnails)
-      ) {
-        setSongsWithThumbnails(newSongsWithThumbnails);
-      }
-    };
-
-    fetchThumbnails();
-  }, [songs, songsWithThumbnails]);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -634,6 +890,9 @@ function App() {
   });
   const [mostrar, setMostrar] = useState(false);
   const naTelaNoticias = window.location.pathname.startsWith('/noticias');
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const colors = ['#570000', '#610788', '#0058B2'];
+  const [scrolled, setScrolled] = useState(false);
   const settings = {
     dots: false,
     infinite: true,
@@ -642,7 +901,55 @@ function App() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 20000,
+    afterChange: (current) => setCurrentSlide(current), // Atualiza o slide atual após a mudança
   };
+  useEffect(() => {
+    const color = colors[currentSlide % colors.length];
+    const style = document.createElement('style');
+
+    if (!scrolled && !carregando) {
+      document.body.classList.add('app');
+
+      style.innerHTML = `
+        @media (min-width: 600px) {
+          .app::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(${color}, transparent);
+            pointer-events: none;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+        document.body.classList.remove('app');
+      } else if (window.scrollY <= 50) {
+        setScrolled(false);
+        if (!carregando) {
+          document.body.classList.add('app');
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      document.body.classList.remove('app');
+      if (style.parentNode) {
+        document.head.removeChild(style);
+      }
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [currentSlide, colors, scrolled, carregando]);
+
   useEffect(() => {
     if (isMenuOpen) {
       document.body.classList.add('noScroll');
@@ -656,16 +963,77 @@ function App() {
       setCarregando(false);
     }, 2200);
   }, []);
+  const [active, setActive] = useState(false);
 
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  const [showImage, setShowImage] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowImage(!showImage);
+    }, 5000); // Alterna a cada 5 segundos
+
+    return () => clearTimeout(timer); // Limpa o timer quando o componente é desmontado
+  }, [showImage]);
+  useEffect(() => {
+    const handleScroll = () => {
+      setActive(true);
+      setTimeout(() => setActive(false), 1000); // Ajuste este valor conforme necessário
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  function formatDays(days) {
+    const dayMap = {
+      0: 'Domingo',
+      1: 'Segunda',
+      2: 'Terça',
+      3: 'Quarta',
+      4: 'Quinta',
+      5: 'Sexta',
+      6: 'Sábado',
+    };
+
+    const areConsecutive = days.every((day, index) => {
+      return (
+        index === 0 ||
+        day === days[index - 1] + 1 ||
+        (days[index - 1] === 6 && day === 0)
+      );
+    });
+
+    if (areConsecutive && days.length > 1) {
+      // Se o intervalo for de Domingo a Sábado, inverta para Sábado a Domingo
+      if (days[0] === 0 && days[days.length - 1] === 6) {
+        return `${dayMap[6]} à ${dayMap[0]}`;
+      } else {
+        return `${dayMap[days[0]]} à ${dayMap[days[days.length - 1]]}`;
+      }
+    } else {
+      return days.map((day) => dayMap[day]).join(', ');
+    }
+  }
   if (carregando) {
+    const numBars = windowWidth > 600 ? 150 : 50;
     return (
       <div className="loader-container1">
         <img className="loader-logo" src={Logo} alt="Logo" />
-        {[...Array(50)].map((_, i) => (
+        {[...Array(numBars)].map((_, i) => (
           <div
             key={i}
             className="loader-bar"
-            style={{ '--delay': `${Math.sin(i + Math.random()) * 0.2}s` }}
+            style={{
+              '--delay': `${Math.sin(i + Math.random()) * 0.2}s`,
+              '--size': `${2 + Math.random() * 3}px`, // Tamanho aleatório entre 2px e 5px
+            }}
           />
         ))}
       </div>
@@ -682,26 +1050,44 @@ function App() {
       }}
     >
       <div className="App">
-        <div className="promoContainerNew1">
-          <div
-            className={`logoMenuDivRow ${isMenuOpen ? 'fixed' : ''} ${
-              isPlaying ? 'playing' : ''
-            } ${isPlaying && isMenuOpen ? 'playingAndMenuOpen' : ''}`}
-          >
-            <img src={Logo} />
-            {isMenuOpen ? (
-              <X weight="bold" onClick={() => setIsMenuOpen(false)} />
-            ) : (
-              <List weight="bold" onClick={() => setIsMenuOpen(true)} />
-            )}
-          </div>
+        <div className={`promoContainerNew1 ${isPlaying ? 'playing' : ''}`}>
+          {windowWidth > 600 ? (
+            <div
+              className={`logoMenuDivRow ${
+                isPlaying && isHome ? 'playing' : ''
+              }`}
+            >
+              <img src={Logo} />
+              <div className="menuLinks">
+                <Link to="/onde-estamos">ONDE ESTAMOS</Link>
+                <Link to="/drops">DROPS</Link>
+                <Link to="/programas">PROGRAMAS</Link>
+                <Link to="/programacao">PROGRAMAÇÃO</Link>
+                <Link to="/contato">CONTATO</Link>
+                <Link to="/promocao">PROMOÇÕES</Link>
+              </div>
+            </div>
+          ) : (
+            <div
+              className={`logoMenuDivRow ${isMenuOpen ? 'fixed' : ''} ${
+                isPlaying ? 'playing' : ''
+              } ${isPlaying && isMenuOpen ? 'playingAndMenuOpen' : ''}`}
+            >
+              <img src={Logo} />
+              {isMenuOpen ? (
+                <X weight="bold" onClick={() => setIsMenuOpen(false)} />
+              ) : (
+                <List weight="bold" onClick={() => setIsMenuOpen(true)} />
+              )}
+            </div>
+          )}
           <div className={`fullScreenMenu ${isMenuOpen ? 'open' : ''}`}>
             <div className="menuOpenContainerColumn">
               <Link to="/">
                 <h1>Home</h1>
               </Link>
-              <Link to="/sobre">
-                <h1>Quem Somos</h1>
+              <Link to="/onde-estamos">
+                <h1>Onde Estamos</h1>
               </Link>
               <Link to="/drops">
                 <h1>Drops</h1>
@@ -712,26 +1098,63 @@ function App() {
               <Link to="/programacao">
                 <h1>Programação</h1>
               </Link>
-              <Link to="/onde-estamos">
-                <h1>Onde Estamos</h1>
-              </Link>
               <Link to="/promocao">
                 <h1>Promoções</h1>
               </Link>
-              <Link to="/contato">
-                <h1>Contato</h1>
-              </Link>
               <div className="footerSocialMediaContainer">
-                {' '}
-                <FacebookLogo weight="regular" size={30} /> <img src={Xlogo} />
-                <InstagramLogo weight="regular" size={30} />{' '}
-                <TiktokLogo weight="regular" size={30} />{' '}
-                <YoutubeLogo weight="regular" size={30} />{' '}
-                <WhatsappLogo weight="regular" size={30} />{' '}
-                <TelegramLogo weight="regular" size={30} />
+                <a
+                  href="https://www.facebook.com/plusfmrede/?locale=pt_BR"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FacebookLogo weight="regular" size={25} color="white" />
+                </a>
+                <a
+                  href="https://twitter.com/plusfmrede_"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={Xlogo} />
+                </a>
+                <a
+                  href="https://www.instagram.com/plusfmrede/?igsh=dGhjczFwNDBwdW81"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <InstagramLogo weight="regular" size={25} color="white" />
+                </a>
+                <a
+                  href="https://www.tiktok.com/@plusfmrede"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <TiktokLogo weight="regular" size={25} color="white" />
+                </a>
+                <a
+                  href="https://www.youtube.com/channel/UC0ek2Dls6ikevIsWckZX7ZA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <YoutubeLogo weight="regular" size={25} color="white" />
+                </a>
+                <a
+                  href="https://www.whatsapp.com/channel/0029VaDSwXYA89MeJrPw1p1A"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <WhatsappLogo weight="regular" size={25} color="white" />
+                </a>
+                <a
+                  href="https://t.me/redeplusfm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <TelegramLogo weight="regular" size={25} color="white" />
+                </a>
               </div>
             </div>
           </div>
+
           <div className="promoActorRowNew">
             <Slider {...settings}>
               {promos.map((promo, index) => (
@@ -749,7 +1172,7 @@ function App() {
                     </div>
                   )}
                   <Link
-                    to={`/promocao/${promo.id}`}
+                    to={`/promocao-detalhes/${promo.id}`}
                     className="linkArea"
                   ></Link>
                 </div>
@@ -758,58 +1181,136 @@ function App() {
           </div>
         </div>
 
-        <div className="backgroundDivContainerNews fade-in">
-          <h1 className="h1StyleDrops">Drops </h1>
-          <div className="whiteLine" />
+        {windowWidth <= 600 && (
+          <div className="backgroundDivContainerNews fade-in">
+            <h1 className="h1StyleDrops">DROPS </h1>
+            <div className="whiteLine" />
 
-          {news.slice(0, 3).map((newsItem, index) => (
-            <Link
-              to={`/noticia/${newsItem.id}`}
-              key={index}
-              style={{ textDecoration: 'none' }}
-            >
-              <div className="newsContainer">
-                <img
-                  src={newsItem.yoast_head_json?.og_image?.[0]?.url}
-                  alt="Imagem da notícia"
-                  className="newsImage"
-                />
-                <div className="newsTitleContainer">
-                  <h2 className="newsTitle">
-                    {decode(newsItem.title.rendered)}
-                  </h2>
+            {news.slice(0, 3).map((newsItem, index) => (
+              <Link
+                to={`/noticia/${newsItem.id}`}
+                key={index}
+                style={{ textDecoration: 'none' }}
+              >
+                <div className="newsContainer">
+                  <img
+                    src={newsItem.yoast_head_json?.og_image?.[0]?.url}
+                    alt="Imagem da notícia"
+                    className="newsImage"
+                  />
+                  <div className="newsTitleContainer">
+                    <h2 className="newsTitle">
+                      {decode(newsItem.title.rendered)}
+                    </h2>
+                  </div>
                 </div>
-              </div>
+              </Link>
+            ))}
+            <Link to="/drops" className="btnStyle">
+              Ver mais
             </Link>
-          ))}
-          <Link to="/drops" className="btnStyle">
-            Ver mais
-          </Link>
-          <div className="placeholderPropraganda" />
-        </div>
-        <div className="contentBackground fade-in">
-          <h1 className="contentTitle">Programas</h1>
-          <div className="whiteLine" />
+            <div className="placeholderPropragandaSmallScreen" />
+          </div>
+        )}
 
-          <div className="contentContainer">
+        {windowWidth > 600 && (
+          <div className="backgroundDivContainerNewsLargeScreen">
+            <img
+              src={pRoxo}
+              className="backgroundDivContainerNewsLargeScreenImg"
+            />
+            <h1 className="h1StyleDropsLargeScreen">DROPS </h1>
+            <div className="whiteLineLargeScreen" />
+
+            <div className="newsContainerLargeScreen">
+              {news.slice(0, 2).map((newsItem, index) => (
+                <Link
+                  to={`/noticia/${newsItem.id}`}
+                  key={index}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <div className="newsItemLargeScreen">
+                    <img
+                      src={newsItem.yoast_head_json?.og_image?.[0]?.url}
+                      alt="Imagem da notícia"
+                      className="newsImageLargeScreen"
+                    />
+                    <div className="newsTitleContainerLargeScreen">
+                      <h2 className="newsTitleLargeScreen">
+                        {decode(newsItem.title.rendered)}
+                      </h2>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <Link to="/drops" className="btnStyleLargeScreen">
+              VER MAIS
+            </Link>
+            <div className="placeholderPropragandaLargeScreen" />
+          </div>
+        )}
+        <div className="contentBackground fade-in">
+          <h1
+            style={{ color: windowWidth > 600 ? 'white' : 'white' }}
+            className={
+              windowWidth > 600 ? 'h1StyleDropsLargeScreen' : 'contentTitle'
+            }
+          >
+            PROGRAMAS
+          </h1>
+          <div
+            style={{ backgroundColor: windowWidth > 600 ? 'white' : 'white' }}
+            className={windowWidth > 600 ? 'whiteLineLargeScreen' : 'whiteLine'}
+          />
+          <div
+            className={
+              windowWidth > 600
+                ? 'newsContainerLargeScreen'
+                : 'contentContainer'
+            }
+          >
             {programas.slice(0, 2).map((programa, index) => (
               <Link
                 to={`/noticia/${programa.id}`}
                 key={index}
                 style={{ textDecoration: 'none' }}
               >
-                <div className="contentItem">
+                <div
+                  style={{
+                    borderColor: windowWidth > 600 ? 'white' : 'white',
+                  }}
+                  className={
+                    windowWidth > 600 ? 'newsItemLargeScreen' : 'contentItem'
+                  }
+                >
                   <img
                     src={programa.yoast_head_json?.og_image?.[0]?.url}
                     alt="Imagem da notícia"
+                    className={windowWidth > 600 ? 'newsImageLargeScreen' : ''}
                   />
-                  <p className="contentText">
+                  <p
+                    className={
+                      windowWidth > 600
+                        ? 'newsTitleLargeScreen1'
+                        : 'contentText'
+                    }
+                  >
                     {decode(programa.title.rendered)}
                   </p>
                 </div>
               </Link>
             ))}
           </div>
+
+          {windowWidth > 600 && (
+            <>
+              <Link to="/programas" className="btnStyleLargeScreen1">
+                VER MAIS
+              </Link>
+              <div className="placeholderPropragandaLargeScreen" />
+            </>
+          )}
         </div>
       </div>
       <section id="programacao"></section>
@@ -817,8 +1318,11 @@ function App() {
         {/* <img src={Prog} className="progImage" /> */}
         {/* <h1 className="dropsText1">NO AR</h1>
         <div className="whiteLine1"></div> */}
-        <h1 className="h1StyleDrops">Programação </h1>
-        <div className="whiteLine" />
+        <div className="live-container">
+          <h1 className="h1StyleDrops6">NO AR </h1>
+          <img src={discoMusical} className="imgDiscoProgramacao" />
+        </div>
+        <div className="whiteLine6" />
         {/* {mostrar && (
           <div>
             {' '}
@@ -1178,100 +1682,294 @@ function App() {
                 ref={circleRef}
                 className="progress-ring__circle"
                 stroke="#541084"
-                strokeWidth="1vw" // reduzido de 21 para 20
+                strokeWidth="0.8vw" // reduzido de 21 para 20
                 fill="transparent"
                 r="48%" // reduzido de 50% para 45%
                 cx="50%" // metade do tamanho do SVG
                 cy="50%" // metade do tamanho do SVG
               />
             </svg>
-            <img
-              src={currentImage}
-              alt="Imagem dentro do círculo"
-              className="circle-image"
-            />
-          </div>
-          <div className="program-info">
-            {/* <div className="now-playing">Tocando agora</div> */}
-            {/* <hr className="separator" /> */}
-            <div className="live-container">
-              <div className="live-dot"></div>
-              <span>AO VIVO</span>
-            </div>
-
-            <h1 className="program-title">{currentProgramTitle}</h1>
-
-            <style jsx>{`
-              @keyframes blink {
-                to {
-                  visibility: hidden;
-                }
-              }
-            `}</style>
-            <p className="program-time">
-              {formatHour(currentProgramStartHour)} -{' '}
-              {formatHour(currentProgramEndHour)}
-            </p>
-            <div className="button-container">
-              <button
-                className="play-pause-button"
-                onClick={handlePlayPause}
-                disabled={isLoading}
+            {showImage ? (
+              <img
+                src={currentImage}
+                alt="Imagem dentro do círculo"
+                className={`circle-image ${showImage ? 'fade-in' : 'fade-out'}`}
+              />
+            ) : (
+              <div
+                className={`program-info ${showImage ? 'fade-out' : 'fade-in'}`}
               >
-                {isPlaying ? (
-                  <PauseCircle size="8vw" weight="fill" />
-                ) : (
-                  <PlayCircle size="8vw" weight="fill" />
-                )}
-              </button>
-            </div>
+                {/* <div className="now-playing">Tocando agora</div> */}
+                {/* <hr className="separator" /> */}
+                <div className="live-dot"></div>
+                <h1 className="program-title">{currentProgramTitle}</h1>
+
+                <style jsx>{`
+                  @keyframes blink {
+                    to {
+                      visibility: hidden;
+                    }
+                  }
+                `}</style>
+
+                <p className="program-time">
+                  {formatHour(currentProgramStartHour)} -{' '}
+                  {formatHour(currentProgramEndHour)}
+                </p>
+                <div className="button-container">
+                  <button
+                    className="play-pause-button"
+                    onClick={handlePlayPause}
+                    disabled={isLoading}
+                  >
+                    {isPlaying ? (
+                      <PauseCircle
+                        className="icon"
+                        size={window.innerWidth <= 600 ? '11vw' : '8vw'}
+                        weight="fill"
+                      />
+                    ) : (
+                      <PlayCircle
+                        className="icon"
+                        size={window.innerWidth <= 600 ? '11vw' : '8vw'}
+                        weight="fill"
+                      />
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
-        </div>{' '}
-        <Link to="/programacao" className="meuBotao">
-          <span className="textoBotao">CONFIRA NOSSA PROGRAMAÇÃO</span>
-        </Link>
+          <div className="large-screen-element">
+            <div className="programacao-lista">
+              {displayPrograms.map((program, index) => {
+                let previousProgramIndex = currentProgramIndex - 1;
+                let nextProgramIndex = currentProgramIndex + 1;
+
+                if (currentProgramIndex === 0) {
+                  previousProgramIndex = displayPrograms.length - 1;
+                } else if (currentProgramIndex === displayPrograms.length - 1) {
+                  nextProgramIndex = 0;
+                }
+
+                if (
+                  index === currentProgramIndex ||
+                  index === previousProgramIndex ||
+                  index === nextProgramIndex
+                ) {
+                  return (
+                    <div
+                      key={index}
+                      style={{
+                        width: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginBottom: '1rem',
+                      }}
+                    >
+                      {program !== expandedProgram && (
+                        <div
+                          className={`programacao-row ${
+                            index === currentProgramIndex
+                              ? 'current-program'
+                              : ''
+                          }`}
+                        >
+                          <div className="programacao-data">
+                            <p>{`${program.startHour
+                              .toString()
+                              .padStart(2, '0')}:00`}</p>
+                          </div>
+                          <div className="programacao-titulo">
+                            <p>{program.title}</p>
+                          </div>
+                          <div
+                            className="programacao-expand"
+                            onClick={() => handleExpand(program)}
+                          >
+                            <p>
+                              <CaretDown weight="bold" />
+                            </p>
+                          </div>
+                        </div>
+                      )}
+
+                      {program === expandedProgram && (
+                        <div
+                          className={`programacao-expanded-row ${
+                            program === currentProgram ? 'current-program' : ''
+                          } ${
+                            program.title === 'Deu B.O.' ||
+                            program.title === 'A Voz do Brasil'
+                              ? 'special-program'
+                              : ''
+                          }`}
+                          ref={
+                            program === currentProgram
+                              ? currentProgramRef
+                              : null
+                          }
+                        >
+                          <div className="programacao-imagem">
+                            <img
+                              src={program.image}
+                              alt="Imagem"
+                              className={`${
+                                program === expandedProgram
+                                  ? 'larger-image'
+                                  : ''
+                              } ${
+                                program.title === 'Deu B.O.' ||
+                                program.title === 'A Voz do Brasil'
+                                  ? 'special-program-image'
+                                  : program.title === 'Ceará News'
+                                  ? 'ceara-news-image'
+                                  : ''
+                              }`}
+                            />
+                            {program === currentProgram && (
+                              <p>{`${program.startHour
+                                .toString()
+                                .padStart(2, '0')}:00`}</p>
+                            )}
+                          </div>
+                          <div className="programacao-expanded-titulo">
+                            <h1>{program.title}</h1>
+                            <span>{formatDays(program.days)}</span>
+                            <p>{program.textDesc}</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+                return null;
+              })}
+            </div>
+            <Link to="/programacao" className="meuBotao">
+              <span className="textoBotao">CONFIRA NOSSA PROGRAMAÇÃO</span>
+            </Link>
+          </div>
+        </div>
+
+        {windowWidth <= 600 && (
+          <Link to="/programacao" className="meuBotao">
+            <span className="textoBotao">CONFIRA NOSSA PROGRAMAÇÃO</span>
+          </Link>
+        )}
       </div>
       <div className="promoContainerNew">
         <img src={FoneDeOuvido} className="foneImg" />
-
         <div className="flexCenter">
-          {' '}
-          <h1 className="contentTitle1">Promoções</h1>
-          <div className="whiteLine1" />
+          <h1 className="contentTitle1">PROMOÇÕES</h1>
+          <div className="whiteLine5" />
         </div>
-        <div className="promoActorRowNew fade-in">
-          <Slider {...settings}>
-            {promos.map((promo, index) => (
-              <Link to={`/promocao/${promo.id}`} key={index}>
-                <div className="promoCardNew">
-                  {promo.yoast_head_json.og_image[0].url && (
-                    <img
-                      src={promo.yoast_head_json.og_image[0].url}
-                      alt="Promo"
-                    />
-                  )}
-                  <span className="cartolaAbsoluteNew">
-                    {he.decode(
-                      promo.cartola === 'Oportunidade' ? 'ATIVA' : 'ENCERRADA'
+        {window.innerWidth <= 600 && (
+          <div className="promoActorRowNew fade-in">
+            <Slider {...settings}>
+              {promos.map((promo, index) => (
+                <Link to={`/promocao-detalhes/${promo.id}`} key={index}>
+                  <div className="promoCardNew">
+                    {promo.yoast_head_json.og_image[0].url && (
+                      <img
+                        src={promo.yoast_head_json.og_image[0].url}
+                        alt="Promo"
+                      />
                     )}
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </Slider>
-        </div>
+                    <span className="cartolaAbsoluteNew">
+                      {he.decode(
+                        promo.cartola === 'Oportunidade' ? 'ATIVA' : 'ENCERRADA'
+                      )}
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </Slider>
+          </div>
+        )}
+        {window.innerWidth > 600 && (
+          <div className="promoActorRowNew fade-in">
+            <div className="promoContainerNewLarger">
+              {/* Renderiza a primeira promoção */}
+              {promos.slice(0, 1).map((promo, index) => (
+                <Link
+                  to={`/promocao-detalhes/${promo.id}`}
+                  key={index}
+                  className="promoCardNewStyle largeCard1"
+                >
+                  <div className="relativeContainer">
+                    {promo.yoast_head_json.og_image[0].url && (
+                      <img
+                        src={promo.yoast_head_json.og_image[0].url}
+                        alt="Promo"
+                        className="relativeImage"
+                      />
+                    )}
+                    <span className="cartolaAbsoluteNew">
+                      {he.decode(
+                        promo.cartola === 'Oportunidade' ? 'ATIVA' : 'ENCERRADA'
+                      )}
+                    </span>
+                  </div>
+                </Link>
+              ))}
+
+              {/* Renderiza as outras promoções dentro de um único contêiner */}
+              <div className="otherPromosContainer">
+                {promos.slice(1, 3).map((promo, index) => (
+                  <Link
+                    to={`/promocao-detalhes/${promo.id}`}
+                    key={index}
+                    className="promoCardNewStyle smallCard1"
+                  >
+                    <div className="relativeContainer">
+                      {promo.yoast_head_json.og_image[0].url && (
+                        <img
+                          src={promo.yoast_head_json.og_image[0].url}
+                          alt="Promo"
+                          className="otherImages"
+                        />
+                      )}
+                      <span className="cartolaAbsoluteNew">
+                        {he.decode(
+                          promo.cartola === 'Oportunidade'
+                            ? 'ATIVA'
+                            : 'ENCERRADA'
+                        )}
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+        <Link to="/promocao" className="btnStylePromo">
+          VER MAIS
+        </Link>
       </div>
       <div className="MapContainer">
         <img src={PingGoogle} className="mapImg" />
         {/* <img src={mapText} className="mapImage" /> */}
-        <h1 className="h1StyleDrops">Onde Estamos</h1>
+        <h1 className="h1StyleDrops">ONDE ESTAMOS</h1>
         <div className="whiteLine" />
         <div style={{ position: 'relative' }}>
           <Map
             onMouseOver={() => setHover(true)}
             onMouseOut={() => setHover(false)}
             className="mapComponent"
-          />
+          />{' '}
+          {windowWidth > 600 && (
+            <h1 className="clickInstruction">Clique para ouvir</h1>
+          )}
+          {windowWidth > 600 && (
+            <Cursor
+              className={`handPointing ${!isPlaying ? 'clicking' : ''}`}
+              weight="fill"
+            />
+          )}
           <StyledRipple
             top="86%"
             left="60%"
@@ -1471,6 +2169,7 @@ function App() {
           justifyContent: 'center',
           alignItems: 'center',
           width: '100%',
+          borderRadius: '12px',
         }}
       >
         <p className="redesSociaisP">Siga a Plus nas Redes Sociais</p>
@@ -1531,28 +2230,111 @@ function App() {
         </a>
       </div>
       <div className="footer">
-        <div className="footerDiv">
-          <div className="imageContainer">
-            <img src={Logo} alt="Imagem 3" className="footerImage4" />
-            <div className="footerDivRow">
-              <Link to="/sobre">
-                <span className="footerDivRowSpan"> Sobre </span>
-              </Link>
-              <div className="verticalLine"></div>
-              <Link to="/principios-editoriais">
-                <span className="footerDivRowSpan">
-                  {' '}
-                  Princípios Editoriais{' '}
-                </span>
-              </Link>
-              <div className="verticalLine"></div>
-              <Link to="/contato">
-                <span className="footerDivRowSpan"> Contato </span>
-              </Link>
+        {windowWidth <= 600 && (
+          <div className="footerDiv">
+            <div className="imageContainer">
+              <img src={Logo} alt="Imagem 3" className="footerImage4" />
+              <div className="footerDivRow">
+                <Link to="/sobre">
+                  <span className="footerDivRowSpan"> Sobre </span>
+                </Link>
+                <div className="verticalLine"></div>
+                <Link to="/principios-editoriais">
+                  <span className="footerDivRowSpan">
+                    {' '}
+                    Princípios Editoriais{' '}
+                  </span>
+                </Link>
+                <div className="verticalLine"></div>
+                <Link to="/contato">
+                  <span className="footerDivRowSpan"> Contato </span>
+                </Link>
+              </div>
             </div>
+            <span className="footerText">Copyright © 2024 Plus FM.</span>
           </div>
-          <span className="footerText">Copyright © 2024 Plus FM.</span>
-        </div>
+        )}
+        {windowWidth > 600 && (
+          <>
+            {' '}
+            <div className="footerDiv">
+              <div className="imageContainer">
+                <img src={LogoBranca} alt="Imagem 3" className="footerImage4" />
+                <div className="footerDivRow">
+                  <Link to="/sobre">
+                    <span className="footerDivRowSpan"> SOBRE </span>
+                  </Link>
+
+                  <Link to="/principios-editoriais">
+                    <span className="footerDivRowSpan">
+                      {' '}
+                      PRINCÍPIOS EDITORIAIS{' '}
+                    </span>
+                  </Link>
+
+                  <Link to="/contato">
+                    <span className="footerDivRowSpan"> CONTATO </span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="footerContainerColumnDiv">
+              {' '}
+              <div className="footerSocialMediaContainerFooter">
+                <a
+                  href="https://www.facebook.com/plusfmrede/?locale=pt_BR"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FacebookLogo weight="regular" size={50} color="white" />
+                </a>
+                <a
+                  href="https://twitter.com/plusfmrede_"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={Xlogo} />
+                </a>
+                <a
+                  href="https://www.instagram.com/plusfmrede/?igsh=dGhjczFwNDBwdW81"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <InstagramLogo weight="regular" size={50} color="white" />
+                </a>
+                <a
+                  href="https://www.tiktok.com/@plusfmrede"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <TiktokLogo weight="regular" size={50} color="white" />
+                </a>
+                <a
+                  href="https://www.youtube.com/channel/UC0ek2Dls6ikevIsWckZX7ZA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <YoutubeLogo weight="regular" size={50} color="white" />
+                </a>
+                <a
+                  href="https://www.whatsapp.com/channel/0029VaDSwXYA89MeJrPw1p1A"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <WhatsappLogo weight="regular" size={50} color="white" />
+                </a>
+                <a
+                  href="https://t.me/redeplusfm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <TelegramLogo weight="regular" size={50} color="white" />
+                </a>
+              </div>
+              <span className="footerText">Copyright © 2024 Plus FM.</span>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

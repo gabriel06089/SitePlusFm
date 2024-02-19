@@ -112,7 +112,7 @@ export const PlayerProvider = ({ children }) => {
       url: 'https://webradio.amsolution.com.br/radio/8110/catarina',
       title: 'Catarina',
       isPlaying: false,
-      frequency: '106.1',
+      frequency: '88.7',
       width: '10vw',
       svgClass: 'catarina',
     },

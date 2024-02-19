@@ -151,7 +151,7 @@ function OndeEstamos() {
       <div className="topBackContainer">
         <button
           onClick={handleHome}
-          className={`backButton4 ${isPlaying ? 'playing' : ''}`}
+          className={`backButton1 ${isPlaying ? 'playing' : ''}`}
         >
           <CaretLeft weight="bold" />
         </button>
@@ -331,46 +331,146 @@ function OndeEstamos() {
               className={selectedRadio.title === 'Cascavel' ? 'pulsing' : ''}
             />
           </div>
-          <div className="container-cidades-coluna">
-            <h1>Aracati 98.1</h1>
-            <div className="container-cidades-row">
-              <h1> Aracati</h1> <h1> Aracati</h1> <h1> Aracati</h1>{' '}
+          <div className="container-cidades-grid">
+            <div className="container-cidades-coluna">
+              <h1>Sobral 105.1</h1>
+              <div className="container-cidades-row">
+                <h1> Forquilha</h1> <h1>Massapê</h1> <h1> Santana do Acaraú</h1>{' '}
+              </div>
+              <div className="container-cidades-row">
+                <h1> Meruoca</h1> <h1>Alcântaras</h1> <h1> Groaíras</h1>{' '}
+                <h1>Cariré</h1>{' '}
+              </div>
+
+              <div className="container-cidades-row">
+                <h1>Irauçuba</h1> <h1>Coreaú</h1> <h1> Varjota</h1>{' '}
+                <h1>Reriutaba</h1>{' '}
+              </div>
+              <div className="container-cidades-row">
+                <h1>Amontada</h1> <h1>Pires ferreira</h1>
+                <h1>Miraíma</h1>{' '}
+              </div>
             </div>
-            <div className="container-cidades-row">
-              <h1> Aracati</h1> <h1> Aracati</h1>
-              <h1> Aracati</h1> <h1> Aracati</h1>{' '}
+            <div className="container-cidades-coluna">
+              <h1>Cariri 97.1</h1>
+              <div className="container-cidades-row">
+                <h1> Juazeiro do Norte</h1> <h1> Barbalha</h1>
+                <h1> Brejo Santo</h1>
+              </div>
+              <div className="container-cidades-row">
+                <h1> Barro</h1> <h1> Nova Olinda</h1>
+                <h1> Abaiara</h1>
+                <h1> Crato</h1>
+              </div>
+              <div className="container-cidades-row">
+                <h1> Caririaçu</h1> <h1> Missão Velha</h1>
+                <h1> Mauriti</h1> <h1> Milagres</h1>{' '}
+              </div>
             </div>
+            <div className="container-cidades-coluna">
+              <h1>Aracati 98.1</h1>
+              <div className="container-cidades-row">
+                <h1> Aracati</h1> <h1>Fortim</h1> <h1> Icapuí</h1>{' '}
+              </div>
+              <div className="container-cidades-row">
+                <h1> Itaiçaba</h1> <h1> Jaguaruana</h1>
+                <h1> Beberibe</h1> <h1> Palhano</h1>{' '}
+              </div>
+            </div>
+            <div className="container-cidades-coluna">
+              <h1>Cascavel 106.1</h1>
+              <div className="container-cidades-row">
+                <h1> Chorozinho</h1>
+                <h1> Pindoretama</h1>
+              </div>
+              <div className="container-cidades-row">
+                <h1> Eusébio</h1> <h1> Horizonte</h1>
+                <h1> Itaitinga</h1> <h1> Pacajus</h1>{' '}
+              </div>
+              <div className="container-cidades-row">
+                <h1> Aquiraz</h1> <h1> Beberibe</h1>
+              </div>
+            </div>
+            <div className="container-cidades-coluna">
+              <h1>Crateús 93.3</h1>
+              <div className="container-cidades-row">
+                <h1> Ipaporanga</h1> <h1> Massapê</h1>
+                <h1> Independência</h1>
+              </div>
+              <div className="container-cidades-row">
+                <h1> Novo Oriente</h1> <h1>Tamboril</h1>
+                <h1> Poranga</h1>
+              </div>
+              <div className="container-cidades-row">
+                <h1> Catunda</h1> <h1> Nova Russas</h1>
+                <h1> Quiterianópolis</h1>
+              </div>
+            </div>
+            <div className="container-cidades-coluna">
+              <h1>Iguatu 91.5</h1>
+              <div className="container-cidades-row">
+                <h1> Cariús</h1> <h1> Varzea Alegre</h1>
+                <h1> Farias Brito</h1>
+              </div>
+              <div className="container-cidades-row">
+                <h1> Cedro</h1> <h1>Quixelô</h1>
+                <h1> Jucás</h1>
+              </div>
+              <div className="container-cidades-row">
+                <h1> Acopiara</h1> <h1> Tarrafas</h1>
+                <h1> Saboeiro</h1>
+              </div>
+            </div>
+            <div className="container-cidades-coluna">
+              <h1>Pacajus 99.5</h1>
+              <div className="container-cidades-row">
+                <h1> Chorozinho</h1>
+              </div>
+              <div className="container-cidades-row">
+                <h1> Horizonte</h1> <h1>Ocara</h1>
+              </div>
+            </div>
+            <div className="container-cidades-coluna">
+              <h1>Paraipaba 88.7</h1>
+              <div className="container-cidades-row">
+                <h1> Paracuru</h1> <h1> São Gonçalo do Amarante</h1>{' '}
+              </div>
+              <div className="container-cidades-row">
+                <h1> Trairi</h1>
+                <h1> São Luís do Curu</h1>
+              </div>
+            </div>
+            <div className="container-cidades-coluna">
+              <h1>Redenção 98.7</h1>
+              <div className="container-cidades-row">
+                <h1> Acaripe</h1> <h1>Guaiúba</h1>{' '}
+              </div>
+              <div className="container-cidades-row">
+                <h1> Barreira</h1>
+                <h1> Capistrano</h1>
+              </div>
+            </div>
+            <div className="container-cidades-coluna">
+              <h1>Santa Quitéria 106.5</h1>
+              <div className="container-cidades-row">
+                <h1> Varjota</h1> <h1>Catunda</h1>{' '}
+              </div>
+              <div className="container-cidades-row">
+                <h1> Hidrolândia</h1>
+              </div>
+            </div>
+            <div className="container-cidades-coluna">
+              <h1>Catarina 88.7</h1>
+              <div className="container-cidades-row">
+                <h1> Auiaba</h1> <h1> Arneiroz</h1> <h1> Saboeiro</h1>
+              </div>
+              <div className="container-cidades-row">
+                <h1> Acopiara</h1> <h1> Mombaça</h1>
+              </div>
+            </div>
+            {/* Outros elementos .container-cidades-coluna */}
           </div>
-          <div className="container-cidades-coluna">
-            <h1>Aracati 98.1</h1>
-            <div className="container-cidades-row">
-              <h1> Aracati</h1> <h1> Aracati</h1> <h1> Aracati</h1>{' '}
-            </div>
-            <div className="container-cidades-row">
-              <h1> Aracati</h1> <h1> Aracati</h1>
-              <h1> Aracati</h1> <h1> Aracati</h1>{' '}
-            </div>
-          </div>
-          <div className="container-cidades-coluna">
-            <h1>Aracati 98.1</h1>
-            <div className="container-cidades-row">
-              <h1> Aracati</h1> <h1> Aracati</h1> <h1> Aracati</h1>{' '}
-            </div>
-            <div className="container-cidades-row">
-              <h1> Aracati</h1> <h1> Aracati</h1>
-              <h1> Aracati</h1> <h1> Aracati</h1>{' '}
-            </div>
-          </div>
-          <div className="container-cidades-coluna">
-            <h1>Aracati 98.1</h1>
-            <div className="container-cidades-row">
-              <h1> Aracati</h1> <h1> Aracati</h1> <h1> Aracati</h1>{' '}
-            </div>
-            <div className="container-cidades-row">
-              <h1> Aracati</h1> <h1> Aracati</h1>
-              <h1> Aracati</h1> <h1> Aracati</h1>{' '}
-            </div>
-          </div>
+
           <div className="boxMapPropaganda" />
         </div>
       </div>

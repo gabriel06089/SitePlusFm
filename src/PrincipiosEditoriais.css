@@ -3,7 +3,24 @@
     flex-direction: column;
     align-items: flex-start;
     padding-top: 15vw;
-    margin-inline: 6vw;
+    padding-inline: 6vw;
+    width: 100%;
+    background-color: var(--cor-primaria);
+    height: 140vh;
+}
+
+@media (min-width: 600px) {
+    .containerEsquerda {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+         padding-top: 0vw; 
+        padding-inline: 6vw;
+        width: 100%;
+        background-color: var(--cor-primaria);
+        height: 100vh;
+    }
+
 }
 
 .lineEditoriais {

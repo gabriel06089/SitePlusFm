@@ -29,6 +29,8 @@ const Contato = () => {
   const [telefone, setTelefone] = useState('');
   const [mensagem, setMensagem] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const isContactPage = location.pathname === '/contato';
   const {
     isPlaying,
     // Adicione handlePlayPause aqui se você o adicionou ao contexto
@@ -86,7 +88,9 @@ const Contato = () => {
       <div
         className={`logoMenuDivRow ${isMenuOpen ? 'fixed' : ''} ${
           isPlaying ? 'playing' : ''
-        } ${isPlaying && isMenuOpen ? 'playingAndMenuOpen' : ''}`}
+        } ${isPlaying && isMenuOpen ? 'playingAndMenuOpen' : ''} ${
+          isContactPage ? 'contactPage' : ''
+        }`}
       >
         <img src={Logo} />
         {isMenuOpen ? (
@@ -104,8 +108,8 @@ const Contato = () => {
           <Link to="/">
             <h1>Home</h1>
           </Link>
-          <Link to="/sobre">
-            <h1>Quem Somos</h1>
+          <Link to="/onde-estamos">
+            <h1>Onde</h1>
           </Link>
           <Link to="/drops">
             <h1>Drops</h1>
@@ -116,14 +120,8 @@ const Contato = () => {
           <Link to="/programacao">
             <h1>Programação</h1>
           </Link>
-          <Link to="/onde-estamos">
-            <h1>Onde Estamos</h1>
-          </Link>
           <Link to="/promocao">
             <h1>Promoções</h1>
-          </Link>
-          <Link to="/contato">
-            <h1>Contato</h1>
           </Link>
           <div className="footerSocialMediaContainer">
             {' '}
@@ -179,7 +177,8 @@ const Contato = () => {
           </div>
         </div>
       </div>
-
+      <h2 className={`contatoH2 ${isPlaying ? 'playing' : ''}`}>Contato</h2>{' '}
+      <div className="whiteLineContato" />
       <div className={`containerPropaganda ${isPlaying ? 'playing' : ''}`}>
         {' '}
       </div>
@@ -203,7 +202,7 @@ const Contato = () => {
               />
             </label>
             <label className="contatoLabel">
-              Email:
+              E-mail:
               <input
                 type="email"
                 name="email"

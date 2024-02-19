@@ -5,9 +5,11 @@ import { Puff } from 'react-loader-spinner';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 import { Tweet } from 'react-tweet';
 import Xlogo from './twitter-x.svg';
+import XlogoRoxo from './twitter-xRoxo.svg';
 import { decode } from 'he';
 import Don7 from './don7horizontal.svg';
 import Logo from './plus-1.png';
+import LogoBranca from './LogoBranca.svg';
 import PlayStore from './playstore.png';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
@@ -37,6 +39,7 @@ const NoticiaDetalhe = () => {
   const [imagemDescricao, setImagemDescricao] = useState(null);
   const [maisNoticias, setMaisNoticias] = useState([]);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const {
     isPlaying,
@@ -51,6 +54,9 @@ const NoticiaDetalhe = () => {
     }
   };
 
+  const updateWindowWidth = () => {
+    setWindowWidth(window.innerWidth);
+  };
   useEffect(() => {
     window.addEventListener('scroll', checkScroll);
 
@@ -65,17 +71,32 @@ const NoticiaDetalhe = () => {
   }, [noticia]);
 
   useEffect(() => {
-    const fetchMaisNoticias = async () => {
-      const response = await fetch(
-        'https://plusfm.com.br/wp-json/wp/v2/posts?per_page=2'
-      );
-      const data = await response.json();
-      setMaisNoticias(data);
+    const fetchNoticia = async () => {
+      setLoading(true);
+      try {
+        const [noticiaResponse, maisNoticiasResponse] = await Promise.all([
+          fetch(`https://plusfm.com.br/wp-json/wp/v2/posts/${id}`),
+          fetch('https://plusfm.com.br/wp-json/wp/v2/posts?per_page=2'),
+        ]);
+
+        const noticiaData = await noticiaResponse.json();
+        const maisNoticiasData = await maisNoticiasResponse.json();
+
+        setNoticia(noticiaData);
+        setMaisNoticias(maisNoticiasData);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    fetchMaisNoticias();
+    fetchNoticia();
+  }, [id]);
+  useEffect(() => {
+    window.addEventListener('resize', updateWindowWidth);
+    return () => window.removeEventListener('resize', updateWindowWidth);
   }, []);
-
   useEffect(() => {
     const fetchNoticia = async () => {
       try {
@@ -216,7 +237,7 @@ const NoticiaDetalhe = () => {
 
   return (
     <div className="noticiaDetalheDiv">
-      <div className="MenuContainerHeader">
+      <div className={`MenuContainerHeader ${isPlaying ? 'playing' : ''}`}>
         <div
           className={`logoMenuDivRow ${isMenuOpen ? 'fixed' : ''} ${
             isPlaying ? 'playing' : ''
@@ -225,14 +246,20 @@ const NoticiaDetalhe = () => {
           }`}
         >
           <img src={Logo} />
-          {isMenuOpen ? (
+          <div className="menuLinksDetalhes">
+            <Link to="/">Home</Link>
+            <Link to="/onde-estamos">Onde Estamos</Link>
+            <Link to="/drops">Drops</Link>
+            <Link to="/programas">Programas</Link>
+            <Link to="/programacao">Programação</Link>
+            <Link to="/contato">Contato</Link>
+          </div>
+          {isMenuOpen && windowWidth <= 600 ? (
             <X weight="bold" onClick={() => setIsMenuOpen(false)} />
           ) : (
-            <List
-              className={isNewsPage ? 'newsPageIcon' : ''}
-              weight="bold"
-              onClick={() => setIsMenuOpen(true)}
-            />
+            windowWidth <= 600 && (
+              <List weight="bold" onClick={() => setIsMenuOpen(true)} />
+            )
           )}
         </div>
         <div className={`fullScreenMenu ${isMenuOpen ? 'open' : ''}`}>
@@ -252,14 +279,8 @@ const NoticiaDetalhe = () => {
             <Link to="/programacao">
               <h1>Programação</h1>
             </Link>
-            <Link to="/onde-estamos">
-              <h1>Onde Estamos</h1>
-            </Link>
-            <Link to="/promocoes">
+            <Link to="/promocao">
               <h1>Promoções</h1>
-            </Link>
-            <Link to="/contato">
-              <h1>Contato</h1>
             </Link>
             <div className="footerSocialMediaContainer">
               {' '}
@@ -273,111 +294,81 @@ const NoticiaDetalhe = () => {
           </div>
         </div>
       </div>
-      <div className={`noticiasContainer ${isPlaying ? 'playing' : ''}`}>
-        <h1>{decode(noticia.title.rendered)}</h1>
-        <h2>{decode(noticia.bigode)}</h2>
+      <div className="div-bloco-cinza">{/* Conteúdo da div aqui */}</div>
+      <div className="containerPrincipal">
+        <div className={`noticiasContainer ${isPlaying ? 'playing' : ''}`}>
+          <h1>{decode(noticia.title.rendered)}</h1>
+          <h2>{decode(noticia.bigode)}</h2>
 
-        {noticia.yoast_head_json && noticia.yoast_head_json.og_image && (
-          <>
-            <img
-              loading="lazy"
-              src={noticia.yoast_head_json.og_image[0].url}
-              alt="Imagem da notícia"
-            />
+          {noticia.yoast_head_json && noticia.yoast_head_json.og_image && (
+            <>
+              <img
+                loading="lazy"
+                src={noticia.yoast_head_json.og_image[0].url}
+                alt="Imagem da notícia"
+              />
+              {/* <div className="icon-row">
+              <FacebookLogo weight="regular" size={40} />
+              <img src={XlogoRoxo} />
+              <InstagramLogo weight="regular" size={40} />
+              <TiktokLogo weight="regular" size={40} />
 
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                marginTop: '6px',
-              }}
-            >
-              <Camera className="iconDesc" />
-              {imagemDescricao && (
-                <p className="descImage">{decode(imagemDescricao)}</p>
-              )}
-            </div>
-
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                marginBottom: '1rem',
-              }}
-            >
-              <Timer className="iconDesc" />
-              {noticia.date && (
-                <p className="descImage">
-                  {format(new Date(noticia.date), 'dd/MM/yyyy HH:mm', {
-                    locale: ptBR,
-                  })}
-                </p>
-              )}
-            </div>
-          </>
-        )}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            height: '1px',
-            backgroundColor: 'black',
-            marginBottom: '2rem',
-            opacity: '0.4',
-          }}
-        />
-        <div
-          className="meu-conteudo"
-          dangerouslySetInnerHTML={{ __html: cleanedHtmlContent }}
-        />
-        <div className="tweet-container">
-          <div className="light">{tweetId && <Tweet id={tweetId} />}</div>
+              <WhatsappLogo weight="regular" size={40} />
+              <TelegramLogo weight="regular" size={40} />
+            </div> */}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  marginTop: '6px',
+                }}
+              >
+                <Camera className="iconDesc" />
+                {imagemDescricao && (
+                  <p className="descImage">{decode(imagemDescricao)}</p>
+                )}
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <Timer className="iconDesc" />
+                {noticia.date && (
+                  <p className="descImage">
+                    {format(new Date(noticia.date), 'dd/MM/yyyy HH:mm', {
+                      locale: ptBR,
+                    })}
+                  </p>
+                )}
+              </div>
+            </>
+          )}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              height: '1px',
+              backgroundColor: 'black',
+              marginTop: '1rem',
+              marginBottom: '1rem',
+              opacity: '0.4',
+            }}
+          />
+          <div
+            className="meu-conteudo"
+            dangerouslySetInnerHTML={{ __html: cleanedHtmlContent }}
+          />
+          <div className="tweet-container">
+            <div className="light">{tweetId && <Tweet id={tweetId} />}</div>
+          </div>
+          <div id="container"></div>
         </div>
-        <div id="container"></div>
-      </div>
-      <div className="social-share-container">
-        <a
-          href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FacebookLogo
-            className="social-link"
-            size={'4vw'}
-            color={getComputedStyle(document.documentElement).getPropertyValue(
-              '--cor-primaria'
-            )}
-            weight="fill"
-          />
-        </a>
-        <a
-          href={`https://twitter.com/intent/tweet?text=${text}&url=${url}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <TwitterLogo
-            className="social-link"
-            size={'4vw'}
-            color={getComputedStyle(document.documentElement).getPropertyValue(
-              '--cor-primaria'
-            )}
-            weight="fill"
-          />
-        </a>
-        <a
-          href={`https://api.whatsapp.com/send?text=${text} ${url}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <WhatsappLogo
-            className="social-link"
-            size={'4vw'}
-            color={getComputedStyle(document.documentElement).getPropertyValue(
-              '--cor-primaria'
-            )}
-            weight="fill"
-          />
-        </a>
+        <div className="container-blocos">
+          <div className="bloco-cinza-grande"></div>
+          <div className="bloco-cinza"></div>
+        </div>
       </div>
 
       <div className="containerDivisaoC"> Recomendadas para você </div>
@@ -391,10 +382,7 @@ const NoticiaDetalhe = () => {
               to={`/noticia/${post.id}`}
               key={post.id}
               className="post"
-              style={{
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
+              style={{ color: 'inherit', textDecoration: 'none' }}
             >
               <img
                 loading="lazy"
@@ -414,10 +402,27 @@ const NoticiaDetalhe = () => {
               to={`/noticia/${post.id}`}
               key={post.id}
               className="post"
-              style={{
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
+              style={{ color: 'inherit', textDecoration: 'none' }}
+            >
+              <img
+                loading="lazy"
+                src={post.yoast_head_json.og_image[0].url}
+                alt="Imagem do post"
+              />
+              <div className="containerSpanFooter">
+                <h4>{decode(post.cartola)}</h4>
+                <h5>{decode(post.title.rendered)}</h5>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="containerColuna3">
+          {posts.slice(6, 9).map((post) => (
+            <Link
+              to={`/noticia/${post.id}`}
+              key={post.id}
+              className="post"
+              style={{ color: 'inherit', textDecoration: 'none' }}
             >
               <img
                 loading="lazy"
@@ -433,28 +438,111 @@ const NoticiaDetalhe = () => {
         </div>
       </div>
       <div className="footer">
-        <div className="footerDiv">
-          <div className="imageContainer">
-            <img src={Logo} alt="Imagem 3" className="footerImage4" />
-            <div className="footerDivRow">
-              <Link to="/sobre">
-                <span className="footerDivRowSpan"> Sobre </span>
-              </Link>
-              <div className="verticalLine"></div>
-              <Link to="/principios-editoriais">
-                <span className="footerDivRowSpan">
-                  {' '}
-                  Princípios Editoriais{' '}
-                </span>
-              </Link>
-              <div className="verticalLine"></div>
-              <Link to="/contato">
-                <span className="footerDivRowSpan"> Contato </span>
-              </Link>
+        {windowWidth <= 600 && (
+          <div className="footerDiv">
+            <div className="imageContainer">
+              <img src={Logo} alt="Imagem 3" className="footerImage4" />
+              <div className="footerDivRow">
+                <Link to="/sobre">
+                  <span className="footerDivRowSpan"> Sobre </span>
+                </Link>
+                <div className="verticalLine"></div>
+                <Link to="/principios-editoriais">
+                  <span className="footerDivRowSpan">
+                    {' '}
+                    Princípios Editoriais{' '}
+                  </span>
+                </Link>
+                <div className="verticalLine"></div>
+                <Link to="/contato">
+                  <span className="footerDivRowSpan"> Contato </span>
+                </Link>
+              </div>
             </div>
+            <span className="footerText">Copyright © 2024 Plus FM.</span>
           </div>
-          <span className="footerText">Copyright © 2024 Plus FM.</span>
-        </div>
+        )}
+        {windowWidth > 600 && (
+          <>
+            {' '}
+            <div className="footerDiv">
+              <div className="imageContainer">
+                <img src={LogoBranca} alt="Imagem 3" className="footerImage4" />
+                <div className="footerDivRow">
+                  <Link to="/sobre">
+                    <span className="footerDivRowSpan"> SOBRE </span>
+                  </Link>
+
+                  <Link to="/principios-editoriais">
+                    <span className="footerDivRowSpan">
+                      {' '}
+                      PRINCÍPIOS EDITORIAIS{' '}
+                    </span>
+                  </Link>
+
+                  <Link to="/contato">
+                    <span className="footerDivRowSpan"> CONTATO </span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="footerContainerColumnDiv">
+              {' '}
+              <div className="footerSocialMediaContainerFooter">
+                <a
+                  href="https://www.facebook.com/plusfmrede/?locale=pt_BR"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FacebookLogo weight="regular" size={50} color="white" />
+                </a>
+                <a
+                  href="https://twitter.com/plusfmrede_"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={Xlogo} />
+                </a>
+                <a
+                  href="https://www.instagram.com/plusfmrede/?igsh=dGhjczFwNDBwdW81"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <InstagramLogo weight="regular" size={50} color="white" />
+                </a>
+                <a
+                  href="https://www.tiktok.com/@plusfmrede"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <TiktokLogo weight="regular" size={50} color="white" />
+                </a>
+                <a
+                  href="https://www.youtube.com/channel/UC0ek2Dls6ikevIsWckZX7ZA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <YoutubeLogo weight="regular" size={50} color="white" />
+                </a>
+                <a
+                  href="https://www.whatsapp.com/channel/0029VaDSwXYA89MeJrPw1p1A"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <WhatsappLogo weight="regular" size={50} color="white" />
+                </a>
+                <a
+                  href="https://t.me/redeplusfm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <TelegramLogo weight="regular" size={50} color="white" />
+                </a>
+              </div>
+              <span className="footerText">Copyright © 2024 Plus FM.</span>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
