@@ -332,6 +332,8 @@ function App() {
   const [displayPrograms, setDisplayPrograms] = useState([]);
   const currentProgramRef = useRef(null);
   const [clickedProgram, setClickedProgram] = useState(null);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
   const checkScroll = () => {
     // Verifique se a página foi rolada mais de 100 pixels
     if (window.scrollY > 10) {
@@ -1059,12 +1061,10 @@ function App() {
             >
               <img src={Logo} />
               <div className="menuLinks">
-                <Link to="/onde-estamos">ONDE ESTAMOS</Link>
                 <Link to="/drops">DROPS</Link>
-                <Link to="/programas">PROGRAMAS</Link>
                 <Link to="/programacao">PROGRAMAÇÃO</Link>
-                <Link to="/contato">CONTATO</Link>
                 <Link to="/promocao">PROMOÇÕES</Link>
+                <Link to="/onde-estamos">ONDE ESTAMOS</Link>
               </div>
             </div>
           ) : (
@@ -1771,18 +1771,22 @@ function App() {
                     >
                       {program !== expandedProgram && (
                         <div
-                          className={`programacao-row ${
-                            index === currentProgramIndex
-                              ? 'current-program'
-                              : ''
-                          }`}
-                        >
+                        className={`programacao-row ${
+                          index === currentProgramIndex
+                            ? 'current-program'
+                            : ''
+                        } ${isHomePage ? 'home' : ''}`}
+                      >
                           <div className="programacao-data">
                             <p>{`${program.startHour
                               .toString()
                               .padStart(2, '0')}:00`}</p>
                           </div>
-                          <div className="programacao-titulo">
+                          <div
+                            className={`programacao-titulo ${
+                              isHomePage ? 'home' : ''
+                            }`}
+                          >
                             <p>{program.title}</p>
                           </div>
                           <div
@@ -1961,7 +1965,7 @@ function App() {
             onMouseOut={() => setHover(false)}
             className="mapComponent"
           />{' '}
-          {windowWidth > 600 && (
+          {/* {windowWidth > 600 && (
             <h1 className="clickInstruction">Clique para ouvir</h1>
           )}
           {windowWidth > 600 && (
@@ -1969,7 +1973,7 @@ function App() {
               className={`handPointing ${!isPlaying ? 'clicking' : ''}`}
               weight="fill"
             />
-          )}
+          )} */}
           <StyledRipple
             top="86%"
             left="60%"

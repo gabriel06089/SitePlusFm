@@ -127,6 +127,12 @@ a {
   width: 100%;
 }
 
+@media (min-width: 600px) {
+  .MapContainer {
+    background: none;
+  }
+}
+
 .dropsColumnContainer span {
   bottom: -14%;
   color: var(--cor-primaria);
@@ -2629,7 +2635,7 @@ a {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 50vw;
+  width: 36vw;
   /* aumentado de 29vw para 39vw */
 }
 
@@ -2916,7 +2922,7 @@ a {
     font-weight: 400;
     font-family: 'Rubik', sans-serif;
     color: var(--cor-terciaria);
-    font-size: 35px;
+    font-size: 20px;
     margin-top: 3vw;
   }
 
@@ -2933,7 +2939,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1vw;
+  padding-bottom: 10px;
+
 }
 
 .live-container span {
@@ -3047,7 +3054,7 @@ a {
     height: 0.6rem;
     border-radius: 50%;
     background-color: red;
-    margin-right: 5px;
+    margin-right: 0px;
     margin-top: 1.3rem;
     animation: blink 1s steps(5, start) infinite;
   }
@@ -3155,7 +3162,7 @@ a {
 .promoCardNew1 img {
   width: 100%;
   object-fit: cover;
-  height: 51vw;
+  height: 45vw;
   border-radius: 0px;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
@@ -3599,7 +3606,7 @@ a {
   width: 100%;
   flex-direction: row;
   justify-content: space-around;
-  padding-inline: 10rem;
+  padding-inline: 14rem;
   z-index: 2;
 }
 
@@ -3607,7 +3614,8 @@ a {
 
   color: white;
   font-family: 'Rubik', sans-serif;
-  font-size: 20px !important;
+  font-size: 25px !important;
+  margin-top: 0px !important;
   height: 6vw;
   font-weight: 400 !important;
   line-height: normal;
@@ -3619,6 +3627,7 @@ a {
   margin-bottom: 0px !important;
   display: flex;
   align-items: center;
+
 }
 
 .btnStyleLargeScreen1 {
@@ -3647,9 +3656,11 @@ a {
 }
 
 .newsTitleLargeScreen1 {
+  font-size: 25px !important;
+  margin-top: 0px !important;
   color: white;
   font-family: 'Rubik', sans-serif;
-  font-size: 20px !important;
+
   height: 6vw;
   font-weight: 400 !important;
   line-height: normal;
@@ -3705,7 +3716,7 @@ a {
   display: flex;
   flex-direction: column;
 
-  width: 45rem;
+  width: 40rem;
   height: auto;
   border-radius: 12px;
   border: 1px solid white;
@@ -3718,7 +3729,7 @@ a {
 
 .newsItemLargeScreen img {
   width: 100%;
-  height: 22rem;
+  height: 21rem;
   border-radius: 10px;
   object-fit: cover;
   -webkit-border-radius: 10px;
@@ -3951,11 +3962,23 @@ a {
   background-color: white;
   margin-top: 6px;
   margin-bottom: 1.56rem;
-  height: 3px;
-  width: 6%;
+  height: 5px;
+  border-radius: 8px;
+  width: 5%;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
 }
 
 
+@media (min-width: 600px) {
+  .whiteLine {
+
+    width: 2%;
+    /* Ajuste este valor para a largura desejada */
+  }
+}
 
 
 .btnStylePromo {
@@ -4081,8 +4104,8 @@ a {
   margin-top: 0px;
   margin-bottom: 1.56rem;
   border-radius: 6px;
-  height: 6px;
-  width: 3%;
+  height: 5px;
+  width: 5%;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   -ms-border-radius: 6px;
@@ -4095,8 +4118,8 @@ a {
     margin-top: 0px;
     margin-bottom: 1.56rem;
     border-radius: 6px;
-    height: 6px;
-    width: 3%;
+    height: 5px;
+    width: 2%;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     -ms-border-radius: 6px;
@@ -4139,6 +4162,7 @@ a {
     color: white;
     text-align: center;
     margin-block: 0.3rem;
+    margin-bottom: 10px;
   }
 
   .foneImg {
@@ -4624,8 +4648,13 @@ a {
   background-color: white;
   margin-top: 0px;
   margin-bottom: 1.56rem;
-  height: 3px;
-  width: 8%;
+  height: 5px;
+  width: 5%;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
 }
 
 .contactPage {
@@ -4701,6 +4730,19 @@ a {
   .btnStylePromo {
     display: block;
     /* Mostra o botão quando a largura da tela é maior que 600px */
+  }
+
+  .whiteLine5 {
+    background-color: white;
+    margin-top: 0px;
+    margin-bottom: 1.56rem;
+    height: 5px;
+    width: 2%;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
   }
 }
 
@@ -4914,7 +4956,7 @@ a {
   .circleContainerRow {
     display: flex;
     justify-content: space-between;
-    padding-inline: 9rem;
+    padding-inline: 4rem;
   }
 
   .large-screen-element {
@@ -4934,8 +4976,8 @@ a {
 
   .MapContainer {
     align-items: center;
-    background: linear-gradient(180deg, #541084 0%, #9248FF 100%);
-    /* background-color: #FFC007; */
+    /* background: linear-gradient(180deg, #541084 0%, #9248FF 100%); */
+    background-color: #541084;
     display: flex;
     flex-direction: column;
     height: auto;
@@ -4969,3 +5011,13 @@ a {
   display: flex;
   flex-direction: column;
 }
+
+.programacao-titulo.home p {
+  font-size: 1.4rem;
+  color: white;
+  padding-left: 1rem;
+  width: 100%;
+}
+
+.programacao-row.home {}
+

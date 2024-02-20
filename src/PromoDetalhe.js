@@ -359,10 +359,10 @@ const PromoDetalhe = () => {
           </div>
           <div id="container"></div>
         </div>
-        <div className="container-blocos">
+        {/* <div className="container-blocos">
           <div className="bloco-cinza-grande"></div>
           <div className="bloco-cinza"></div>
-        </div>
+        </div> */}
       </div>
 
       <div className="containerDivisaoC"> Recomendadas para você </div>

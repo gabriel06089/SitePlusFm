@@ -490,15 +490,18 @@ a {
     flex-direction: column;
 
     width: 20vw;
-    padding: 0 20px;
-    padding-left: 7.8125rem
+    /* padding: 0 20px;
+    padding-left: 7.8125rem */
+    padding-inline: 30rem;
 }
 
 .noticiasContainer img {
     border-radius: 10px;
-    height: auto;
-
+    height: 32rem;
+    width: 60rem;
     margin-bottom: 1rem;
+    object-fit: cover;
+    /* align-self: center; */
 }
 
 h1 {
@@ -523,6 +526,7 @@ h2 {
     letter-spacing: -0.6px;
     margin-block: 0rem !important;
     margin-bottom: 24px !important;
+    margin-top: 8px !important;
     font-style: normal;
     font-weight: 200;
     line-height: normal;
@@ -590,7 +594,7 @@ h1 {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    padding-top: 2vw;
+    padding-top: 5vw;
     font-size: 40px;
     letter-spacing: -1.08px;
 
@@ -935,13 +939,11 @@ h3 {
     background-color: var(--cor-primaria);
     border-radius: 8px;
     padding-inline: 1vw;
-    margin-left: 7.8125rem;
+    margin: auto;
     font-size: 2rem;
     color: #FFF;
 
     font-family: 'Rubik', sans-serif;
-
-
     font-style: normal;
     font-weight: 200;
     margin-bottom: 3vw;
@@ -1059,9 +1061,12 @@ h3 {
 .maisNoticiasR {
     display: flex;
     flex-direction: column;
-    width: 61rem !important;
+    /* width: 61rem !important; */
     margin-top: 20px;
-    gap: 2rem;
+    gap: 1rem;
+    align-items: center;
+    padding-left: 18.4rem;
+    padding-right: 28rem;
 }
 
 
@@ -1112,6 +1117,16 @@ h3 {
 }
 
 @media (max-width: 600px) {
+    .maisNoticiasR {
+        display: flex;
+        flex-direction: column;
+        /* width: 61rem !important; */
+        margin-top: 20px;
+        gap: 2rem;
+        align-items: center;
+        padding: 0rem;
+    }
+
     .maisNoticiasR {
         display: flex;
         flex-direction: column;
@@ -1181,7 +1196,7 @@ h3 {
 .containerColuna1 img,
 .containerColuna2 img,
 .containerColuna3 img {
-    width: 19.5rem;
+    width: 21.5rem;
     height: 12rem;
     object-fit: cover;
     border-radius: 10px;
