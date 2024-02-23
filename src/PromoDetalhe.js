@@ -22,6 +22,7 @@ import { ptBR } from 'date-fns/locale';
 import { decode } from 'he';
 import LogoBranca from './LogoBranca.svg';
 import Logo from './plus-1.png';
+import Don7 from './don7.png';
 import { Tweet } from 'react-tweet';
 const PromoDetalhe = () => {
   const location = useLocation();
@@ -359,10 +360,10 @@ const PromoDetalhe = () => {
           </div>
           <div id="container"></div>
         </div>
-        {/* <div className="container-blocos">
+        <div className="container-blocos">
           <div className="bloco-cinza-grande"></div>
           <div className="bloco-cinza"></div>
-        </div> */}
+        </div>
       </div>
 
       <div className="containerDivisaoC"> Recomendadas para você </div>
@@ -480,6 +481,7 @@ const PromoDetalhe = () => {
                 </div>
               </div>
             </div>
+            <span className="footerText">Copyright © 2024 Plus FM.</span>
             <div className="footerContainerColumnDiv">
               {' '}
               <div className="footerSocialMediaContainerFooter">
@@ -533,7 +535,8 @@ const PromoDetalhe = () => {
                   <TelegramLogo weight="regular" size={50} color="white" />
                 </a>
               </div>
-              <span className="footerText">Copyright © 2024 Plus FM.</span>
+              <span className="footerText1">SITE PERTENCENTE AO</span>{' '}
+              <img src={Don7} alt="Imagem 3" className="footerImage5" />
             </div>
           </>
         )}

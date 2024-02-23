@@ -68,7 +68,8 @@ import textPromo from './textSVGs/promocoes.svg';
 import mapText from './textSVGs/OndeEstamos.svg';
 import textTop10 from './AssetDrops/textTop10.png';
 import aoVivo from './oucaqui.svg';
-import Don7 from './don7horizontal.svg';
+
+import Don7 from './don7.png';
 import vozdobrasil from './imagemprogamacao/vozdobrasil.png';
 import LogoBranca from './LogoBranca.svg';
 import Logo from './plus-1.png';
@@ -1771,12 +1772,12 @@ function App() {
                     >
                       {program !== expandedProgram && (
                         <div
-                        className={`programacao-row ${
-                          index === currentProgramIndex
-                            ? 'current-program'
-                            : ''
-                        } ${isHomePage ? 'home' : ''}`}
-                      >
+                          className={`programacao-row ${
+                            index === currentProgramIndex
+                              ? 'current-program'
+                              : ''
+                          } ${isHomePage ? 'home' : ''}`}
+                        >
                           <div className="programacao-data">
                             <p>{`${program.startHour
                               .toString()
@@ -1809,14 +1810,18 @@ function App() {
                             program.title === 'A Voz do Brasil'
                               ? 'special-program'
                               : ''
-                          }`}
+                          } ${isHomePage ? 'home' : ''}`}
                           ref={
                             program === currentProgram
                               ? currentProgramRef
                               : null
                           }
                         >
-                          <div className="programacao-imagem">
+                          <div
+                            className={`programacao-imagem ${
+                              isHomePage ? 'home' : ''
+                            }`}
+                          >
                             <img
                               src={program.image}
                               alt="Imagem"
@@ -1831,7 +1836,7 @@ function App() {
                                   : program.title === 'Ceará News'
                                   ? 'ceara-news-image'
                                   : ''
-                              }`}
+                              } ${isHomePage ? 'home' : ''}`}
                             />
                             {program === currentProgram && (
                               <p>{`${program.startHour
@@ -1839,7 +1844,11 @@ function App() {
                                 .padStart(2, '0')}:00`}</p>
                             )}
                           </div>
-                          <div className="programacao-expanded-titulo">
+                          <div
+                            className={`programacao-expanded-titulo ${
+                              isHomePage ? 'home' : ''
+                            }`}
+                          >
                             <h1>{program.title}</h1>
                             <span>{formatDays(program.days)}</span>
                             <p>{program.textDesc}</p>
@@ -2282,6 +2291,7 @@ function App() {
                 </div>
               </div>
             </div>
+            <span className="footerText">Copyright © 2024 Plus FM.</span>
             <div className="footerContainerColumnDiv">
               {' '}
               <div className="footerSocialMediaContainerFooter">
@@ -2335,7 +2345,8 @@ function App() {
                   <TelegramLogo weight="regular" size={50} color="white" />
                 </a>
               </div>
-              <span className="footerText">Copyright © 2024 Plus FM.</span>
+              <span className="footerText1">SITE PERTENCENTE AO</span>{' '}
+              <img src={Don7} alt="Imagem 3" className="footerImage5" />
             </div>
           </>
         )}

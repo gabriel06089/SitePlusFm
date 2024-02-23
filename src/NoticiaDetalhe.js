@@ -5,9 +5,10 @@ import { Puff } from 'react-loader-spinner';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 import { Tweet } from 'react-tweet';
 import Xlogo from './twitter-x.svg';
+import Don7 from './don7.png';
 import XlogoRoxo from './twitter-xRoxo.svg';
 import { decode } from 'he';
-import Don7 from './don7horizontal.svg';
+
 import Logo from './plus-1.png';
 import LogoBranca from './LogoBranca.svg';
 import PlayStore from './playstore.png';
@@ -365,10 +366,10 @@ const NoticiaDetalhe = () => {
           </div>
           <div id="container"></div>
         </div>
-        {/* <div className="container-blocos">
+        <div className="container-blocos">
           <div className="bloco-cinza-grande"></div>
           <div className="bloco-cinza"></div>
-        </div> */}
+        </div>
       </div>
 
       <div className="containerDivisaoC"> Recomendadas para você </div>
@@ -486,6 +487,7 @@ const NoticiaDetalhe = () => {
                 </div>
               </div>
             </div>
+            <span className="footerText">Copyright © 2024 Plus FM.</span>
             <div className="footerContainerColumnDiv">
               {' '}
               <div className="footerSocialMediaContainerFooter">
@@ -539,7 +541,8 @@ const NoticiaDetalhe = () => {
                   <TelegramLogo weight="regular" size={50} color="white" />
                 </a>
               </div>
-              <span className="footerText">Copyright © 2024 Plus FM.</span>
+              <span className="footerText1">SITE PERTENCENTE AO</span>{' '}
+              <img src={Don7} alt="Imagem 3" className="footerImage5" />
             </div>
           </>
         )}

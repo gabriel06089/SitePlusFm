@@ -1591,6 +1591,7 @@ a {
   width: 19vw;
 }
 
+x
 @media (max-width: 600px) {
   .dropsImage {
     height: 0vw;
@@ -1716,6 +1717,7 @@ a {
   padding: 20px;
   width: 100%;
   /* border-radius: 12px; */
+  position: relative;
 }
 
 .footerDiv {
@@ -1747,6 +1749,7 @@ a {
     padding: 20px;
     padding-inline: 10rem;
     width: 100%;
+    position: relative;
   }
 }
 
@@ -1837,7 +1840,16 @@ a {
   line-height: normal;
   margin-block: 2vw;
   z-index: 5;
-  text-align: right;
+  text-align: center;
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  align-self: center;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
 }
 
 @media (max-width: 600px) {
@@ -4994,7 +5006,7 @@ a {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 1.2rem;
+  gap: 2.1999999999999993rem;
   padding-top: 3rem;
 }
 
@@ -5020,4 +5032,3 @@ a {
 }
 
 .programacao-row.home {}
-
