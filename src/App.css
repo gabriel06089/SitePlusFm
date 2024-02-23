@@ -1591,8 +1591,7 @@ a {
   width: 19vw;
 }
 
-x
-@media (max-width: 600px) {
+x @media (max-width: 600px) {
   .dropsImage {
     height: 0vw;
     margin-left: 5.8vw;
@@ -3598,7 +3597,7 @@ x
 
 .whiteLineLargeScreen {
   background-color: white;
-
+  z-index: 2;
   margin-bottom: 1.56rem;
   height: 5px;
   border-radius: 4px;
@@ -3619,6 +3618,7 @@ x
   flex-direction: row;
   justify-content: space-around;
   padding-inline: 14rem;
+  margin-bottom: 4rem;
   z-index: 2;
 }
 
@@ -3715,6 +3715,7 @@ x
   padding-top: 3rem !important;
   color: white;
   padding-bottom: 10px;
+  z-index: 2;
 }
 
 .newsTitleContainerLargeScreen {
@@ -4953,6 +4954,7 @@ x
   height: 4rem;
   width: 80%;
   margin-block: 4rem;
+  z-index: 2;
 }
 
 .circleContainerRow {
@@ -5032,3 +5034,30 @@ x
 }
 
 .programacao-row.home {}
+
+.cartolaPlusNews {
+  position: absolute;
+  top: -3.2%;
+  align-self: center;
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  background-color: white;
+  padding: 4px 15px;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+
+.plusDegradeImg {
+  position: absolute;
+  bottom: 24%;
+  left: -15%;
+  width: 55rem;
+  height: auto;
+  object-fit: contain;
+  z-index: 1;
+}

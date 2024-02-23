@@ -68,6 +68,7 @@ import textPromo from './textSVGs/promocoes.svg';
 import mapText from './textSVGs/OndeEstamos.svg';
 import textTop10 from './AssetDrops/textTop10.png';
 import aoVivo from './oucaqui.svg';
+import PlusDegadre from './plusDegrade.svg';
 
 import Don7 from './don7.png';
 import vozdobrasil from './imagemprogamacao/vozdobrasil.png';
@@ -1304,6 +1305,117 @@ function App() {
             ))}
           </div>
 
+          {windowWidth > 600 && (
+            <>
+              <Link to="/programas" className="btnStyleLargeScreen1">
+                VER MAIS
+              </Link>
+              <div className="placeholderPropragandaLargeScreen" />
+            </>
+          )}
+          <h1
+            style={{ color: windowWidth > 600 ? 'white' : 'white' }}
+            className={
+              windowWidth > 600 ? 'h1StyleDropsLargeScreen' : 'contentTitle'
+            }
+          >
+            + NEWS
+          </h1>
+          <img src={PlusDegadre} className="plusDegradeImg" />
+          <div
+            style={{ backgroundColor: windowWidth > 600 ? 'white' : 'white' }}
+            className={windowWidth > 600 ? 'whiteLineLargeScreen' : 'whiteLine'}
+          />
+          <div
+            className={
+              windowWidth > 600
+                ? 'newsContainerLargeScreen'
+                : 'contentContainer'
+            }
+          >
+            {programas.slice(0, 2).map((programa, index) => (
+              <Link
+                to={`/noticia/${programa.id}`}
+                key={index}
+                style={{ textDecoration: 'none' }}
+              >
+                <div
+                  style={{
+                    borderColor: windowWidth > 600 ? 'white' : 'white',
+                    position: 'relative', // Adicione isso para posicionar o cartola em relação a este div
+                  }}
+                  className={
+                    windowWidth > 600 ? 'newsItemLargeScreen' : 'contentItem'
+                  }
+                >
+                  {windowWidth > 600 && (
+                    <div className="cartolaPlusNews">
+                      {decode(programa.cartola)}
+                    </div>
+                  )}
+                  <img
+                    src={programa.yoast_head_json?.og_image?.[0]?.url}
+                    alt="Imagem da notícia"
+                    className={windowWidth > 600 ? 'newsImageLargeScreen' : ''}
+                  />
+                  <p
+                    className={
+                      windowWidth > 600
+                        ? 'newsTitleLargeScreen1'
+                        : 'contentText'
+                    }
+                  >
+                    {decode(programa.title.rendered)}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div
+            className={
+              windowWidth > 600
+                ? 'newsContainerLargeScreen'
+                : 'contentContainer'
+            }
+          >
+            {programas.slice(0, 2).map((programa, index) => (
+              <Link
+                to={`/noticia/${programa.id}`}
+                key={index}
+                style={{ textDecoration: 'none' }}
+              >
+                <div
+                  style={{
+                    borderColor: windowWidth > 600 ? 'white' : 'white',
+                    position: 'relative', // Adicione isso para posicionar o cartola em relação a este div
+                  }}
+                  className={
+                    windowWidth > 600 ? 'newsItemLargeScreen' : 'contentItem'
+                  }
+                >
+                  {windowWidth > 600 && (
+                    <div className="cartolaPlusNews">
+                      {decode(programa.cartola)}
+                    </div>
+                  )}
+                  <img
+                    src={programa.yoast_head_json?.og_image?.[0]?.url}
+                    alt="Imagem da notícia"
+                    className={windowWidth > 600 ? 'newsImageLargeScreen' : ''}
+                  />
+                  <p
+                    className={
+                      windowWidth > 600
+                        ? 'newsTitleLargeScreen1'
+                        : 'contentText'
+                    }
+                  >
+                    {decode(programa.title.rendered)}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
           {windowWidth > 600 && (
             <>
               <Link to="/programas" className="btnStyleLargeScreen1">
