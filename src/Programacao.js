@@ -293,7 +293,7 @@ function Programacao() {
       0: 'Domingo',
       1: 'Segunda',
       2: 'Terça',
-      3: 'Quarta', 
+      3: 'Quarta',
       4: 'Quinta',
       5: 'Sexta',
       6: 'Sábado',
@@ -310,9 +310,9 @@ function Programacao() {
     if (areConsecutive && days.length > 1) {
       // Se o intervalo for de Domingo a Sábado, inverta para Sábado a Domingo
       if (days[0] === 0 && days[days.length - 1] === 6) {
-        return `${dayMap[6]} à ${dayMap[0]}`;
+        return `${dayMap[6]} a ${dayMap[0]}`;
       } else {
-        return `${dayMap[days[0]]} à ${dayMap[days[days.length - 1]]}`;
+        return `${dayMap[days[0]]} a ${dayMap[days[days.length - 1]]}`;
       }
     } else {
       return days.map((day) => dayMap[day]).join(', ');

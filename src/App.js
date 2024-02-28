@@ -7,6 +7,7 @@ import React, {
   useContext,
   useRef,
 } from 'react';
+import { Helmet } from 'react-helmet';
 
 import './App.css';
 import { decode } from 'he';
@@ -32,7 +33,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useLocation } from 'react-router-dom';
-
+import AdSense from 'react-adsense';
 import agrandehora from './imagemprogamacao/agrandehora.svg';
 import asmaispedidas from './imagemprogamacao/asmaispedidas.svg';
 import asmelhoresdaplus from './imagemprogamacao/asmelhoresdaplus.svg';
@@ -68,9 +69,16 @@ import textPromo from './textSVGs/promocoes.svg';
 import mapText from './textSVGs/OndeEstamos.svg';
 import textTop10 from './AssetDrops/textTop10.png';
 import aoVivo from './oucaqui.svg';
+import banner1 from './banner1.png';
+import banner2 from './banner2.png';
+import banner3 from './banner3.png';
+import bannerMobile1 from './bannerMobile1.png';
+import bannerMobile2 from './bannerMobile2.png';
+import bannerMobile3 from './bannerMobile3.png';
 import PlusDegadre from './plusDegrade.svg';
 
 import Don7 from './don7.png';
+
 import vozdobrasil from './imagemprogamacao/vozdobrasil.png';
 import LogoBranca from './LogoBranca.svg';
 import Logo from './plus-1.png';
@@ -500,7 +508,7 @@ function App() {
       try {
         const cachedNews = JSON.parse(localStorage.getItem('news'));
         const response = await fetch(
-          'https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=3&tags_exclude=2007'
+          'https://plusfm.com.br/wp-json/wp/v2/posts?categories=2&per_page=3'
         );
         const data = await response.json();
 
@@ -567,7 +575,7 @@ function App() {
 
     fetchPromotions();
   }, []);
-  const [songsWithThumbnails, setSongsWithThumbnails] = useState([]);
+
   const [programas, setProgramas] = useState([]);
 
   useEffect(() => {
@@ -594,6 +602,62 @@ function App() {
     };
 
     fetchProgramas();
+  }, []);
+  const [NewsPlus, setNewsPlus] = useState(null);
+
+  useEffect(() => {
+    const fetchNewsPlus = async () => {
+      try {
+        const cachedNewsPlus = JSON.parse(localStorage.getItem('NewsPlus'));
+        const response = await fetch(
+          'https://plusfm.com.br/wp-json/wp/v2/posts?categories=2698&per_page=4'
+        );
+        const data = await response.json();
+
+        if (
+          !cachedNewsPlus ||
+          new Date(data[0].modified) > new Date(cachedNewsPlus[0].modified)
+        ) {
+          setNewsPlus(data);
+          localStorage.setItem('NewsPlus', JSON.stringify(data));
+        } else {
+          setNewsPlus(cachedNewsPlus);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchNewsPlus();
+  }, []);
+  const [NewsPlus2699, setNewsPlus2699] = useState(null);
+
+  useEffect(() => {
+    const fetchNewsPlus2699 = async () => {
+      try {
+        const cachedNewsPlus2699 = JSON.parse(
+          localStorage.getItem('NewsPlus2699')
+        );
+        const response = await fetch(
+          'https://plusfm.com.br/wp-json/wp/v2/posts?categories=2699&per_page=4'
+        );
+        const data = await response.json();
+
+        if (
+          !cachedNewsPlus2699 ||
+          new Date(data[0].modified) > new Date(cachedNewsPlus2699[0].modified)
+        ) {
+          setNewsPlus2699(data);
+          localStorage.setItem('NewsPlus2699', JSON.stringify(data));
+        } else {
+          setNewsPlus2699(cachedNewsPlus2699);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchNewsPlus2699();
   }, []);
   const songs = [
     {
@@ -895,7 +959,7 @@ function App() {
   const [mostrar, setMostrar] = useState(false);
   const naTelaNoticias = window.location.pathname.startsWith('/noticias');
   const [currentSlide, setCurrentSlide] = useState(0);
-  const colors = ['#570000', '#610788', '#0058B2'];
+  const colors = ['#761BAD', '#FBC000', '#93CED6'];
   const [scrolled, setScrolled] = useState(false);
   const settings = {
     dots: false,
@@ -907,6 +971,33 @@ function App() {
     autoplaySpeed: 20000,
     afterChange: (current) => setCurrentSlide(current), // Atualiza o slide atual após a mudança
   };
+  let banners;
+
+  if (window.matchMedia('(max-width: 600px)').matches) {
+    // A tela tem no máximo 600px de largura
+    banners = [
+      {
+        id: 1,
+        url: bannerMobile1,
+        alt: 'Banner 1',
+        link: 'https://www.whatsapp.com/channel/0029VaDSwXYA89MeJrPw1p1A',
+      },
+      { id: 2, url: bannerMobile2, alt: 'Banner 2' },
+      { id: 3, url: bannerMobile3, alt: 'Banner 3', link: '/promocao' },
+    ];
+  } else {
+    // A tela tem mais de 600px de largura
+    banners = [
+      {
+        id: 1,
+        url: banner1,
+        alt: 'Banner 1',
+        link: 'https://www.whatsapp.com/channel/0029VaDSwXYA89MeJrPw1p1A',
+      },
+      { id: 2, url: banner2, alt: 'Banner 2' },
+      { id: 3, url: banner3, alt: 'Banner 3', link: '/promocao' },
+    ];
+  }
   useEffect(() => {
     const color = colors[currentSlide % colors.length];
     const style = document.createElement('style');
@@ -915,6 +1006,16 @@ function App() {
       document.body.classList.add('app');
 
       style.innerHTML = `
+      .app::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 20%;
+        background: linear-gradient(${color}, transparent);
+        pointer-events: none;
+      }
         @media (min-width: 600px) {
           .app::after {
             content: "";
@@ -995,6 +1096,7 @@ function App() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
   function formatDays(days) {
     const dayMap = {
       0: 'Domingo',
@@ -1029,7 +1131,7 @@ function App() {
     const numBars = windowWidth > 600 ? 150 : 50;
     return (
       <div className="loader-container1">
-        <img className="loader-logo" src={Logo} alt="Logo" />
+        <img className="loader-logo" src={Boneco} alt="Logo" />
         {[...Array(numBars)].map((_, i) => (
           <div
             key={i}
@@ -1159,24 +1261,33 @@ function App() {
 
           <div className="promoActorRowNew">
             <Slider {...settings}>
-              {promos.map((promo, index) => (
-                <div
-                  className={`promoCardNew1 ${isPlaying ? 'playing' : ''}`}
-                  key={index}
-                >
-                  {promo.yoast_head_json.og_image[0].url && (
-                    <div className="imageContainer1">
-                      <img
-                        src={promo.yoast_head_json.og_image[0].url}
-                        alt="Promo"
-                      />
-                      <div className="clickInterceptor"></div>
-                    </div>
+              {banners.map((banner, index) => (
+                <div key={index}>
+                  {banner.link ? (
+                    banner.link.startsWith('http') ? (
+                      <a href={banner.link}>
+                        <img
+                          src={banner.url}
+                          alt={banner.alt}
+                          className="imgSlider"
+                        />
+                      </a>
+                    ) : (
+                      <Link to={banner.link}>
+                        <img
+                          src={banner.url}
+                          alt={banner.alt}
+                          className="imgSlider"
+                        />
+                      </Link>
+                    )
+                  ) : (
+                    <img
+                      src={banner.url}
+                      alt={banner.alt}
+                      className="imgSlider"
+                    />
                   )}
-                  <Link
-                    to={`/promocao-detalhes/${promo.id}`}
-                    className="linkArea"
-                  ></Link>
                 </div>
               ))}
             </Slider>
@@ -1212,6 +1323,13 @@ function App() {
               Ver mais
             </Link>
             <div className="placeholderPropragandaSmallScreen" />
+            {/* <AdSense.Google
+              client="ca-pub-7840500895207824"
+              slot="8444930177"
+              style={{ display: 'block' }}
+              format="auto"
+              responsive="true"
+            /> */}
           </div>
         )}
 
@@ -1252,6 +1370,7 @@ function App() {
             <div className="placeholderPropragandaLargeScreen" />
           </div>
         )}
+
         <div className="contentBackground fade-in">
           <h1
             style={{ color: windowWidth > 600 ? 'white' : 'white' }}
@@ -1333,43 +1452,43 @@ function App() {
                 : 'contentContainer'
             }
           >
-            {programas.slice(0, 2).map((programa, index) => (
-              <Link
-                to={`/noticia/${programa.id}`}
-                key={index}
-                style={{ textDecoration: 'none' }}
-              >
-                <div
-                  style={{
-                    borderColor: windowWidth > 600 ? 'white' : 'white',
-                    position: 'relative', // Adicione isso para posicionar o cartola em relação a este div
-                  }}
-                  className={
-                    windowWidth > 600 ? 'newsItemLargeScreen' : 'contentItem'
-                  }
+            {NewsPlus2699 &&
+              NewsPlus2699.slice(0, 2).map((noticianews, index) => (
+                <Link
+                  to={`/noticia/${noticianews.id}`}
+                  key={index}
+                  style={{ textDecoration: 'none' }}
                 >
-                  {windowWidth > 600 && (
-                    <div className="cartolaPlusNews">
-                      {decode(programa.cartola)}
-                    </div>
-                  )}
-                  <img
-                    src={programa.yoast_head_json?.og_image?.[0]?.url}
-                    alt="Imagem da notícia"
-                    className={windowWidth > 600 ? 'newsImageLargeScreen' : ''}
-                  />
-                  <p
+                  <div
+                    style={{
+                      borderColor: windowWidth > 600 ? 'white' : 'white',
+                      position: 'relative', // Adicione isso para posicionar o cartola em relação a este div
+                    }}
                     className={
-                      windowWidth > 600
-                        ? 'newsTitleLargeScreen1'
-                        : 'contentText'
+                      windowWidth > 600 ? 'newsItemLargeScreen' : 'contentItem'
                     }
                   >
-                    {decode(programa.title.rendered)}
-                  </p>
-                </div>
-              </Link>
-            ))}
+                    <div className="cartolaPlusNews">Brasil</div>
+
+                    <img
+                      src={noticianews.yoast_head_json?.og_image?.[0]?.url}
+                      alt="Imagem da notícia"
+                      className={
+                        windowWidth > 600 ? 'newsImageLargeScreen' : ''
+                      }
+                    />
+                    <p
+                      className={
+                        windowWidth > 600
+                          ? 'newsTitleLargeScreen1'
+                          : 'contentText'
+                      }
+                    >
+                      {decode(noticianews.title.rendered)}
+                    </p>
+                  </div>
+                </Link>
+              ))}
           </div>
           <div
             className={
@@ -1378,43 +1497,43 @@ function App() {
                 : 'contentContainer'
             }
           >
-            {programas.slice(0, 2).map((programa, index) => (
-              <Link
-                to={`/noticia/${programa.id}`}
-                key={index}
-                style={{ textDecoration: 'none' }}
-              >
-                <div
-                  style={{
-                    borderColor: windowWidth > 600 ? 'white' : 'white',
-                    position: 'relative', // Adicione isso para posicionar o cartola em relação a este div
-                  }}
-                  className={
-                    windowWidth > 600 ? 'newsItemLargeScreen' : 'contentItem'
-                  }
+            {NewsPlus &&
+              NewsPlus.slice(0, 2).map((noticianews2699, index) => (
+                <Link
+                  to={`/noticia/${noticianews2699.id}`}
+                  key={index}
+                  style={{ textDecoration: 'none' }}
                 >
-                  {windowWidth > 600 && (
-                    <div className="cartolaPlusNews">
-                      {decode(programa.cartola)}
-                    </div>
-                  )}
-                  <img
-                    src={programa.yoast_head_json?.og_image?.[0]?.url}
-                    alt="Imagem da notícia"
-                    className={windowWidth > 600 ? 'newsImageLargeScreen' : ''}
-                  />
-                  <p
+                  <div
+                    style={{
+                      borderColor: windowWidth > 600 ? 'white' : 'white',
+                      position: 'relative', // Adicione isso para posicionar o cartola em relação a este div
+                    }}
                     className={
-                      windowWidth > 600
-                        ? 'newsTitleLargeScreen1'
-                        : 'contentText'
+                      windowWidth > 600 ? 'newsItemLargeScreen' : 'contentItem'
                     }
                   >
-                    {decode(programa.title.rendered)}
-                  </p>
-                </div>
-              </Link>
-            ))}
+                    <div className="cartolaPlusNews">Ceará</div>
+
+                    <img
+                      src={noticianews2699.yoast_head_json?.og_image?.[0]?.url}
+                      alt="Imagem da notícia"
+                      className={
+                        windowWidth > 600 ? 'newsImageLargeScreen' : ''
+                      }
+                    />
+                    <p
+                      className={
+                        windowWidth > 600
+                          ? 'newsTitleLargeScreen1'
+                          : 'contentText'
+                      }
+                    >
+                      {decode(noticianews2699.title.rendered)}
+                    </p>
+                  </div>
+                </Link>
+              ))}
           </div>
           {windowWidth > 600 && (
             <>
@@ -1427,6 +1546,7 @@ function App() {
         </div>
       </div>
       <section id="programacao"></section>
+
       <div className="progContainer">
         {/* <img src={Prog} className="progImage" /> */}
         {/* <h1 className="dropsText1">NO AR</h1>
@@ -2354,6 +2474,13 @@ function App() {
           <TelegramLogo size={'4vw'} color="white" />
         </a>
       </div>
+      {/* <AdSense.Google
+        client="ca-pub-7840500895207824"
+        slot="8444930177"
+        style={{ display: 'block' }}
+        format="auto"
+        responsive="true"
+      /> */}
       <div className="footer">
         {windowWidth <= 600 && (
           <div className="footerDiv">

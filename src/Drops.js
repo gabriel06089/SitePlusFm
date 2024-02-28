@@ -64,7 +64,7 @@ const Drops = ({ match }) => {
       setLoading(true);
       try {
         const response = await fetch(
-          `https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=${
+          `https://plusfm.com.br/wp-json/wp/v2/posts?status&categories=2&per_page=${
             windowWidth > 600 ? 27 : 6
           }&page=${page}&tags_exclude=2007`
         );

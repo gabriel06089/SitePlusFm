@@ -20,6 +20,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import Logo from './plus-1.png';
 import XRoxo from './TwitterRoxo.png';
 import Xlogo from './twitter-x.svg';
+import AdSense from './Adsense';
 
 const Contato = () => {
   const location = useLocation();
@@ -97,7 +98,7 @@ const Contato = () => {
           <X weight="bold" onClick={() => setIsMenuOpen(false)} />
         ) : (
           <List
-            className={isNewsPage ? 'newsPageIcon' : ''}
+            className={isNewsPage ? 'newsPageIconS' : ''}
             weight="bold"
             onClick={() => setIsMenuOpen(true)}
           />
@@ -240,6 +241,7 @@ const Contato = () => {
         <div className="box">
           <div className="rectangle" />
         </div>
+        <AdSense />
         <div className="footerContainer">
           <div className="footerDivRowContato">
             <div className="footerDivColumnContato">

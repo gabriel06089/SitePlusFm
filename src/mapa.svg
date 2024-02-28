@@ -359,12 +359,6 @@
     currentSong: svgElement.getAttribute('data-current-song'),
   };
 
-  // Atualize o estado com base no evento personalizado
-  svgElement.addEventListener('stateChanged', function (event) {
-    state.isPlaying = event.detail.isPlaying;
-    state.currentSong = event.detail.currentSong;
-    console.log('state:', state);
-  });
 
   var classes = ['paraipaba','crateus','catarina','iguatu','cariri', 'sobral', 'santaquiteria', 'cascavel', 'redencao', 'pacajus', 'fortaleza', 'aracati', 'playing'];
   var cls1Elements = document.querySelectorAll('.cls-1');
@@ -374,7 +368,10 @@
     var elements = document.querySelectorAll('.' + cls);
     elements.forEach(function(element) {
       element.addEventListener('click', function () {
-        var className = this.className.baseVal.split(' ')[0];
+        var className;
+        if (this.className && this.className.baseVal) {
+          className = this.className.baseVal.split(' ')[0];
+        }
         var event = new CustomEvent('svgClassClicked', { detail: className });
         document.dispatchEvent(event);
 
@@ -403,7 +400,11 @@
         }
 
         cls1Elements.forEach(function(el) {
-          if (el.className.baseVal.split(' ')[0] !== playingClass) {
+          var elClassName;
+          if (el.className && el.className.baseVal) {
+            elClassName = el.className.baseVal.split(' ')[0];
+          }
+          if (elClassName !== playingClass) {
             el.classList.add('transparent');
           } else {
             el.classList.remove('transparent');

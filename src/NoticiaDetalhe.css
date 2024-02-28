@@ -8,6 +8,32 @@
     align-items: center;
 }
 
+@media (max-width: 1420px) {
+    .menuLinksDetalhes a {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 1263px) {
+    .menuLinksDetalhes a {
+        font-size: 1.1rem;
+    }
+
+    .menuLinksDetalhes {
+        /* margin-left: 13rem; */
+        display: flex;
+        align-items: center;
+        width: auto;
+        gap: 2rem;
+        justify-content: flex-start;
+        font-size: 1rem;
+        color: white;
+        letter-spacing: 2px;
+        font-family: 'Rubik', sans-serif;
+        font-weight: 400;
+    }
+}
+
 .MenuContainerHeader.playing {
     padding-top: 11.5vw;
 }
@@ -488,12 +514,15 @@ a {
 .noticiasContainer {
     display: flex;
     flex-direction: column;
-
     width: 20vw;
-    padding-left: 19rem
-        /* padding: 0 20px;
-   
-    /* padding-inline: 19rem; */
+    padding-left: calc(11% + (5 * (1640px - 100vw) / 1640));
+}
+
+@media (max-width: 1640px) {
+    .noticiasContainer {
+        width: 20vw;
+        padding-left: 11%;
+    }
 }
 
 .noticiasContainer img {
@@ -756,7 +785,7 @@ h3 {
 
 
 .meu-conteudo strong {
-    color: var(--cor-primaria);
+    
     font-family: 'Rubik', sans-serif;
 
 
@@ -936,7 +965,7 @@ h3 {
     justify-content: center;
     align-items: center;
     height: 2.5vw;
-    width: 23vw;
+    width: 28vw;
     margin-top: 2vw;
     background-color: var(--cor-primaria);
     border-radius: 8px;
@@ -952,6 +981,21 @@ h3 {
 }
 
 
+@media (max-width: 1758px) {
+    .containerDivisaoC {
+
+        width: 28vw;
+
+    }
+}
+
+@media (max-width: 1404px) {
+    .containerDivisaoC {
+
+        width: 32vw;
+
+    }
+}
 
 @media (max-width: 600px) {
     .containerDivisaoC {
@@ -1067,8 +1111,8 @@ h3 {
     margin-top: 20px;
     gap: 1rem;
     align-items: center;
-    padding-left: 18.4rem;
-    padding-right: 28rem;
+    /* padding-left: 18.4rem;
+    padding-right: 28rem; */
 }
 
 
@@ -1169,8 +1213,15 @@ h3 {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 21.5rem;
+    margin-left: 11.8125rem;
+}
 
-    margin-left: 7.8125rem
+@media (max-width: 1284px) {
+    .containerColuna1 {
+
+        margin-left: 8.8125rem;
+    }
 }
 
 .containerSpanFooter h5 {
@@ -1192,7 +1243,7 @@ h3 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-
+    width: 21.5rem;
 }
 
 .containerColuna1 img,
@@ -1458,7 +1509,7 @@ svg.newsPageIcon {
 }
 
 .div-bloco-cinza {
-    background-color: #808080;
+    background-color: transparent;
     /* Cor cinza */
     padding: 2rem;
     margin: 2rem;
@@ -1495,6 +1546,7 @@ svg.newsPageIcon {
     .containerColuna3 {
         display: block;
         /* Mostra a coluna quando a largura da tela é 600px ou mais */
+        width: 21.5rem;
     }
 }
 
@@ -1536,7 +1588,7 @@ svg.newsPageIcon {
 
     .bloco-cinza-grande {
         display: block;
-        background-color: rgb(204, 204, 204);
+        background-color: transparent;
         /* Cor cinza */
         border-radius: 10px;
         margin-top: 3rem;
@@ -1557,7 +1609,7 @@ svg.newsPageIcon {
 
     .bloco-cinza {
         display: block;
-        background-color: rgb(204, 204, 204);
+        background-color: transparent;
         /* Cor cinza */
         border-radius: 10px;
         /* Bordas arredondadas */
@@ -1605,7 +1657,7 @@ svg.newsPageIcon {
 }
 
 .menuLinksDetalhes a {
-    font-size: 1.3rem !important;
+    font-size: 1.3rem;
 }
 
 .pagination1 button {
@@ -1653,7 +1705,7 @@ svg.newsPageIcon {
         width: auto;
         gap: 4rem;
         justify-content: flex-start;
-
+        font-size: 1rem;
         color: white;
         letter-spacing: 2px;
         font-family: 'Rubik', sans-serif;
@@ -1661,7 +1713,7 @@ svg.newsPageIcon {
     }
 
     .menuLinksDetalhes a {
-        font-size: 1.3rem !important;
+        font-size: 1.3rem;
     }
 
     .logoMenuDivRow.newsPage {
@@ -1671,6 +1723,8 @@ svg.newsPageIcon {
         /* Alinha o conteúdo à esquerda */
     }
 }
+
+
 
 .footerImage5 {
     height: auto;
@@ -1706,4 +1760,3 @@ svg.newsPageIcon {
         z-index: 5;
     }
 }
-

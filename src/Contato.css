@@ -71,18 +71,7 @@
     }
 }
 
-.contatoH2 {
-    color: #541084 !important;
 
-    width: auto;
-    padding: 1rem;
-    font-size: 1.2rem;
-    padding: 0 !important;
-    padding-inline: 3rem !important;
-    line-height: 30px !important;
-    align-self: center !important;
-
-}
 
 .contatoForm {
 
@@ -164,7 +153,33 @@
     font-family: 'Rubik', sans-serif;
 }
 
+.contatoH2 {
+    color: #541084 !important;
+
+    width: auto;
+    padding-top: 3rem;
+    font-size: 1.2rem;
+
+
+    line-height: 30px !important;
+    align-self: center !important;
+
+}
+
 @media (min-width: 600px) {
+    .contatoH2 {
+        color: #541084 !important;
+
+        width: auto;
+        padding: 1rem;
+        font-size: 1.2rem;
+        padding: 0 !important;
+        padding-inline: 3rem !important;
+        line-height: 30px !important;
+        align-self: center !important;
+
+    }
+
     .contatoInput {
         margin-inline: 0;
         padding-left: 1rem;
@@ -625,4 +640,14 @@
 .select-container {
     position: relative;
     display: inline-block;
+}
+
+.logoMenuDivRow svg.newsPageIconS {
+    color: white !important;
+}
+
+.contactPage {
+    top: 1%;
+    padding-block: 0.3rem !important;
+
 }

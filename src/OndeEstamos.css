@@ -186,8 +186,10 @@
 }
 
 .container-cidades-coluna h1 {
-    color: #FFF;
-
+    color: #541084;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 12px;
     text-align: center;
     font-family: Rubik;
     font-size: 0.9375rem;
@@ -196,6 +198,9 @@
     line-height: normal;
     width: auto;
     margin-bottom: 1rem;
+    padding-top: 0vw;
+    padding-block: 0.1rem;
+    padding-inline: 0.6rem;
 }
 
 .container-cidades-row {
@@ -207,7 +212,9 @@
 }
 
 .container-cidades-row h1 {
+    color: white;
     border: 1px solid white;
+    background-color: transparent;
     border-radius: 12px;
     padding-block: 0.1rem;
     padding-inline: 0.6rem;

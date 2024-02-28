@@ -157,6 +157,7 @@ const NoticiaDetalhe = () => {
 
     fetchPosts();
   }, []);
+  
   useEffect(() => {
     if (isMenuOpen) {
       document.body.classList.add('noScroll');
@@ -295,7 +296,7 @@ const NoticiaDetalhe = () => {
           </div>
         </div>
       </div>
-      <div className="div-bloco-cinza">{/* Conteúdo da div aqui */}</div>
+      <div className="div-bloco-cinza"></div>
       <div className="containerPrincipal">
         <div className={`noticiasContainer ${isPlaying ? 'playing' : ''}`}>
           <h1>{decode(noticia.title.rendered)}</h1>
@@ -367,8 +368,12 @@ const NoticiaDetalhe = () => {
           <div id="container"></div>
         </div>
         <div className="container-blocos">
-          <div className="bloco-cinza-grande"></div>
-          <div className="bloco-cinza"></div>
+          <div className="bloco-cinza-grande">
+            
+          </div>
+          <div className="bloco-cinza">
+           
+          </div>
         </div>
       </div>
 
