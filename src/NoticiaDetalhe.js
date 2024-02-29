@@ -29,6 +29,8 @@ import {
   X,
   YoutubeLogo,
 } from 'phosphor-react';
+import AdSense from './Adsense';
+import AdSenseMobile from './AdsenseMobile';
 
 const NoticiaDetalhe = () => {
   const location = useLocation();
@@ -157,7 +159,7 @@ const NoticiaDetalhe = () => {
 
     fetchPosts();
   }, []);
-  
+
   useEffect(() => {
     if (isMenuOpen) {
       document.body.classList.add('noScroll');
@@ -296,7 +298,7 @@ const NoticiaDetalhe = () => {
           </div>
         </div>
       </div>
-      <div className="div-bloco-cinza"></div>
+      <div className="div-bloco-cinza">{/* <AdSense /> */}</div>
       <div className="containerPrincipal">
         <div className={`noticiasContainer ${isPlaying ? 'playing' : ''}`}>
           <h1>{decode(noticia.title.rendered)}</h1>
@@ -367,16 +369,28 @@ const NoticiaDetalhe = () => {
           </div>
           <div id="container"></div>
         </div>
-        <div className="container-blocos">
-          <div className="bloco-cinza-grande">
-            
+        {windowWidth >= 600 && (
+          <div className="container-blocos">
+            <div className="bloco-cinza-grande">
+              <AdSense />
+              <AdSense />
+              <AdSense />
+            </div>
+            <div className="bloco-cinza">
+              <AdSense />
+              <AdSense />
+            </div>
           </div>
-          <div className="bloco-cinza">
-           
-          </div>
-        </div>
+        )}
+        ;
       </div>
-
+      {windowWidth < 600 && (
+        <>
+          <div style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
+            <AdSenseMobile />
+          </div>
+        </>
+      )}
       <div className="containerDivisaoC"> Recomendadas para você </div>
       <div
         className="maisNoticiasR"
@@ -392,8 +406,12 @@ const NoticiaDetalhe = () => {
             >
               <img
                 loading="lazy"
-                src={post.yoast_head_json.og_image[0].url}
-                alt="Imagem do post"
+                src={
+                  post.yoast_head_json.og_image
+                    ? post.yoast_head_json.og_image[0].url
+                    : 'https://plusfm.com.br/Imagens/artwork.jpeg'
+                }
+                alt="Imagem Carregando"
               />
               <div className="containerSpanFooter">
                 <h4>{decode(post.cartola)}</h4>
@@ -442,7 +460,22 @@ const NoticiaDetalhe = () => {
             </Link>
           ))}
         </div>
+        {windowWidth >= 1440 && (
+          <div className="containerColuna3">
+            <div className="adsense-container">
+              <AdSense />
+              <AdSense />
+            </div>
+          </div>
+        )}
       </div>
+      {windowWidth < 600 && (
+        <>
+          <div style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
+            <AdSenseMobile />
+          </div>
+        </>
+      )}
       <div className="footer">
         {windowWidth <= 600 && (
           <div className="footerDiv">

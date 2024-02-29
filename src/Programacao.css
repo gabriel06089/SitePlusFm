@@ -66,7 +66,8 @@ select option:disabled {
     background-color: transparent;
     color: white;
     font-size: 5rem;
-    padding-top: 4vw;
+    padding-top: 7vw;
+
 }
 
 .programacao-row {
@@ -323,7 +324,7 @@ select option:disabled {
     align-self: center;
     height: 3.5rem;
     margin-block: 1rem;
-    background-color: rgba(217, 217, 217, 1);
+
 }
 
 

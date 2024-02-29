@@ -33,7 +33,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useLocation } from 'react-router-dom';
-import AdSense from 'react-adsense';
+
 import agrandehora from './imagemprogamacao/agrandehora.svg';
 import asmaispedidas from './imagemprogamacao/asmaispedidas.svg';
 import asmelhoresdaplus from './imagemprogamacao/asmelhoresdaplus.svg';
@@ -109,6 +109,8 @@ import {
 import { PlayerContext } from './Context/PlayerContext';
 
 import { StyledImg, StyledRipple } from './styles';
+import AdSense from './Adsense';
+import AdSenseMobile from './AdsenseMobile';
 function App() {
   const [image, setImage] = useState(null);
   const [post, setPost] = useState(null);
@@ -1322,14 +1324,9 @@ function App() {
             <Link to="/drops" className="btnStyle">
               Ver mais
             </Link>
-            <div className="placeholderPropragandaSmallScreen" />
-            {/* <AdSense.Google
-              client="ca-pub-7840500895207824"
-              slot="8444930177"
-              style={{ display: 'block' }}
-              format="auto"
-              responsive="true"
-            /> */}
+            <div style={{ width: '100%', height: '150px' }}>
+              <AdSenseMobile />
+            </div>
           </div>
         )}
 
@@ -1367,7 +1364,10 @@ function App() {
             <Link to="/drops" className="btnStyleLargeScreen">
               VER MAIS
             </Link>
-            <div className="placeholderPropragandaLargeScreen" />
+            <div className="placeholderPropragandaLargeScreen">
+              {' '}
+              <AdSense />
+            </div>
           </div>
         )}
 
@@ -1429,7 +1429,10 @@ function App() {
               <Link to="/programas" className="btnStyleLargeScreen1">
                 VER MAIS
               </Link>
-              <div className="placeholderPropragandaLargeScreen" />
+              <div className="placeholderPropragandaLargeScreen">
+                {' '}
+                <AdSense />
+              </div>
             </>
           )}
           <h1
@@ -1438,6 +1441,13 @@ function App() {
               windowWidth > 600 ? 'h1StyleDropsLargeScreen' : 'contentTitle'
             }
           >
+            {windowWidth < 600 && (
+              <div
+                style={{ width: '100%', height: '150px', marginBottom: '1rem' }}
+              >
+                <AdSenseMobile />
+              </div>
+            )}
             + NEWS
           </h1>
           <img src={PlusDegadre} className="plusDegradeImg" />
@@ -1540,7 +1550,10 @@ function App() {
               <Link to="/programas" className="btnStyleLargeScreen1">
                 VER MAIS
               </Link>
-              <div className="placeholderPropragandaLargeScreen" />
+              <div className="placeholderPropragandaLargeScreen">
+                {' '}
+                <AdSense />
+              </div>
             </>
           )}
         </div>
@@ -2376,7 +2389,11 @@ function App() {
         </div>
         <div className="boxMapPropaganda" />
       </div>
-
+      {windowWidth < 600 && (
+        <div style={{ width: '100%', height: '150px' }}>
+          <AdSenseMobile />
+        </div>
+      )}
       <section id="contato"></section>
       <div className="contato">
         <div className="footerDiv1">

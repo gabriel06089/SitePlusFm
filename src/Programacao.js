@@ -26,6 +26,7 @@ import vozdobrasil from './imagemprogamacao/vozdobrasil.png';
 import { CaretDown, CaretLeft } from 'phosphor-react';
 import { navigate } from 'react-router-dom';
 import { useNavigate, useParams } from 'react-router-dom';
+import AdSense from './Adsense';
 function Programacao() {
   const [currentProgram, setCurrentProgram] = useState(null);
   const [expandedProgram, setExpandedProgram] = useState(null);
@@ -337,7 +338,9 @@ function Programacao() {
       </div>
       <div className="whiteLine8" />
 
-      <div className="propagandaDiv" />
+      <div className="propagandaDiv">
+        <AdSense />
+      </div>
       <div className="botoes-dia-semana">
         <div className="select-container">
           <select

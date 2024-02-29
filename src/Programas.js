@@ -25,7 +25,8 @@ import './Drops.css';
 import { decode } from 'he';
 import { Link } from 'react-router-dom';
 import { PlayerContext } from './Context/PlayerContext';
-
+import AdSense from './Adsense';
+import AdSenseMobile from './AdsenseMobile';
 const Programas = ({ match }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -112,37 +113,41 @@ const Programas = ({ match }) => {
                         <p className="contentText">Carregando...</p>
                       </div>
                     ))
-                : programas.map(
-                    (
-                      programa,
-                      index // Atualizado para usar a variável programas
-                    ) => (
-                      <Link
-                        to={`/noticia/${programa.id}`}
-                        style={{ textDecoration: 'none' }}
-                        key={programa.id}
+                : programas.flatMap((programa, index) => [
+                    <Link
+                      to={`/noticia/${programa.id}`}
+                      style={{ textDecoration: 'none' }}
+                      key={programa.id}
+                    >
+                      <div
+                        className={`contentItem ${
+                          index === 2 ? 'thirdItem' : ''
+                        }`}
+                        style={
+                          index === programas.length - 1
+                            ? { marginBottom: '20px' }
+                            : {}
+                        }
                       >
-                        <div
-                          className={`contentItem ${
-                            index === 2 ? 'thirdItem' : ''
-                          }`}
-                          style={
-                            index === programas.length - 1
-                              ? { marginBottom: '20px' }
-                              : {}
-                          }
-                        >
-                          <img
-                            src={programa.yoast_head_json?.og_image?.[0]?.url}
-                            alt="Imagem do programa"
-                          />
-                          <p className="contentText">
-                            {decode(programa.title.rendered)}
-                          </p>
-                        </div>
-                      </Link>
-                    )
-                  )}
+                        <img
+                          src={programa.yoast_head_json?.og_image?.[0]?.url}
+                          alt="Imagem do programa"
+                        />
+                        <p className="contentText">
+                          {decode(programa.title.rendered)}
+                        </p>
+                      </div>
+                    </Link>,
+                    (index + 1) % 2 === 0 && (
+                      <div className="dividerLine">
+                        {windowWidth < 600 && (
+                          <div style={{ width: '100%', height: '150px' }}>
+                            <AdSenseMobile />
+                          </div>
+                        )}
+                      </div>
+                    ),
+                  ])}
             </div>
           </>
         )}
@@ -184,6 +189,9 @@ const Programas = ({ match }) => {
                   </div>
                 </Link>
               ))}
+            </div>
+            <div className="propagandaDivDrops">
+              <AdSense />
             </div>
           </>
         )}

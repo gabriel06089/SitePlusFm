@@ -26,6 +26,8 @@ import './Drops.css';
 import { decode } from 'he';
 import { Link } from 'react-router-dom';
 import { PlayerContext } from './Context/PlayerContext';
+import AdSense from './Adsense';
+import AdSenseMobile from './AdsenseMobile';
 const Drops = ({ match }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -144,7 +146,15 @@ const Drops = ({ match }) => {
                         </p>
                       </div>
                     </Link>,
-                    (index + 1) % 2 === 0 && <div className="dividerLine" />,
+                    (index + 1) % 2 === 0 && (
+                      <div className="dividerLine">
+                        {windowWidth < 600 && (
+                          <div style={{ width: '100%', height: '150px' }}>
+                            <AdSenseMobile />
+                          </div>
+                        )}
+                      </div>
+                    ),
                   ])}
             </div>
           </>
@@ -188,6 +198,9 @@ const Drops = ({ match }) => {
                   </div>
                 </Link>
               ))}
+            </div>
+            <div className="propagandaDivDrops">
+              <AdSense />
             </div>
           </>
         )}

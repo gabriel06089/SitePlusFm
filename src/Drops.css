@@ -281,3 +281,12 @@ h5 {
     font-weight: 400;
     line-height: normal;
 }
+
+.propagandaDivDrops {
+    width: 90%;
+    align-self: center;
+
+    margin-block: 1rem;
+    margin-bottom: 4rem;
+
+}

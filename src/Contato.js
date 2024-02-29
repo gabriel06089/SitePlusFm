@@ -87,11 +87,14 @@ const Contato = () => {
   return (
     <div className="contatoContainer">
       <div
-        className={`logoMenuDivRow ${isMenuOpen ? 'fixed' : ''} ${
-          isPlaying ? 'playing' : ''
-        } ${isPlaying && isMenuOpen ? 'playingAndMenuOpen' : ''} ${
-          isContactPage ? 'contactPage' : ''
-        }`}
+        className={`
+    logoMenuDivRow 
+    ${isMenuOpen ? 'fixed' : ''} 
+    ${isPlaying ? 'playing' : ''} 
+    ${isPlaying && isMenuOpen ? 'playingAndMenuOpen' : ''} 
+    ${isContactPage ? 'contactPage' : ''}
+    ${isPlaying && isContactPage ? 'playingAndContactPage' : ''}
+  `}
       >
         <img src={Logo} />
         {isMenuOpen ? (
@@ -181,7 +184,7 @@ const Contato = () => {
       <h2 className={`contatoH2 ${isPlaying ? 'playing' : ''}`}>Contato</h2>{' '}
       <div className="whiteLineContato" />
       <div className={`containerPropaganda ${isPlaying ? 'playing' : ''}`}>
-        {' '}
+        <AdSense />{' '}
       </div>
       <div className="containerRowColumn">
         {' '}
@@ -239,9 +242,8 @@ const Contato = () => {
           </form>
         </div>{' '}
         <div className="box">
-          <div className="rectangle" />
+          <AdSense />
         </div>
-        <AdSense />
         <div className="footerContainer">
           <div className="footerDivRowContato">
             <div className="footerDivColumnContato">

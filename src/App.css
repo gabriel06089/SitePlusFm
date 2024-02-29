@@ -4228,9 +4228,9 @@ x @media (max-width: 600px) {
 
 
 .dividerLine1 {
-  width: 309px;
+  width: 100%;
   height: 49px;
-  background-color: white;
+  background-color: transparent;
   align-self: center;
   margin: 0 auto;
   margin-top: 2.2rem;
@@ -4283,9 +4283,9 @@ x @media (max-width: 600px) {
 }
 
 .dividerLine {
-  width: 309px;
+  width: 100%;
   height: 49px;
-  background-color: white;
+  background-color: transparent;
   align-self: center;
   margin: 0 auto;
   /* margin-bottom: 2.2rem; */
@@ -5003,9 +5003,9 @@ x @media (max-width: 600px) {
 
 .placeholderPropragandaLargeScreen {
   background-color: transparent;
-  height: 4rem;
-  width: 80%;
-  margin-block: 4rem;
+  height: 2rem !important;
+  width: 60%;
+  margin-block: 2rem;
   z-index: 2;
 }
 
@@ -5036,6 +5036,13 @@ x @media (max-width: 600px) {
 }
 
 @media (min-width: 600px) {
+  .logoMenuDivRow.playing {
+    /* top: 10.9%; */
+    top: 14%;
+
+    /* Exemplo: altera a cor de fundo para preto */
+  }
+
   .cartolaPlusNews {
     position: absolute;
     top: -3.2%;

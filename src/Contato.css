@@ -440,7 +440,7 @@
     width: 84%;
     height: 4rem;
     margin: 2rem;
-    background-color: #D9D9D9;
+    background-color: transparent;
 
 }
 
@@ -450,10 +450,11 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-block: 2rem;
 }
 
 .box .rectangle {
-    background-color: #d9d9d9;
+    background-color: transparent;
     height: 200px;
 
     width: 200px;
@@ -520,6 +521,8 @@
 }
 
 @media (min-width: 600px) {
+    .logoMenuDivRow.playingAndContactPage { top: 4.5%;}
+
     .footerDivRowContato {
         padding-inline: 20rem;
         height: 15rem;
@@ -573,7 +576,7 @@
         width: 84%;
         height: 16rem;
         margin: 2rem;
-        background-color: #D9D9D9;
+        background-color: transparent;
         margin-top: 7rem;
     }
 }
@@ -600,8 +603,15 @@
     color: white;
 }
 
+.logoMenuDivRow svg.newsPageIconS {
+    color: #541084 !important;
+}
 
 @media (max-width: 600px) {
+    .logoMenuDivRow svg.newsPageIconS {
+        color: white !important;
+    }
+
     .select-container::after {
         content: "\25BC";
         position: absolute;
@@ -642,9 +652,6 @@
     display: inline-block;
 }
 
-.logoMenuDivRow svg.newsPageIconS {
-    color: white !important;
-}
 
 .contactPage {
     top: 1%;

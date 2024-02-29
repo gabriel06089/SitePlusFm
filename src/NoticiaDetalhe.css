@@ -785,7 +785,7 @@ h3 {
 
 
 .meu-conteudo strong {
-    
+
     font-family: 'Rubik', sans-serif;
 
 
@@ -1508,12 +1508,7 @@ svg.newsPageIcon {
     /* ajuste para o valor desejado */
 }
 
-.div-bloco-cinza {
-    background-color: transparent;
-    /* Cor cinza */
-    padding: 2rem;
-    margin: 2rem;
-}
+
 
 .icon-row {
     display: flex;
@@ -1557,10 +1552,16 @@ svg.newsPageIcon {
 .bloco-cinza {
     display: none;
     /* Esconde os blocos por padrão */
+    width: 64%;
+
+    height: 39rem;
 }
 
 .bloco-cinza-grande {
     display: none;
+    width: 64%;
+    /* Largura do bloco */
+    height: 39rem;
     /* Esconde os blocos por padrão */
 }
 
@@ -1595,15 +1596,11 @@ svg.newsPageIcon {
         margin-inline: auto;
         /* Bordas arredondadas */
         width: 64%;
-
         /* Largura do bloco */
         height: 39rem;
-
         /* Altura do bloco */
         margin-bottom: 6rem;
         position: relative;
-
-
         /* Espaço entre os blocos */
     }
 
@@ -1758,5 +1755,25 @@ svg.newsPageIcon {
         line-height: normal;
         margin-block: 1vw;
         z-index: 5;
+    }
+}
+
+.adsense-container {
+    display: none;
+}
+
+@media (min-width: 1440px) {
+    .adsense-container {
+        display: block;
+    }
+}
+
+.adsense-container-block {
+    visibility: hidden;
+}
+
+@media (min-width: 600px) {
+    .adsense-container-block {
+        visibility: visible;
     }
 }

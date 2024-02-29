@@ -25,6 +25,8 @@ import './Drops.css';
 import { decode } from 'he';
 import { Link } from 'react-router-dom';
 import { PlayerContext } from './Context/PlayerContext';
+import AdSense from './Adsense';
+import AdSenseMobile from './AdsenseMobile';
 const Promocao = ({ match }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -129,7 +131,15 @@ const Promocao = ({ match }) => {
                             {decode(programa.title.rendered)}
                           </p>
                         </div>
-                        {index === 1 && <div className="dividerLine1" />}
+                        {index === 1 && (
+                          <div className="dividerLine1">
+                            {windowWidth < 600 && (
+                              <div style={{ width: '100%', height: '150px' }}>
+                                <AdSenseMobile />
+                              </div>
+                            )}
+                          </div>
+                        )}
                       </Link>
                     )
                   )}
@@ -174,6 +184,9 @@ const Promocao = ({ match }) => {
                   </div>
                 </Link>
               ))}
+            </div>
+            <div className="propagandaDivDrops">
+              <AdSense />
             </div>
           </>
         )}

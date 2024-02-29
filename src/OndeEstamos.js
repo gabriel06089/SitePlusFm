@@ -17,6 +17,7 @@ import Redencao from './AssetsMap/Redencao.svg';
 import SantaQuiteria from './AssetsMap/SantaQuiteria.svg';
 import Rede from './AssetsMap/Rede.svg';
 import Paraipaba from './AssetsMap/Paraipaba.svg';
+import AdSense from './Adsense';
 function OndeEstamos() {
   const {
     isPlaying,
@@ -473,6 +474,9 @@ function OndeEstamos() {
 
           <div className="boxMapPropaganda" />
         </div>
+      </div>
+      <div className="propagandaDiv">
+        <AdSense />
       </div>
     </div>
   );
