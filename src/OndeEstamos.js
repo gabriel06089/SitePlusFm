@@ -463,7 +463,7 @@ function OndeEstamos() {
             <div className="container-cidades-coluna">
               <h1>Catarina 88.7</h1>
               <div className="container-cidades-row">
-                <h1> Auiaba</h1> <h1> Arneiroz</h1> <h1> Saboeiro</h1>
+                <h1> Aiuaba</h1> <h1> Arneiroz</h1> <h1> Saboeiro</h1>
               </div>
               <div className="container-cidades-row">
                 <h1> Acopiara</h1> <h1> Mombaça</h1>

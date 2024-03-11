@@ -421,7 +421,18 @@ const PromoDetalhe = () => {
             >
               <img
                 loading="lazy"
-                src={post.yoast_head_json.og_image[0].url}
+                src={
+                  post.yoast_head_json?.og_image?.[0]?.url ||
+                  'https://plusfm.com.br/Imagens/artwork.jpeg'
+                }
+                onError={(e) => {
+                  if (
+                    e.target.src !==
+                    'https://plusfm.com.br/Imagens/artwork.jpeg'
+                  ) {
+                    e.target.src = 'https://plusfm.com.br/Imagens/artwork.jpeg';
+                  }
+                }}
                 alt="Imagem do post"
               />
               <div className="containerSpanFooter">
