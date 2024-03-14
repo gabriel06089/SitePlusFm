@@ -2136,11 +2136,7 @@ function App() {
                         alt="Promo"
                       />
                     )}
-                    <span className="cartolaAbsoluteNew">
-                      {he.decode(
-                        promo.cartola === 'Oportunidade' ? 'ATIVA' : 'ENCERRADA'
-                      )}
-                    </span>
+                    <span className="cartolaAbsoluteNew">{promo.cartola}</span>
                   </div>
                 </Link>
               ))}
@@ -2165,11 +2161,7 @@ function App() {
                         className="relativeImage"
                       />
                     )}
-                    <span className="cartolaAbsoluteNew">
-                      {he.decode(
-                        promo.cartola === 'Oportunidade' ? 'ATIVA' : 'ENCERRADA'
-                      )}
-                    </span>
+                    <span className="cartolaAbsoluteNew">{promo.cartola}</span>
                   </div>
                 </Link>
               ))}
