@@ -1,21 +1,21 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import NoticiaDetalhe from '../NoticiaDetalhe';
-import PromoDetalhe from '../PromoDetalhe';
+import NoticiaDetalhe from '../pages/NoticiaDetalhe';
+import PromoDetalhe from '../pages/PromoDetalhe';
 
-import Programas from '../Programas';
-import Promocao from '../Promocao';
-import App from '../App';
-import Player from '../Player';
-import Drops from '../Drops';
-import Sobre from '../Sobre';
-import OndeEstamos from '../OndeEstamos';
-import PrincipiosEditoriais from '../PrincipiosEditoriais';
-import Contato from '../Contato';
-import Manutencao from '../Manutencao';
-import Programacao from '../Programacao';
+import Programas from '../pages/Programas';
+import Promocao from '../pages/Promocao';
+import App from '../pages/App';
+import Player from '../pages/Player';
+import Drops from '../pages/Drops';
+import Sobre from '../pages/Sobre';
+import OndeEstamos from '../pages/OndeEstamos';
+import PrincipiosEditoriais from '../pages/PrincipiosEditoriais';
+import Contato from '../pages/Contato';
+import Manutencao from '../pages/Manutencao';
+import Programacao from '../pages/Programacao';
 import { PlayerProvider } from '../Context/PlayerContext';
-import PlusNews from '../PlusNews';
+import PlusNews from '../pages/PlusNews';
 
 const RoutesComponent = () => {
   return (
