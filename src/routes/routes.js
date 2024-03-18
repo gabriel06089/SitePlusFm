@@ -15,6 +15,7 @@ import Contato from '../Contato';
 import Manutencao from '../Manutencao';
 import Programacao from '../Programacao';
 import { PlayerProvider } from '../Context/PlayerContext';
+import PlusNews from '../PlusNews';
 
 const RoutesComponent = () => {
   return (
@@ -103,6 +104,15 @@ const RoutesComponent = () => {
             }
           />
           <Route
+            path="/plusnews/:page?"
+            element={
+              <>
+                <Player />
+                <PlusNews />
+              </>
+            }
+          />
+          <Route
             path="/promocao/page/:page"
             element={
               <>
@@ -113,7 +123,7 @@ const RoutesComponent = () => {
           />
 
           <Route
-            path="/noticia/:id"
+            path="/noticia/:id/:slug"
             element={
               <>
                 <Player />
@@ -152,7 +162,7 @@ const RoutesComponent = () => {
             }
           />
           <Route
-            path="/promocao-detalhes/:id"
+            path="/promocao-detalhes/:id/:slug"
             element={
               <>
                 <Player />

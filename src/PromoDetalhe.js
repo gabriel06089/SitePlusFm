@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -232,6 +233,27 @@ const PromoDetalhe = () => {
 
   return (
     <div className="noticiaDetalheDiv">
+      <Helmet>
+        <title>{decode(noticia.title.rendered)}</title>
+        <meta name="description" content={decode(noticia.bigode)} />
+        <meta property="og:title" content={decode(noticia.title.rendered)} />
+        <meta property="og:description" content={decode(noticia.bigode)} />
+        {noticia.yoast_head_json && noticia.yoast_head_json.og_image && (
+          <meta
+            property="og:image"
+            content={noticia.yoast_head_json.og_image[0].url}
+          />
+        )}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={decode(noticia.title.rendered)} />
+        <meta name="twitter:description" content={decode(noticia.bigode)} />
+        {noticia.yoast_head_json && noticia.yoast_head_json.og_image && (
+          <meta
+            name="twitter:image"
+            content={noticia.yoast_head_json.og_image[0].url}
+          />
+        )}
+      </Helmet>
       <div className={`MenuContainerHeader ${isPlaying ? 'playing' : ''}`}>
         <div
           className={`logoMenuDivRow ${isMenuOpen ? 'fixed' : ''} ${
@@ -374,7 +396,7 @@ const PromoDetalhe = () => {
         <div className="containerColuna1">
           {posts.slice(0, 3).map((post) => (
             <Link
-              to={`/noticia/${post.id}`}
+              to={`/noticia/${post.id}/${post.slug}`}
               key={post.id}
               className="post"
               style={{ color: 'inherit', textDecoration: 'none' }}
@@ -394,7 +416,7 @@ const PromoDetalhe = () => {
         <div className="containerColuna2">
           {posts.slice(3, 6).map((post) => (
             <Link
-              to={`/noticia/${post.id}`}
+              to={`/noticia/${post.id}/${post.slug}`}
               key={post.id}
               className="post"
               style={{ color: 'inherit', textDecoration: 'none' }}
@@ -414,7 +436,7 @@ const PromoDetalhe = () => {
         <div className="containerColuna3">
           {posts.slice(6, 9).map((post) => (
             <Link
-              to={`/noticia/${post.id}`}
+              to={`/noticia/${post.id}/${post.slug}`}
               key={post.id}
               className="post"
               style={{ color: 'inherit', textDecoration: 'none' }}

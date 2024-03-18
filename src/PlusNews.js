@@ -13,7 +13,9 @@ import {
   YoutubeLogo,
 } from 'phosphor-react';
 import Xlogo from './twitter-x.svg';
+import { Helmet } from 'react-helmet';
 import LogoBranca from './LogoBranca.svg';
+import { ReactComponent as Map } from './mapa.svg';
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { ReactComponent as TwitterLogoX } from './twitter-x.svg';
@@ -27,21 +29,26 @@ import { Link } from 'react-router-dom';
 import { PlayerContext } from './Context/PlayerContext';
 import AdSense from './Adsense';
 import AdSenseMobile from './AdsenseMobile';
-const Programas = ({ match }) => {
+const PlusNews = ({ match }) => {
   const location = useLocation();
   const navigate = useNavigate();
-
-  const [programas, setprogramas] = useState([]);
-
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const isNewsPage = location.pathname.includes('/programas');
+  const isNewsPage = location.pathname.includes('/plusnews');
   const [startPage, setStartPage] = useState(1);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const {
     isPlaying,
     // Adicione handlePlayPause aqui se você o adicionou ao contexto
   } = useContext(PlayerContext);
+  const updateWindowWidth = () => {
+    setWindowWidth(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener('resize', updateWindowWidth);
+    return () => window.removeEventListener('resize', updateWindowWidth);
+  }, []);
   function handleHome() {
     navigate('/');
   }
@@ -54,50 +61,72 @@ const Programas = ({ match }) => {
       setStartPage(startPage - 5);
     }
   }
-  const updateWindowWidth = () => {
-    setWindowWidth(window.innerWidth);
-  };
-
   useEffect(() => {
-    const fetchProgramas = async () => {
-      setLoading(true);
+    console.log(`Fetching news for page ${page}`);
+    const fetchNews = async () => {
       try {
-        const response = await fetch(
-          `https://plusfm.com.br/wp-json/wp/v2/posts?categories=2685&per_page=${
-            window.innerWidth > 600 ? 9 : 6
-          }&page=${page}`
+        const responseBrasil = await fetch(
+          `https://plusfm.com.br/wp-json/wp/v2/posts?categories=2698&per_page=3&page=${page}`
         );
-        const data = await response.json();
-
-        data.forEach((programa) => {
-          console.log('Cartola:', programa.cartola);
+        const dataBrasil = await responseBrasil.json();
+        dataBrasil.forEach((newsItem) => {
+          newsItem.cartola = 'Brasil';
         });
 
-        setprogramas(data);
+        const responseCeara = await fetch(
+          `https://plusfm.com.br/wp-json/wp/v2/posts?categories=2699&per_page=3&page=${page}`
+        );
+        const dataCeara = await responseCeara.json();
+        dataCeara.forEach((newsItem) => {
+          newsItem.cartola = 'Ceará';
+        });
+
+        const responseFortaleza = await fetch(
+          `https://plusfm.com.br/wp-json/wp/v2/posts?categories=2697&per_page=3&page=${page}`
+        );
+        const dataFortaleza = await responseFortaleza.json();
+        if (Array.isArray(dataFortaleza)) {
+          dataFortaleza.forEach((newsItem) => {
+            newsItem.cartola = 'Fortaleza';
+          });
+        } else {
+          console.error('dataFortaleza is not an array:', dataFortaleza);
+        }
+        let allNews;
+        if (Array.isArray(dataFortaleza)) {
+          allNews = [...dataBrasil, ...dataCeara, ...dataFortaleza];
+        } else {
+          allNews = [...dataBrasil, ...dataCeara];
+        }
+        allNews.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        setNews(allNews);
       } catch (error) {
         console.error(error);
       }
-      setLoading(false);
     };
 
-    fetchProgramas();
-  }, [page]);
+    fetchNews();
+  }, [page, location]);
+
   const handlePageChange = (newPage) => {
-    navigate(`/noticia/${newPage}`); // Atualizado para apontar para a página de Programas
+    console.log(`Changing page to ${newPage}`);
+    setPage(newPage);
+    navigate(`/plusnews/${newPage}`);
   };
   return (
     <div>
-      <div className="contentBackgroundDrops1">
+      <div className="contentBackgroundDrops">
         {windowWidth <= 600 && (
           <>
             <div className="topBackContainer">
               <button onClick={handleHome} className="backButton">
                 <CaretLeft weight="bold" />
               </button>
-              <h1 className="contentTitle">Programas</h1>
+              <h1 className="contentTitle">Drops</h1>
             </div>
             <div className="whiteLine" />
-            <div className="contentContainer" style={{ mBottom: '20px' }}>
+            <div className="contentContainer">
               {loading
                 ? Array(3)
                     .fill()
@@ -113,28 +142,23 @@ const Programas = ({ match }) => {
                         <p className="contentText">Carregando...</p>
                       </div>
                     ))
-                : programas.flatMap((programa, index) => [
+                : news.flatMap((newsItem, index) => [
                     <Link
-                      to={`/noticia/${programa.id}/${programa.slug}`}
+                      to={`/noticia/${newsItem.id}/${newsItem.slug}`}
                       style={{ textDecoration: 'none' }}
-                      key={programa.id}
+                      key={newsItem.id}
                     >
                       <div
                         className={`contentItem ${
                           index === 2 ? 'thirdItem' : ''
                         }`}
-                        style={
-                          index === programas.length - 1
-                            ? { marginBottom: '20px' }
-                            : {}
-                        }
                       >
                         <img
-                          src={programa.yoast_head_json?.og_image?.[0]?.url}
-                          alt="Imagem do programa"
+                          src={newsItem.yoast_head_json?.og_image?.[0]?.url}
+                          alt="Imagem da notícia"
                         />
                         <p className="contentText">
-                          {decode(programa.title.rendered)}
+                          {decode(newsItem.title.rendered)}
                         </p>
                       </div>
                     </Link>,
@@ -153,6 +177,7 @@ const Programas = ({ match }) => {
         )}
         {windowWidth > 600 && (
           <>
+            {' '}
             <div
               className={`MenuContainerHeader ${isPlaying ? 'playing' : ''}`}
             >
@@ -173,19 +198,19 @@ const Programas = ({ match }) => {
               </div>
             </div>
             <div className="news-grid">
-              {programas.map((programa, index) => (
+              {news.map((newsItem, index) => (
                 <Link
-                  to={`/noticia/${programa.id}/${programa.slug}`}
+                  to={`/noticia/${newsItem.id}/${newsItem.slug}`}
                   style={{ textDecoration: 'none' }}
-                  key={programa.id}
+                  key={newsItem.id}
                 >
                   <div className="news-card">
                     <img
-                      src={programa.yoast_head_json?.og_image?.[0]?.url}
-                      alt="Imagem do programa"
+                      src={newsItem.yoast_head_json?.og_image?.[0]?.url}
+                      alt="Imagem da notícia"
                     />
-                    <p>{programa.cartola}</p>
-                    <h2>{decode(programa.title.rendered)}</h2>
+                    <p>{newsItem.cartola}</p>
+                    <h2>{decode(newsItem.title.rendered)}</h2>
                   </div>
                 </Link>
               ))}
@@ -195,9 +220,7 @@ const Programas = ({ match }) => {
             </div>
           </>
         )}
-        <div className="dividerLine" />
-
-        <div className="pagination1">
+        <div className="pagination">
           {startPage > 1 && (
             <button onClick={handlePreviousPages} className="previousPages">
               &lt;
@@ -329,4 +352,4 @@ const Programas = ({ match }) => {
   );
 };
 
-export default Programas;
+export default PlusNews;

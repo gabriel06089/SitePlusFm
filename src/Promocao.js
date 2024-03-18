@@ -114,7 +114,7 @@ const Promocao = ({ match }) => {
                       index // Atualizado para usar a variável programas
                     ) => (
                       <Link
-                        to={`/promocao-detalhes/${programa.id}`}
+                        to={`/promocao-detalhes/${programa.id}/${programa.slug}`}
                         style={{ textDecoration: 'none' }}
                         key={programa.id}
                       >
@@ -170,7 +170,7 @@ const Promocao = ({ match }) => {
             <div className="news-grid">
               {programas.map((programa, index) => (
                 <Link
-                  to={`/noticia/${programa.id}`}
+                  to={`/noticia/${programa.id}/${programa.slug}`}
                   style={{ textDecoration: 'none' }}
                   key={programa.id}
                 >

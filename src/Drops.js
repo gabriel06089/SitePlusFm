@@ -128,7 +128,7 @@ const Drops = ({ match }) => {
                     ))
                 : news.flatMap((newsItem, index) => [
                     <Link
-                      to={`/noticia/${newsItem.id}`}
+                      to={`/noticia/${newsItem.id}/${newsItem.slug}`}
                       style={{ textDecoration: 'none' }}
                       key={newsItem.id}
                     >
@@ -184,7 +184,7 @@ const Drops = ({ match }) => {
             <div className="news-grid">
               {news.map((newsItem, index) => (
                 <Link
-                  to={`/noticia/${newsItem.id}`}
+                  to={`/noticia/${newsItem.id}/${newsItem.slug}`}
                   style={{ textDecoration: 'none' }}
                   key={newsItem.id}
                 >

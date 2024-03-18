@@ -661,6 +661,47 @@ function App() {
 
     fetchNewsPlus2699();
   }, []);
+
+  const [NewsPlus2697, setNewsPlus2697] = useState(null);
+  useEffect(() => {
+    const fetchNewsPlus2697 = async () => {
+      try {
+        const cachedNewsPlus2697 = JSON.parse(
+          localStorage.getItem('NewsPlus2697')
+        );
+        const response = await fetch(
+          'https://plusfm.com.br/wp-json/wp/v2/posts?categories=2697&per_page=3'
+        );
+        const data = await response.json();
+
+        if (
+          !cachedNewsPlus2697 ||
+          new Date(data[0].modified) > new Date(cachedNewsPlus2697[0].modified)
+        ) {
+          setNewsPlus2697(data);
+          localStorage.setItem('NewsPlus2697', JSON.stringify(data));
+        } else {
+          setNewsPlus2697(cachedNewsPlus2697);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchNewsPlus2697();
+  }, []);
+  let combinedNews = [];
+  if (NewsPlus && NewsPlus2697) {
+    const maxLength = Math.max(NewsPlus.length, NewsPlus2697.length);
+    for (let i = 0; i < maxLength; i++) {
+      if (NewsPlus[i]) {
+        combinedNews.push(NewsPlus[i]);
+      }
+      if (NewsPlus2697[i]) {
+        combinedNews.push(NewsPlus2697[i]);
+      }
+    }
+  }
   const songs = [
     {
       song: 'luan santana - mulher segura',
@@ -1303,7 +1344,7 @@ function App() {
 
             {news.slice(0, 3).map((newsItem, index) => (
               <Link
-                to={`/noticia/${newsItem.id}`}
+                to={`/noticia/${newsItem.id}/${newsItem.slug}`}
                 key={index}
                 style={{ textDecoration: 'none' }}
               >
@@ -1342,7 +1383,7 @@ function App() {
             <div className="newsContainerLargeScreen">
               {news.slice(0, 2).map((newsItem, index) => (
                 <Link
-                  to={`/noticia/${newsItem.id}`}
+                  to={`/noticia/${newsItem.id}/${newsItem.slug}`}
                   key={index}
                   style={{ textDecoration: 'none' }}
                 >
@@ -1393,7 +1434,7 @@ function App() {
           >
             {programas.slice(0, 2).map((programa, index) => (
               <Link
-                to={`/noticia/${programa.id}`}
+                to={`/noticia/${programa.id}/${programa.slug}`}
                 key={index}
                 style={{ textDecoration: 'none' }}
               >
@@ -1465,7 +1506,7 @@ function App() {
             {NewsPlus2699 &&
               NewsPlus2699.slice(0, 2).map((noticianews, index) => (
                 <Link
-                  to={`/noticia/${noticianews.id}`}
+                  to={`/noticia/${noticianews.id}/${noticianews.slug}`}
                   key={index}
                   style={{ textDecoration: 'none' }}
                 >
@@ -1507,47 +1548,48 @@ function App() {
                 : 'contentContainer'
             }
           >
-            {NewsPlus &&
-              NewsPlus.slice(0, 2).map((noticianews2699, index) => (
-                <Link
-                  to={`/noticia/${noticianews2699.id}`}
-                  key={index}
-                  style={{ textDecoration: 'none' }}
+            {combinedNews.slice(0, 2).map((noticianews, index) => (
+              <Link
+                to={`/noticia/${noticianews.id}/${noticianews.slug}`}
+                key={index}
+                style={{ textDecoration: 'none' }}
+              >
+                <div
+                  style={{
+                    borderColor: windowWidth > 600 ? 'white' : 'white',
+                    position: 'relative', // Adicione isso para posicionar o cartola em relação a este div
+                  }}
+                  className={
+                    windowWidth > 600 ? 'newsItemLargeScreen' : 'contentItem'
+                  }
                 >
-                  <div
-                    style={{
-                      borderColor: windowWidth > 600 ? 'white' : 'white',
-                      position: 'relative', // Adicione isso para posicionar o cartola em relação a este div
-                    }}
+                  <div className="cartolaPlusNews">
+                    {noticianews.categories.includes(2697)
+                      ? 'Fortaleza'
+                      : 'Ceará'}
+                  </div>
+
+                  <img
+                    src={noticianews.yoast_head_json?.og_image?.[0]?.url}
+                    alt="Imagem da notícia"
+                    className={windowWidth > 600 ? 'newsImageLargeScreen' : ''}
+                  />
+                  <p
                     className={
-                      windowWidth > 600 ? 'newsItemLargeScreen' : 'contentItem'
+                      windowWidth > 600
+                        ? 'newsTitleLargeScreen1'
+                        : 'contentText'
                     }
                   >
-                    <div className="cartolaPlusNews">Ceará</div>
-
-                    <img
-                      src={noticianews2699.yoast_head_json?.og_image?.[0]?.url}
-                      alt="Imagem da notícia"
-                      className={
-                        windowWidth > 600 ? 'newsImageLargeScreen' : ''
-                      }
-                    />
-                    <p
-                      className={
-                        windowWidth > 600
-                          ? 'newsTitleLargeScreen1'
-                          : 'contentText'
-                      }
-                    >
-                      {decode(noticianews2699.title.rendered)}
-                    </p>
-                  </div>
-                </Link>
-              ))}
+                    {decode(noticianews.title.rendered)}
+                  </p>
+                </div>
+              </Link>
+            ))}
           </div>
           {windowWidth > 600 && (
             <>
-              <Link to="/programas" className="btnStyleLargeScreen1">
+              <Link to="/plusnews" className="btnStyleLargeScreen1">
                 VER MAIS
               </Link>
               <div className="placeholderPropragandaLargeScreen">
@@ -2128,7 +2170,10 @@ function App() {
           <div className="promoActorRowNew fade-in">
             <Slider {...settings}>
               {promos.map((promo, index) => (
-                <Link to={`/promocao-detalhes/${promo.id}`} key={index}>
+                <Link
+                  to={`/promocao-detalhes/${promo.id}/${promo.slug}`}
+                  key={index}
+                >
                   <div className="promoCardNew">
                     {promo.yoast_head_json.og_image[0].url && (
                       <img
@@ -2149,7 +2194,7 @@ function App() {
               {/* Renderiza a primeira promoção */}
               {promos.slice(0, 1).map((promo, index) => (
                 <Link
-                  to={`/promocao-detalhes/${promo.id}`}
+                  to={`/promocao-detalhes/${promo.id}/${promo.slug}`}
                   key={index}
                   className="promoCardNewStyle largeCard1"
                 >
@@ -2170,7 +2215,7 @@ function App() {
               <div className="otherPromosContainer">
                 {promos.slice(1, 3).map((promo, index) => (
                   <Link
-                    to={`/promocao-detalhes/${promo.id}`}
+                    to={`/promocao-detalhes/${promo.id}/${promo.slug}`}
                     key={index}
                     className="promoCardNewStyle smallCard1"
                   >

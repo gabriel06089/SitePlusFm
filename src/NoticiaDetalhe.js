@@ -31,11 +31,13 @@ import {
 } from 'phosphor-react';
 import AdSense from './Adsense';
 import AdSenseMobile from './AdsenseMobile';
+import { Helmet } from 'react-helmet';
 
 const NoticiaDetalhe = () => {
   const location = useLocation();
   const isNewsPage = location.pathname.includes('/noticia');
   const { id } = useParams();
+
   const [noticia, setNoticia] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -179,20 +181,34 @@ const NoticiaDetalhe = () => {
     return <div>Erro ao carregar a notícia: {error}</div>;
   }
   const url = window.location.href;
-  const text = `Confira esta notícia: ${noticia.title.rendered}`;
-  const htmlWithStyling = noticia.content.rendered
-    .replace(/(<iframe[^>]*src="https:\/\/www\.youtube\.com[^>]*>)/g, (match) =>
-      match.replace('<iframe', '<iframe class="iframe-wrapper youtube-iframe"')
-    )
-    .replace(
-      /(<iframe[^>]*src="https:\/\/open\.spotify\.com[^>]*>)/g,
-      (match) =>
-        match.replace(
-          '<iframe',
-          '<iframe class="iframe-wrapper spotify-iframe"'
-        )
-    )
-    .replace(/<p>(Assista:|Ouça:)<\/p>/g, '<p class="special-strong">$1</p>');
+  const text =
+    noticia && noticia.title
+      ? `Confira esta notícia: ${noticia.title.rendered}`
+      : '';
+  const htmlWithStyling =
+    noticia && noticia.content
+      ? noticia.content.rendered
+          .replace(
+            /(<iframe[^>]*src="https:\/\/www\.youtube\.com[^>]*>)/g,
+            (match) =>
+              match.replace(
+                '<iframe',
+                '<iframe class="iframe-wrapper youtube-iframe"'
+              )
+          )
+          .replace(
+            /(<iframe[^>]*src="https:\/\/open\.spotify\.com[^>]*>)/g,
+            (match) =>
+              match.replace(
+                '<iframe',
+                '<iframe class="iframe-wrapper spotify-iframe"'
+              )
+          )
+          .replace(
+            /<p>(Assista:|Ouça:)<\/p>/g,
+            '<p class="special-strong">$1</p>'
+          )
+      : '';
 
   const cleanedHtmlContent = decode(
     htmlWithStyling.replace(/<em/g, '<em class="alinhado-direita"')
@@ -241,6 +257,17 @@ const NoticiaDetalhe = () => {
 
   return (
     <div className="noticiaDetalheDiv">
+      {' '}
+      <Helmet>
+        <title>{decode(noticia.title.rendered)}</title>
+        <meta name="description" content={decode(noticia.bigode)} />
+        {noticia.yoast_head_json && noticia.yoast_head_json.og_image && (
+          <meta
+            property="og:image"
+            content={noticia.yoast_head_json.og_image[0].url}
+          />
+        )}
+      </Helmet>
       <div className={`MenuContainerHeader ${isPlaying ? 'playing' : ''}`}>
         <div
           className={`logoMenuDivRow ${isMenuOpen ? 'fixed' : ''} ${
@@ -399,7 +426,7 @@ const NoticiaDetalhe = () => {
         <div className="containerColuna1">
           {posts.slice(0, 3).map((post) => (
             <Link
-              to={`/noticia/${post.id}`}
+              to={`/noticia/${post.id}/${post.slug}`}
               key={post.id}
               className="post"
               style={{ color: 'inherit', textDecoration: 'none' }}
@@ -423,7 +450,7 @@ const NoticiaDetalhe = () => {
         <div className="containerColuna2">
           {posts.slice(3, 6).map((post) => (
             <Link
-              to={`/noticia/${post.id}`}
+              to={`/noticia/${post.id}/${post.slug}`}
               key={post.id}
               className="post"
               style={{ color: 'inherit', textDecoration: 'none' }}
@@ -443,7 +470,7 @@ const NoticiaDetalhe = () => {
         <div className="containerColuna3">
           {posts.slice(6, 9).map((post) => (
             <Link
-              to={`/noticia/${post.id}`}
+              to={`/noticia/${post.id}/${post.slug}`}
               key={post.id}
               className="post"
               style={{ color: 'inherit', textDecoration: 'none' }}
