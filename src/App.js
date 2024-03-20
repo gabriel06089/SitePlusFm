@@ -1198,6 +1198,19 @@ function App() {
         overflow: 'hidden',
       }}
     >
+      <Helmet>
+        <title>Home</title>
+        <meta
+          name="description"
+          content="Esta é a página inicial do meu site."
+        />
+        <meta property="og:title" content="Home" />
+        <meta
+          property="og:description"
+          content="Esta é a página inicial do meu site."
+        />
+        <meta property="og:url" content={window.location.href} />
+      </Helmet>
       <div className="App">
         <div className={`promoContainerNew1 ${isPlaying ? 'playing' : ''}`}>
           {windowWidth > 600 ? (

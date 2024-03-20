@@ -238,7 +238,7 @@ const NoticiaDetalhe = () => {
   const match = cleanedHtmlContent.match(tweetUrlRegex);
   const tweetId = match ? match[1] : null;
   // Exiba o htmlContent atualizado
-  console.log(cleanedHtmlContent);
+  
 
   // window.addEventListener('scroll', function () {
   //   const element = document.querySelector('.social-share-container');
@@ -258,16 +258,6 @@ const NoticiaDetalhe = () => {
   return (
     <div className="noticiaDetalheDiv">
       {' '}
-      <Helmet>
-        <title>{decode(noticia.title.rendered)}</title>
-        <meta name="description" content={decode(noticia.bigode)} />
-        {noticia.yoast_head_json && noticia.yoast_head_json.og_image && (
-          <meta
-            property="og:image"
-            content={noticia.yoast_head_json.og_image[0].url}
-          />
-        )}
-      </Helmet>
       <div className={`MenuContainerHeader ${isPlaying ? 'playing' : ''}`}>
         <div
           className={`logoMenuDivRow ${isMenuOpen ? 'fixed' : ''} ${
