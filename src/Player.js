@@ -256,7 +256,6 @@ const Player = () => {
       ? 'Seu texto personalizado aqui'
       : `${currentSong.artist} - ${currentSong.title}`;
 
-  
   const options = radios.map((radio) => ({
     value: radio.title,
     label: radio.title,
@@ -348,10 +347,9 @@ const Player = () => {
             >
               <BeatLoader
                 loading={isLoading}
-                // Ajuste o tamanho aqui
-                color={'white'} // Ajuste a cor aqui
+                color={'white'}
                 css={css`
-                  margin-right: 2vw; // Ajuste a margem aqui
+                  margin-right: 2vw;
                 `}
               />
             </div>
@@ -386,19 +384,6 @@ const Player = () => {
             <span>{text}</span>
           </div>
         </div>
-        {/*         
-<div className="VolumeControl">
-  <div
-    style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}
-    onClick={handleSpeakerClick}
-  >
-    {renderSpeakerIcon()}
-  </div>
-</div> */}
 
         <div className="ContainerRadioList">
           <Select

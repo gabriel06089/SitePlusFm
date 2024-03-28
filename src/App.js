@@ -508,7 +508,6 @@ function App() {
     const fetchNews = async () => {
       setCarregando(true);
       try {
-        const cachedNews = JSON.parse(localStorage.getItem('news'));
         const response = await fetch(
           'https://plusfm.com.br/wp-json/wp/v2/posts?categories=2&per_page=3'
         );
@@ -522,15 +521,7 @@ function App() {
 
         const limitedNews = filteredNews.slice(0, 3);
 
-        if (
-          !cachedNews ||
-          new Date(data[0].modified) > new Date(cachedNews[0].modified)
-        ) {
-          setNews(limitedNews);
-          localStorage.setItem('news', JSON.stringify(limitedNews));
-        } else {
-          setNews(cachedNews);
-        }
+        setNews(limitedNews);
       } catch (error) {
         console.error(error);
       } finally {
@@ -554,22 +545,11 @@ function App() {
   useEffect(() => {
     const fetchPromotions = async () => {
       try {
-        const cachedPromos = JSON.parse(localStorage.getItem('promos'));
-
         const response = await fetch(
           'https://plusfm.com.br/wp-json/wp/v2/posts?categories=14&per_page=3'
         );
         const data = await response.json();
-
-        if (
-          !cachedPromos ||
-          new Date(data[0].modified) > new Date(cachedPromos[0].modified)
-        ) {
-          setPromos(data);
-          localStorage.setItem('promos', JSON.stringify(data));
-        } else {
-          setPromos(cachedPromos);
-        }
+        setPromos(data);
       } catch (error) {
         console.error(error);
       }
@@ -691,16 +671,12 @@ function App() {
     fetchNewsPlus2697();
   }, []);
   let combinedNews = [];
-  if (NewsPlus && NewsPlus2697) {
-    const maxLength = Math.max(NewsPlus.length, NewsPlus2697.length);
-    for (let i = 0; i < maxLength; i++) {
-      if (NewsPlus[i]) {
-        combinedNews.push(NewsPlus[i]);
-      }
-      if (NewsPlus2697[i]) {
-        combinedNews.push(NewsPlus2697[i]);
-      }
-    }
+  if (NewsPlus && NewsPlus2699 && NewsPlus2697) {
+    combinedNews = [...NewsPlus, ...NewsPlus2699, ...NewsPlus2697];
+
+    combinedNews.sort((a, b) => {
+      return new Date(b.date) - new Date(a.date);
+    });
   }
   const songs = [
     {
@@ -1200,15 +1176,9 @@ function App() {
     >
       <Helmet>
         <title>Home</title>
-        <meta
-          name="description"
-          content="Esta é a página inicial do meu site."
-        />
+        <meta name="description" content=" Aqui é legal demais!" />
         <meta property="og:title" content="Home" />
-        <meta
-          property="og:description"
-          content="Esta é a página inicial do meu site."
-        />
+        <meta property="og:description" content=" Aqui é legal demais!" />
         <meta property="og:url" content={window.location.href} />
       </Helmet>
       <div className="App">
@@ -1516,8 +1486,8 @@ function App() {
                 : 'contentContainer'
             }
           >
-            {NewsPlus2699 &&
-              NewsPlus2699.slice(0, 2).map((noticianews, index) => (
+            {combinedNews &&
+              combinedNews.slice(0, 2).map((noticianews, index) => (
                 <Link
                   to={`/noticia/${noticianews.id}/${noticianews.slug}`}
                   key={index}
@@ -1532,7 +1502,13 @@ function App() {
                       windowWidth > 600 ? 'newsItemLargeScreen' : 'contentItem'
                     }
                   >
-                    <div className="cartolaPlusNews">Brasil</div>
+                    <div className="cartolaPlusNews">
+                      {noticianews.categories.includes(2697)
+                        ? 'Fortaleza'
+                        : noticianews.categories.includes(2699)
+                        ? 'Brasil'
+                        : 'Ceará'}
+                    </div>
 
                     <img
                       src={noticianews.yoast_head_json?.og_image?.[0]?.url}
@@ -1561,7 +1537,7 @@ function App() {
                 : 'contentContainer'
             }
           >
-            {combinedNews.slice(0, 2).map((noticianews, index) => (
+            {combinedNews.slice(2, 4).map((noticianews, index) => (
               <Link
                 to={`/noticia/${noticianews.id}/${noticianews.slug}`}
                 key={index}
@@ -1579,6 +1555,8 @@ function App() {
                   <div className="cartolaPlusNews">
                     {noticianews.categories.includes(2697)
                       ? 'Fortaleza'
+                      : noticianews.categories.includes(2699)
+                      ? 'Brasil'
                       : 'Ceará'}
                   </div>
 
@@ -1600,17 +1578,6 @@ function App() {
               </Link>
             ))}
           </div>
-          {windowWidth > 600 && (
-            <>
-              <Link to="/plusnews" className="btnStyleLargeScreen1">
-                VER MAIS
-              </Link>
-              <div className="placeholderPropragandaLargeScreen">
-                {' '}
-                <AdSense />
-              </div>
-            </>
-          )}
         </div>
       </div>
       <section id="programacao"></section>
@@ -1624,347 +1591,7 @@ function App() {
           <img src={discoMusical} className="imgDiscoProgramacao" />
         </div>
         <div className="whiteLine6" />
-        {/* {mostrar && (
-          <div>
-            {' '}
-            <div className="progContainerRow">
-              <div className="progContainerColumn">
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer">
-                    {' '}
-                    <img src={corujaodaplus} alt="Coruja da Plus" />
-                  </div>
 
-                  <div className="progContainerColumn">
-                    <span>Corujão da Plus</span>
-                    <span>Segunda - Sexta</span>
-                    <span>00:00 - 05:50</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#8A0A0A" />
-                </div>
-                <div className="marginDiv"></div>
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer">
-                    <img src={clubeplus} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    {' '}
-                    <span>Clube da Plus</span>
-                    <span>Segunda à Sexta</span>
-                    <span>05:00 - 06:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#1221A8" />
-                </div>
-
-                <div className="marginDiv"></div>
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer specialHeightDeuBo">
-                    {' '}
-                    <img src={PROGRAMAS} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    {' '}
-                    <span>Deu B.O.</span>
-                    <span>Segunda à Sexta</span>
-                    <span>06:00 - 07:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#22D4D8" />
-                </div>
-                <div className="marginDiv"></div>
-
-                <div className="marginDiv"></div>
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer">
-                    {' '}
-                    <img src={cearanews} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    <span>Ceará News</span>
-                    <span>Segunda à Sexta</span>
-                    <span>07:00 - 08:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#000000" />
-                </div>
-                <div className="marginDiv"></div>
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer">
-                    {' '}
-                    <img src={semlimitesparaamar} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn specialHeight">
-                    {' '}
-                    <span>Sem limites para amar</span>
-                    <span>Segunda à Sexta</span>
-                    <span>12:00 - 13:00</span>
-                    <span>Domingo</span>
-                    <span>22:00 - 00:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#000000" />
-                </div>
-                <div className="marginDiv"></div>
-              </div>
-              <div className="progContainerColumn">
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer">
-                    {' '}
-                    <img src={nocolodejesusedemaria} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    {' '}
-                    <span>
-                      No Colo de Jesus e<br />
-                      de Maria
-                    </span>
-                    <span>Segunda à Sexta</span>
-                    <span>08:00 - 09:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#F4E72D" />
-                </div>
-                <div className="marginDiv"></div>
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer">
-                    {' '}
-                    <img src={manhadaplus} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    {' '}
-                    <span>Manhã Plus</span>
-                    <span>Segunda à Sexta</span>
-                    <span>09:00 - 11:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#0A8A0F" />
-                </div>
-                <div className="marginDiv"></div>
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer">
-                    {' '}
-                    <img src={redacaoplus} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    {' '}
-                    <span>Redação da Plus</span>
-                    <span>Segunda à Sexta</span>
-                    <span>12:00 - 14:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#9248FF" />
-                </div>
-                <div className="marginDiv"></div>
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer">
-                    {' '}
-                    <img src={tardeplus} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    {' '}
-                    <span>Tarde Plus</span>
-                    <span>Segunda à Sexta</span>
-                    <span>14:00 - 17:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#1E1E1E" />
-                </div>
-                <div className="marginDiv"></div>
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer">
-                    {' '}
-                    <img src={tatodomundoplus} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    {' '}
-                    <span>Tá Todo Mundo Plus</span>
-                    <span>Segunda à Sexta</span>
-                    <span>17:00 - 18:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#788A0A" />
-                </div>
-                <div className="marginDiv"></div>
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer">
-                    {' '}
-                    <img src={asmelhoresdaplus} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    <span>As Melhores da Plus</span>
-                    <span>Segunda à Sexta</span>
-                    <span>11:00 - 12:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#1E1E1E" />
-                </div>
-                <div className="marginDiv"></div>
-              </div>
-
-              <div className="progContainerColumn">
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer">
-                    {' '}
-                    <img src={asmaispedidas} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    {' '}
-                    <span>As Mais Pedidas</span>
-                    <span>Segunda à Sexta</span>
-                    <span>18:00 - 19:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#84AEFF" />
-                </div>
-                <div className="marginDiv"></div>
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer">
-                    {' '}
-                    <img src={plusmania} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    {' '}
-                    <span>Plus Mania</span>
-                    <span>Segunda à Sexta</span>
-                    <span>20:00 - 22:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#FF8A00" />
-                </div>
-                <div className="marginDiv"></div>
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer specialHeightFestaPlus">
-                    {' '}
-                    <img src={festaplus} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    {' '}
-                    <span>Festa Plus</span>
-                    <span>Sábado</span>
-                    <span>12:00 - 14:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#5C3F1C" />
-                </div>
-                <div className="marginDiv"></div>
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer">
-                    {' '}
-                    <img src={timemachine} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    {' '}
-                    <span>Time Machine</span>
-                    <span>Sábado</span>
-                    <span>21:00 - 22:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#8A0A66" />
-                </div>
-                <div className="marginDiv"></div>
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer">
-                    {' '}
-                    <img src={upgrade} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    {' '}
-                    <span>Upgrade</span>
-                    <span>Sábado</span>
-                    <span>22:00 - 00:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#FF00C7" />
-                </div>
-
-                <div className="marginDiv"></div>
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer specialHeightSlowMo">
-                    {' '}
-                    <img src={slowmotion} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    {' '}
-                    <span>Slow Motion</span>
-                    <span>Segunda à Sexta</span>
-                    <span>22:00 - 00:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#FF00C7" />
-                </div>
-
-                <div className="marginDiv"></div>
-              </div>
-              <div className="progContainerColumn">
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer">
-                    {' '}
-                    <img src={playlistdaplus} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    {' '}
-                    <span>Playlist da Plus</span>
-                    <span>Domingo</span>
-                    <span>
-                      05:00 - 08:00
-                      <br /> 20:00 - 22:00
-                    </span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#2D0B3E" />
-                </div>
-                <div className="marginDiv"></div>
-
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer">
-                    {' '}
-                    <img src={domingao} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    {' '}
-                    <span>Domingão da Plus</span>
-                    <span>Domingo</span>
-                    <span>10:00 - 15:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#FF4D00" />
-                </div>
-                <div className="marginDiv"></div>
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer">
-                    {' '}
-                    <img src={megaplus} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    {' '}
-                    <span>Mega Plus</span>
-                    <span>Domingo</span>
-                    <span>15:00 - 19:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#00FF94" />
-                </div>
-                <div className="marginDiv"></div>
-                <div className="progCardContainerRow">
-                  <div className="progBallContainer">
-                    {' '}
-                    <img src={agrandehora} alt="Clube Plus" />
-                  </div>
-
-                  <div className="progContainerColumn">
-                    {' '}
-                    <span>A Grande Hora</span>
-                    <span>Domingo</span>
-                    <span>19:00 - 20:00</span>
-                  </div>
-                  <Play size={'2vw'} weight="fill" color="#262D6D" />
-                </div>
-                <div className="marginDiv"></div>
-              </div>
-            </div>
-          </div>
-        )} */}
         <div className="circleContainerRow">
           {' '}
           <div className="circle-container">

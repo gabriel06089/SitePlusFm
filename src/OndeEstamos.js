@@ -375,7 +375,7 @@ function OndeEstamos() {
               </div>
               <div className="container-cidades-row">
                 <h1> Itaiçaba</h1> <h1> Jaguaruana</h1>
-                <h1> Beberibe</h1> <h1> Palhano</h1>{' '}
+                <h1> Palhano</h1>{' '}
               </div>
             </div>
             <div className="container-cidades-coluna">
@@ -410,7 +410,7 @@ function OndeEstamos() {
             <div className="container-cidades-coluna">
               <h1>Iguatu 91.5</h1>
               <div className="container-cidades-row">
-                <h1> Cariús</h1> <h1> Varzea Alegre</h1>
+                <h1> Cariús</h1> <h1> Várzea Alegre</h1>
                 <h1> Farias Brito</h1>
               </div>
               <div className="container-cidades-row">
